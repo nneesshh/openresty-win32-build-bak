@@ -1,0 +1,132 @@
+﻿  Building Custom Rule D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/tools/CMakeLists.txt
+  CMake does not need to re-run because D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/CMakeFiles/generate.stamp is up-to-date.
+  tiffcrop.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1716): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1718): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1721): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(2261): note: see declaration of 'sscanf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1748): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1750): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1776): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1783): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1800): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(337): note: see declaration of 'strncpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1806): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(337): note: see declaration of 'strncpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1830): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1832): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1909): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1911): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1975): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(2261): note: see declaration of 'sscanf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(1977): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2079): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2081): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(439): note: see declaration of 'strtok'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2128): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2132): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(337): note: see declaration of 'strncpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2140): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(337): note: see declaration of 'strncpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2144): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(337): note: see declaration of 'strncpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2156): warning C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(265): note: see declaration of 'strncat'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2321): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2340): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2510): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2547): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2582): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2584): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2619): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2621): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2655): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(2657): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3122): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3124): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3126): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3503): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3505): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3507): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3827): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3832): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3933): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(3939): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4045): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4051): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4172): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4174): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4176): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4219): warning C4244: 'function': conversion from 'uint64' to 'uint32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4221): warning C4244: 'function': conversion from 'uint64' to 'uint32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4222): warning C4244: 'function': conversion from 'uint64' to 'uint32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4182): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4188): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4352): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4357): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4457): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4463): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4569): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4575): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4697): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4699): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4701): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4744): warning C4244: 'function': conversion from 'uint64' to 'uint32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4746): warning C4244: 'function': conversion from 'uint64' to 'uint32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4747): warning C4244: 'function': conversion from 'uint64' to 'uint32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4707): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4713): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4970): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(337): note: see declaration of 'strncpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(4986): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(5081): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(5500): warning C4244: '=': conversion from 'double' to 'int32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(5527): warning C4244: '=': conversion from 'double' to 'int32', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(8345): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(8347): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(8349): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(8953): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(8955): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\tiffcrop.c(8957): warning C4244: '=': conversion from 'uint64' to 'uint8', possible loss of data
+  tiffcrop.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\tools\Debug\tiffcrop.exe

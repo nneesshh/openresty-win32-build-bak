@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcreposix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcreposix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2D7B994C-4263-3EB0-9F83-9BBC520A66B0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{CB4019B1-5BE9-3F1F-B0F4-E400492B65D6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

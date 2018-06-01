@@ -1,0 +1,1856 @@
+The system is: Windows - 10.0.16299 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler:  
+Build flags: 
+Id flags:  
+
+The output was:
+0
+���� .NET Framework �� Microsoft (R) ��������汾 15.6.82.30579
+��Ȩ����(C) Microsoft Corporation����������Ȩ����
+
+��������ʱ��Ϊ 2018/5/30 16:49:10��
+�ڵ� 1 �ϵ���Ŀ��D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\3.9.0\CompilerIdC\CompilerIdC.vcxproj��(Ĭ��Ŀ��)��
+PrepareForBuild:
+  ���ڴ���Ŀ¼��Debug\����
+  ���ڴ���Ŀ¼��Debug\CompilerIdC.tlog\����
+InitializeBuildStatus:
+  ���ڴ�����Debug\CompilerIdC.tlog\unsuccessfulbuild������Ϊ��ָ����AlwaysCreate����
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue CMakeCCompilerId.c
+  CMakeCCompilerId.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\3.9.0\CompilerIdC\.\CompilerIdC.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_C_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\Hostx86\x86\cl.exe
+FinalizeBuildStatus:
+  ����ɾ���ļ���Debug\CompilerIdC.tlog\unsuccessfulbuild����
+  ���ڶԡ�Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate��ִ�� Touch ����
+�����������Ŀ��D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\3.9.0\CompilerIdC\CompilerIdC.vcxproj��(Ĭ��Ŀ��)�Ĳ�����
+
+�ѳɹ����ɡ�
+    0 ������
+    0 ������
+
+����ʱ�� 00:00:00.85
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+
+The C compiler identification is MSVC, found in "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/3.9.0/CompilerIdC/CompilerIdC.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a8d00.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:11。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a8d00.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_a8d00.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_a8d00.dir\Debug\cmTC_a8d00.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_a8d00.dir\Debug\cmTC_a8d00.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a8d00.dir\Debug\\" /Fd"cmTC_a8d00.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\testCCompiler.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a8d00.dir\Debug\\" /Fd"cmTC_a8d00.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\testCCompiler.c"
+  testCCompiler.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a8d00.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a8d00.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a8d00.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_a8d00.dir\Debug\testCCompiler.obj
+  cmTC_a8d00.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a8d00.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_a8d00.dir\Debug\cmTC_a8d00.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a8d00.dir\Debug\cmTC_a8d00.tlog\cmTC_a8d00.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a8d00.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.35
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_e64c5.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:12。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_e64c5.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_e64c5.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_e64c5.dir\Debug\cmTC_e64c5.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_e64c5.dir\Debug\cmTC_e64c5.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e64c5.dir\Debug\\" /Fd"cmTC_e64c5.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCCompilerABI.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e64c5.dir\Debug\\" /Fd"cmTC_e64c5.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCCompilerABI.c"
+  CMakeCCompilerABI.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_e64c5.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_e64c5.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_e64c5.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_e64c5.dir\Debug\CMakeCCompilerABI.obj
+  cmTC_e64c5.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_e64c5.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_e64c5.dir\Debug\cmTC_e64c5.tlog\unsuccessfulbuild”。
+  正在对“cmTC_e64c5.dir\Debug\cmTC_e64c5.tlog\cmTC_e64c5.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_e64c5.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.97
+
+
+Performing C SOURCE FILE Test C_FLAG_W3 succeeded with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_93783.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:14。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_93783.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_93783.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_93783.dir\Debug\cmTC_93783.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_93783.dir\Debug\cmTC_93783.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D C_FLAG_W3 /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_93783.dir\Debug\\" /Fd"cmTC_93783.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\src.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D C_FLAG_W3 /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_93783.dir\Debug\\" /Fd"cmTC_93783.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\src.c"
+  src.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_93783.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_93783.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_93783.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_93783.dir\Debug\src.obj
+  cmTC_93783.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_93783.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_93783.dir\Debug\cmTC_93783.tlog\unsuccessfulbuild”。
+  正在对“cmTC_93783.dir\Debug\cmTC_93783.tlog\cmTC_93783.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_93783.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.99
+
+Source file was:
+int main(void) { return 0; }
+Determining if the include file assert.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_3595c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:16。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_3595c.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_3595c.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_3595c.dir\Debug\cmTC_3595c.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_3595c.dir\Debug\cmTC_3595c.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3595c.dir\Debug\\" /Fd"cmTC_3595c.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3595c.dir\Debug\\" /Fd"cmTC_3595c.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_3595c.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_3595c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_3595c.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_3595c.dir\Debug\CheckIncludeFile.obj
+  cmTC_3595c.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_3595c.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_3595c.dir\Debug\cmTC_3595c.tlog\unsuccessfulbuild”。
+  正在对“cmTC_3595c.dir\Debug\cmTC_3595c.tlog\cmTC_3595c.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_3595c.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining if the include file fcntl.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_92833.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:18。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_92833.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_92833.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_92833.dir\Debug\cmTC_92833.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_92833.dir\Debug\cmTC_92833.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_92833.dir\Debug\\" /Fd"cmTC_92833.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_92833.dir\Debug\\" /Fd"cmTC_92833.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_92833.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_92833.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_92833.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_92833.dir\Debug\CheckIncludeFile.obj
+  cmTC_92833.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_92833.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_92833.dir\Debug\cmTC_92833.tlog\unsuccessfulbuild”。
+  正在对“cmTC_92833.dir\Debug\cmTC_92833.tlog\cmTC_92833.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_92833.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_da12a.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:19。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_da12a.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_da12a.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_da12a.dir\Debug\cmTC_da12a.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_da12a.dir\Debug\cmTC_da12a.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_da12a.dir\Debug\\" /Fd"cmTC_da12a.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_da12a.dir\Debug\\" /Fd"cmTC_da12a.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_da12a.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_da12a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_da12a.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_da12a.dir\Debug\CheckIncludeFile.obj
+  cmTC_da12a.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_da12a.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_da12a.dir\Debug\cmTC_da12a.tlog\unsuccessfulbuild”。
+  正在对“cmTC_da12a.dir\Debug\cmTC_da12a.tlog\cmTC_da12a.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_da12a.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.97
+
+
+Determining if the include file io.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_cfa31.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:21。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_cfa31.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_cfa31.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_cfa31.dir\Debug\cmTC_cfa31.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_cfa31.dir\Debug\cmTC_cfa31.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cfa31.dir\Debug\\" /Fd"cmTC_cfa31.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cfa31.dir\Debug\\" /Fd"cmTC_cfa31.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_cfa31.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_cfa31.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_cfa31.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_cfa31.dir\Debug\CheckIncludeFile.obj
+  cmTC_cfa31.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_cfa31.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_cfa31.dir\Debug\cmTC_cfa31.tlog\unsuccessfulbuild”。
+  正在对“cmTC_cfa31.dir\Debug\cmTC_cfa31.tlog\cmTC_cfa31.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_cfa31.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.95
+
+
+Determining if the include file search.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_54eb9.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:22。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_54eb9.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_54eb9.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_54eb9.dir\Debug\cmTC_54eb9.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_54eb9.dir\Debug\cmTC_54eb9.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_54eb9.dir\Debug\\" /Fd"cmTC_54eb9.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_54eb9.dir\Debug\\" /Fd"cmTC_54eb9.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_54eb9.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_54eb9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_54eb9.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_54eb9.dir\Debug\CheckIncludeFile.obj
+  cmTC_54eb9.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_54eb9.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_54eb9.dir\Debug\cmTC_54eb9.tlog\unsuccessfulbuild”。
+  正在对“cmTC_54eb9.dir\Debug\cmTC_54eb9.tlog\cmTC_54eb9.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_54eb9.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.97
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a5623.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:23。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a5623.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_a5623.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_a5623.dir\Debug\cmTC_a5623.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_a5623.dir\Debug\cmTC_a5623.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a5623.dir\Debug\\" /Fd"cmTC_a5623.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a5623.dir\Debug\\" /Fd"cmTC_a5623.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a5623.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a5623.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a5623.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_a5623.dir\Debug\CheckIncludeFile.obj
+  cmTC_a5623.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a5623.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_a5623.dir\Debug\cmTC_a5623.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a5623.dir\Debug\cmTC_a5623.tlog\cmTC_a5623.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a5623.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.01
+
+
+Determining if the include file string.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_1974c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:24。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_1974c.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_1974c.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_1974c.dir\Debug\cmTC_1974c.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_1974c.dir\Debug\cmTC_1974c.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1974c.dir\Debug\\" /Fd"cmTC_1974c.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1974c.dir\Debug\\" /Fd"cmTC_1974c.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_1974c.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_1974c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_1974c.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_1974c.dir\Debug\CheckIncludeFile.obj
+  cmTC_1974c.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_1974c.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_1974c.dir\Debug\cmTC_1974c.tlog\unsuccessfulbuild”。
+  正在对“cmTC_1974c.dir\Debug\cmTC_1974c.tlog\cmTC_1974c.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_1974c.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.01
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_1a031.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:27。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_1a031.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_1a031.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_1a031.dir\Debug\cmTC_1a031.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_1a031.dir\Debug\cmTC_1a031.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1a031.dir\Debug\\" /Fd"cmTC_1a031.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1a031.dir\Debug\\" /Fd"cmTC_1a031.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_1a031.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_1a031.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_1a031.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_1a031.dir\Debug\CheckIncludeFile.obj
+  cmTC_1a031.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_1a031.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_1a031.dir\Debug\cmTC_1a031.tlog\unsuccessfulbuild”。
+  正在对“cmTC_1a031.dir\Debug\cmTC_1a031.tlog\cmTC_1a031.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_1a031.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.94
+
+
+Performing C SOURCE FILE Test C_HAS_inline succeeded with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_47390.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:29。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_47390.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_47390.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_47390.dir\Debug\cmTC_47390.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_47390.dir\Debug\cmTC_47390.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D C_HAS_inline /D inline=inline /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_47390.dir\Debug\\" /Fd"cmTC_47390.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\src.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D C_HAS_inline /D inline=inline /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_47390.dir\Debug\\" /Fd"cmTC_47390.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\src.c"
+  src.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_47390.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_47390.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_47390.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_47390.dir\Debug\src.obj
+  cmTC_47390.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_47390.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_47390.dir\Debug\cmTC_47390.tlog\unsuccessfulbuild”。
+  正在对“cmTC_47390.dir\Debug\cmTC_47390.tlog\cmTC_47390.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_47390.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.98
+
+Source file was:
+
+        typedef int foo_t;
+        static inline foo_t static_foo() {return 0;}
+        foo_t foo(){return 0;}
+        int main(int argc, char *argv[]) {return 0;}
+Performing C SOURCE FILE Test TM_IN_SYS_TIME succeeded with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_10edf.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:32。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_10edf.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_10edf.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_10edf.dir\Debug\cmTC_10edf.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_10edf.dir\Debug\cmTC_10edf.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D TM_IN_SYS_TIME /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_10edf.dir\Debug\\" /Fd"cmTC_10edf.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\src.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D TM_IN_SYS_TIME /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_10edf.dir\Debug\\" /Fd"cmTC_10edf.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\src.c"
+  src.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_10edf.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_10edf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_10edf.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_10edf.dir\Debug\src.obj
+  cmTC_10edf.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_10edf.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_10edf.dir\Debug\cmTC_10edf.tlog\unsuccessfulbuild”。
+  正在对“cmTC_10edf.dir\Debug\cmTC_10edf.tlog\cmTC_10edf.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_10edf.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.06
+
+Source file was:
+
+#include <sys/types.h>
+#include <time.h>
+
+int main(void){
+  struct tm tm;
+  int *p = &tm.tm_sec;
+  return !p;
+}
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_65868.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:33。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_65868.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_65868.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_65868.dir\Debug\cmTC_65868.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_65868.dir\Debug\cmTC_65868.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_65868.dir\Debug\\" /Fd"cmTC_65868.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_65868.dir\Debug\\" /Fd"cmTC_65868.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c"
+  CheckIncludeFile.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_65868.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_65868.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_65868.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_65868.dir\Debug\CheckIncludeFile.obj
+  cmTC_65868.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_65868.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_65868.dir\Debug\cmTC_65868.tlog\unsuccessfulbuild”。
+  正在对“cmTC_65868.dir\Debug\cmTC_65868.tlog\cmTC_65868.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_65868.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.05
+
+
+Determining size of signed int passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_9f850.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:34。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_9f850.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_9f850.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_9f850.dir\Debug\cmTC_9f850.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_9f850.dir\Debug\cmTC_9f850.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9f850.dir\Debug\\" /Fd"cmTC_9f850.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_INT.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9f850.dir\Debug\\" /Fd"cmTC_9f850.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_INT.c"
+  SIZEOF_SIGNED_INT.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_9f850.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_9f850.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_9f850.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_9f850.dir\Debug\SIZEOF_SIGNED_INT.obj
+  cmTC_9f850.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_9f850.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_9f850.dir\Debug\cmTC_9f850.tlog\unsuccessfulbuild”。
+  正在对“cmTC_9f850.dir\Debug\cmTC_9f850.tlog\cmTC_9f850.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_9f850.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining size of unsigned int passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_5b1d9.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:35。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_5b1d9.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_5b1d9.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_5b1d9.dir\Debug\cmTC_5b1d9.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_5b1d9.dir\Debug\cmTC_5b1d9.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5b1d9.dir\Debug\\" /Fd"cmTC_5b1d9.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_INT.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5b1d9.dir\Debug\\" /Fd"cmTC_5b1d9.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_INT.c"
+  SIZEOF_UNSIGNED_INT.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_5b1d9.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_5b1d9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_5b1d9.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_5b1d9.dir\Debug\SIZEOF_UNSIGNED_INT.obj
+  cmTC_5b1d9.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_5b1d9.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_5b1d9.dir\Debug\cmTC_5b1d9.tlog\unsuccessfulbuild”。
+  正在对“cmTC_5b1d9.dir\Debug\cmTC_5b1d9.tlog\cmTC_5b1d9.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_5b1d9.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining size of signed long passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_52290.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:37。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_52290.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_52290.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_52290.dir\Debug\cmTC_52290.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_52290.dir\Debug\cmTC_52290.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_52290.dir\Debug\\" /Fd"cmTC_52290.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_52290.dir\Debug\\" /Fd"cmTC_52290.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG.c"
+  SIZEOF_SIGNED_LONG.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_52290.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_52290.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_52290.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_52290.dir\Debug\SIZEOF_SIGNED_LONG.obj
+  cmTC_52290.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_52290.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_52290.dir\Debug\cmTC_52290.tlog\unsuccessfulbuild”。
+  正在对“cmTC_52290.dir\Debug\cmTC_52290.tlog\cmTC_52290.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_52290.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.97
+
+
+Determining size of unsigned long passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a3639.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:38。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a3639.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_a3639.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_a3639.dir\Debug\cmTC_a3639.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_a3639.dir\Debug\cmTC_a3639.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a3639.dir\Debug\\" /Fd"cmTC_a3639.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a3639.dir\Debug\\" /Fd"cmTC_a3639.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG.c"
+  SIZEOF_UNSIGNED_LONG.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a3639.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a3639.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a3639.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_a3639.dir\Debug\SIZEOF_UNSIGNED_LONG.obj
+  cmTC_a3639.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a3639.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_a3639.dir\Debug\cmTC_a3639.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a3639.dir\Debug\cmTC_a3639.tlog\cmTC_a3639.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a3639.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.97
+
+
+Determining size of signed long long passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_65be8.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:39。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_65be8.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_65be8.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_65be8.dir\Debug\cmTC_65be8.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_65be8.dir\Debug\cmTC_65be8.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_65be8.dir\Debug\\" /Fd"cmTC_65be8.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG_LONG.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_65be8.dir\Debug\\" /Fd"cmTC_65be8.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIGNED_LONG_LONG.c"
+  SIZEOF_SIGNED_LONG_LONG.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_65be8.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_65be8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_65be8.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_65be8.dir\Debug\SIZEOF_SIGNED_LONG_LONG.obj
+  cmTC_65be8.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_65be8.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_65be8.dir\Debug\cmTC_65be8.tlog\unsuccessfulbuild”。
+  正在对“cmTC_65be8.dir\Debug\cmTC_65be8.tlog\cmTC_65be8.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_65be8.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining size of unsigned long long passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a3fce.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:40。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a3fce.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_a3fce.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_a3fce.dir\Debug\cmTC_a3fce.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_a3fce.dir\Debug\cmTC_a3fce.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a3fce.dir\Debug\\" /Fd"cmTC_a3fce.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG_LONG.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a3fce.dir\Debug\\" /Fd"cmTC_a3fce.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_LONG_LONG.c"
+  SIZEOF_UNSIGNED_LONG_LONG.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a3fce.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a3fce.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_a3fce.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_a3fce.dir\Debug\SIZEOF_UNSIGNED_LONG_LONG.obj
+  cmTC_a3fce.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_a3fce.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_a3fce.dir\Debug\cmTC_a3fce.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a3fce.dir\Debug\cmTC_a3fce.tlog\cmTC_a3fce.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_a3fce.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.00
+
+
+Determining size of unsigned char * passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_6f839.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:42。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_6f839.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_6f839.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_6f839.dir\Debug\cmTC_6f839.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_6f839.dir\Debug\cmTC_6f839.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6f839.dir\Debug\\" /Fd"cmTC_6f839.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_CHAR_P.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6f839.dir\Debug\\" /Fd"cmTC_6f839.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_UNSIGNED_CHAR_P.c"
+  SIZEOF_UNSIGNED_CHAR_P.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_6f839.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_6f839.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_6f839.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_6f839.dir\Debug\SIZEOF_UNSIGNED_CHAR_P.obj
+  cmTC_6f839.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_6f839.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_6f839.dir\Debug\cmTC_6f839.tlog\unsuccessfulbuild”。
+  正在对“cmTC_6f839.dir\Debug\cmTC_6f839.tlog\cmTC_6f839.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_6f839.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.00
+
+
+Determining size of size_t passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_1a6da.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:43。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_1a6da.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_1a6da.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_1a6da.dir\Debug\cmTC_1a6da.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_1a6da.dir\Debug\cmTC_1a6da.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1a6da.dir\Debug\\" /Fd"cmTC_1a6da.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIZE_T.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1a6da.dir\Debug\\" /Fd"cmTC_1a6da.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_SIZE_T.c"
+  SIZEOF_SIZE_T.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_1a6da.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_1a6da.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_1a6da.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_1a6da.dir\Debug\SIZEOF_SIZE_T.obj
+  cmTC_1a6da.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_1a6da.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_1a6da.dir\Debug\cmTC_1a6da.tlog\unsuccessfulbuild”。
+  正在对“cmTC_1a6da.dir\Debug\cmTC_1a6da.tlog\cmTC_1a6da.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_1a6da.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining size of ptrdiff_t passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_e9d8f.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:44。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_e9d8f.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_e9d8f.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_e9d8f.dir\Debug\cmTC_e9d8f.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_e9d8f.dir\Debug\cmTC_e9d8f.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e9d8f.dir\Debug\\" /Fd"cmTC_e9d8f.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_PTRDIFF_T.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e9d8f.dir\Debug\\" /Fd"cmTC_e9d8f.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\SIZEOF_PTRDIFF_T.c"
+  SIZEOF_PTRDIFF_T.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_e9d8f.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_e9d8f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_e9d8f.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_e9d8f.dir\Debug\SIZEOF_PTRDIFF_T.obj
+  cmTC_e9d8f.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_e9d8f.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_e9d8f.dir\Debug\cmTC_e9d8f.tlog\unsuccessfulbuild”。
+  正在对“cmTC_e9d8f.dir\Debug\cmTC_e9d8f.tlog\cmTC_e9d8f.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_e9d8f.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.04
+
+
+Determining if the snprintf exist passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_739fd.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:47。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_739fd.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_739fd.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_739fd.dir\Debug\cmTC_739fd.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_739fd.dir\Debug\cmTC_739fd.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_739fd.dir\Debug\\" /Fd"cmTC_739fd.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_739fd.dir\Debug\\" /Fd"cmTC_739fd.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_739fd.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_739fd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_739fd.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_739fd.dir\Debug\CheckSymbolExists.obj
+  cmTC_739fd.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_739fd.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_739fd.dir\Debug\cmTC_739fd.tlog\unsuccessfulbuild”。
+  正在对“cmTC_739fd.dir\Debug\cmTC_739fd.tlog\cmTC_739fd.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_739fd.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.09
+
+File D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef snprintf
+  return ((int*)(&snprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strtol exist passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_2223f.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:50。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_2223f.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_2223f.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_2223f.dir\Debug\cmTC_2223f.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_2223f.dir\Debug\cmTC_2223f.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2223f.dir\Debug\\" /Fd"cmTC_2223f.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2223f.dir\Debug\\" /Fd"cmTC_2223f.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_2223f.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_2223f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_2223f.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_2223f.dir\Debug\CheckSymbolExists.obj
+  cmTC_2223f.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_2223f.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_2223f.dir\Debug\cmTC_2223f.tlog\unsuccessfulbuild”。
+  正在对“cmTC_2223f.dir\Debug\cmTC_2223f.tlog\cmTC_2223f.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_2223f.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.02
+
+File D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtol
+  return ((int*)(&strtol))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strtoll exist passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_30520.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:51。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_30520.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_30520.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_30520.dir\Debug\cmTC_30520.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_30520.dir\Debug\cmTC_30520.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_30520.dir\Debug\\" /Fd"cmTC_30520.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_30520.dir\Debug\\" /Fd"cmTC_30520.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_30520.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_30520.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_30520.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_30520.dir\Debug\CheckSymbolExists.obj
+  cmTC_30520.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_30520.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_30520.dir\Debug\cmTC_30520.tlog\unsuccessfulbuild”。
+  正在对“cmTC_30520.dir\Debug\cmTC_30520.tlog\cmTC_30520.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_30520.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.14
+
+File D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoll
+  return ((int*)(&strtoll))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strtoul exist passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_11d89.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:52。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_11d89.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_11d89.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_11d89.dir\Debug\cmTC_11d89.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_11d89.dir\Debug\cmTC_11d89.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_11d89.dir\Debug\\" /Fd"cmTC_11d89.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_11d89.dir\Debug\\" /Fd"cmTC_11d89.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_11d89.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_11d89.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_11d89.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_11d89.dir\Debug\CheckSymbolExists.obj
+  cmTC_11d89.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_11d89.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_11d89.dir\Debug\cmTC_11d89.tlog\unsuccessfulbuild”。
+  正在对“cmTC_11d89.dir\Debug\cmTC_11d89.tlog\cmTC_11d89.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_11d89.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.02
+
+File D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoul
+  return ((int*)(&strtoul))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strtoull exist passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_0fca8.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:54。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_0fca8.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_0fca8.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_0fca8.dir\Debug\cmTC_0fca8.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_0fca8.dir\Debug\cmTC_0fca8.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_0fca8.dir\Debug\\" /Fd"cmTC_0fca8.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_0fca8.dir\Debug\\" /Fd"cmTC_0fca8.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_0fca8.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_0fca8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_0fca8.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_0fca8.dir\Debug\CheckSymbolExists.obj
+  cmTC_0fca8.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_0fca8.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_0fca8.dir\Debug\cmTC_0fca8.tlog\unsuccessfulbuild”。
+  正在对“cmTC_0fca8.dir\Debug\cmTC_0fca8.tlog\cmTC_0fca8.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_0fca8.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.95
+
+File D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoull
+  return ((int*)(&strtoull))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the lfind exist passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_73c47.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:56。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_73c47.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_73c47.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_73c47.dir\Debug\cmTC_73c47.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_73c47.dir\Debug\cmTC_73c47.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_73c47.dir\Debug\\" /Fd"cmTC_73c47.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_73c47.dir\Debug\\" /Fd"cmTC_73c47.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  CheckSymbolExists.c
+  
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\cmakefiles\cmaketmp\checksymbolexists.c(8): warning C4996: 'lfind': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _lfind. See online help for details. [D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_73c47.vcxproj]
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_search.h(191): note: 参见“lfind”的声明
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_73c47.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_73c47.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_73c47.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_73c47.dir\Debug\CheckSymbolExists.obj
+  cmTC_73c47.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_73c47.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_73c47.dir\Debug\cmTC_73c47.tlog\unsuccessfulbuild”。
+  正在对“cmTC_73c47.dir\Debug\cmTC_73c47.tlog\cmTC_73c47.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_73c47.vcxproj”(默认目标)的操作。
+
+已成功生成。
+
+“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_73c47.vcxproj”(默认目标) (1) ->
+(ClCompile 目标) -> 
+  d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\cmakefiles\cmaketmp\checksymbolexists.c(8): warning C4996: 'lfind': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _lfind. See online help for details. [D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_73c47.vcxproj]
+
+    1 个警告
+    0 个错误
+
+已用时间 00:00:01.07
+
+File D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <search.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef lfind
+  return ((int*)(&lfind))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining size of unsigned short passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_632ec.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:57。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_632ec.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_632ec.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_632ec.dir\Debug\cmTC_632ec.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_632ec.dir\Debug\cmTC_632ec.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_632ec.dir\Debug\\" /Fd"cmTC_632ec.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\CMAKE_SIZEOF_UNSIGNED_SHORT.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_632ec.dir\Debug\\" /Fd"cmTC_632ec.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CheckTypeSize\CMAKE_SIZEOF_UNSIGNED_SHORT.c"
+  CMAKE_SIZEOF_UNSIGNED_SHORT.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_632ec.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_632ec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_632ec.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_632ec.dir\Debug\CMAKE_SIZEOF_UNSIGNED_SHORT.obj
+  cmTC_632ec.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_632ec.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_632ec.dir\Debug\cmTC_632ec.tlog\unsuccessfulbuild”。
+  正在对“cmTC_632ec.dir\Debug\cmTC_632ec.tlog\cmTC_632ec.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_632ec.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:00.96
+
+
+Determining if the system is big endian passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_ce0d9.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:49:58。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_ce0d9.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_ce0d9.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_ce0d9.dir\Debug\cmTC_ce0d9.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_ce0d9.dir\Debug\cmTC_ce0d9.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ce0d9.dir\Debug\\" /Fd"cmTC_ce0d9.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\TestEndianess.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ce0d9.dir\Debug\\" /Fd"cmTC_ce0d9.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\TestEndianess.c"
+  TestEndianess.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_ce0d9.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_ce0d9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_ce0d9.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_ce0d9.dir\Debug\TestEndianess.obj
+  cmTC_ce0d9.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_ce0d9.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_ce0d9.dir\Debug\cmTC_ce0d9.tlog\unsuccessfulbuild”。
+  正在对“cmTC_ce0d9.dir\Debug\cmTC_ce0d9.tlog\cmTC_ce0d9.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_ce0d9.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.02
+
+TestEndianess.c:
+/* A 16 bit integer is required. */
+typedef unsigned short cmakeint16;
+
+/* On a little endian machine, these 16bit ints will give "THIS IS LITTLE ENDIAN."
+   On a big endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_little[] =  {0x4854, 0x5349, 0x4920, 0x2053, 0x494c, 0x5454, 0x454c, 0x4520, 0x444e, 0x4149, 0x2e4e, 0x0000};
+
+/* on a big endian machine, these 16bit ints will give "THIS IS BIG ENDIAN."
+   On a little endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_big[] =     {0x5448, 0x4953, 0x2049, 0x5320, 0x4249, 0x4720, 0x454e, 0x4449, 0x414e, 0x2e2e, 0x0000};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_little[argc];
+  require += info_big[argc];
+  (void)argv;
+  return require;
+}
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler:  
+Build flags: 
+Id flags:  
+
+The output was:
+0
+���� .NET Framework �� Microsoft (R) ��������汾 15.6.82.30579
+��Ȩ����(C) Microsoft Corporation����������Ȩ����
+
+��������ʱ��Ϊ 2018/5/30 16:50:01��
+�ڵ� 1 �ϵ���Ŀ��D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\3.9.0\CompilerIdCXX\CompilerIdCXX.vcxproj��(Ĭ��Ŀ��)��
+PrepareForBuild:
+  ���ڴ���Ŀ¼��Debug\����
+  ���ڴ���Ŀ¼��Debug\CompilerIdCXX.tlog\����
+InitializeBuildStatus:
+  ���ڴ�����Debug\CompilerIdCXX.tlog\unsuccessfulbuild������Ϊ��ָ����AlwaysCreate����
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue CMakeCXXCompilerId.cpp
+  CMakeCXXCompilerId.cpp
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\3.9.0\CompilerIdCXX\.\CompilerIdCXX.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_CXX_COMPILER=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\Hostx86\x86\cl.exe
+FinalizeBuildStatus:
+  ����ɾ���ļ���Debug\CompilerIdCXX.tlog\unsuccessfulbuild����
+  ���ڶԡ�Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate��ִ�� Touch ����
+�����������Ŀ��D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\3.9.0\CompilerIdCXX\CompilerIdCXX.vcxproj��(Ĭ��Ŀ��)�Ĳ�����
+
+�ѳɹ����ɡ�
+    0 ������
+    0 ������
+
+����ʱ�� 00:00:00.87
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+
+The CXX compiler identification is MSVC, found in "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/3.9.0/CompilerIdCXX/CompilerIdCXX.exe"
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_74635.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:50:02。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_74635.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_74635.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_74635.dir\Debug\cmTC_74635.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_74635.dir\Debug\cmTC_74635.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_74635.dir\Debug\\" /Fd"cmTC_74635.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_74635.dir\Debug\\" /Fd"cmTC_74635.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  testCXXCompiler.cxx
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_74635.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_74635.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_74635.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_74635.dir\Debug\testCXXCompiler.obj
+  cmTC_74635.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_74635.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_74635.dir\Debug\cmTC_74635.tlog\unsuccessfulbuild”。
+  正在对“cmTC_74635.dir\Debug\cmTC_74635.tlog\cmTC_74635.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_74635.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.02
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_96190.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:50:03。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_96190.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_96190.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_96190.dir\Debug\cmTC_96190.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_96190.dir\Debug\cmTC_96190.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_96190.dir\Debug\\" /Fd"cmTC_96190.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXCompilerABI.cpp"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_96190.dir\Debug\\" /Fd"cmTC_96190.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXCompilerABI.cpp"
+  CMakeCXXCompilerABI.cpp
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_96190.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_96190.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_96190.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_96190.dir\Debug\CMakeCXXCompilerABI.obj
+  cmTC_96190.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_96190.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_96190.dir\Debug\cmTC_96190.tlog\unsuccessfulbuild”。
+  正在对“cmTC_96190.dir\Debug\cmTC_96190.tlog\cmTC_96190.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_96190.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.06
+
+
+
+
+Detecting CXX [] compiler features compiled with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_8b142.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:50:05。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_8b142.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_8b142.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_8b142.dir\Debug\cmTC_8b142.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_8b142.dir\Debug\cmTC_8b142.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8b142.dir\Debug\\" /Fd"cmTC_8b142.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8b142.dir\Debug\\" /Fd"cmTC_8b142.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  feature_tests.cxx
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_8b142.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_8b142.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_8b142.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8b142.dir\Debug\feature_tests.obj
+  cmTC_8b142.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_8b142.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_8b142.dir\Debug\cmTC_8b142.tlog\unsuccessfulbuild”。
+  正在对“cmTC_8b142.dir\Debug\cmTC_8b142.tlog\cmTC_8b142.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_8b142.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.02
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [] compiler features compiled with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_ee0db.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:50:06。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_ee0db.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_ee0db.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_ee0db.dir\Debug\cmTC_ee0db.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_ee0db.dir\Debug\cmTC_ee0db.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_ee0db.dir\Debug\\" /Fd"cmTC_ee0db.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_ee0db.dir\Debug\\" /Fd"cmTC_ee0db.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  feature_tests.cxx
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_ee0db.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_ee0db.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_ee0db.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_ee0db.dir\Debug\feature_tests.obj
+  cmTC_ee0db.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_ee0db.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_ee0db.dir\Debug\cmTC_ee0db.tlog\unsuccessfulbuild”。
+  正在对“cmTC_ee0db.dir\Debug\cmTC_ee0db.tlog\cmTC_ee0db.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_ee0db.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.06
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [] compiler features compiled with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_7e5f9.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:50:08。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_7e5f9.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_7e5f9.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_7e5f9.dir\Debug\cmTC_7e5f9.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_7e5f9.dir\Debug\cmTC_7e5f9.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7e5f9.dir\Debug\\" /Fd"cmTC_7e5f9.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7e5f9.dir\Debug\\" /Fd"cmTC_7e5f9.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  feature_tests.cxx
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_7e5f9.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_7e5f9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_7e5f9.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_7e5f9.dir\Debug\feature_tests.obj
+  cmTC_7e5f9.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_7e5f9.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_7e5f9.dir\Debug\cmTC_7e5f9.tlog\unsuccessfulbuild”。
+  正在对“cmTC_7e5f9.dir\Debug\cmTC_7e5f9.tlog\cmTC_7e5f9.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_7e5f9.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.04
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [] compiler features compiled with the following output:
+Change Dir: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_3244d.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.6.82.30579
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2018/5/30 16:50:10。
+节点 1 上的项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_3244d.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_3244d.dir\Debug\”。
+  正在创建目录“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_3244d.dir\Debug\cmTC_3244d.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_3244d.dir\Debug\cmTC_3244d.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_3244d.dir\Debug\\" /Fd"cmTC_3244d.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.13.26129 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_3244d.dir\Debug\\" /Fd"cmTC_3244d.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\feature_tests.cxx"
+  feature_tests.cxx
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.13.26128\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_3244d.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_3244d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/CMakeFiles/CMakeTmp/Debug/cmTC_3244d.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_3244d.dir\Debug\feature_tests.obj
+  cmTC_3244d.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\Debug\cmTC_3244d.exe
+FinalizeBuildStatus:
+  正在删除文件“cmTC_3244d.dir\Debug\cmTC_3244d.tlog\unsuccessfulbuild”。
+  正在对“cmTC_3244d.dir\Debug\cmTC_3244d.tlog\cmTC_3244d.lastbuildstate”执行 Touch 任务。
+已完成生成项目“D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\CMakeFiles\CMakeTmp\cmTC_3244d.vcxproj”(默认目标)的操作。
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:01.04
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates

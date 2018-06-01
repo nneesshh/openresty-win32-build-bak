@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_aux.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_close.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_codec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_color.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_compress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirinfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirwrite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dumpmode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_extension.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_fax3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_fax3sm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_flush.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_jbig.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_jpeg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_jpeg_12.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_luv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_lzma.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_lzw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_next.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_ojpeg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_open.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_packbits.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_pixarlog.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_predict.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_print.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_read.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_strip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_swab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_thunder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_tile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_version.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_warning.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_write.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_zip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_zstd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\dummy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\strcasecmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tiff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tiffio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tiffvers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff\tiffconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\libport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\libtiff.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1A351CD7-0A0F-30F3-A564-882F998D82AA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5FB9DAAB-9370-3B86-BCBA-11781C1521CB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

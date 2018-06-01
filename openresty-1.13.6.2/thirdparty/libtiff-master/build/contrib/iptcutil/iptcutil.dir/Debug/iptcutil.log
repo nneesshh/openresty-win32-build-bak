@@ -1,0 +1,20 @@
+﻿  Building Custom Rule D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/contrib/iptcutil/CMakeLists.txt
+  CMake does not need to re-run because D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/contrib/iptcutil/CMakeFiles/generate.stamp is up-to-date.
+  iptcutil.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(157): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(2261): note: see declaration of 'sscanf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(167): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(181): warning C4996: 'strnicmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strnicmp. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(565): note: see declaration of 'strnicmp'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(183): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(431): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(433): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(442): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\contrib\iptcutil\iptcutil.c(444): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  iptcutil.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\contrib\iptcutil\Debug\iptcutil.exe

@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1B154877-A18F-37EB-91C7-646A91DBB777}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>tiff</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../x86/libtiff-4.0.9-vc15-x86/lib/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tiff.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">libtiff_a</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../x86/libtiff-4.0.9-vc15-x86/lib/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tiff.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libtiff_a</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">../../../x86/libtiff-4.0.9-vc15-x86/lib/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">tiff.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">libtiff_a</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">../../../x86/libtiff-4.0.9-vc15-x86/lib/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">tiff.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">libtiff_a</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../build/libtiff;../libtiff;../../../x86/zlib-1.2.11-vc15-x86/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>E:\_nutstore\mush\support\zlib-1.2.8\lib\zlibd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.lib</ImportLibrary>
+      <ModuleDefinitionFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/libtiff/libtiff.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../build/libtiff;../libtiff;../../../x86/zlib-1.2.11-vc15-x86/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsC</CompileAs>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>E:\_nutstore\mush\support\zlib-1.2.8\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Release/tiff.lib</ImportLibrary>
+      <ModuleDefinitionFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/libtiff/libtiff.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Release/tiff.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../build/libtiff;../libtiff;../../../x86/zlib-1.2.11-vc15-x86/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsC</CompileAs>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>E:\_nutstore\mush\support\zlib-1.2.8\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/MinSizeRel/tiff.lib</ImportLibrary>
+      <ModuleDefinitionFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/libtiff/libtiff.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/MinSizeRel/tiff.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../build/libtiff;../libtiff;../../../x86/zlib-1.2.11-vc15-x86/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";tiff_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff;E:\_nutstore\mush\support\zlib-1.2.8;C:\Strawberry\c\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>E:\_nutstore\mush\support\zlib-1.2.8\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/RelWithDebInfo/tiff.lib</ImportLibrary>
+      <ModuleDefinitionFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/libtiff/libtiff.def</ModuleDefinitionFile>
+      <ProgramDataBaseFile>D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/RelWithDebInfo/tiff.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_aux.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_close.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_codec.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_color.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_compress.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dir.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirinfo.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirread.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirwrite.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dumpmode.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_error.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_extension.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_fax3.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_fax3sm.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_flush.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_jbig.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_jpeg.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_jpeg_12.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_luv.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_lzma.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_lzw.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_next.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_ojpeg.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_open.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_packbits.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_pixarlog.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_predict.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_print.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_read.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_strip.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_swab.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_thunder.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_tile.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_version.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_warning.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_write.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_zip.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_zstd.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c" />
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tiff.h" />
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tiffio.h" />
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tiffvers.h" />
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff\tiffconf.h" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\dummy.c" />
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\libport.h" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\getopt.c" />
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\port\strcasecmp.c" />
+    <None Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\libtiff.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

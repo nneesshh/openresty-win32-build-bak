@@ -1,0 +1,133 @@
+﻿  tif_aux.c
+  tif_close.c
+  tif_codec.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_codec.c(113): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+  tif_color.c
+  tif_compress.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_compress.c(209): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+  tif_dir.c
+  tif_dirinfo.c
+  tif_dirread.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_dirread.c(5615): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdlib.h(1199): note: see declaration of 'getenv'
+  tif_dirwrite.c
+  tif_dumpmode.c
+  tif_error.c
+  tif_extension.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_extension.c(105): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+  tif_fax3.c
+  tif_fax3sm.c
+  tif_flush.c
+  tif_getimage.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(81): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(92): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(97): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(110): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(121): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(145): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(155): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(161): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(170): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(178): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(183): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(188): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(197): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(206): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(304): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(354): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(362): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(372): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(386): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(423): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(433): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(438): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(446): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(456): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(461): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(472): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(483): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_getimage.c(488): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+  tif_jbig.c
+  tif_jpeg.c
+  tif_jpeg_12.c
+  tif_luv.c
+  Generating Code...
+  Compiling...
+  tif_lzma.c
+  tif_lzw.c
+  tif_next.c
+  tif_ojpeg.c
+  tif_open.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_open.c(124): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(132): note: see declaration of 'strcpy'
+  tif_packbits.c
+  tif_pixarlog.c
+  tif_predict.c
+  tif_print.c
+  tif_read.c
+  tif_strip.c
+  tif_swab.c
+  tif_thunder.c
+  tif_tile.c
+  tif_version.c
+  tif_warning.c
+  tif_write.c
+  tif_zip.c
+  tif_zstd.c
+  tif_unix.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(85): warning C4996: 'read': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _read. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_io.h(523): note: see declaration of 'read'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(113): warning C4996: 'write': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _write. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_io.h(558): note: see declaration of 'write'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(142): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _close. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_io.h(459): note: see declaration of 'close'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(238): warning C4996: 'open': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _open. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_io.h(516): note: see declaration of 'open'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(240): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(181): note: see declaration of 'strerror'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(241): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\string.h(181): note: see declaration of 'strerror'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(250): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _close. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_io.h(459): note: see declaration of 'close'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(277): warning C4996: '_wopen': This function or variable may be unsafe. Consider using _wsopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_wio.h(255): note: see declaration of '_wopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\libtiff\tif_unix.c(303): warning C4996: 'close': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _close. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\corecrt_io.h(459): note: see declaration of 'close'
+  Generating Code...
+  Compiling...
+  dummy.c
+  getopt.c
+  strcasecmp.c
+  Generating Code...
+  tiff.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\libtiff\../../../x86/libtiff-4.0.9-vc15-x86/lib/libtiff_a.lib

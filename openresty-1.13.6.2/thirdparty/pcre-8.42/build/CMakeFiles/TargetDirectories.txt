@@ -1,0 +1,12 @@
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcre.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcreposix.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/RUN_TESTS.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcregrep.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcrecpp.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcrecpp_unittest.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcretest.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcre_scanner_unittest.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/pcre_stringpiece_unittest.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/INSTALL.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/ALL_BUILD.dir
+D:/www/_openresty/openresty-1.13.6.2/thirdparty/pcre-8.42/build/CMakeFiles/ZERO_CHECK.dir

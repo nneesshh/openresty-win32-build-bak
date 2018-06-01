@@ -1,0 +1,11 @@
+﻿  Building Custom Rule D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/tools/CMakeLists.txt
+  CMake does not need to re-run because D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/CMakeFiles/generate.stamp is up-to-date.
+  fax2tiff.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\fax2tiff.c(117): warning C4013: 'getopt' undefined; assuming extern returning int
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\fax2tiff.c(276): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\fax2tiff.c(283): warning C4996: 'fileno': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fileno. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(2457): note: see declaration of 'fileno'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\tools\fax2tiff.c(475): warning C4996: 'setbuf': This function or variable may be unsafe. Consider using setvbuf instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(394): note: see declaration of 'setbuf'
+  fax2tiff.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\tools\Debug\fax2tiff.exe

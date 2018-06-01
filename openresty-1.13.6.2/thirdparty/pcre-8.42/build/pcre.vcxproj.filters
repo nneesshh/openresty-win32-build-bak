@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_byte_order.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\build\pcre_chartables.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_compile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_config.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_dfa_exec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_exec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_fullinfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_get.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_globals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_jit_compile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_maketables.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_newline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_ord2utf8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_refcount.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_string_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_study.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_tables.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_ucd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_valid_utf8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_version.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcre_xclass.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\build\pcre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\build\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2D7B994C-4263-3EB0-9F83-9BBC520A66B0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{CB4019B1-5BE9-3F1F-B0F4-E400492B65D6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

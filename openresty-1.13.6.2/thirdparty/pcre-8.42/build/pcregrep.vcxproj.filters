@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\pcregrep.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\www\_openresty\openresty-1.13.6.2\thirdparty\pcre-8.42\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2D7B994C-4263-3EB0-9F83-9BBC520A66B0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

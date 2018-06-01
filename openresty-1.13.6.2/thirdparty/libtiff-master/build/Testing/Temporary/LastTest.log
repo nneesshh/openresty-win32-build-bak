@@ -1,0 +1,1251 @@
+Start testing: May 30 16:56 ?D1迆㊣那℅?那㊣??
+----------------------------------------------------------
+1/80 Testing: bmp2tiff-palette-palette-1c-8b
+1/80 Test: bmp2tiff-palette-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.bmp" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/bmp2tiff-palette-palette-1c-8b.bmp" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"bmp2tiff-palette-palette-1c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"bmp2tiff-palette-palette-1c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"bmp2tiff-palette-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/80 Testing: bmp2tiff-rgb-rgb-3c-8b
+2/80 Test: bmp2tiff-rgb-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.bmp" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/bmp2tiff-rgb-rgb-3c-8b.bmp" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"bmp2tiff-rgb-rgb-3c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"bmp2tiff-rgb-rgb-3c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"bmp2tiff-rgb-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/80 Testing: gif2tiff-palette-palette-1c-8b
+3/80 Test: gif2tiff-palette-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.gif" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/gif2tiff-palette-palette-1c-8b.gif" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"gif2tiff-palette-palette-1c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"gif2tiff-palette-palette-1c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"gif2tiff-palette-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/80 Testing: ppm2tiff-miniswhite-miniswhite-1c-1b
+4/80 Test: ppm2tiff-miniswhite-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.pbm" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/ppm2tiff-miniswhite-miniswhite-1c-1b.pbm" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"ppm2tiff-miniswhite-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"ppm2tiff-miniswhite-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"ppm2tiff-miniswhite-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/80 Testing: ppm2tiff-minisblack-minisblack-1c-8b
+5/80 Test: ppm2tiff-minisblack-minisblack-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.pgm" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/ppm2tiff-minisblack-minisblack-1c-8b.pgm" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"ppm2tiff-minisblack-minisblack-1c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"ppm2tiff-minisblack-minisblack-1c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"ppm2tiff-minisblack-minisblack-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/80 Testing: ppm2tiff-rgb-rgb-3c-8b
+6/80 Test: ppm2tiff-rgb-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.ppm" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/ppm2tiff-rgb-rgb-3c-8b.ppm" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"ppm2tiff-rgb-rgb-3c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"ppm2tiff-rgb-rgb-3c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"ppm2tiff-rgb-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/80 Testing: tiffcp-g3-miniswhite-1c-1b
+7/80 Test: tiffcp-g3-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-g3-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-g3-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-g3-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-g3-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/80 Testing: tiffcp-g31d-miniswhite-1c-1b
+8/80 Test: tiffcp-g31d-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-g31d-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-g31d-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-g31d-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-g31d-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/80 Testing: tiffcp-g31dfill-miniswhite-1c-1b
+9/80 Test: tiffcp-g31dfill-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-g31dfill-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-g31dfill-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-g31dfill-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-g31dfill-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/80 Testing: tiffcp-g32d-miniswhite-1c-1b
+10/80 Test: tiffcp-g32d-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-g32d-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-g32d-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-g32d-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-g32d-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/80 Testing: tiffcp-g32dfill-miniswhite-1c-1b
+11/80 Test: tiffcp-g32dfill-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-g32dfill-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-g32dfill-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-g32dfill-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-g32dfill-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/80 Testing: tiffcp-g4-miniswhite-1c-1b
+12/80 Test: tiffcp-g4-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-g4-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-g4-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-g4-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-g4-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/80 Testing: tiffcp-none-quad-lzw-compat
+13/80 Test: tiffcp-none-quad-lzw-compat
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-lzw-compat.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-none-quad-lzw-compat.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-none-quad-lzw-compat" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-none-quad-lzw-compat" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-none-quad-lzw-compat" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/80 Testing: tiffcp-logluv-logluv-3c-16b
+14/80 Test: tiffcp-logluv-logluv-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/logluv-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-logluv-logluv-3c-16b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-logluv-logluv-3c-16b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-logluv-logluv-3c-16b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-logluv-logluv-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/80 Testing: tiffcp-thumbnail-miniswhite-1c-1b
+15/80 Test: tiffcp-thumbnail-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-thumbnail-miniswhite-1c-1b.tiff" "-DVALIDATE=FALSE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-thumbnail-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcp-thumbnail-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-thumbnail-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/80 Testing: tiffdump-miniswhite-1c-1b
+16/80 Test: tiffdump-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DREADER_COMMAND=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffdump.exe^" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffdump-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+-- Running  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffdump.exe; D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\miniswhite-1c-1b.tiff
+CMake Error at D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTestCommon.cmake:86 (message):
+  Returned failed status Exit code 0xc000012f
+
+  ! Output (if any) is in "
+Call Stack (most recent call first):
+  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake:62 (test_reader)
+
+
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Failed.
+"tiffdump-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffdump-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/80 Testing: tiffinfo-minisblack-1c-16b
+17/80 Test: tiffinfo-minisblack-1c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DREADER_COMMAND=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe^-c^-D^-d^-j^-s" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffinfo-minisblack-1c-16b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+-- Running  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe;-c;-D;-d;-j;-s D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\minisblack-1c-16b.tiff
+CMake Error at D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTestCommon.cmake:86 (message):
+  Returned failed status Exit code 0xc000012f
+
+  ! Output (if any) is in "
+Call Stack (most recent call first):
+  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake:62 (test_reader)
+
+
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Failed.
+"tiffinfo-minisblack-1c-16b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffinfo-minisblack-1c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/80 Testing: tiffcp-split
+18/80 Test: tiffcp-split
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DTESTFILES=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DCONJOINED=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-split-conjoined.tif" "-DSPLITFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-split-split-" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffSplitTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-split" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+-- Running D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\minisblack-1c-16b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\minisblack-1c-8b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\miniswhite-1c-1b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\palette-1c-1b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\palette-1c-4b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\palette-1c-8b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\rgb-3c-8b.tiff D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\output\tiffcp-split-conjoined.tif
+CMake Error at D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTestCommon.cmake:56 (message):
+  Returned failed status Exit code 0xc000012f
+
+  ! Output (if any) is in
+  "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\output\tiffcp-split-conjoined.tif"
+Call Stack (most recent call first):
+  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffSplitTest.cmake:29 (test_convert_multi)
+
+
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Failed.
+"tiffcp-split" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-split" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/80 Testing: tiffcp-split-join
+19/80 Test: tiffcp-split-join
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DTESTFILES=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff^D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DCONJOINED=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-split-join-conjoined.tif" "-DSPLITFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-split-join-split-" "-DRECONJOINED=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcp-split-join-reconjoined.tif" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffSplitTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcp-split-join" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+-- Running D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\minisblack-1c-16b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\minisblack-1c-8b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\miniswhite-1c-1b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\palette-1c-1b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\palette-1c-4b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\palette-1c-8b.tiff;D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\rgb-3c-8b.tiff D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\output\tiffcp-split-join-conjoined.tif
+CMake Error at D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTestCommon.cmake:56 (message):
+  Returned failed status Exit code 0xc000012f
+
+  ! Output (if any) is in
+  "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\output\tiffcp-split-join-conjoined.tif"
+Call Stack (most recent call first):
+  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffSplitTest.cmake:29 (test_convert_multi)
+
+
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Failed.
+"tiffcp-split-join" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiffcp-split-join" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/80 Testing: tiff2pdf-miniswhite-1c-1b
+20/80 Test: tiff2pdf-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DSTDOUT_COMMAND=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiff2pdf.exe^" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2pdf-miniswhite-1c-1b.tiff" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2pdf-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+-- Running  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiff2pdf.exe; D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\images\miniswhite-1c-1b.tiff > D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\output\tiff2pdf-miniswhite-1c-1b.tiff
+CMake Error at D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTestCommon.cmake:72 (message):
+  Returned failed status Exit code 0xc000012f
+
+  ! Output (if any) is in
+  "D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\output\tiff2pdf-miniswhite-1c-1b.tiff
+Call Stack (most recent call first):
+  D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake:58 (test_stdout)
+
+
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Failed.
+"tiff2pdf-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2pdf-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/80 Testing: tiff2rgba-default-logluv-3c-16b
+21/80 Test: tiff2rgba-default-logluv-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/logluv-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-logluv-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-logluv-3c-16b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-logluv-3c-16b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-logluv-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/80 Testing: tiff2rgba-default-minisblack-1c-16b
+22/80 Test: tiff2rgba-default-minisblack-1c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-minisblack-1c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-minisblack-1c-16b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-minisblack-1c-16b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-minisblack-1c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/80 Testing: tiff2rgba-default-minisblack-1c-8b
+23/80 Test: tiff2rgba-default-minisblack-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-minisblack-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-minisblack-1c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-minisblack-1c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-minisblack-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/80 Testing: tiff2rgba-default-minisblack-2c-8b-alpha
+24/80 Test: tiff2rgba-default-minisblack-2c-8b-alpha
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-2c-8b-alpha.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-minisblack-2c-8b-alpha.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-minisblack-2c-8b-alpha" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-minisblack-2c-8b-alpha" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-minisblack-2c-8b-alpha" time elapsed: 00:00:00
+----------------------------------------------------------
+
+25/80 Testing: tiff2rgba-default-miniswhite-1c-1b
+25/80 Test: tiff2rgba-default-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-miniswhite-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-miniswhite-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-miniswhite-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+26/80 Testing: tiff2rgba-default-palette-1c-1b
+26/80 Test: tiff2rgba-default-palette-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-palette-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-palette-1c-1b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-palette-1c-1b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-palette-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+27/80 Testing: tiff2rgba-default-palette-1c-4b
+27/80 Test: tiff2rgba-default-palette-1c-4b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-palette-1c-4b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-palette-1c-4b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-palette-1c-4b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-palette-1c-4b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/80 Testing: tiff2rgba-default-palette-1c-8b
+28/80 Test: tiff2rgba-default-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-palette-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-palette-1c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-palette-1c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+29/80 Testing: tiff2rgba-default-rgb-3c-16b
+29/80 Test: tiff2rgba-default-rgb-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-rgb-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-rgb-3c-16b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-rgb-3c-16b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-rgb-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/80 Testing: tiff2rgba-default-rgb-3c-8b
+30/80 Test: tiff2rgba-default-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-rgb-3c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-rgb-3c-8b" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-rgb-3c-8b" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/80 Testing: tiff2rgba-default-quad-tile
+31/80 Test: tiff2rgba-default-quad-tile
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-tile.jpg.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-quad-tile.jpg.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-quad-tile" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-quad-tile" end time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-quad-tile" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/80 Testing: tiff2rgba-default-quad-lzw-compat
+32/80 Test: tiff2rgba-default-quad-lzw-compat
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-lzw-compat.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiff2rgba-default-quad-lzw-compat.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiff2rgba-default-quad-lzw-compat" start time: May 30 16:56 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiff2rgba-default-quad-lzw-compat" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiff2rgba-default-quad-lzw-compat" time elapsed: 00:00:00
+----------------------------------------------------------
+
+33/80 Testing: tiffcrop-R90-logluv-3c-16b
+33/80 Test: tiffcrop-R90-logluv-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/logluv-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-logluv-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-logluv-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-logluv-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-logluv-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+34/80 Testing: tiffcrop-R90-minisblack-1c-16b
+34/80 Test: tiffcrop-R90-minisblack-1c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-minisblack-1c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-minisblack-1c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-minisblack-1c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-minisblack-1c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+35/80 Testing: tiffcrop-R90-minisblack-1c-8b
+35/80 Test: tiffcrop-R90-minisblack-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-minisblack-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-minisblack-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-minisblack-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-minisblack-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/80 Testing: tiffcrop-R90-minisblack-2c-8b-alpha
+36/80 Test: tiffcrop-R90-minisblack-2c-8b-alpha
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-2c-8b-alpha.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-minisblack-2c-8b-alpha.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-minisblack-2c-8b-alpha" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-minisblack-2c-8b-alpha" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-minisblack-2c-8b-alpha" time elapsed: 00:00:00
+----------------------------------------------------------
+
+37/80 Testing: tiffcrop-R90-miniswhite-1c-1b
+37/80 Test: tiffcrop-R90-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-miniswhite-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-miniswhite-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-miniswhite-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+38/80 Testing: tiffcrop-R90-palette-1c-1b
+38/80 Test: tiffcrop-R90-palette-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-palette-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-palette-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-palette-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-palette-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+39/80 Testing: tiffcrop-R90-palette-1c-4b
+39/80 Test: tiffcrop-R90-palette-1c-4b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-palette-1c-4b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-palette-1c-4b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-palette-1c-4b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-palette-1c-4b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+40/80 Testing: tiffcrop-R90-palette-1c-8b
+40/80 Test: tiffcrop-R90-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-palette-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-palette-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-palette-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+41/80 Testing: tiffcrop-R90-rgb-3c-16b
+41/80 Test: tiffcrop-R90-rgb-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-rgb-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-rgb-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-rgb-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-rgb-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+42/80 Testing: tiffcrop-R90-rgb-3c-8b
+42/80 Test: tiffcrop-R90-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-rgb-3c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-rgb-3c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-rgb-3c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+43/80 Testing: tiffcrop-R90-quad-tile
+43/80 Test: tiffcrop-R90-quad-tile
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-tile.jpg.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-quad-tile.jpg.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-quad-tile" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-quad-tile" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-quad-tile" time elapsed: 00:00:00
+----------------------------------------------------------
+
+44/80 Testing: tiffcrop-R90-quad-lzw-compat
+44/80 Test: tiffcrop-R90-quad-lzw-compat
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-lzw-compat.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-R90-quad-lzw-compat.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-R90-quad-lzw-compat" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-R90-quad-lzw-compat" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-R90-quad-lzw-compat" time elapsed: 00:00:00
+----------------------------------------------------------
+
+45/80 Testing: tiffcrop-doubleflip-logluv-3c-16b
+45/80 Test: tiffcrop-doubleflip-logluv-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/logluv-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-logluv-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-logluv-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-logluv-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-logluv-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+46/80 Testing: tiffcrop-doubleflip-minisblack-1c-16b
+46/80 Test: tiffcrop-doubleflip-minisblack-1c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-minisblack-1c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-minisblack-1c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-minisblack-1c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-minisblack-1c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+47/80 Testing: tiffcrop-doubleflip-minisblack-1c-8b
+47/80 Test: tiffcrop-doubleflip-minisblack-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-minisblack-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-minisblack-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-minisblack-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-minisblack-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+48/80 Testing: tiffcrop-doubleflip-minisblack-2c-8b-alpha
+48/80 Test: tiffcrop-doubleflip-minisblack-2c-8b-alpha
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-2c-8b-alpha.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-minisblack-2c-8b-alpha.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-minisblack-2c-8b-alpha" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-minisblack-2c-8b-alpha" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-minisblack-2c-8b-alpha" time elapsed: 00:00:00
+----------------------------------------------------------
+
+49/80 Testing: tiffcrop-doubleflip-miniswhite-1c-1b
+49/80 Test: tiffcrop-doubleflip-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-miniswhite-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-miniswhite-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-miniswhite-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+50/80 Testing: tiffcrop-doubleflip-palette-1c-1b
+50/80 Test: tiffcrop-doubleflip-palette-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-palette-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-palette-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-palette-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-palette-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+51/80 Testing: tiffcrop-doubleflip-palette-1c-4b
+51/80 Test: tiffcrop-doubleflip-palette-1c-4b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-palette-1c-4b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-palette-1c-4b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-palette-1c-4b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-palette-1c-4b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+52/80 Testing: tiffcrop-doubleflip-palette-1c-8b
+52/80 Test: tiffcrop-doubleflip-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-palette-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-palette-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-palette-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+53/80 Testing: tiffcrop-doubleflip-rgb-3c-16b
+53/80 Test: tiffcrop-doubleflip-rgb-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-rgb-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-rgb-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-rgb-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-rgb-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+54/80 Testing: tiffcrop-doubleflip-rgb-3c-8b
+54/80 Test: tiffcrop-doubleflip-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-rgb-3c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-rgb-3c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-rgb-3c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+55/80 Testing: tiffcrop-doubleflip-quad-tile
+55/80 Test: tiffcrop-doubleflip-quad-tile
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-tile.jpg.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-quad-tile.jpg.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-quad-tile" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-quad-tile" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-quad-tile" time elapsed: 00:00:00
+----------------------------------------------------------
+
+56/80 Testing: tiffcrop-doubleflip-quad-lzw-compat
+56/80 Test: tiffcrop-doubleflip-quad-lzw-compat
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-lzw-compat.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-doubleflip-quad-lzw-compat.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-doubleflip-quad-lzw-compat" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-doubleflip-quad-lzw-compat" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-doubleflip-quad-lzw-compat" time elapsed: 00:00:00
+----------------------------------------------------------
+
+57/80 Testing: tiffcrop-extract-logluv-3c-16b
+57/80 Test: tiffcrop-extract-logluv-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/logluv-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-logluv-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-logluv-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-logluv-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-logluv-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+58/80 Testing: tiffcrop-extract-minisblack-1c-16b
+58/80 Test: tiffcrop-extract-minisblack-1c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-minisblack-1c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-minisblack-1c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-minisblack-1c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-minisblack-1c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+59/80 Testing: tiffcrop-extract-minisblack-1c-8b
+59/80 Test: tiffcrop-extract-minisblack-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-minisblack-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-minisblack-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-minisblack-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-minisblack-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+60/80 Testing: tiffcrop-extract-minisblack-2c-8b-alpha
+60/80 Test: tiffcrop-extract-minisblack-2c-8b-alpha
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-2c-8b-alpha.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-minisblack-2c-8b-alpha.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-minisblack-2c-8b-alpha" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-minisblack-2c-8b-alpha" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-minisblack-2c-8b-alpha" time elapsed: 00:00:00
+----------------------------------------------------------
+
+61/80 Testing: tiffcrop-extract-miniswhite-1c-1b
+61/80 Test: tiffcrop-extract-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-miniswhite-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-miniswhite-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-miniswhite-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+62/80 Testing: tiffcrop-extract-palette-1c-1b
+62/80 Test: tiffcrop-extract-palette-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-palette-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-palette-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-palette-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-palette-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+63/80 Testing: tiffcrop-extract-palette-1c-4b
+63/80 Test: tiffcrop-extract-palette-1c-4b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-palette-1c-4b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-palette-1c-4b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-palette-1c-4b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-palette-1c-4b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+64/80 Testing: tiffcrop-extract-palette-1c-8b
+64/80 Test: tiffcrop-extract-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-palette-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-palette-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-palette-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+65/80 Testing: tiffcrop-extract-rgb-3c-16b
+65/80 Test: tiffcrop-extract-rgb-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-rgb-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-rgb-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-rgb-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-rgb-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+66/80 Testing: tiffcrop-extract-rgb-3c-8b
+66/80 Test: tiffcrop-extract-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-rgb-3c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-rgb-3c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-rgb-3c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+67/80 Testing: tiffcrop-extract-quad-tile
+67/80 Test: tiffcrop-extract-quad-tile
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-tile.jpg.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-quad-tile.jpg.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-quad-tile" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-quad-tile" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-quad-tile" time elapsed: 00:00:00
+----------------------------------------------------------
+
+68/80 Testing: tiffcrop-extract-quad-lzw-compat
+68/80 Test: tiffcrop-extract-quad-lzw-compat
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-lzw-compat.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extract-quad-lzw-compat.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extract-quad-lzw-compat" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extract-quad-lzw-compat" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extract-quad-lzw-compat" time elapsed: 00:00:00
+----------------------------------------------------------
+
+69/80 Testing: tiffcrop-extractz14-logluv-3c-16b
+69/80 Test: tiffcrop-extractz14-logluv-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/logluv-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-logluv-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-logluv-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-logluv-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-logluv-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+70/80 Testing: tiffcrop-extractz14-minisblack-1c-16b
+70/80 Test: tiffcrop-extractz14-minisblack-1c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-minisblack-1c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-minisblack-1c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-minisblack-1c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-minisblack-1c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+71/80 Testing: tiffcrop-extractz14-minisblack-1c-8b
+71/80 Test: tiffcrop-extractz14-minisblack-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-minisblack-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-minisblack-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-minisblack-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-minisblack-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+72/80 Testing: tiffcrop-extractz14-minisblack-2c-8b-alpha
+72/80 Test: tiffcrop-extractz14-minisblack-2c-8b-alpha
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/minisblack-2c-8b-alpha.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-minisblack-2c-8b-alpha.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-minisblack-2c-8b-alpha" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-minisblack-2c-8b-alpha" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-minisblack-2c-8b-alpha" time elapsed: 00:00:00
+----------------------------------------------------------
+
+73/80 Testing: tiffcrop-extractz14-miniswhite-1c-1b
+73/80 Test: tiffcrop-extractz14-miniswhite-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/miniswhite-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-miniswhite-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-miniswhite-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-miniswhite-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-miniswhite-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+74/80 Testing: tiffcrop-extractz14-palette-1c-1b
+74/80 Test: tiffcrop-extractz14-palette-1c-1b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-1b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-palette-1c-1b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-palette-1c-1b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-palette-1c-1b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-palette-1c-1b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+75/80 Testing: tiffcrop-extractz14-palette-1c-4b
+75/80 Test: tiffcrop-extractz14-palette-1c-4b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-4b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-palette-1c-4b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-palette-1c-4b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-palette-1c-4b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-palette-1c-4b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+76/80 Testing: tiffcrop-extractz14-palette-1c-8b
+76/80 Test: tiffcrop-extractz14-palette-1c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/palette-1c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-palette-1c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-palette-1c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-palette-1c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-palette-1c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+77/80 Testing: tiffcrop-extractz14-rgb-3c-16b
+77/80 Test: tiffcrop-extractz14-rgb-3c-16b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-16b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-rgb-3c-16b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-rgb-3c-16b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-rgb-3c-16b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-rgb-3c-16b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+78/80 Testing: tiffcrop-extractz14-rgb-3c-8b
+78/80 Test: tiffcrop-extractz14-rgb-3c-8b
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/rgb-3c-8b.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-rgb-3c-8b.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-rgb-3c-8b" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-rgb-3c-8b" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-rgb-3c-8b" time elapsed: 00:00:00
+----------------------------------------------------------
+
+79/80 Testing: tiffcrop-extractz14-quad-tile
+79/80 Test: tiffcrop-extractz14-quad-tile
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-tile.jpg.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-quad-tile.jpg.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-quad-tile" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-quad-tile" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-quad-tile" time elapsed: 00:00:00
+----------------------------------------------------------
+
+80/80 Testing: tiffcrop-extractz14-quad-lzw-compat
+80/80 Test: tiffcrop-extractz14-quad-lzw-compat
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DCONVERT_COMMAND1=" "-DCONVERT_COMMAND2=" "-DCONVERT_COMMAND3=" "-DINFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/images/quad-lzw-compat.tiff" "-DOUTFILE=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/output/tiffcrop-extractz14-quad-lzw-compat.tiff" "-DVALIDATE=TRUE" "-DTIFFCP=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffcp.exe" "-DTIFFINFO=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffinfo.exe" "-DTIFFSPLIT=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/tools/Debug/tiffsplit.exe" "-DLIBTIFF=D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/libtiff/Debug/tiffd.dll" "-DWIN32=1" "-P" "D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/TiffTest.cmake"
+Directory: D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test
+"tiffcrop-extractz14-quad-lzw-compat" start time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tiffcrop-extractz14-quad-lzw-compat" end time: May 30 16:57 ?D1迆㊣那℅?那㊣??
+"tiffcrop-extractz14-quad-lzw-compat" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 30 16:57 ?D1迆㊣那℅?那㊣??

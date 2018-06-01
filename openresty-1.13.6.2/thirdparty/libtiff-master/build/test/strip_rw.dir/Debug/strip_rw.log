@@ -1,0 +1,19 @@
+﻿  Building Custom Rule D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/test/CMakeLists.txt
+  CMake does not need to re-run because D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/test/CMakeFiles/generate.stamp is up-to-date.
+  strip_rw.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\strip_rw.c(87): warning C4996: 'unlink': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _unlink. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(380): note: see declaration of 'unlink'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\strip_rw.c(103): warning C4996: 'unlink': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _unlink. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(380): note: see declaration of 'unlink'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\strip_rw.c(129): warning C4996: 'unlink': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _unlink. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(380): note: see declaration of 'unlink'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\strip_rw.c(146): warning C4996: 'unlink': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _unlink. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(380): note: see declaration of 'unlink'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\strip_rw.c(151): warning C4996: 'unlink': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _unlink. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(380): note: see declaration of 'unlink'
+  strip.c
+  test_arrays.c
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\test_arrays.c(252): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\test\test_arrays.c(373): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Generating Code...
+  strip_rw.vcxproj -> D:\www\_openresty\openresty-1.13.6.2\thirdparty\libtiff-master\build\test\Debug\strip_rw.exe
