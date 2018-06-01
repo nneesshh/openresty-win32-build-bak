@@ -16,20 +16,7 @@
 *.gch
 *.pch
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
 # Executables
-*.exe
 *.out
 *.app
 *.i*86
@@ -50,3 +37,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+openresty-1\.13\.6\.2/bin/Debug/logs/
+
+openresty-1\.13\.6\.2/msvc/\.vs/
+
+openresty-1\.13\.6\.2/msvc/Debug/
