@@ -18,4 +18,3 @@
 + pgsql(libpg, openssl): https://www.enterprisedb.com/download-postgresql-binaries
 + perl: http://strawberryperl.com/releases.html
 + pcre: https://ftp.pcre.org/pub/pcre/
-+ geoip2: https://pypi.org/project/geoip2/#files
