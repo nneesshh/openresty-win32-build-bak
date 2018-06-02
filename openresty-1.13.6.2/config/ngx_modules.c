@@ -32,7 +32,7 @@ extern ngx_module_t  ngx_http_access_module;
 extern ngx_module_t  ngx_http_limit_conn_module;
 extern ngx_module_t  ngx_http_limit_req_module;
 extern ngx_module_t  ngx_http_realip_module;
-//extern ngx_module_t  ngx_http_geo_module;
+extern ngx_module_t  ngx_http_geo_module;
 extern ngx_module_t  ngx_http_map_module;
 extern ngx_module_t  ngx_http_split_clients_module;
 extern ngx_module_t  ngx_http_referer_module;
@@ -103,7 +103,7 @@ extern ngx_module_t  ngx_stream_write_filter_module;
 extern ngx_module_t  ngx_stream_ssl_module;
 extern ngx_module_t  ngx_stream_limit_conn_module;
 extern ngx_module_t  ngx_stream_access_module;
-//extern ngx_module_t  ngx_stream_geo_module;
+extern ngx_module_t  ngx_stream_geo_module;
 extern ngx_module_t  ngx_stream_map_module;
 extern ngx_module_t  ngx_stream_split_clients_module;
 extern ngx_module_t  ngx_stream_return_module;
@@ -140,7 +140,7 @@ ngx_module_t *ngx_modules[] = {
     &ngx_http_limit_conn_module,
     &ngx_http_limit_req_module,
     &ngx_http_realip_module,
-//    &ngx_http_geo_module,
+    &ngx_http_geo_module,
     &ngx_http_map_module,
     &ngx_http_split_clients_module,
     &ngx_http_referer_module,
@@ -211,7 +211,7 @@ ngx_module_t *ngx_modules[] = {
     &ngx_stream_ssl_module,
     &ngx_stream_limit_conn_module,
     &ngx_stream_access_module,
-//    &ngx_stream_geo_module,
+    &ngx_stream_geo_module,
     &ngx_stream_map_module,
     &ngx_stream_split_clients_module,
     &ngx_stream_return_module,
@@ -250,7 +250,7 @@ char *ngx_module_names[] = {
     "ngx_http_limit_conn_module",
     "ngx_http_limit_req_module",
     "ngx_http_realip_module",
-//    "ngx_http_geo_module",
+    "ngx_http_geo_module",
     "ngx_http_map_module",
     "ngx_http_split_clients_module",
     "ngx_http_referer_module",
@@ -321,7 +321,7 @@ char *ngx_module_names[] = {
     "ngx_stream_ssl_module",
     "ngx_stream_limit_conn_module",
     "ngx_stream_access_module",
-//    "ngx_stream_geo_module",
+    "ngx_stream_geo_module",
     "ngx_stream_map_module",
     "ngx_stream_split_clients_module",
     "ngx_stream_return_module",

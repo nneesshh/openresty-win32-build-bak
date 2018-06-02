@@ -999,6 +999,12 @@
     <ClCompile Include="..\bundle\ngx_lua_upstream-0.07\src\ngx_http_lua_upstream_module.c">
       <Filter>bundle\lua\upstream</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\nginx\src\stream\ngx_stream_geo_module.c">
+      <Filter>src\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_geo_module.c">
+      <Filter>src\http\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\nginx\src\event\modules\ngx_iocp_module.h">

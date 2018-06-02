@@ -290,6 +290,7 @@
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_empty_gif_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_fastcgi_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_flv_module.c" />
+    <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_geo_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_gunzip_filter_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_gzip_filter_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_gzip_static_module.c" />
@@ -385,6 +386,7 @@
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_access_module.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_core_module.c" />
+    <ClCompile Include="..\src\nginx\src\stream\ngx_stream_geo_module.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_handler.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_limit_conn_module.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_log_module.c" />
