@@ -66,7 +66,7 @@ ngx_module_t  ngx_select_module = {
     NULL,                                  /* init process */
     NULL,                                  /* init thread */
     NULL,                                  /* exit thread */
-    NULL,                                  /* exit process */
+    &ngx_select_done,                      /* exit process */
     NULL,                                  /* exit master */
     NGX_MODULE_V1_PADDING
 };

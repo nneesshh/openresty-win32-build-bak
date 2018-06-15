@@ -1086,7 +1086,12 @@ ngx_http_lua_socket_resolve_retval_handler(ngx_http_request_t *r,
 
     pc->get = ngx_http_lua_socket_tcp_get_peer;
 
-    rc = ngx_event_connect_peer(pc);
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rc = ngx_event_connect_peerex(pc);
+    }
+    else {
+        rc = ngx_event_connect_peer(pc);
+    }
 
     if (rc == NGX_ERROR) {
         u->socket_errno = ngx_socket_errno;

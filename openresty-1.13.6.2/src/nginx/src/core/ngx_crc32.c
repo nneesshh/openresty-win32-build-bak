@@ -100,6 +100,7 @@ uint32_t  ngx_crc32_table256[] = {
 
 
 uint32_t *ngx_crc32_table_short = ngx_crc32_table16;
+void *ngx_crc32_table_short_raw = NULL; /* make vld happy */
 
 
 ngx_int_t
@@ -119,6 +120,8 @@ ngx_crc32_table_init(void)
         return NGX_ERROR;
     }
 
+    /* make vld happy */
+    ngx_crc32_table_short_raw = p;
     p = ngx_align_ptr(p, ngx_cacheline_size);
 
     ngx_memcpy(p, ngx_crc32_table16, 16 * sizeof(uint32_t));

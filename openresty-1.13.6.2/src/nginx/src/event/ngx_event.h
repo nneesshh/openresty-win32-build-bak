@@ -21,7 +21,8 @@
 typedef struct {
     WSAOVERLAPPED    ovlp;
     ngx_event_t     *event;
-    int              error;
+    /* int              error; */
+    int              acceptex_flag : 1; /* 1 = waiting for acceptex event raised, 0 = event process over */
 } ngx_event_ovlp_t;
 
 #endif
@@ -43,6 +44,7 @@ struct ngx_event_s {
      */
     unsigned         active:1;
 
+    /* IOCP: NGX_IOCP_IO disabled when acceptex in waiting, and enabled after acceptex(init_connection) success */
     unsigned         disabled:1;
 
     /* the ready event; in aio mode 0 means that no operation can be posted */

@@ -16,6 +16,8 @@ static void ngx_stream_close_connection(ngx_connection_t *c);
 static u_char *ngx_stream_log_error(ngx_log_t *log, u_char *buf, size_t len);
 static void ngx_stream_proxy_protocol_handler(ngx_event_t *rev);
 
+#include "ngx_stream_handlerex.c"
+
 
 void
 ngx_stream_init_connection(ngx_connection_t *c)
@@ -179,7 +181,12 @@ ngx_stream_init_connection(ngx_connection_t *c)
     if (addr_conf->proxy_protocol) {
         c->log->action = "reading PROXY protocol";
 
-        rev->handler = ngx_stream_proxy_protocol_handler;
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+            rev->handler = ngx_stream_proxy_protocol_handlerex;
+        }
+        else {
+            rev->handler = ngx_stream_proxy_protocol_handler;
+        }
 
         if (!rev->ready) {
             ngx_add_timer(rev, cscf->proxy_protocol_timeout);

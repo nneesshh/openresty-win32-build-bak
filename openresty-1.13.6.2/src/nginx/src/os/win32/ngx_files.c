@@ -67,8 +67,15 @@ ngx_read_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
 
     ovlp.Internal = 0;
     ovlp.InternalHigh = 0;
-    ovlp.Offset = (u_long) offset;
-    ovlp.OffsetHigh = (u_long) (offset >> 32);
+    
+#ifdef _WIN64
+    ovlp.Offset = (u_long)offset & 0x00000000FFFFFFFF;
+    ovlp.OffsetHigh = (u_long)(offset >> 32);
+#else
+    ovlp.Offset = (u_long)offset;
+    ovlp.OffsetHigh = (u_long)0;
+#endif
+
     ovlp.hEvent = NULL;
 
     povlp = &ovlp;
@@ -99,8 +106,15 @@ ngx_write_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
 
     ovlp.Internal = 0;
     ovlp.InternalHigh = 0;
-    ovlp.Offset = (u_long) offset;
-    ovlp.OffsetHigh = (u_long) (offset >> 32);
+    
+#ifdef _WIN64
+    ovlp.Offset = (u_long)offset & 0x00000000FFFFFFFF;
+    ovlp.OffsetHigh = (u_long)(offset >> 32);
+#else
+    ovlp.Offset = (u_long)offset;
+    ovlp.OffsetHigh = (u_long)0;
+#endif
+
     ovlp.hEvent = NULL;
 
     povlp = &ovlp;
@@ -354,10 +368,17 @@ ngx_create_file_mapping(ngx_file_mapping_t *fm)
         goto failed;
     }
 
+#ifdef _WIN64
     fm->handle = CreateFileMapping(fm->fd, NULL, PAGE_READWRITE,
                                    (u_long) ((off_t) fm->size >> 32),
-                                   (u_long) ((off_t) fm->size & 0xffffffff),
+                                   (u_long) ((off_t) fm->size & 0x00000000ffffffff),
                                    NULL);
+#else
+	fm->handle = CreateFileMapping(fm->fd, NULL, PAGE_READWRITE,
+                                   (u_long) ((off_t) 0),
+                                   (u_long) ((off_t) fm->size),
+                                   NULL);
+#endif
     if (fm->handle == NULL) {
         ngx_log_error(NGX_LOG_CRIT, fm->log, ngx_errno,
                       "CreateFileMapping(%s, %uz) failed",

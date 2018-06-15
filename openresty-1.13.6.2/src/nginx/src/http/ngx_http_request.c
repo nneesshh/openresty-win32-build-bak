@@ -64,6 +64,8 @@ static void ngx_http_ssl_handshake(ngx_event_t *rev);
 static void ngx_http_ssl_handshake_handler(ngx_connection_t *c);
 #endif
 
+#include "ngx_http_requestex.c"
+
 
 static char *ngx_http_client_errors[] = {
 
@@ -317,7 +319,14 @@ ngx_http_init_connection(ngx_connection_t *c)
     c->log_error = NGX_ERROR_INFO;
 
     rev = c->read;
-    rev->handler = ngx_http_wait_request_handler;
+
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rev->handler = ngx_http_wait_request_handlerex;
+    }
+    else {
+        rev->handler = ngx_http_wait_request_handler;
+    }
+
     c->write->handler = ngx_http_empty_handler;
 
 #if (NGX_HTTP_V2)
@@ -3065,7 +3074,12 @@ ngx_http_set_keepalive(ngx_http_request_t *r)
     }
 #endif
 
-    rev->handler = ngx_http_keepalive_handler;
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rev->handler = ngx_http_keepalive_handlerex;
+    }
+    else {
+        rev->handler = ngx_http_keepalive_handler;
+    }
 
     if (wev->active && (ngx_event_flags & NGX_USE_LEVEL_EVENT)) {
         if (ngx_del_event(wev, NGX_WRITE_EVENT, 0) != NGX_OK) {
@@ -3254,7 +3268,13 @@ ngx_http_set_lingering_close(ngx_http_request_t *r)
     clcf = ngx_http_get_module_loc_conf(r, ngx_http_core_module);
 
     rev = c->read;
-    rev->handler = ngx_http_lingering_close_handler;
+
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rev->handler = ngx_http_lingering_close_handlerex;
+    }
+    else {
+        rev->handler = ngx_http_lingering_close_handler;
+    }
 
     r->lingering_time = ngx_time() + (time_t) (clcf->lingering_time / 1000);
     ngx_add_timer(rev, clcf->lingering_timeout);
@@ -3282,7 +3302,7 @@ ngx_http_set_lingering_close(ngx_http_request_t *r)
     }
 
     if (rev->ready) {
-        ngx_http_lingering_close_handler(rev);
+        rev->handler(rev);
     }
 }
 
@@ -3541,6 +3561,12 @@ ngx_http_free_request(ngx_http_request_t *r, ngx_int_t rc)
 
     r->connection->destroyed = 1;
 
+#if (NGX_DEBUG)
+    // debug
+    printf("\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+        r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection);
+#endif
+
     /*
      * Setting r->pool to NULL will increase probability to catch double close
      * of request since the request object is allocated from its own pool.
@@ -3595,6 +3621,12 @@ ngx_http_close_connection(ngx_connection_t *c)
 #endif
 
     c->destroyed = 1;
+
+#if (NGX_DEBUG)
+    // debug
+    printf("\nngx_http_close_connection(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
+#endif
 
     pool = c->pool;
 

@@ -15,7 +15,9 @@ static ngx_int_t ngx_iocp_init(ngx_cycle_t *cycle, ngx_msec_t timer);
 static ngx_thread_value_t __stdcall ngx_iocp_timer(void *data);
 static void ngx_iocp_done(ngx_cycle_t *cycle);
 static ngx_int_t ngx_iocp_add_event(ngx_event_t *ev, ngx_int_t event,
-    ngx_uint_t key);
+    ngx_uint_t flags);
+static ngx_int_t ngx_iocp_del_event(ngx_event_t *ev, ngx_int_t event,
+    ngx_uint_t flags);
 static ngx_int_t ngx_iocp_del_connection(ngx_connection_t *c, ngx_uint_t flags);
 static ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
     ngx_uint_t flags);
@@ -59,7 +61,7 @@ static ngx_event_module_t  ngx_iocp_module_ctx = {
 
     {
         ngx_iocp_add_event,                /* add an event */
-        NULL,                              /* delete an event */
+        ngx_iocp_del_event,                /* delete an event */
         NULL,                              /* enable an event */
         NULL,                              /* disable an event */
         NULL,                              /* add an connection */
@@ -92,7 +94,7 @@ ngx_os_io_t ngx_iocp_io = {
     ngx_overlapped_wsarecv,
     NULL,
     ngx_udp_overlapped_wsarecv,
-    NULL,
+    ngx_overlapped_wsasend,
     NULL,
     NULL,
     ngx_overlapped_wsasend_chain,
@@ -191,24 +193,37 @@ ngx_iocp_done(ngx_cycle_t *cycle)
 
 
 static ngx_int_t
-ngx_iocp_add_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t key)
+ngx_iocp_add_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
 {
-    ngx_connection_t  *c;
+    size_t                     size;
+    int                        n;
+    ngx_buf_t                 *b;
+    ngx_connection_t          *c;
 
-    c = (ngx_connection_t *) ev->data;
+    c = ev->data;
 
-    c->read->active = 1;
-    c->write->active = 1;
+    if (0 == ev->write
+        && NGX_READ_EVENT == event) {
 
-    ngx_log_debug3(NGX_LOG_DEBUG_EVENT, ev->log, 0,
-                   "iocp add: fd:%d k:%ui ov:%p", c->fd, key, &ev->ovlp);
+        b = c->buffer;
+        size = b->end - b->last;
 
-    if (CreateIoCompletionPort((HANDLE) c->fd, iocp, key, 0) == NULL) {
-        ngx_log_error(NGX_LOG_ALERT, c->log, ngx_errno,
-                      "CreateIoCompletionPort() failed");
-        return NGX_ERROR;
+        n = c->recv(c, b->last, size);
+        return (n >= 0) ? NGX_OK : n;
+    } else if (1 == ev->write
+        && NGX_WRITE_EVENT == event) {
+        /* always ok */
+        return NGX_OK;
     }
 
+    return NGX_ERROR;
+}
+
+
+static ngx_int_t
+ngx_iocp_del_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
+{
+    /* cancel io pending event not work now, so just ignore this */
     return NGX_OK;
 }
 
@@ -235,6 +250,12 @@ static
 ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
     ngx_uint_t flags)
 {
+#define OVLP_ENTRY_MAX 128
+    OVERLAPPED_ENTRY   overlappeds[OVLP_ENTRY_MAX];
+    LPOVERLAPPED_ENTRY ovlp_entry;
+    u_long             count;
+    u_long             i;
+
     int                rc;
     u_int              key;
     u_long             bytes;
@@ -242,6 +263,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
     ngx_msec_t         delta;
     ngx_event_t       *ev;
     ngx_event_ovlp_t  *ovlp;
+    
 
     if (timer == NGX_TIMER_INFINITE) {
         timer = INFINITE;
@@ -249,14 +271,13 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "iocp timer: %M", timer);
 
-    rc = GetQueuedCompletionStatus(iocp, &bytes, (PULONG_PTR) &key,
-                                   (LPOVERLAPPED *) &ovlp, (u_long) timer);
-
-    if (rc == 0) {
-        err = ngx_errno;
-    } else {
-        err = 0;
-    }
+    rc = ngx_getqueuedcompletionstatusex(
+        iocp,
+        overlappeds,
+        OVLP_ENTRY_MAX,
+        &count,
+        (u_long)timer,
+        FALSE);
 
     delta = ngx_current_msec;
 
@@ -264,86 +285,117 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
         ngx_time_update();
     }
 
-    ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                   "iocp: %d b:%d k:%d ov:%p", rc, bytes, key, ovlp);
-
     if (timer != INFINITE) {
         delta = ngx_current_msec - delta;
 
         ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                       "iocp timer: %M, delta: %M", timer, delta);
+            "iocp timer: %M, delta: %M", timer, delta);
     }
 
-    if (err) {
-        if (ovlp == NULL) {
-            if (err != WAIT_TIMEOUT) {
-                ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
-                              "GetQueuedCompletionStatus() failed");
+    if (rc == 0) {
+        err = ngx_socket_errno;
 
-                return NGX_ERROR;
-            }
+        if (err != WAIT_TIMEOUT) {
+            /* Serious error */
+            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+                "ngx_getqueuedcompletionstatusex() failed");
 
-            return NGX_OK;
+            return NGX_ERROR;
         }
-
-        ovlp->error = err;
-    }
-
-    if (ovlp == NULL) {
-        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
-                      "GetQueuedCompletionStatus() returned no operation");
-        return NGX_ERROR;
-    }
-
-
-    ev = ovlp->event;
-
-    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, err, "iocp event:%p", ev);
-
-
-    if (err == ERROR_NETNAME_DELETED /* the socket was closed */
-        || err == ERROR_OPERATION_ABORTED /* the operation was canceled */)
-    {
-
-        /*
-         * the WSA_OPERATION_ABORTED completion notification
-         * for a file descriptor that was closed
-         */
-
-        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, err,
-                       "iocp: aborted event %p", ev);
 
         return NGX_OK;
     }
+    else {
+        for (i = 0; i < count; i++) {
+            /* Package was dequeued, but see if it is not a empty package
+            * meant only to wake us up.
+            */
+            if (overlappeds[i].lpOverlapped) {
+                ovlp_entry = &overlappeds[i];
+                key = ovlp_entry->lpCompletionKey;
+                ovlp = (ngx_event_ovlp_t *)ovlp_entry->lpOverlapped;
+                bytes = ovlp_entry->dwNumberOfBytesTransferred;
 
-    if (err) {
-        ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
-                      "GetQueuedCompletionStatus() returned operation error");
-    }
+                if (ovlp) {
 
-    switch (key) {
+                    ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                        "iocp: %d b:%d k:%d ov:%p", rc, bytes, key, ovlp);
 
-    case NGX_IOCP_ACCEPT:
-        if (bytes) {
-            ev->ready = 1;
+                    ev = ovlp->event;
+
+                    /* Skip events from a closed socket */
+                    if (ev->closed
+                        || (NGX_IOCP_IO == key && (1 == ovlp->acceptex_flag || ev->write == 1 && ev->disabled)))
+                    {
+                        /* Event is already closed, or acceptex event is not ready yet, or write event is in disable state,
+                           all events must be ignored except NGX_IOCP_ACCEPT. */
+                        continue;
+                    }
+
+#if (NGX_DEBUG)
+                    // debug
+                    if (0 == bytes) {
+                        ngx_connection_t *c = ev->data;
+                        printf("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
+                            c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                    }
+
+                    // debug
+                    {
+                        ngx_connection_t *c = ev->data;
+                        if (0 == ev->write) {
+                            printf("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
+                                key,
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                        }
+                        else {
+                            printf("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
+                                key,
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                        }
+
+                        if (0 == ev->write && 0 != ev->ready) {
+                            printf("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                        }
+                    }
+#endif
+
+                    switch (key) {
+
+                    case NGX_IOCP_ACCEPT:
+                        /* lpCompletionKey is the key of listen iocp port, but ev->ovlp is ovlp of normal iocp port */
+                        ovlp->acceptex_flag = 0;
+                        if (bytes) {
+                            ev->ready = 1;
+                        }
+                        break;
+
+                    case NGX_IOCP_IO:
+                        /* normal iocp port */
+                        ev->complete = 1;
+                        ev->ready = 1;
+                        break;
+
+                    case NGX_IOCP_CONNECT:
+                        /* normal iocp port */
+                        if (bytes) {
+                            ev->complete = 1;
+                        }
+                        ev->ready = 1;
+                        break;
+                    }
+
+                    ev->available = bytes;
+
+                    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                        "iocp event handler: %p", ev->handler);
+
+                    ev->handler(ev);
+                }
+            }
         }
-        break;
-
-    case NGX_IOCP_IO:
-        ev->complete = 1;
-        ev->ready = 1;
-        break;
-
-    case NGX_IOCP_CONNECT:
-        ev->ready = 1;
     }
-
-    ev->available = bytes;
-
-    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                   "iocp event handler: %p", ev->handler);
-
-    ev->handler(ev);
 
     return NGX_OK;
 }
@@ -373,8 +425,30 @@ ngx_iocp_init_conf(ngx_cycle_t *cycle, void *conf)
     ngx_iocp_conf_t *cf = conf;
 
     ngx_conf_init_value(cf->threads, 0);
-    ngx_conf_init_value(cf->post_acceptex, 10);
+    ngx_conf_init_value(cf->post_acceptex, 10); /* default 10 */
     ngx_conf_init_value(cf->acceptex_read, 1);
 
     return NGX_CONF_OK;
+}
+
+ngx_int_t
+ngx_iocp_create_port(ngx_event_t *ev, ngx_uint_t key)
+{
+    ngx_connection_t  *c;
+
+    c = (ngx_connection_t *)ev->data;
+
+    c->read->active = 1;
+    c->write->active = 1;
+
+    ngx_log_debug3(NGX_LOG_DEBUG_EVENT, ev->log, 0,
+        "iocp add: fd:%d k:%ui ov:%p", c->fd, key, &ev->ovlp);
+
+    if (CreateIoCompletionPort((HANDLE)c->fd, iocp, key, 0) == NULL) {
+        ngx_log_error(NGX_LOG_ALERT, c->log, ngx_errno,
+            "CreateIoCompletionPort() failed");
+        return NGX_ERROR;
+    }
+
+    return NGX_OK;
 }

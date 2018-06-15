@@ -12,7 +12,6 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 
-
 #define NGX_WRITE_SHUTDOWN SD_SEND
 
 
@@ -199,6 +198,18 @@ extern LPFN_TRANSMITPACKETS       ngx_transmitpackets;
 extern LPFN_CONNECTEX             ngx_connectex;
 extern LPFN_DISCONNECTEX          ngx_disconnectex;
 
+#ifdef NGX_WIN32
+/* Kernel32 function pointers */
+typedef BOOL(WINAPI *sGetQueuedCompletionStatusEx)
+(HANDLE CompletionPort,
+    LPOVERLAPPED_ENTRY lpCompletionPortEntries,
+    ULONG ulCount,
+    PULONG ulNumEntriesRemoved,
+    DWORD dwMilliseconds,
+    BOOL fAlertable);
+
+extern sGetQueuedCompletionStatusEx ngx_getqueuedcompletionstatusex;
+#endif
 
 int ngx_tcp_push(ngx_socket_t s);
 #define ngx_tcp_push_n            "tcp_push()"

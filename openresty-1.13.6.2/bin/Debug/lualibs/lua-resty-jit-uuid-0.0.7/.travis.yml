@@ -1,0 +1,45 @@
+# vim:set sts=2 ts=2 sw=2 et:
+
+language: perl
+
+perl: 5.18
+
+sudo: false
+
+notifications:
+  email: false
+
+addons:
+  apt:
+    packages:
+      - libpcre3-dev
+      - build-essential
+
+env:
+  global:
+    - OPENRESTY=1.11.2.2
+    - LUAROCKS=2.4.2
+    - DOWNLOAD_CACHE=$HOME/download-cache
+    - INSTALL_CACHE=$HOME/install-cache
+
+before_install:
+  - source .ci/setup_openresty.sh
+  - luarocks install luacheck
+  - luarocks install luacov-coveralls
+  - luarocks install Lua-cURL
+
+install:
+  - luarocks make
+
+script:
+  - make lint
+  - make coverage
+  - luacov-coveralls -v -i lib/resty
+
+cache:
+  cpan: true
+  apt: true
+  pip: true
+  directories:
+    - $DOWNLOAD_CACHE
+    - $INSTALL_CACHE

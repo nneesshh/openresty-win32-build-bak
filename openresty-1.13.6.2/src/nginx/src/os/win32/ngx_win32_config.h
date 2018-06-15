@@ -64,6 +64,9 @@
 #include <ctype.h>
 #include <locale.h>
 #include <jemalloc/jemalloc.h>
+#ifdef NGX_WIN32
+#include <vld.h>
+#endif
 
 #ifdef __WATCOMC__
 #define _TIME_T_DEFINED

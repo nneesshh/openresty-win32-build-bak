@@ -18,5 +18,6 @@ typedef struct {
 
 extern ngx_module_t  ngx_iocp_module;
 
+extern ngx_int_t     ngx_iocp_create_port(ngx_event_t *ev, ngx_uint_t key);
 
 #endif /* _NGX_IOCP_MODULE_H_INCLUDED_ */

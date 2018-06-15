@@ -50,6 +50,8 @@ LPFN_TRANSMITPACKETS       ngx_transmitpackets;
 LPFN_CONNECTEX             ngx_connectex;
 LPFN_DISCONNECTEX          ngx_disconnectex;
 
+sGetQueuedCompletionStatusEx ngx_getqueuedcompletionstatusex;
+
 static GUID ax_guid = WSAID_ACCEPTEX;
 static GUID as_guid = WSAID_GETACCEPTEXSOCKADDRS;
 static GUID tf_guid = WSAID_TRANSMITFILE;
@@ -61,6 +63,7 @@ static GUID dx_guid = WSAID_DISCONNECTEX;
 ngx_int_t
 ngx_os_init(ngx_log_t *log)
 {
+    HMODULE       kernel32_module;
     DWORD         bytes;
     SOCKET        s;
     WSADATA       wsd;
@@ -217,6 +220,16 @@ ngx_os_init(ngx_log_t *log)
                       "WSAIoctl(SIO_GET_EXTENSION_FUNCTION_POINTER, "
                                "WSAID_DISCONNECTEX) failed");
     }
+
+    kernel32_module = GetModuleHandleA("kernel32.dll");
+    if (kernel32_module == NULL) {
+        ngx_log_error(NGX_LOG_NOTICE, log, ngx_socket_errno,
+            "GetModuleHandleA failed");
+    }
+
+    ngx_getqueuedcompletionstatusex = (sGetQueuedCompletionStatusEx)ngx_dlsym(
+        kernel32_module,
+        "GetQueuedCompletionStatusEx");
 
     if (ngx_close_socket(s) == -1) {
         ngx_log_error(NGX_LOG_ALERT, log, ngx_socket_errno,

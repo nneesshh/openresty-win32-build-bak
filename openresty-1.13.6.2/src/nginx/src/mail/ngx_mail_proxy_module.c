@@ -135,7 +135,12 @@ ngx_mail_proxy_init(ngx_mail_session_t *s, ngx_addr_t *peer)
     p->upstream.log = s->connection->log;
     p->upstream.log_error = NGX_ERROR_ERR;
 
-    rc = ngx_event_connect_peer(&p->upstream);
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rc = ngx_event_connect_peerex(&p->upstream);
+    }
+    else {
+        rc = ngx_event_connect_peer(&p->upstream);
+    }
 
     if (rc == NGX_ERROR || rc == NGX_BUSY || rc == NGX_DECLINED) {
         ngx_mail_proxy_internal_server_error(s);

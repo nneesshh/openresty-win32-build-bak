@@ -1,0 +1,13 @@
+language: c
+sudo: required
+
+services:
+  - docker
+
+install:
+  - docker build -t lapis-test .
+
+script:
+  - docker run lapis-test
+
+

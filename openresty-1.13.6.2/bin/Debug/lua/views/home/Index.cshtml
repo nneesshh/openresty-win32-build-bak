@@ -1,0 +1,152 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!--网页页面字符集-->
+    <meta charset="utf-8">
+    <!--让IE使用最新的渲染模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--针对移动设备,网站显示宽度等于设备屏幕显示宽度,内容缩放比例为1:1-->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--将下面的 <meta> 标签加入到页面中，可以让部分国产浏览器默认采用高速模式渲染页面：-->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- Bootstrap -->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <title>后台管理系统首页</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="~/lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/lib/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/lib/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/lib/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Make sure you apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="~/lib/dist/css/skins/_all-skins.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="~/lib/bower_components/morris.js/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="~/lib/bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="~/lib/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/lib/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="~/lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+</head>
+<body>
+    <div class="container">
+        <br />
+        <h4>
+            <p>当前时间：<font color="#003300"><span id="nowDateTimeSpan"></span></font></p>
+            <br />
+            <p><input class="form-control" id="targetDateSpan" value="2018/07/07"></input></p>
+            <p id="countDownP">距离项目正式上线还剩000天0000时0000分0000秒</p>
+        </h4>
+        <br />
+    </div>
+
+    <div class="container">
+        <div class="clock" style="margin:2em;"></div>
+        <!--div class="message"></div-->
+    </div>
+
+    <div class="container">
+        <br />
+        <br />
+        <br />
+        <div class="text-center">
+            <a asp-area="" asp-controller="Home" asp-action="Welcome" class="btn btn-primary btn-block margin-bottom">进入系统</a>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <!-- jQuery 3 -->
+    <script src="~/lib/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/flipclock.min.js"></script>
+    <link rel="stylesheet" href="~/css/flipclock.css">
+
+    <script type="text/javascript">
+        var clock;
+
+        $(document).ready(function () {
+
+            clock = $('.clock').FlipClock({
+                clockFace: 'TwelveHourClock'
+            });
+        });
+        //clock.setTime();
+
+    </script>
+
+    <script language="JavaScript">
+
+        function startTime() {
+            var today = new Date();//定义日期对象
+            var yyyy = today.getFullYear();//通过日期对象的getFullYear()方法返回年
+            var MM = today.getMonth() + 1;//通过日期对象的getMonth()方法返回年
+            var dd = today.getDate();//通过日期对象的getDate()方法返回年
+            var hh = today.getHours();//通过日期对象的getHours方法返回小时
+            var mm = today.getMinutes();//通过日期对象的getMinutes方法返回分钟
+            var ss = today.getSeconds();//通过日期对象的getSeconds方法返回秒
+            // 如果分钟或小时的值小于10，则在其值前加0，比如如果时间是下午3点20分9秒的话，则显示15：20：09
+            MM = checkTime(MM);
+            dd = checkTime(dd);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            var day; //用于保存星期（getDay()方法得到星期编号）
+            if (today.getDay() == 0) day = "星期日 "
+            if (today.getDay() == 1) day = "星期一 "
+            if (today.getDay() == 2) day = "星期二 "
+            if (today.getDay() == 3) day = "星期三 "
+            if (today.getDay() == 4) day = "星期四 "
+            if (today.getDay() == 5) day = "星期五 "
+            if (today.getDay() == 6) day = "星期六 "
+            document.getElementById('nowDateTimeSpan').innerHTML = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "   " + day;
+            setTimeout('startTime()', 1000); // 一秒后执行
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function countDown() {
+            var targetDate = document.getElementById('targetDateSpan').value;
+            var taget = new Date(targetDate);
+            var now = new Date();
+            var plus = taget.getTime() - now.getTime();
+            var day = parseInt(plus / 1000 / 60 / 60 / 24);
+            var hour = parseInt(plus / 1000 / 60 / 60) - day * 24;
+            var minute = parseInt(plus / 1000 / 60) - parseInt(plus / 1000 / 60 / 60) * 60;
+            var second = parseInt(plus / 1000) - parseInt(plus / 1000 / 60) * 60;
+            document.getElementById("countDownP").innerHTML = "距离 " + targetDate + " 还剩" + day + "天" + hour + "时" + minute + "分" + second + "秒";
+        }
+
+        startTime();
+        setInterval('countDown()', 1000); // 间隔一秒
+
+    </script>
+</body>
+</html>

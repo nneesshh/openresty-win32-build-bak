@@ -57,21 +57,21 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;_DEBUG;_CONSOLE;NGX_HAVE_ATOMIC_OPS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/pcre-8.42/build;../thirdparty/pcre-8.42;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/pcre-8.42/build;../thirdparty/pcre-8.42;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib;../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib;../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vld.lib;jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.LIB;LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -81,15 +81,15 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/pcre-8.42/build;../thirdparty/pcre-8.42;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/pcre-8.42/build;../thirdparty/pcre-8.42;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -97,9 +97,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib;../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>MSVCRT.LIB;LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib;../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vld.lib;jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile>
@@ -134,7 +134,6 @@
     <ClCompile Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_variables.c" />
     <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\hash\murmurhash2.c" />
     <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk.c" />
-    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_debug.c" />
     <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_hash.c" />
     <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_log.c" />
     <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_accessby.c" />
@@ -205,6 +204,45 @@
     <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_upstream.c" />
     <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_util.c" />
     <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_variable.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_api.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_args.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_balancer.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_cache.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_clfactory.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_config.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_consts.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_contentby.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_control.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_coroutine.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ctx.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_directive.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_exception.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initby.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initworkerby.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_lex.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_log.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_logby.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_misc.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_module.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_output.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_pcrefix.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_phase.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_prereadby.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_regex.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_request.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_script.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_shdict.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_sleep.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_tcp.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_udp.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ssl.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_string.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_time.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_timer.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_uthread.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_util.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_variable.c" />
+    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_worker.c" />
     <ClCompile Include="..\bundle\rds-json-nginx-module-0.15\src\ngx_http_rds_json_filter_module.c" />
     <ClCompile Include="..\bundle\rds-json-nginx-module-0.15\src\ngx_http_rds_json_handler.c" />
     <ClCompile Include="..\bundle\rds-json-nginx-module-0.15\src\ngx_http_rds_json_output.c" />
@@ -230,6 +268,7 @@
     <ClCompile Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_rotate.c" />
     <ClCompile Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_secure_random.c" />
     <ClCompile Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_unescape_uri.c" />
+    <ClCompile Include="..\bundle\stream-echo-nginx-module-master\src\ngx_stream_echo_module.c" />
     <ClCompile Include="..\config\ngx_modules.c" />
     <ClCompile Include="..\src\nginx\src\core\nginx.c" />
     <ClCompile Include="..\src\nginx\src\core\ngx_array.c" />
@@ -273,6 +312,7 @@
     <ClCompile Include="..\src\nginx\src\event\ngx_event_accept.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_acceptex.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_connect.c" />
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_openssl.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_openssl_stapling.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_pipe.c" />
@@ -527,6 +567,47 @@
     <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_util.h" />
     <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_variable.h" />
     <ClInclude Include="..\bundle\ngx_postgres-1.0\src\resty_dbd_stream.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\api\ngx_stream_lua_api.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ddebug.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_args.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_balancer.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_cache.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_clfactory.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_common.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_config.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_consts.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_contentby.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_control.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_coroutine.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ctx.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_directive.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_exception.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initby.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initworkerby.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_lex.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_log.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_logby.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_misc.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_output.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_pcrefix.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_phase.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_prereadby.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_probe.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_regex.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_request.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_script.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_shdict.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_sleep.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_tcp.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_udp.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ssl.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_string.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_time.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_timer.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_uthread.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_util.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_variable.h" />
+    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_worker.h" />
     <ClInclude Include="..\bundle\rds-json-nginx-module-0.15\src\ddebug.h" />
     <ClInclude Include="..\bundle\rds-json-nginx-module-0.15\src\ngx_http_rds.h" />
     <ClInclude Include="..\bundle\rds-json-nginx-module-0.15\src\ngx_http_rds_json_filter_module.h" />
@@ -558,6 +639,7 @@
     <ClInclude Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_rotate.h" />
     <ClInclude Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_secure_random.h" />
     <ClInclude Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_unescape_uri.h" />
+    <ClInclude Include="..\bundle\stream-echo-nginx-module-master\src\ddebug.h" />
     <ClInclude Include="..\config\ngx_auto_config.h" />
     <ClInclude Include="..\config\ngx_auto_headers.h" />
     <ClInclude Include="..\src\nginx\src\core\nginx.h" />
@@ -660,15 +742,9 @@
     <None Include="..\src\nginx\src\http\modules\perl\nginx.pm" />
     <None Include="..\src\nginx\src\http\modules\perl\nginx.xs" />
     <None Include="..\src\nginx\src\http\modules\perl\typemap" />
-    <None Include="..\src\nginx\src\http\ngx_http_core_module.c.orig" />
-    <None Include="..\src\nginx\src\http\ngx_http_request.c.orig" />
-    <None Include="..\src\nginx\src\http\ngx_http_special_response.c.orig" />
-    <None Include="..\src\nginx\src\http\ngx_http_upstream.c.orig" />
-    <None Include="..\src\nginx\src\http\v2\ngx_http_v2_filter_module.c.orig" />
     <None Include="..\src\nginx\src\os\win32\nginx_icon16.xpm" />
     <None Include="..\src\nginx\src\os\win32\nginx_icon32.xpm" />
     <None Include="..\src\nginx\src\os\win32\nginx_icon48.xpm" />
-    <None Include="..\src\nginx\src\stream\ngx_stream_proxy_module.c.orig" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\src\nginx\src\os\win32\nginx.ico" />

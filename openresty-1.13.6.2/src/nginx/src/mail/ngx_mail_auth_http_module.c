@@ -201,7 +201,12 @@ ngx_mail_auth_http_init(ngx_mail_session_t *s)
     ctx->peer.log = s->connection->log;
     ctx->peer.log_error = NGX_ERROR_ERR;
 
-    rc = ngx_event_connect_peer(&ctx->peer);
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rc = ngx_event_connect_peerex(&ctx->peer);
+    }
+    else {
+        rc = ngx_event_connect_peer(&ctx->peer);
+    }
 
     if (rc == NGX_ERROR || rc == NGX_BUSY || rc == NGX_DECLINED) {
         if (ctx->peer.connection) {

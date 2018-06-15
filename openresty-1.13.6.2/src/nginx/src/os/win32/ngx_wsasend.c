@@ -151,12 +151,6 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
     wev->active = 0;
 
     if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
-
-        if (wev->ovlp.error) {
-            ngx_connection_error(c, wev->ovlp.error, "WSASend() failed");
-            return NGX_ERROR;
-        }
-
         sent = wev->available;
 
     } else {

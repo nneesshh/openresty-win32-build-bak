@@ -14,6 +14,7 @@
 
 
 extern uint32_t  *ngx_crc32_table_short;
+extern void      *ngx_crc32_table_short_raw; /* make vld happy */
 extern uint32_t   ngx_crc32_table256[];
 
 

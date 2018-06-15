@@ -1034,7 +1034,12 @@ ngx_ssl_ocsp_connect(ngx_ssl_ocsp_ctx_t *ctx)
     ctx->peer.log = ctx->log;
     ctx->peer.log_error = NGX_ERROR_ERR;
 
-    rc = ngx_event_connect_peer(&ctx->peer);
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rc = ngx_event_connect_peerex(&ctx->peer);
+    }
+    else {
+        rc = ngx_event_connect_peer(&ctx->peer);
+    }
 
     ngx_log_debug0(NGX_LOG_DEBUG_EVENT, ctx->log, 0,
                    "ssl ocsp connect peer done");

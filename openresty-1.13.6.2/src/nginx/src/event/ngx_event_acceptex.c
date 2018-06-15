@@ -26,12 +26,6 @@ ngx_event_acceptex(ngx_event_t *rev)
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "AcceptEx: %d", c->fd);
 
-    if (rev->ovlp.error) {
-        ngx_log_error(NGX_LOG_CRIT, c->log, rev->ovlp.error,
-                      "AcceptEx() %V failed", &ls->addr_text);
-        return;
-    }
-
     /* SO_UPDATE_ACCEPT_CONTEXT is required for shutdown() to work */
 
     if (setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_ACCEPT_CONTEXT,
@@ -39,8 +33,8 @@ ngx_event_acceptex(ngx_event_t *rev)
         == -1)
     {
         ngx_log_error(NGX_LOG_CRIT, c->log, ngx_socket_errno,
-                      "setsockopt(SO_UPDATE_ACCEPT_CONTEXT) failed for %V",
-                      &c->addr_text);
+                      "setsockopt(SO_UPDATE_ACCEPT_CONTEXT) failed for %d/%d",
+                      c->fd, ls->fd);
         /* TODO: close socket */
         return;
     }
@@ -82,8 +76,18 @@ ngx_event_acceptex(ngx_event_t *rev)
 
     ls->handler(c);
 
+    /* io enabled after acceptex is ready */
+    c->read->disabled = 0;
+    c->write->disabled = 0;
     return;
 
+}
+
+
+ngx_int_t
+ngx_event_create_listenex(ngx_event_t *ev, ngx_uint_t flags)
+{
+    return -1;
 }
 
 
@@ -174,10 +178,16 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         rev->log = c->log;
         wev->log = c->log;
 
-        if (ngx_add_event(rev, 0, NGX_IOCP_IO) == NGX_ERROR) {
+        if (ngx_iocp_create_port(rev, NGX_IOCP_IO) == NGX_ERROR) {
             ngx_close_posted_connection(c);
             return NGX_ERROR;
         }
+
+#if (NGX_DEBUG)
+        // debug
+        printf("\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
+            c->id, c->fd, c->destroyed, ls->fd, s);
+#endif
 
         if (ngx_acceptex(ls->fd, s, c->buffer->pos, ls->post_accept_buffer_size,
                          ls->socklen + 16, ls->socklen + 16,
@@ -193,6 +203,15 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
                 return NGX_ERROR;
             }
         }
+
+        /* acceptex event posted, wait acceptex flag to be cleared, 
+           and don't post again before response */
+        rev->ovlp.acceptex_flag = 1;
+        rev->ready = 0;
+
+		/* io disabled before acceptex is ready */
+		wev->disabled = 1;
+		rev->disabled = 1;
     }
 
     return NGX_OK;

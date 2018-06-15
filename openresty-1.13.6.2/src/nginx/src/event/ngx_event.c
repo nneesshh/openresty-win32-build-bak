@@ -23,6 +23,7 @@ extern ngx_module_t ngx_select_module;
 static char *ngx_event_init_conf(ngx_cycle_t *cycle, void *conf);
 static ngx_int_t ngx_event_module_init(ngx_cycle_t *cycle);
 static ngx_int_t ngx_event_process_init(ngx_cycle_t *cycle);
+static void ngx_event_process_exit(ngx_cycle_t *cycle);
 static char *ngx_events_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 
 static char *ngx_event_connections(ngx_conf_t *cf, ngx_command_t *cmd,
@@ -184,7 +185,7 @@ ngx_module_t  ngx_event_core_module = {
     ngx_event_process_init,                /* init process */
     NULL,                                  /* init thread */
     NULL,                                  /* exit thread */
-    NULL,                                  /* exit process */
+    ngx_event_process_exit,                /* exit process */
     NULL,                                  /* exit master */
     NGX_MODULE_V1_PADDING
 };
@@ -757,6 +758,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
     do {
         i--;
 
+        c[i].id = i + 1; // for debug
         c[i].data = next;
         c[i].read = &cycle->read_events[i];
         c[i].write = &cycle->write_events[i];
@@ -831,14 +833,14 @@ ngx_event_process_init(ngx_cycle_t *cycle)
                 continue;
             }
 
-            if (ngx_add_event(rev, 0, NGX_IOCP_ACCEPT) == NGX_ERROR) {
+            if (ngx_iocp_create_port(rev, NGX_IOCP_ACCEPT) == NGX_ERROR) {
                 return NGX_ERROR;
             }
 
             ls[i].log.handler = ngx_acceptex_log_error;
 
             iocpcf = ngx_event_get_conf(cycle->conf_ctx, ngx_iocp_module);
-            if (ngx_event_post_acceptex(&ls[i], iocpcf->post_acceptex)
+            if (ngx_event_post_acceptex(&ls[i], ngx_max(1, iocpcf->post_acceptex))
                 == NGX_ERROR)
             {
                 return NGX_ERROR;
@@ -904,6 +906,31 @@ ngx_event_process_init(ngx_cycle_t *cycle)
     return NGX_OK;
 }
 
+/* make vld happy */
+static void
+ngx_event_process_exit(ngx_cycle_t *cycle)
+{
+    ngx_uint_t           m;
+    ngx_event_conf_t    *ecf;
+    ngx_event_module_t  *module;
+
+    ecf = ngx_event_get_conf(cycle->conf_ctx, ngx_event_core_module);
+
+    for (m = 0; cycle->modules[m]; m++) {
+        if (cycle->modules[m]->type != NGX_EVENT_MODULE) {
+            continue;
+        }
+
+        if (cycle->modules[m]->ctx_index != ecf->use) {
+            continue;
+        }
+
+        module = cycle->modules[m]->ctx;
+        module->actions.done(cycle);
+
+        break;
+    }
+}
 
 ngx_int_t
 ngx_send_lowat(ngx_connection_t *c, size_t lowat)
@@ -1285,7 +1312,7 @@ ngx_event_core_init_conf(ngx_cycle_t *cycle, void *conf)
 #if (NGX_HAVE_SELECT)
 
     if (module == NULL) {
-        module = &ngx_select_module;
+        module = &ngx_iocp_module;
     }
 
 #endif

@@ -1,0 +1,92 @@
+﻿@{
+    Layout = null;
+}
+@model LoginModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>系统登录</title>
+   
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="http://localhost" target="_blank"><b>后台管理系统</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">用户登录</p>
+            <input id="errorInfo" type="hidden" value="@ViewBag.ErrorInfo" />
+            <form asp-controller="Login" asp-action="Index" method="post" onsubmit="onSubmit()">
+                <div class="form-group has-feedback">
+                    <input asp-for="UserName" type="text" class="form-control" placeholder="用户名" />
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="密码" />
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <input asp-for="RememberMe" type="checkbox"> 记住我
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button id="btnLogin" type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/iCheck/icheck.js"></script>
+    <script src="~/lib/layer/layer.js"></script>
+    <script src="~/lib/jquery.cookie/src/jquery.cookie.js"></script>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+
+            //显示服务端验证的错误信息
+            if ($("#errorInfo").val()) {
+                layer.tips($("#errorInfo").val(), "#btnLogin");
+            };
+
+            //判断之前是否有设置cookie，如果有，则设置【记住我】选择框
+            if ($.cookie("oss_userName") != undefined) {
+                $("#RememberMe").attr("checked", "checked");
+            }
+            else {
+                $("#RememberMe").removeAttr("checked");
+            }
+            //读取cookie
+            if ($("#RememberMe:checked").length > 0) {
+                $("#UserName").val($.cookie("oss_userName"));
+                $("#Password").val($.cookie("oss_password"));
+            }
+        });
+        //根据是否勾选记住我记录或清除cookie
+        function onSubmit() {
+            if ($("#RememberMe:checked").length > 0) {//设置cookie
+                $.cookie("oss_userName", $("#UserName").val());
+                $.cookie("oss_password", $("#Password").val());
+            } else {//清除cookie
+                $.removeCookie("oss_userName");
+                $.removeCookie("oss_password");
+            }
+        };
+    </script>
+    <script src="~/js/bootstrap-datetimepicker.js"></script>
+</body>
+</html>

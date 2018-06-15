@@ -1,0 +1,7 @@
+t/servroot
+*.lua
+!bench.lua
+luacov.*
+*.tar.gz
+lua-resty-jit-uuid-*
+!lua-resty-jit-uuid-*.rockspec

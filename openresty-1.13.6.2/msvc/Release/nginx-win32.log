@@ -1,0 +1,427 @@
+﻿  ngx_http_array_var_module.c
+  ngx_http_array_var_util.c
+  ngx_http_echo_echo.c
+  ngx_http_echo_filter.c
+  ngx_http_echo_foreach.c
+  ngx_http_echo_handler.c
+  ngx_http_echo_location.c
+  ngx_http_echo_module.c
+  ngx_http_echo_request_info.c
+  ngx_http_echo_sleep.c
+  ngx_http_echo_subrequest.c
+  ngx_http_echo_timer.c
+  ngx_http_echo_util.c
+  ngx_http_echo_var.c
+  ngx_http_encrypted_session_cipher.c
+  ngx_http_encrypted_session_module.c
+  ngx_http_form_input_module.c
+  ngx_http_headers_more_filter_module.c
+  ngx_http_headers_more_headers_in.c
+  ngx_http_headers_more_headers_out.c
+  Compiling...
+  ngx_http_headers_more_util.c
+  ngx_http_concat_module.c
+  ngx_coolkit_handlers.c
+  ngx_coolkit_module.c
+  ngx_coolkit_variables.c
+  murmurhash2.c
+  ndk.c
+  ndk_hash.c
+  ndk_log.c
+  ngx_http_lua_accessby.c
+  ngx_http_lua_api.c
+  ngx_http_lua_args.c
+  ngx_http_lua_balancer.c
+  ngx_http_lua_bodyfilterby.c
+  ngx_http_lua_cache.c
+  ngx_http_lua_capturefilter.c
+  ngx_http_lua_clfactory.c
+  ngx_http_lua_config.c
+  ngx_http_lua_consts.c
+  ngx_http_lua_contentby.c
+  Compiling...
+  ngx_http_lua_control.c
+  ngx_http_lua_coroutine.c
+  ngx_http_lua_ctx.c
+  ngx_http_lua_directive.c
+  ngx_http_lua_exception.c
+  ngx_http_lua_headerfilterby.c
+  ngx_http_lua_headers.c
+  ngx_http_lua_headers_in.c
+  ngx_http_lua_headers_out.c
+  ngx_http_lua_initby.c
+  ngx_http_lua_initworkerby.c
+  ngx_http_lua_lex.c
+  ngx_http_lua_log.c
+  ngx_http_lua_logby.c
+  ngx_http_lua_log_ringbuf.c
+  ngx_http_lua_misc.c
+  ngx_http_lua_module.c
+  ngx_http_lua_ndk.c
+  ngx_http_lua_output.c
+  ngx_http_lua_pcrefix.c
+  Compiling...
+  ngx_http_lua_phase.c
+  ngx_http_lua_regex.c
+  ngx_http_lua_req_body.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bundle\ngx_lua-0.10.13\src\ngx_http_lua_req_body.c(960): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_lua_req_method.c
+  ngx_http_lua_rewriteby.c
+  ngx_http_lua_script.c
+  ngx_http_lua_semaphore.c
+  ngx_http_lua_setby.c
+  ngx_http_lua_shdict.c
+  ngx_http_lua_sleep.c
+  ngx_http_lua_socket_tcp.c
+  ngx_http_lua_socket_udp.c
+  ngx_http_lua_ssl.c
+  ngx_http_lua_ssl_certby.c
+  ngx_http_lua_ssl_ocsp.c
+  ngx_http_lua_ssl_session_fetchby.c
+  ngx_http_lua_ssl_session_storeby.c
+  ngx_http_lua_string.c
+  ngx_http_lua_subrequest.c
+  ngx_http_lua_time.c
+  Compiling...
+  ngx_http_lua_timer.c
+  ngx_http_lua_uri.c
+  ngx_http_lua_uthread.c
+  ngx_http_lua_util.c
+  ngx_http_lua_variable.c
+  ngx_http_lua_worker.c
+  ngx_http_lua_upstream_module.c
+  ngx_postgres_escape.c
+  ngx_postgres_handler.c
+  ngx_postgres_keepalive.c
+  ngx_postgres_module.c
+  ngx_postgres_output.c
+  ngx_postgres_processor.c
+  ngx_postgres_rewrite.c
+  ngx_postgres_upstream.c
+  ngx_postgres_util.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bundle\ngx_postgres-1.0\src\ngx_postgres_util.c(266): warning C4098: 'ngx_postgres_upstream_next': 'void' function returning a value
+  ngx_postgres_variable.c
+  ngx_stream_lua_api.c
+  ngx_stream_lua_args.c
+  ngx_stream_lua_balancer.c
+  Compiling...
+  ngx_stream_lua_cache.c
+  ngx_stream_lua_clfactory.c
+  ngx_stream_lua_config.c
+  ngx_stream_lua_consts.c
+  ngx_stream_lua_contentby.c
+  ngx_stream_lua_control.c
+  ngx_stream_lua_coroutine.c
+  ngx_stream_lua_ctx.c
+  ngx_stream_lua_directive.c
+  ngx_stream_lua_exception.c
+  ngx_stream_lua_initby.c
+  ngx_stream_lua_initworkerby.c
+  ngx_stream_lua_lex.c
+  ngx_stream_lua_log.c
+  ngx_stream_lua_logby.c
+  ngx_stream_lua_misc.c
+  ngx_stream_lua_module.c
+  ngx_stream_lua_output.c
+  ngx_stream_lua_pcrefix.c
+  ngx_stream_lua_phase.c
+  Compiling...
+  ngx_stream_lua_prereadby.c
+  ngx_stream_lua_regex.c
+  ngx_stream_lua_request.c
+  ngx_stream_lua_script.c
+  ngx_stream_lua_shdict.c
+  ngx_stream_lua_sleep.c
+  ngx_stream_lua_socket_tcp.c
+  ngx_stream_lua_socket_udp.c
+  ngx_stream_lua_ssl.c
+  ngx_stream_lua_string.c
+  ngx_stream_lua_time.c
+  ngx_stream_lua_timer.c
+  ngx_stream_lua_uthread.c
+  ngx_stream_lua_util.c
+  ngx_stream_lua_variable.c
+  ngx_stream_lua_worker.c
+  ngx_http_rds_json_filter_module.c
+  ngx_http_rds_json_handler.c
+  ngx_http_rds_json_output.c
+  ngx_http_rds_json_processor.c
+  Compiling...
+  ngx_http_rds_json_util.c
+  ngx_http_redis2_handler.c
+  ngx_http_redis2_module.c
+  ngx_http_redis2_reply.c
+  ngx_http_redis2_util.c
+  ngx_http_set_base32.c
+  ngx_http_set_base64.c
+  ngx_http_set_default_value.c
+  ngx_http_set_escape_uri.c
+  ngx_http_set_hash.c
+  ngx_http_set_hashed_upstream.c
+  ngx_http_set_hex.c
+  ngx_http_set_hmac.c
+  ngx_http_set_local_today.c
+  ngx_http_set_misc_module.c
+  ngx_http_set_quote_json.c
+  ngx_http_set_quote_sql.c
+  ngx_http_set_random.c
+  ngx_http_set_rotate.c
+  ngx_http_set_secure_random.c
+  Compiling...
+  ngx_http_set_unescape_uri.c
+  ngx_stream_echo_module.c
+  ngx_modules.c
+  nginx.c
+  ngx_array.c
+  ngx_buf.c
+  ngx_conf_file.c
+  ngx_connection.c
+  ngx_cpuinfo.c
+  ngx_crc32.c
+  ngx_crypt.c
+  ngx_cycle.c
+  ngx_file.c
+  ngx_hash.c
+  ngx_inet.c
+  ngx_list.c
+  ngx_log.c
+  ngx_md5.c
+  ngx_module.c
+  ngx_murmurhash.c
+  Compiling...
+  ngx_open_file_cache.c
+  ngx_output_chain.c
+  ngx_palloc.c
+  ngx_parse.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\core\ngx_parse.c(77): warning C4305: '=': truncation from '__int64' to 'off_t'
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\core\ngx_parse.c(84): warning C4305: '=': truncation from '__int64' to 'off_t'
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\core\ngx_parse.c(91): warning C4305: '=': truncation from '__int64' to 'off_t'
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\core\ngx_parse.c(96): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_parse_time.c
+  ngx_proxy_protocol.c
+  ngx_queue.c
+  ngx_radix_tree.c
+  ngx_rbtree.c
+  ngx_regex.c
+  ngx_resolver.c
+  ngx_rwlock.c
+  ngx_sha1.c
+  ngx_shmtx.c
+  ngx_slab.c
+  ngx_spinlock.c
+  ngx_string.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\core\ngx_string.c(1038): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_syslog.c
+  ngx_times.c
+  ngx_iocp_module.c
+  Compiling...
+  ngx_win32_select_module.c
+  ngx_event.c
+  ngx_event_accept.c
+  ngx_event_acceptex.c
+  ngx_event_connect.c
+  ngx_event_connectex.c
+  ngx_event_openssl.c
+  ngx_event_openssl_stapling.c
+  ngx_event_pipe.c
+  ngx_event_posted.c
+  ngx_event_timer.c
+  ngx_http_access_module.c
+  ngx_http_addition_filter_module.c
+  ngx_http_auth_basic_module.c
+  ngx_http_auth_request_module.c
+  ngx_http_autoindex_module.c
+  ngx_http_browser_module.c
+  ngx_http_charset_filter_module.c
+  ngx_http_chunked_filter_module.c
+  ngx_http_dav_module.c
+  Compiling...
+  ngx_http_empty_gif_module.c
+  ngx_http_fastcgi_module.c
+  ngx_http_flv_module.c
+  ngx_http_geo_module.c
+  ngx_http_gunzip_filter_module.c
+  ngx_http_gzip_filter_module.c
+  ngx_http_gzip_static_module.c
+  ngx_http_headers_filter_module.c
+  ngx_http_image_filter_module.c
+  ngx_http_index_module.c
+  ngx_http_limit_conn_module.c
+  ngx_http_limit_req_module.c
+  ngx_http_log_module.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\modules\ngx_http_log_module.c(555): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_map_module.c
+  ngx_http_memcached_module.c
+  ngx_http_mirror_module.c
+  ngx_http_mp4_module.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\modules\ngx_http_mp4_module.c(465): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_not_modified_filter_module.c
+  ngx_http_proxy_module.c
+  ngx_http_random_index_module.c
+  Compiling...
+  ngx_http_range_filter_module.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\modules\ngx_http_range_filter_module.c(298): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_realip_module.c
+  ngx_http_referer_module.c
+  ngx_http_rewrite_module.c
+  ngx_http_scgi_module.c
+  ngx_http_secure_link_module.c
+  ngx_http_slice_filter_module.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\modules\ngx_http_slice_filter_module.c(304): warning C4305: '=': truncation from '__int64' to 'off_t'
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\modules\ngx_http_slice_filter_module.c(474): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_split_clients_module.c
+  ngx_http_ssi_filter_module.c
+  ngx_http_ssl_module.c
+  ngx_http_static_module.c
+  ngx_http_stub_status_module.c
+  ngx_http_sub_filter_module.c
+  ngx_http_try_files_module.c
+  ngx_http_upstream_hash_module.c
+  ngx_http_upstream_ip_hash_module.c
+  ngx_http_upstream_keepalive_module.c
+  ngx_http_upstream_least_conn_module.c
+  ngx_http_upstream_zone_module.c
+  ngx_http_userid_filter_module.c
+  Compiling...
+  ngx_http_uwsgi_module.c
+  ngx_http_perl_module.c
+  ngx_http.c
+  ngx_http_copy_filter_module.c
+  ngx_http_core_module.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\ngx_http_core_module.c(4542): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_file_cache.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\ngx_http_file_cache.c(354): warning C4305: '=': truncation from '__int64' to 'off_t'
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\http\ngx_http_file_cache.c(2343): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_http_header_filter_module.c
+  ngx_http_parse.c
+  ngx_http_postpone_filter_module.c
+  ngx_http_request.c
+  ngx_http_request_body.c
+  ngx_http_script.c
+  ngx_http_special_response.c
+  ngx_http_upstream.c
+  ngx_http_upstream_round_robin.c
+  ngx_http_variables.c
+  ngx_http_write_filter_module.c
+  ngx_http_v2.c
+  ngx_http_v2_filter_module.c
+  ngx_http_v2_huff_decode.c
+  Compiling...
+  ngx_http_v2_huff_encode.c
+  ngx_http_v2_module.c
+  ngx_http_v2_table.c
+  ngx_mail.c
+  ngx_mail_auth_http_module.c
+  ngx_mail_core_module.c
+  ngx_mail_handler.c
+  ngx_mail_imap_handler.c
+  ngx_mail_imap_module.c
+  ngx_mail_parse.c
+  ngx_mail_pop3_handler.c
+  ngx_mail_pop3_module.c
+  ngx_mail_proxy_module.c
+  ngx_mail_smtp_handler.c
+  ngx_mail_smtp_module.c
+  ngx_mail_ssl_module.c
+  ngx_alloc.c
+  ngx_dlopen.c
+  ngx_errno.c
+  ngx_event_log.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\os\win32\ngx_event_log.c(11): warning C4005: 'NGX_MAX_ERROR_STR': macro redefinition
+  d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\core\ngx_log.h(77): note: see previous definition of 'NGX_MAX_ERROR_STR'
+  Compiling...
+  ngx_files.c
+  ngx_process.c
+  ngx_process_cycle.c
+  ngx_shmem.c
+  ngx_socket.c
+  ngx_stat.c
+  ngx_thread.c
+  ngx_time.c
+  ngx_udp_wsarecv.c
+  ngx_user.c
+  ngx_win32_init.c
+  ngx_wsarecv.c
+  ngx_wsarecv_chain.c
+  ngx_wsasend.c
+  ngx_wsasend_chain.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\os\win32\ngx_wsasend_chain.c(63): warning C4018: '<': signed/unsigned mismatch
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\os\win32\ngx_wsasend_chain.c(72): warning C4018: '>': signed/unsigned mismatch
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\os\win32\ngx_wsasend_chain.c(123): warning C4018: '>=': signed/unsigned mismatch
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\os\win32\ngx_wsasend_chain.c(182): warning C4018: '<': signed/unsigned mismatch
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\os\win32\ngx_wsasend_chain.c(191): warning C4018: '>': signed/unsigned mismatch
+  ngx_stream.c
+  ngx_stream_access_module.c
+  ngx_stream_core_module.c
+  ngx_stream_geo_module.c
+  ngx_stream_handler.c
+  Compiling...
+  ngx_stream_limit_conn_module.c
+  ngx_stream_log_module.c
+d:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\src\nginx\src\stream\ngx_stream_log_module.c(440): warning C4305: '=': truncation from '__int64' to 'off_t'
+  ngx_stream_map_module.c
+  ngx_stream_proxy_module.c
+  ngx_stream_realip_module.c
+  ngx_stream_return_module.c
+  ngx_stream_script.c
+  ngx_stream_split_clients_module.c
+  ngx_stream_ssl_module.c
+  ngx_stream_ssl_preread_module.c
+  ngx_stream_upstream.c
+  ngx_stream_upstream_hash_module.c
+  ngx_stream_upstream_least_conn_module.c
+  ngx_stream_upstream_round_robin.c
+  ngx_stream_upstream_zone_module.c
+  ngx_stream_variables.c
+  ngx_stream_write_filter_module.c
+  ngx_cpp_test_module.cpp
+  Generating code
+  Finished generating code
+libgd_a.lib(iconv1.obj) : warning LNK4099: PDB 'libiconv_a.pdb' was not found with 'libgd_a.lib(iconv1.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libiconv_a.pdb'; linking object as if no debug info
+libgd_a.lib(localcharset1.obj) : warning LNK4099: PDB 'libiconv_a.pdb' was not found with 'libgd_a.lib(localcharset1.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libiconv_a.pdb'; linking object as if no debug info
+libgd_a.lib(png.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(png.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngread.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngread.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngwrite.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngwrite.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngrtran.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngrtran.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngtrans.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngtrans.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngerror.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngerror.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngwio.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngwio.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngrio.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngrio.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngget.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngget.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngset.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngset.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngwutil.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngwutil.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngmem.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngmem.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngrutil.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngrutil.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(pngwtran.obj) : warning LNK4099: PDB 'libpng_a.pdb' was not found with 'libgd_a.lib(pngwtran.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\libpng_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftinit.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftinit.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftbase.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftbase.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftglyph.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftglyph.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(type1.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(type1.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(raster.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(raster.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(smooth.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(smooth.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(pcf.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(pcf.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(bdf.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(bdf.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftsystem.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftsystem.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(type1cid.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(type1cid.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(cff.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(cff.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(sfnt.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(sfnt.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(psaux.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(psaux.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(winfnt.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(winfnt.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(pfr.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(pfr.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(pshinter.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(pshinter.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(psmodule.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(psmodule.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(type42.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(type42.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(truetype.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(truetype.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(autofit.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(autofit.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftbitmap.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftbitmap.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftgzip.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftgzip.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(ftlzw.obj) : warning LNK4099: PDB 'freetype_a.pdb' was not found with 'libgd_a.lib(ftlzw.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\freetype_a.pdb'; linking object as if no debug info
+libgd_a.lib(zutil.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(zutil.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(trees.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(trees.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(inffast.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(inffast.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(inftrees.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(inftrees.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(inflate.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(inflate.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(deflate.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(deflate.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(crc32.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(crc32.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+libgd_a.lib(adler32.obj) : warning LNK4099: PDB 'zlib_a.pdb' was not found with 'libgd_a.lib(adler32.obj)' or at 'D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release\zlib_a.pdb'; linking object as if no debug info
+  nginx-win32.vcxproj -> D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\msvc\../bin/Release/nginx.exe

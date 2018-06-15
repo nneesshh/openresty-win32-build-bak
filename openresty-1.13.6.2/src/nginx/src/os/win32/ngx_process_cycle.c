@@ -814,6 +814,32 @@ ngx_worker_thread(void *data)
 
     ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
 
+    /* make vld happy */
+    {
+        int i;
+    
+        for (i = 0; cycle->modules[i]; i++) {
+            if (cycle->modules[i]->exit_process) {
+                cycle->modules[i]->exit_process(cycle);
+            }
+        }
+
+        i = cycle->connection_n;
+        do {
+            i--;
+            ngx_connection_t *c = &cycle->connections[i];
+            if (c->read->data == c
+                && (c->fd != (ngx_socket_t)-1 || c->destroyed == 0)) {
+                if (c->pool)
+                    ngx_destroy_pool(c->pool);
+            }
+        } while (i);
+        ngx_free(cycle->connections);
+        ngx_free(cycle->read_events);
+        ngx_free(cycle->write_events);
+
+        ngx_destroy_pool(cycle->pool);
+    }
     return 0;
 }
 
@@ -998,6 +1024,25 @@ ngx_single_process_cycle(ngx_cycle_t *cycle)
 
     /* STUB */
     WaitForSingleObject(ngx_stop_event, INFINITE);
+
+    /* make vld happy */
+    {
+        int count;
+
+        fprintf(stderr, "\nServer say bye ...");
+
+        ngx_quit = 1;
+        WaitForSingleObject(tid, INFINITE);
+
+        ngx_free(ngx_crc32_table_short_raw);
+
+        count = sizeof(ngx_argv) / sizeof(ngx_argv[0]);
+        while (count > 0) {
+            count--;
+            ngx_free(ngx_argv[count]);
+        }
+        ngx_free(ngx_argv);
+    }
 }
 
 

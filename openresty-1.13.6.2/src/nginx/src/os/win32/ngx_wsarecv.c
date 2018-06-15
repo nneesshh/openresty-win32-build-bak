@@ -88,10 +88,6 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         rev->complete = 0;
 
         if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
-            if (rev->ovlp.error) {
-                ngx_connection_error(c, rev->ovlp.error, "WSARecv() failed");
-                return NGX_ERROR;
-            }
 
             ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,
                            "WSARecv ovlp: fd:%d %ul of %z",
@@ -124,6 +120,13 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
     rc = WSARecv(c->fd, wsabuf, 1, &bytes, &flags, ovlp, NULL);
 
+#if (NGX_DEBUG)
+    // debug
+    printf("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x)\n", 
+        (uintptr_t)buf, (int)size, bytes,
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)rev, (uintptr_t)rev->data);
+#endif
+
     rev->complete = 0;
 
     ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
@@ -133,6 +136,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
     if (rc == -1) {
         err = ngx_socket_errno;
         if (err == WSA_IO_PENDING) {
+            rev->ready = 0; /* read event already posted and still in processing, don't post again before response */
             rev->active = 1;
             ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,
                            "WSARecv() posted");
@@ -156,6 +160,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
          * despite that WSARecv() was already complete
          */
 
+        rev->ready = 0; /* read event posted, don't post again before response */
         rev->active = 1;
         return NGX_AGAIN;
     }

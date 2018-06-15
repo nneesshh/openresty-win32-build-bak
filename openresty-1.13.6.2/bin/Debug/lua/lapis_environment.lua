@@ -1,0 +1,1 @@
+return require("appconfig").getConfigName()

@@ -119,6 +119,8 @@ typedef enum {
 
 
 struct ngx_connection_s {
+    int                id; // for debug
+
     void               *data;
     ngx_event_t        *read;
     ngx_event_t        *write;

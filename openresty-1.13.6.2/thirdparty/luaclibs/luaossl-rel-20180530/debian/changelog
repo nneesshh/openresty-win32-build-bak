@@ -1,0 +1,212 @@
+liblua-openssl (20180530-0) unstable; urgency=low
+
+  * Bind functions for manipulating csr requested extensions
+  * Add :toPEM() to various objects
+  * Bind modular bignum functions
+  * Add ssl:getMasterKey()
+  * Add ssl.pushffi()
+  * Add ssl:getCertificate() and context:getCertificate()
+  * store:add("./empty-file") no longer throws
+  * Add ssl:getServerTemporaryKey()
+  * Add x509.cert:lookupSerial() and x509.cert:lookupCertificate()
+  * Fix precision loss when using Lua 5.3 with 64bit integers.
+
+-- Daurnimator <quae@daurnimator.com>  Wed, 30 May 2018 17:44:42 +1000
+
+liblua-openssl (20171028-0) unstable; urgency=low
+
+  * Add win32 support
+  * Fix bug where exp would be NULL in pkey.new()
+
+ -- Daurnimator <quae@daurnimator.com>  Sat, 28 Oct 2017 13:19:32 +1100
+
+liblua-openssl (20170903-0) unstable; urgency=low
+
+  * Fix pkey.new failing when generating RSA keys
+  * Fix loading C modules clearing interposed fields
+  * Fix building compat-5.3.o
+
+ -- Daurnimator <quae@daurnimator.com>  Sun, 03 Sep 2017 22:39:20 +1000
+
+liblua-openssl (20170901-0) unstable; urgency=low
+
+  * New openssl.ocsp.basic and openssl.ocsp.response modules
+  * Add x509:getOCSP()
+  * Add x509:getSignatureName() (#79)
+  * Add crl:verify(publickey)
+  * Add pkcs12.parse(bag[, passphrase])
+  * Add context:setStore(store) and context:getStore()
+  * Add context:setParam(params) and context:getParam()
+  * Add context:setCurvesList(string [, ...])
+  * Add context:setAlpnSelect(cb)
+  * Add context:setTLSextStatusType(type) and context:getTLSextStatusType()
+  * Add ssl:getVerifyResult() (#75)
+  * Add ssl:setContext(context) (#84)
+  * Add ssl:setVerify([mode][, depth]) and ssl:getVerify() (#84)
+  * Add ssl:setCertificate(crt), ssl:setPrivateKey(key), ssl:setCurvesList(string [, ...]) (#84)
+  * Add ssl:setTLSextStatusType(type) and ssl:getTLSextStatusType()
+  * Add ssl:setTLSextStatusOCSPResp(or) and ssl:getTLSextStatusOCSPResp()
+  * Use lua-compat-5.3 (fixes LuaJIT header file compatibility) (#94)
+  * Add generator field to replace exp when generating a DH key
+  * Move away from interfaces deprecated in OpenSSL 1.1.0
+
+-- Daurnimator <quae@daurnimator.com>  Fri, 01 Sep 2017 14:20:00 +1000
+
+liblua-openssl (20161214-0) unstable; urgency=low
+
+  * Refactor of bignum operations, fixes bn:sqr()
+
+ -- William Ahern <william@25thandClement.com>
+
+liblua-openssl (20161209-0) unstable; urgency=low
+
+  * Add ssl:getVerifyResult()
+
+ -- William Ahern <william@25thandClement.com>
+
+liblua-openssl (20161208-0) unstable; urgency=low
+
+  * openssl.x509.store:addDefaults() new function to add the operating system's default ca's to a certificate store.
+  * openssl.x509.store:add() can now take a CRL
+  * openssl.ssl.context:getStore() new function that returns a reference to a context's certificate store
+  * openssl.pkey:encrypt() and openssl.pkey:decrypt()
+  * openssl.ssl.new() to construct an SSL* given a SSL_CTX*
+  * Bindings for X509_VERIFY_PARAM*
+
+ -- William Ahern <william@25thandClement.com>
+
+liblua-openssl (20161101-0) unstable; urgency=low
+
+  * Rename bignum methods tobin, todec, tohex to CamelCase: toDecimal, toDecimal, toHex
+
+ -- William Ahern <william@25thandClement.com>
+
+liblua-openssl (20161029-0) unstable; urgency=low
+
+  * Add lots of bignum methods
+  * Allow hex strings creating bignums
+  * Expose openssl.x509.csr
+  * Use autoguess project to get platform features
+
+ -- William Ahern <william@25thandClement.com>
+
+liblua-openssl (20151221-0) unstable; urgency=low
+
+  * Add :tohex and :todec methods to bignums, and make metamethods
+    accessible directly. (daurnimator)
+  * Add __idiv metamethod for Lua 5.3. (daurnimator)
+
+ -- William Ahern <william@25thandClement.com>  Mon, 21 Dec 2015 02:35:12 -0800
+
+liblua-openssl (20151218-0) unstable; urgency=low
+
+  * Add :tobin method to bignums. (daurnimator)
+  * Add :getParameters method to pkeys. (daurnimator)
+  * Fix build when SSLv3 support is not present.
+
+ -- William Ahern <william@25thandClement.com>  Fri, 18 Dec 2015 03:09:29 -0800
+
+liblua-openssl (20150727-0) unstable; urgency=low
+
+  * More extension work from Kaarle Ritvanen.
+  * Add DTLS support.
+  * More extension work from kunkku.
+  * Fix bug in ex_newstate which could cause application data attached
+    to OpenSSL objects using OpenSSL's external application data API to be
+    prematurely invalidated as-if the Lua interperter was destroyed.
+
+ -- William Ahern <william@25thandClement.com>  Mon, 27 Jul 2015 01:42:46 -0700
+
+liblua-openssl (20150504-0) unstable; urgency=low
+
+  * Use lightuserdata as registry keys. C function hashes aren't stable
+    in LuaJIT.
+  * Add openssl.version as binding for SSLeay_version.
+  * Fix build on OpenBSD 5.6 libressl.
+
+ -- William Ahern <william@25thandClement.com>  Mon, 04 May 2015 17:49:08 -0700
+
+liblua-openssl (20150422-0) unstable; urgency=low
+
+  * Add support for ALPN server callback, SSL_CTX_set_alpn_select_cb.
+  * Fix X509_STORE double-free bug on older OpenSSL releases (< 1.0.2)
+    by implementing and using our own X509_STORE_free routine which properly
+    checks reference counts. Workaround adapted from Ruby OpenSSL bindings.
+  * Fix strerror_r usage on glibc.
+
+ -- William Ahern <william@25thandClement.com>  Wed, 22 Apr 2015 15:39:14 -0700
+
+liblua-openssl (20150304-0) unstable; urgency=low
+
+  * Merge ALPN support from quae@daurnimator.com.
+
+ -- William Ahern <william@25thandClement.com>  Wed, 04 Mar 2015 18:11:13 -0800
+
+liblua-openssl (20150225-0) unstable; urgency=low
+
+  * Add DES module to help implement NTLM authentication protocol.
+
+ -- William Ahern <william@25thandClement.com>  Wed, 25 Feb 2015 12:46:41 -0800
+
+liblua-openssl (20141028-0) unstable; urgency=low
+
+  * Add ssl:getVersion and ssl:getClientVersion.
+  * Fix "TLS" and "SSL" method names for context.new. OpenSSL TLSv1_method()
+    literally only speaks 1.0, not 1.0 and above. "TLS" now uses
+    SSLv23_method and disables SSLv2 and SSLv3. "SSL" uses SSLv23_method and
+    disables SSLv2.
+
+ -- William Ahern <william@25thandClement.com>  Tue, 28 Oct 2014 21:03:23 -0700
+
+liblua-openssl (20140923-0) unstable; urgency=low
+
+  * Add more CRL support from Kaarle Ritvanen.
+  * Add prelimiary 5.3 support.
+  * Add SSL_CTX and SSL option support.
+  * Add ephemeral key support.
+  * Add Server Name Indication (SNI) support.
+  * Fix issue which prevented loading public and private keys together.
+  * Add bindings to opensslv.h and opensslconf.h.
+
+ -- William Ahern <william@25thandClement.com>  Tue, 23 Sep 2014 20:32:32 -0700
+
+liblua-openssl (20140718-0) unstable; urgency=low
+
+  * Add CRL spport from Kaarle Ritvanen.
+  * Add PKCS1 support from Kaarle Ritvanen.
+  * Add AIX platform support.
+  * Add rand.stir.
+
+ -- William Ahern <william@25thandClement.com>  Fri, 18 Jul 2014 22:44:31 -0700
+
+liblua-openssl (20140328-0) unstable; urgency=low
+
+  * Add DER input/output formats.
+  * Add GEN_DIRNAME alternative names.
+  * Change the return value of several methods from boolean true
+    to the method object, to allow easy call chaining in Lua.
+  * Fix rand.uniform to use lua_Unsigned when it's a 64-bit type (Lua 5.3).
+  * Rename openssl.pubkey to openssl.pkey.
+
+ -- William Ahern <william@25thandClement.com>  Fri, 28 Mar 2014 22:44:31 -0700
+
+liblua-openssl (20140322-0) unstable; urgency=low
+
+  * Add Lua 5.3 support.
+  * Add user guide.
+
+ -- William Ahern <william@25thandClement.com>  Sat, 22 Mar 2014 20:23:56 -0800
+
+liblua-openssl (20140131-0) unstable; urgency=low
+
+  * Add multi-threaded re-entrancy protection, including explicitly
+    synchronizing OpenSSL initialization because OpenSSL doesn't appear to
+    use its own locking callbacks from initialization routines.
+
+ -- William Ahern <william@25thandClement.com>  Fri, 31 Jan 2014 14:27:30 -0800
+
+liblua-openssl (20131209-1) unstable; urgency=low
+
+  * Initial release after splitting from cqueues project.
+
+ -- William Ahern <william@25thandClement.com>  Sun, 09 Dec 2013 21:17:33 -0800
