@@ -106,6 +106,16 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
                        "WSASend: fd:%d, %d, %ul of %uz", c->fd, n, sent, size);
 
+#if (NGX_DEBUG)
+        // debug
+        if (sent > 65535) {
+            printf("error sent(%ld) -- fd(%d)!!!!\n", sent, c->fd);
+        }
+        printf("\nngx_overlapped_wsasend(): post event WSASend() of sent(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... wev(0x%08x)data(0x%08x)\n",
+            sent,
+            c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)wev, (uintptr_t)wev->data);
+#endif
+
         wev->complete = 0;
 
         if (n == 0) {

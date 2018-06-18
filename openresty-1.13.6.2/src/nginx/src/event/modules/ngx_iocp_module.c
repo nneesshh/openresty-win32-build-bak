@@ -425,7 +425,7 @@ ngx_iocp_init_conf(ngx_cycle_t *cycle, void *conf)
     ngx_iocp_conf_t *cf = conf;
 
     ngx_conf_init_value(cf->threads, 0);
-    ngx_conf_init_value(cf->post_acceptex, 10); /* default 10 */
+    ngx_conf_init_value(cf->post_acceptex, 2); /* default 10 */
     ngx_conf_init_value(cf->acceptex_read, 1);
 
     return NGX_CONF_OK;

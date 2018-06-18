@@ -49,3 +49,6 @@ openresty-1\.13\.6\.2/thirdparty/x86/
 openresty-1\.13\.6\.2/thirdparty/x64/
 openresty-1\.13\.6\.2/thirdparty/libuv-1\.x/
 openresty-1\.13\.6\.2/bin/Debug/static_sample/
+*.tlog
+
+*.log
