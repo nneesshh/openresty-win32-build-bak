@@ -128,7 +128,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 {
     int               rc;
     u_char           *prev;
-    u_long            size, send, sent;
+    u_long            size, bsize, send, sent;
     ngx_err_t         err;
     ngx_event_t      *wev;
     ngx_array_t       vec;
@@ -209,20 +209,15 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     wsabuf = NULL;
 
     /* create the WSABUF and coalesce the neighbouring bufs */
-
-    for (cl = in;
-            cl && vec.nelts < ngx_max_wsabufs && send < limit;
-            cl = cl->next)
+    cl = in;
+    while(cl && vec.nelts < ngx_max_wsabufs && send < limit)
     {
         if (ngx_buf_special(cl->buf)) {
             continue;
         }
 
-        size = cl->buf->last - cl->buf->pos;
-
-        if (send + size > limit) {
-            size = (u_long) (limit - send);
-        }
+        bsize = ngx_buf_size(cl->buf);
+        size = ngx_min((u_long)(limit - send), bsize);
 
         ln = ngx_alloc_chain_link(c->pool);
         if (ln == NULL) {
@@ -232,7 +227,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         ln->buf = ngx_create_temp_buf(c->pool, size);
         ngx_copy(ln->buf->last, cl->buf->pos, size);
         ln->buf->last += size;
-		ln->next = NULL;
+        ln->next = NULL;
 
         *ll = ln;
         ll = &ln->next;
@@ -252,6 +247,20 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
         prev = ln->buf->last;
         send += size;
+
+        /* drain cl buf */
+        if (ngx_buf_in_memory(cl->buf)) {
+            cl->buf->pos += size;
+        }
+
+        if (cl->buf->in_file) {
+            cl->buf->file_pos += size;
+        }
+
+        if (size == bsize) {
+			/* cl->buf is empty */
+            cl = cl->next;
+        }
     }
 
     ovlp = (LPWSAOVERLAPPED) &c->write->ovlp;
@@ -276,8 +285,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             wev->active = 1;
         }
 
-        in = cl;
-        return in;;
+        return cl;
     }
     else {
 
@@ -291,8 +299,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
             wev->active = 1;
 
-            in = cl;
-            return in;
+            return cl;
         }
     }
      
