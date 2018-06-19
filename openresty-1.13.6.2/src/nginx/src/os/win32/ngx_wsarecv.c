@@ -77,8 +77,8 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
     rev = c->read;
 
     if (!rev->ready) {
-        ngx_log_error(NGX_LOG_ALERT, c->log, 0, "second wsa post");
-        return NGX_AGAIN;
+        ngx_log_error(NGX_LOG_ERR, c->log, 0, "ngx_overlapped_wsarecv(): second wsa post");
+        return NGX_ERROR;
     }
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0,
@@ -126,8 +126,6 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         (uintptr_t)buf, (int)size, bytes,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)rev, (uintptr_t)rev->data);
 #endif
-
-    rev->complete = 0;
 
     ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "WSARecv ovlp: fd:%d rc:%d %ul of %z",

@@ -70,15 +70,16 @@ ngx_event_acceptex(ngx_event_t *rev)
         }
     }
 
+    /* io enabled after acceptex is ready */
+    c->read->disabled = 0;
+    c->write->disabled = 0;
+
     ngx_event_post_acceptex(ls, 1);
 
     c->number = ngx_atomic_fetch_add(ngx_connection_counter, 1);
 
     ls->handler(c);
 
-    /* io enabled after acceptex is ready */
-    c->read->disabled = 0;
-    c->write->disabled = 0;
     return;
 
 }
@@ -209,9 +210,9 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         rev->ovlp.acceptex_flag = 1;
         rev->ready = 0;
 
-		/* io disabled before acceptex is ready */
-		wev->disabled = 1;
-		rev->disabled = 1;
+        /* io disabled before acceptex is ready */
+        wev->disabled = 1;
+        rev->disabled = 1;
     }
 
     return NGX_OK;
