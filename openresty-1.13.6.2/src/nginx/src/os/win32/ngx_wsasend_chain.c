@@ -293,9 +293,9 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     if (sent > 65535) {
         printf("error sent(%ld) -- fd(%d)!!!!\n", sent, c->fd);
     }
-    printf("\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%ld)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... wev(0x%08x)data(0x%08x)\n",
+    printf("\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%ld)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n",
         sent, vec.nelts,
-        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)wev, (uintptr_t)wev->data);
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
 #endif
 
     if (rc == 0) {

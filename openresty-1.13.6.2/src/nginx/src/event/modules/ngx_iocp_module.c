@@ -336,27 +336,27 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     // debug
                     if (0 == bytes) {
                         ngx_connection_t *c = ev->data;
-                        printf("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
-                            c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                        printf("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+                            c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                     }
 
                     // debug
                     {
                         ngx_connection_t *c = ev->data;
                         if (0 == ev->write) {
-                            printf("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
+                            printf("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
                                 key,
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
                         else {
-                            printf("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
+                            printf("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
                                 key,
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
 
                         if (0 == ev->write && 0 != ev->ready) {
-                            printf("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... rev(0x%08x)data(0x%08x) -- bytes(%d)\n",
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)ev, (uintptr_t)ev->data, bytes);
+                            printf("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
                     }
 #endif

@@ -3563,8 +3563,9 @@ ngx_http_free_request(ngx_http_request_t *r, ngx_int_t rc)
 
 #if (NGX_DEBUG)
     // debug
-    printf("\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
-        r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection);
+    printf("\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection,
+        (uintptr_t)r->connection->sockaddr, r->connection->sockaddr->sa_family);
 #endif
 
     /*
