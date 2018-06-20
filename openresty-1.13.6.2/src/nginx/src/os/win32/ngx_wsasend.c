@@ -71,10 +71,9 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
     LPWSAOVERLAPPED   ovlp;
     WSABUF            wsabuf;
 
-    ngx_chain_t      *cl, *ln, **ll, *chain;
+    ngx_chain_t      *cl, *ln, **tail, *chain;
 
     wev = c->write;
-    ll = &c->out_pending;
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "wev->complete: %d", wev->complete);
@@ -118,9 +117,11 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         return NGX_OK;
     }
 
-    /* copy the buf to the existent chain */
-    for (cl = c->out_pending; cl; cl = cl->next) {
-        ll = &cl->next;
+    /* try append the in data to the tail of the existent chain(c->out_pending),
+    and post the overlapped WSASend() */
+    tail = &c->out_pending;
+    while ((*tail) != NULL) {
+        tail = &(*tail)->next;
     }
 
     ln = ngx_alloc_chain_link(c->pool);
@@ -131,19 +132,16 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
     ln->buf = ngx_create_temp_buf(c->pool, size);
     ngx_copy(ln->buf->last, buf, size);
     ln->buf->last += size;
-	ln->next = NULL;
+    ln->next = NULL;
 
-    *ll = ln;
-    ll = &ln->next;
-
-    /* post the overlapped WSASend() */
+    (*tail) = ln;
 
     /*
         * WSABUFs must be 4-byte aligned otherwise
         * WSASend() will return undocumented WSAEINVAL error.
         */
 
-    wsabuf.buf = (char *) ln->buf;
+    wsabuf.buf = (char *) (*tail)->buf->pos;
     wsabuf.len = size;
 
     sent = 0;

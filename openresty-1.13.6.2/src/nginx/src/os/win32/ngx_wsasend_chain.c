@@ -10,6 +10,7 @@
 #include <ngx_event.h>
 
 
+#define NGX_WSABUF_SIZE_MAX  4096
 #define NGX_WSABUFS  8
 
 
@@ -54,7 +55,7 @@ ngx_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         /* create the WSABUF and coalesce the neighbouring bufs */
 
         for (cl = in;
-             cl && vec.nelts < ngx_max_wsabufs && send < limit;
+             cl && vec.nelts < ngx_max_wsabufs && send < (u_long)limit;
              cl = cl->next)
         {
             if (ngx_buf_special(cl->buf)) {
@@ -63,7 +64,7 @@ ngx_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
             size = cl->buf->last - cl->buf->pos;
 
-            if (send + size > limit) {
+            if (send + size > (u_long)limit) {
                 size = (u_long) (limit - send);
             }
 
@@ -116,7 +117,7 @@ ngx_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             return in;
         }
 
-        if (send >= limit || in == NULL) {
+        if (send >= (u_long)limit || in == NULL) {
             return in;
         }
     }
@@ -127,7 +128,6 @@ ngx_chain_t *
 ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 {
     int               rc;
-    u_char           *prev;
     u_long            size, bsize, send, sent;
     ngx_err_t         err;
     ngx_event_t      *wev;
@@ -136,10 +136,9 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     LPWSABUF          wsabuf;
     WSABUF            wsabufs[NGX_WSABUFS];
 
-    ngx_chain_t      *cl, *ln, **ll, *chain;
+    ngx_chain_t      *cl, *ln, **tail, *chain;
 
     wev = c->write;
-    ll = &c->out_pending;
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "wev->complete: %d", wev->complete);
@@ -179,15 +178,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         c->out_pending = chain;
     }
 
-    /* copy the new chain to the existent chain */
-    for (cl = c->out_pending; cl; cl = cl->next) {
-        ll = &cl->next;
-    }
-
-    /* post the overlapped WSASend() */
-
     /* the maximum limit size is the maximum u_long value - the page size */
-
     if (limit == 0 || limit > (off_t) (NGX_MAX_UINT32_VALUE - ngx_pagesize))
     {
         limit = NGX_MAX_UINT32_VALUE - ngx_pagesize;
@@ -205,47 +196,76 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     vec.pool = c->pool;
 
     send = 0;
-    prev = NULL;
     wsabuf = NULL;
+
+    /* try append the in data to the tail of the existent chain(c->out_pending),
+    and post the overlapped WSASend() */
+    tail = &c->out_pending;
+    while ((*tail) != NULL) {
+        tail = &(*tail)->next;
+    }
 
     /* create the WSABUF and coalesce the neighbouring bufs */
     cl = in;
-    while(cl && vec.nelts < ngx_max_wsabufs && send < limit)
+    while(cl && vec.nelts < NGX_WSABUFS && send < (u_long)limit)
     {
         if (ngx_buf_special(cl->buf)) {
             continue;
         }
 
         bsize = ngx_buf_size(cl->buf);
-        size = ngx_min((u_long)(limit - send), bsize);
 
-        ln = ngx_alloc_chain_link(c->pool);
-        if (ln == NULL) {
-            return NGX_CHAIN_ERROR;
+        if (0 == bsize) {
+            /* cl->buf is empty */
+            cl = cl->next;
+            continue;
         }
 
-        ln->buf = ngx_create_temp_buf(c->pool, size);
-        ngx_copy(ln->buf->last, cl->buf->pos, size);
-        ln->buf->last += size;
-        ln->next = NULL;
+        size = ngx_min(bsize, (u_long)(limit - send));
 
-        *ll = ln;
-        ll = &ln->next;
+        if ((*tail) == NULL) {
+            /* alloc new chunk, and fill chunk data */
+            size = ngx_min(size, NGX_WSABUF_SIZE_MAX);
 
-        if (prev == ln->buf->pos) {
-            wsabuf->len += size;
+            ln = ngx_alloc_chain_link(c->pool);
+            if (ln == NULL) {
+                return NGX_CHAIN_ERROR;
+            }
 
-        } else {
+            ln->buf = ngx_create_temp_buf(c->pool, NGX_WSABUF_SIZE_MAX);
+            ngx_copy(ln->buf->last, cl->buf->pos, size);
+            ln->buf->last += size;
+            ln->next = NULL;
+
+            (*tail) = ln;
+
             wsabuf = ngx_array_push(&vec);
             if (wsabuf == NULL) {
                 return NGX_CHAIN_ERROR;
             }
 
-            wsabuf->buf = (char *) ln->buf->pos;
+            wsabuf->buf = (char *)(*tail)->buf->pos;
             wsabuf->len = size;
+
+        }
+        else {
+
+            size = ngx_min(size, (u_long)((*tail)->buf->end - (*tail)->buf->last));
+
+            if (size > 0) {
+                /* fill chunk data */
+                ngx_copy((*tail)->buf->last, cl->buf->pos, size);
+                (*tail)->buf->last += size;
+
+                wsabuf->len += size;
+            }
+            else {
+                /* chunk is full */
+                tail = &(*tail)->next;
+                continue;
+            }
         }
 
-        prev = ln->buf->last;
         send += size;
 
         /* drain cl buf */
@@ -258,7 +278,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         }
 
         if (size == bsize) {
-			/* cl->buf is empty */
+            /* cl->buf is empty */
             cl = cl->next;
         }
     }
@@ -273,8 +293,8 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     if (sent > 65535) {
         printf("error sent(%ld) -- fd(%d)!!!!\n", sent, c->fd);
     }
-    printf("\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... wev(0x%08x)data(0x%08x)\n",
-        sent, 
+    printf("\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%ld)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... wev(0x%08x)data(0x%08x)\n",
+        sent, vec.nelts,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, (uintptr_t)wev, (uintptr_t)wev->data);
 #endif
 

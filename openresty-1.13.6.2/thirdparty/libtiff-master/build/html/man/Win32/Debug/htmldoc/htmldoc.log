@@ -1,7 +1,0 @@
-﻿  Building Custom Rule D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/html/man/CMakeLists.txt
-  CMake does not need to re-run because D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/build/html/man/CMakeFiles/generate.stamp is up-to-date.
-  CMake Error at D:/www/_openresty/openresty-1.13.6.2/thirdparty/libtiff-master/html/man/HtmlDoc.cmake:39 (message):
-    Groff failed to generate HTML manpage
-  
-  
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(171,5): error MSB6006: "cmd.exe" exited with code 1.
