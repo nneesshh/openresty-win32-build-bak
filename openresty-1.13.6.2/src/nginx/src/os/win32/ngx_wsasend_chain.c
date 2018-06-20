@@ -285,11 +285,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             wev->active = 1;
         }
 
-<<<<<<< refs/remotes/origin/master
         return cl;
-=======
-        return cl;;
->>>>>>> debug test
     }
     else {
 
