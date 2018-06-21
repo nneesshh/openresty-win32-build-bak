@@ -22,7 +22,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -101,6 +101,7 @@
       <AdditionalDependencies>vld.lib;jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../src/nginx</AdditionalIncludeDirectories>
