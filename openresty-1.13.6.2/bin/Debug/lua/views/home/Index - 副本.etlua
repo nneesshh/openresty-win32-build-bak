@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="zh">
 <head>
     <!--网页页面字符集-->
@@ -69,7 +70,7 @@
         <br />
         <br />
         <div class="text-center">
-            <a href="<%= url_for('login') %>" class="btn btn-primary btn-block margin-bottom">进入系统</a>
+            <a asp-area="" asp-controller="Home" asp-action="Welcome" class="btn btn-primary btn-block margin-bottom">进入系统</a>
         </div>
         <br />
         <br />

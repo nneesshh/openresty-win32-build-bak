@@ -9,30 +9,21 @@ local respond_to = require("lapis.application").respond_to
 local auth = require(cwd .. "authorize")
 
 return function(app)
-  app:match("home", "/", respond_to({
-    --
-    before = nil,
-  
-    GET = function(self)
-      return { render = "home.index" }
-    end,
-    
-    POST = function(self)
-      return { redirect_to = self:url_for("index") }
-    end
-  }))
-
-  app:match("welcome", "/home/welcome", respond_to({
+  app:match("login", "/login", respond_to({
     --
     before = function(self)
-      auth(self, "any")
+      self.user = Users:find(self.params.id)
+      if not self.user then
+        self:write({"Not Found", status = 404})
+      end
     end,
-  
+    
     GET = function(self)
-      return { render = "home.index" }
+      return "Edit account " .. self.user.name
     end,
     
     POST = function(self)
+      self.user:update(self.params.user)
       return { redirect_to = self:url_for("index") }
     end
   }))

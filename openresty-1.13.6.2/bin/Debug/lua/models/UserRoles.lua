@@ -7,8 +7,8 @@ local types = schema.types
 local jituuid = require("resty.jit-uuid")
 
 local _M = {
-  _entity = Model:extend("users", {
-    primary_key = "id"
+  _entity = Model:extend("userroles", {
+    primary_key = { "UserId", "RoleId" }
   }),
 }
 
@@ -18,12 +18,8 @@ function _M.new()
   })
 end
 
-function _M.get(id) 
-  return _M._entity:find(id)
-end
-
-function _M.getByName(name) 
-  return _M._entity:find( { UserName = name })
+function _M.getByUserId(userId) 
+  return _M._entity:find_all({ userId }, "UserId")
 end
 
 return _M

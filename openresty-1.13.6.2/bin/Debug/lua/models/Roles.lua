@@ -7,7 +7,7 @@ local types = schema.types
 local jituuid = require("resty.jit-uuid")
 
 local _M = {
-  _entity = Model:extend("users", {
+  _entity = Model:extend("roles", {
     primary_key = "id"
   }),
 }
@@ -15,6 +15,7 @@ local _M = {
 function _M.new() 
   return _M._entity:create({
     id  = jituuid.generate_v4(),
+    code = "any",
   })
 end
 
@@ -22,8 +23,8 @@ function _M.get(id)
   return _M._entity:find(id)
 end
 
-function _M.getByName(name) 
-  return _M._entity:find( { UserName = name })
+function _M.getByCode(code) 
+  return _M._entity:find( { Code = code })
 end
 
 return _M

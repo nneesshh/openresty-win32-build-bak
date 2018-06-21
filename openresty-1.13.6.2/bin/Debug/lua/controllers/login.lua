@@ -12,19 +12,26 @@ return function(app)
   app:match("login", "/login", respond_to({
     --
     before = function(self)
-      self.user = Users:find(self.params.id)
-      if not self.user then
-        self:write({"Not Found", status = 404})
-      end
+      auth(self, "any", self.route_name)
     end,
     
     GET = function(self)
-      return "Edit account " .. self.user.name
+      return { render = "login.index" }
     end,
     
     POST = function(self)
-      self.user:update(self.params.user)
-      return { redirect_to = self:url_for("index") }
+      
+      local Users = require("models.Users")
+      local user = Users.getByName(self.params.UserName)
+      if user and user.UserName == self.params.UserName and user.Password == self.params.Password then
+        local UserRoles = require("models.UserRoles")
+        
+        self.user = user.UserName
+        self.role = user
+        return { redirect_to = self:url_for("welcome") }
+      else
+        return { render = "login.index", { ErrorInfo = "用户名密码错误!" } }
+      end
     end
   }))
 
