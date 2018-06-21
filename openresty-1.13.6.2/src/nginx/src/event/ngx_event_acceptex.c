@@ -18,6 +18,8 @@ ngx_event_acceptex(ngx_event_t *rev)
 {
     ngx_listening_t   *ls;
     ngx_connection_t  *c;
+    struct sockaddr   *sockaddr, *local_sockaddr;
+    socklen_t          socklen, local_socklen;
 
     c = rev->data;
     ls = c->listening;
@@ -43,8 +45,8 @@ ngx_event_acceptex(ngx_event_t *rev)
                              ls->post_accept_buffer_size,
                              ls->socklen + 16,
                              ls->socklen + 16,
-                             &c->local_sockaddr, &c->local_socklen,
-                             &c->sockaddr, &c->socklen);
+                             &local_sockaddr, &local_socklen,
+                             &sockaddr, &socklen);
 
     if (ls->post_accept_buffer_size) {
         c->buffer->last += rev->available;
@@ -53,6 +55,9 @@ ngx_event_acceptex(ngx_event_t *rev)
     } else {
         c->buffer = NULL;
     }
+
+    ngx_memcpy(c->local_sockaddr, local_sockaddr, local_socklen);
+    ngx_memcpy(c->sockaddr, sockaddr, socklen);
 
     if (ls->addr_ntop) {
         c->addr_text.data = ngx_pnalloc(c->pool, ls->addr_text_max_len);
