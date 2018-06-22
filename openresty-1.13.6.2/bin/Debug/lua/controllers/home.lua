@@ -14,12 +14,9 @@ return function(app)
     before = nil,
   
     GET = function(self)
-      return { render = "home.index" }
+      return { render = "home.Index", layout = false }
     end,
-    
-    POST = function(self)
-      return { redirect_to = self:url_for("index") }
-    end
+  
   }))
 
   app:match("welcome", "/home/welcome", respond_to({
@@ -29,12 +26,9 @@ return function(app)
     end,
   
     GET = function(self)
-      return { render = "home.index" }
+      return { render = "home.Welcome" }
     end,
     
-    POST = function(self)
-      return { redirect_to = self:url_for("index") }
-    end
   }))
 
 end

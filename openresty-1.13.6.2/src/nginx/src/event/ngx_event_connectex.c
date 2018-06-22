@@ -190,6 +190,7 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
         "connect(): %d", rc);
 
     /* use rev to wait for connectex result */
+    rev->ovlp.connectex_flag = 1;
     rev->ready = 0;
 
     wev->disabled = 0;

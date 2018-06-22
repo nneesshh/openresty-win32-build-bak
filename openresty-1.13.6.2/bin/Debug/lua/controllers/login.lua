@@ -12,11 +12,11 @@ return function(app)
   app:match("login", "/login", respond_to({
     --
     before = function(self)
-      auth(self, "any", self.route_name)
+      auth(self, "any")
     end,
     
     GET = function(self)
-      return { render = "login.index" }
+      return { render = "login.Index", layout = false }
     end,
     
     POST = function(self)
@@ -25,12 +25,13 @@ return function(app)
       local user = Users.getByName(self.params.UserName)
       if user and user.UserName == self.params.UserName and user.Password == self.params.Password then
         local UserRoles = require("models.UserRoles")
+        local user_roles = UserRoles.getByUserId(user.Id)
         
-        self.user = user.UserName
-        self.role = user
-        return { redirect_to = self:url_for("welcome") }
+        self.session.user = user
+        self.session.roles = user_roles
+        return { redirect_to = self:url_for("welcome", nil, { layout = "Layout" }) }
       else
-        return { render = "login.index", { ErrorInfo = "用户名密码错误!" } }
+        return { render = "login.Index", layout = false, { ErrorInfo = "用户名密码错误!" } }
       end
     end
   }))

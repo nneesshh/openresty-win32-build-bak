@@ -11,8 +11,8 @@ local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local default_options = require(cwd .. "default_options")
 
 local _M = {
-  _entity = Model:extend(default_options, "userroles", {
-    primary_key = { "UserId", "RoleId" }
+  _entity = Model:extend(default_options, "menus", {
+    primary_key = "Id"
   }),
 }
 
@@ -22,8 +22,13 @@ function _M.new()
   })
 end
 
-function _M.getByUserId(userId) 
-  return _M._entity:find_all({ userId }, "UserId")
+function _M.get(id) 
+  return _M._entity:find(id)
+end
+
+function _M.getAll(ntype) 
+  ntype = ntype or 0
+  return _M._entity:find_all({ ntype }, "Type")
 end
 
 return _M

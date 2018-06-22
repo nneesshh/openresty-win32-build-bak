@@ -2,7 +2,22 @@ local stringutil = require("utils.stringutil")
 
 local function checkAuth(self, role)
   role = stringutil.isValidString(role) and role or "any"
-  return self.session.user and ("any" == role or self.session.role == role)
+  
+  if not self.session.user or "table" ~= type(self.session.roles) then
+    return false
+  elseif "any" == role then 
+    return true
+  else 
+    for k, v in pairs(self.session.roles) do
+      if v == role then
+        return true
+      end
+    end
+    
+    -- failed
+    return false
+  end
+  
 end
 
 --

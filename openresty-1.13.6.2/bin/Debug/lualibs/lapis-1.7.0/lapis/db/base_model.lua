@@ -13,7 +13,7 @@ do
   local _obj_0 = _G
   require, type, setmetatable, rawget, assert, pairs, unpack, error, next = _obj_0.require, _obj_0.type, _obj_0.setmetatable, _obj_0.rawget, _obj_0.assert, _obj_0.pairs, _obj_0.unpack, _obj_0.error, _obj_0.next
 end
-local cjson = require("rapidjson")
+local libjson = require("rapidjson")
 local OffsetPaginator
 OffsetPaginator = require("lapis.db.pagination").OffsetPaginator
 local add_relations, mark_loaded_relations
@@ -360,7 +360,7 @@ do
     return singularize(self:table_name())
   end
   self.columns = function(self)
-    local columns = self.db.query([[      select column_name, data_type
+    local columns = self.db.query(self.options, [[      select column_name, data_type
       from information_schema.columns
       where table_name = ?]], self:table_name())
     self.columns = function()
@@ -370,7 +370,7 @@ do
   end
   self.load = function(self, tbl)
     for k, v in pairs(tbl) do
-      if ngx and v == ngx.null or v == cjson.null then
+      if ngx and v == ngx.null or v == libjson.null then
         tbl[k] = nil
       end
     end
@@ -410,7 +410,7 @@ do
     local load_as = opts and opts.load
     local fields = opts and opts.fields or "*"
     do
-      local res = self.db.select(tostring(fields) .. " from " .. tostring(tbl_name) .. " " .. tostring(query))
+      local res = self.db.select(self.options, tostring(fields) .. " from " .. tostring(tbl_name) .. " " .. tostring(query))
       if res then
         if load_as == false then
           return res
@@ -429,7 +429,7 @@ do
     if clause then
       query = query .. (" where " .. self.db.interpolate_query(clause, ...))
     end
-    return unpack(self.db.select(query)).c
+    return unpack(self.db.select(self.options, query)).c
   end
   self.include_in = function(self, other_records, foreign_key, opts)
     if not (next(other_records)) then
@@ -569,7 +569,7 @@ do
         end
       end
       do
-        local res = self.db.select(query)
+        local res = self.db.select(self.options, query)
         if res then
           local records = { }
           for _index_0 = 1, #res do
@@ -695,7 +695,7 @@ do
     end
     local table_name = self.db.escape_identifier(self:table_name())
     do
-      local result = unpack(self.db.select("* from " .. tostring(table_name) .. " where " .. tostring(cond) .. " limit 1"))
+      local result = unpack(self.db.select(self.options, "* from " .. tostring(table_name) .. " where " .. tostring(cond) .. " limit 1"))
       if result then
         return self:load(result)
       else
@@ -720,7 +720,8 @@ do
     end
     local cond = self.db.encode_clause(t)
     local table_name = self.db.escape_identifier(self:table_name())
-    return nil ~= unpack(self.db.select("1 from " .. tostring(table_name) .. " where " .. tostring(cond) .. " limit 1"))
+    return nil ~= unpack(self.db.select(self.options,"1 from " .. tostring(table_name) .. " where " .. tostring(cond) .. " limit 1",
+        self.options))
   end
   self._check_constraint = function(self, key, value, obj)
     if not (self.constraints) then
@@ -736,10 +737,11 @@ do
   self.paginated = function(self, ...)
     return OffsetPaginator(self, ...)
   end
-  self.extend = function(self, table_name, tbl)
+  self.extend = function(self, options, table_name, tbl)
     if tbl == nil then
       tbl = { }
     end
+    tbl.options = options
     local lua = require("lapis.lua")
     local class_fields = {
       "primary_key",

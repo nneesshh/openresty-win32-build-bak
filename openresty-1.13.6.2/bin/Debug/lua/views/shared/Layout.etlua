@@ -1,47 +1,47 @@
-﻿@{
-    string name = null;
-    string nick = null;
-    if (!true.Equals(ViewData["signed-out"]))
-    {
-        name = User?.FindFirst("preferred_username")?.Value;
-
-        foreach (var claim in User.Claims)
-        {
-            if (claim.Type == "nickname")
-            {
-                nick = claim.Value;
-            }
-        }
-    }
-}
+﻿<%
+    local stringutil = require("utils.stringutil")
+    local name = ""
+    local nick = ""
+    if session.user then
+        name = session.user.UserName
+        nick = session.user.Name
+    end
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
+    <!--网页页面字符集-->
     <meta charset="utf-8">
+    <!--让IE使用最新的渲染模式-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>后台管理系统</title>
+    <!--针对移动设备,网站显示宽度等于设备屏幕显示宽度,内容缩放比例为1:1-->
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="~/lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--将下面的 <meta> 标签加入到页面中，可以让部分国产浏览器默认采用高速模式渲染页面：-->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>后台管理系统首页</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/static/lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/lib/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/lib/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="~/lib/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/lib/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="~/lib/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/static/lib/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Make sure you apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="~/lib/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/static/lib/dist/css/skins/_all-skins.min.css">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="~/lib/bower_components/morris.js/morris.css">
+    <link rel="stylesheet" href="/static/lib/bower_components/morris.js/morris.css">
     <!-- jvectormap -->
-    <link rel="stylesheet" href="~/lib/bower_components/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="/static/lib/bower_components/jvectormap/jquery-jvectormap.css">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="~/lib/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="/static/lib/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="~/lib/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/static/lib/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="~/lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="/static/lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -79,16 +79,16 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="~/images/user-dog-50x50.jpg" class="user-image" alt="User Image">
+                                <img src="/static/images/user-dog-50x50.jpg" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">@nick</span>
+                                <span class="hidden-xs"><%= nick %></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="~/images/user-dog-50x50.jpg" class="img-circle" alt="User Image">
+                                    <img src="/static/images/user-dog-50x50.jpg" class="img-circle" alt="User Image">
                                     <p>
-                                        @nick
+                                        <%= nick %>
                                         <small>注册日期：2018-05-20</small>
                                     </p>
                                 </li>
@@ -115,11 +115,9 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div-->
                                     <div class="pull-right">
-                                        @if (User?.Identity.IsAuthenticated == true)
-                                        {
-                                            <a class="btn btn-success btn-flat" asp-area="" asp-controller="Account" asp-action="SignOut"><span class=" text-danger">注销</span></a>
-                                            <!--a href="/Account/SignOut" class="btn btn-default btn-flat">注销</a-->
-                                        }
+                                        <% if stringutil.isValidString(nick) then %>
+                                            <a href="url_for('signout')" class="btn btn-default btn-flat"><span class=" text-danger">注销</span></a>
+                                        <% end %>
                                     </div>
                                 </li>
                             </ul>
@@ -139,10 +137,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="~/images/user-nobody-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/static/images/user-nobody-128x128.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p> @name </p>
+                        <p> <%= name %> </p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
@@ -161,8 +159,8 @@
                 <!-- /.search form -->
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
-                    @await Component.InvokeAsync("Navigation");
-                    @*<li class="treeview">
+                    <% render("views.shared.components.Navigation") %>
+                    <!--<li class="treeview">
                             <a href="#">
                                 <i class="fa fa-link"></i> <span>Multilevel</span>
                                 <span class="pull-right-container">
@@ -173,7 +171,7 @@
                                 <li><a href="#">Link in level 2</a></li>
                                 <li><a href="#">Link in level 2</a></li>
                             </ul>
-                        </li>*@
+                        </li>-->
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
@@ -182,7 +180,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @*<section class="content-header">
+            <!--<section class="content-header">
                     <h1>
                         Page Header
                         <small>Optional description</small>
@@ -191,11 +189,11 @@
                         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
                         <li class="active">Here</li>
                     </ol>
-                </section>*@
+                </section>-->
             <!-- Main content -->
             <section class="content">
-                <!--当创建基于_Layout.cshtml布局页面的视图时，视图的内容会和布局页面合并，视图的内容会渲染呈现在@RenderBody()处-->
-                @RenderBody()
+                <!--当创建基于_Layout.cshtml布局页面的视图时，视图的内容会和布局页面合并，视图的内容会渲染呈现在content_for处-->
+                <% content_for("inner") %>
             </section>
             <!-- /.content -->
         </div>
@@ -285,32 +283,31 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
-    <script src="~/lib/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="~/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="~/lib/bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="/static/lib/bower_components/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
-    <script src="~/lib/dist/js/adminlte.min.js"></script>
+    <script src="/static/lib/dist/js/adminlte.min.js"></script>
     <!-- Sparkline -->
-    <script src="~/lib/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <script src="/static/lib/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
     <!-- jvectormap  -->
-    <script src="~/lib/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="~/lib/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/static/lib/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/static/lib/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <!-- SlimScroll -->
-    <script src="~/lib/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/static/lib/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- ChartJS -->
-    <script src="~/lib/bower_components/chart.js/Chart.min.js"></script>
+    <script src="/static/lib/bower_components/chart.js/Chart.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <!--
         <script src="dist/js/pages/dashboard2.js"></script>
     -->
 
-    <script src="~/js/flipclock.js"></script>
-    <script src="~/js/app.js"></script>
-    <script src="~/js/bootstrap-paginator.js"></script>
+    <script src="/static/js/flipclock.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/bootstrap-paginator.js"></script>
     <script src="layer/layer.js"></script>
     <script src="jstree/dist/jstree.js"></script>
-    @RenderSection("scripts", false)
 </body>
 </html>

@@ -11,7 +11,7 @@ do
   FALSE, NULL, TRUE, build_helpers, format_date, is_raw, raw, is_list, list, is_encodable = _obj_0.FALSE, _obj_0.NULL, _obj_0.TRUE, _obj_0.build_helpers, _obj_0.format_date, _obj_0.is_raw, _obj_0.raw, _obj_0.is_list, _obj_0.list, _obj_0.is_encodable
 end
 local conn, logger
-local BACKENDS, set_backend, set_raw_query, get_raw_query, escape_literal, escape_identifier, init_logger, init_db, connect, raw_query, interpolate_query, encode_values, encode_assigns, encode_clause, append_all, add_cond, query, _select, _insert, _update, _delete, _truncate
+local BACKENDS, set_backend, set_raw_query, get_raw_query, escape_literal, escape_identifier, init_logger, init_db, raw_query, interpolate_query, encode_values, encode_assigns, encode_clause, append_all, add_cond, query, _select, _insert, _update, _delete, _truncate, _init
 BACKENDS = {
   raw = function(fn)
     return fn
@@ -32,7 +32,7 @@ BACKENDS = {
       end
     end
     conn = assert(luasql:connect(unpack(conn_opts)))
-    return function(q)
+    return function(q, options)
       if logger then
         logger.query(q)
       end
@@ -85,21 +85,9 @@ BACKENDS = {
       local _obj_0 = require("lapis.nginx.context")
       after_dispatch, increment_perf = _obj_0.after_dispatch, _obj_0.increment_perf
     end
-    local config = require("lapis.config").get()
-    local mysql_config = assert(config.mysql, "missing mysql configuration for resty_mysql")
-    local host = mysql_config.host or "127.0.0.1"
-    local port = mysql_config.port or 3306
-    local path = mysql_config.path
-    local database = assert(mysql_config.database, "`database` missing from config for resty_mysql")
-    local user = assert(mysql_config.user, "`user` missing from config for resty_mysql")
-    local password = mysql_config.password
-    local ssl = mysql_config.ssl
-    local ssl_verify = mysql_config.ssl_verify
-    local timeout = mysql_config.timeout or 10000
-    local max_idle_timeout = mysql_config.max_idle_timeout or 10000
-    local pool_size = mysql_config.pool_size or 100
     local mysql = require("resty.mysql")
-    return function(q)
+    return function(q, options)
+      assert(type(options) == "table", "wrong options type: it must be a table!")
       if logger then
         logger.query(q)
       end
@@ -108,20 +96,6 @@ BACKENDS = {
         local err
         db, err = assert(mysql:new())
         db:set_timeout(timeout)
-        local options = {
-          database = database,
-          user = user,
-          password = password,
-          ssl = ssl,
-          ssl_verify = ssl_verify,
-          charset = "utf8",
-        }
-        if path then
-          options.path = path
-        else
-          options.host = host
-          options.port = port
-        end
         local ok, err, errcode, sqlstate = db:connect(options)
         assert(ok, err)
         if ngx then
@@ -130,11 +104,6 @@ BACKENDS = {
             return db:set_keepalive(max_idle_timeout, pool_size)
           end)
         end
-      end
-      local start_time
-      if ngx and config.measure_performance then
-        ngx.update_time()
-        start_time = ngx.now()
       end
       local res, err, errcode, sqlstate = assert(db:query(q))
       local result
@@ -148,11 +117,6 @@ BACKENDS = {
         end
       else
         result = res
-      end
-      if start_time then
-        ngx.update_time()
-        increment_perf("db_time", ngx.now() - start_time)
-        increment_perf("db_count", 1)
       end
       return result
     end
@@ -182,7 +146,6 @@ escape_literal = function(val)
       if ngx then
         return ngx.quote_sql_str(val)
       else
-        connect()
         return escape_literal(val)
       end
     end
@@ -240,14 +203,6 @@ init_db = function()
   end
   return set_backend(backend)
 end
-connect = function()
-  init_logger()
-  return init_db()
-end
-raw_query = function(...)
-  connect()
-  return raw_query(...)
-end
 interpolate_query, encode_values, encode_assigns, encode_clause = build_helpers(escape_literal, escape_identifier)
 append_all = function(t, ...)
   for i = 1, select("#", ...) do
@@ -263,25 +218,25 @@ add_cond = function(buffer, cond, ...)
     return append_all(buffer, interpolate_query(cond, ...))
   end
 end
-query = function(str, ...)
+query = function(options, str, ...)
   if select("#", ...) > 0 then
     str = interpolate_query(str, ...)
   end
-  return raw_query(str)
+  return raw_query(str, options)
 end
-_select = function(str, ...)
-  return query("SELECT " .. str, ...)
+_select = function(options, str, ...)
+  return query(options, "SELECT " .. str, ...)
 end
-_insert = function(tbl, values, ...)
+_insert = function(options, tbl, values, ...)
   local buff = {
     "INSERT INTO ",
     escape_identifier(tbl),
     " "
   }
   encode_values(values, buff)
-  return raw_query(concat(buff))
+  return raw_query(concat(buff), options)
 end
-_update = function(table, values, cond, ...)
+_update = function(options, table, values, cond, ...)
   local buff = {
     "UPDATE ",
     escape_identifier(table),
@@ -291,9 +246,9 @@ _update = function(table, values, cond, ...)
   if cond then
     add_cond(buff, cond, ...)
   end
-  return raw_query(concat(buff))
+  return raw_query(concat(buff), options)
 end
-_delete = function(table, cond, ...)
+_delete = function(options, table, cond, ...)
   local buff = {
     "DELETE FROM ",
     escape_identifier(table)
@@ -301,13 +256,16 @@ _delete = function(table, cond, ...)
   if cond then
     add_cond(buff, cond, ...)
   end
-  return raw_query(concat(buff))
+  return raw_query(concat(buff), options)
 end
-_truncate = function(table)
-  return raw_query("TRUNCATE " .. escape_identifier(table))
+_truncate = function(options, table)
+  return raw_query("TRUNCATE " .. escape_identifier(table), options)
+end
+_init = function()
+  init_logger()
+  return init_db()
 end
 return {
-  connect = connect,
   raw = raw,
   is_raw = is_raw,
   NULL = NULL,
@@ -332,5 +290,6 @@ return {
   insert = _insert,
   update = _update,
   delete = _delete,
-  truncate = _truncate
+  truncate = _truncate,
+  init = _init
 }

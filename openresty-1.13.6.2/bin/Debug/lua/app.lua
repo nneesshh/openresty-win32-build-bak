@@ -3,6 +3,8 @@ local lapis = require("lapis")
 local app = lapis.Application()
 
 app:enable("etlua")
+app.layout = require "views.shared.Layout"
+
 app:before_filter(function(self)
 
   print("got request: ", self.route_name)

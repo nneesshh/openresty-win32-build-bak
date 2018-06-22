@@ -58,7 +58,7 @@ decode_with_secret = function(msg_and_sig, secret, sep)
   if sep == nil then
     sep = "%."
   end
-  local json = require("cjson")
+  local json = require("rapidjson")
   local msg, sig = msg_and_sig:match("^(.*)" .. tostring(sep) .. "(.*)$")
   if not (msg) then
     return nil, "invalid format"

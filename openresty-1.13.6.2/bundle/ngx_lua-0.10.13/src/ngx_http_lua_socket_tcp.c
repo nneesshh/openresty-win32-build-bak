@@ -2898,23 +2898,26 @@ ngx_http_lua_socket_tcp_settimeouts(lua_State *L)
 static void
 ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
 {
-    ngx_connection_t                *c;
+    ngx_connection_t                *c, *r_conn;
     ngx_http_request_t              *r;
     ngx_http_log_ctx_t              *ctx;
 
     ngx_http_lua_socket_tcp_upstream_t  *u;
 
+    int         seconds, bytes, i_result;
+    ngx_err_t   err;
+
     c = ev->data;
     u = c->data;
     r = u->request;
-    c = r->connection;
+	r_conn = r->connection;
 
-    if (c->fd != (ngx_socket_t) -1) {  /* not a fake connection */
-        ctx = c->log->data;
+    if (r_conn->fd != (ngx_socket_t) -1) {  /* not a fake connection */
+        ctx = r_conn->log->data;
         ctx->current_request = r;
     }
 
-    ngx_log_debug3(NGX_LOG_DEBUG_HTTP, c->log, 0,
+    ngx_log_debug3(NGX_LOG_DEBUG_HTTP, r_conn->log, 0,
                    "lua tcp socket handler for \"%V?%V\", wev %d", &r->uri,
                    &r->args, (int) ev->write);
 
@@ -2922,10 +2925,63 @@ ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
         u->write_event_handler(r, u);
 
     } else {
+
+        /* check connectex */
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT
+            && 1 == ev->ovlp.connectex_flag) {
+
+            ev->ovlp.connectex_flag = 0;
+
+			i_result = setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_CONNECT_CONTEXT, NULL, 0);
+			if (i_result != NO_ERROR) {
+
+				err = ngx_socket_errno;
+
+				ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
+					"ngx_http_lua_socket_tcp_handler(): setsockopt(SO_UPDATE_CONNECT_CONTEXT) failed");
+
+				ngx_http_lua_socket_handle_read_error(r, u,
+					NGX_HTTP_LUA_SOCKET_FT_ERROR);
+				return;
+			}
+
+            bytes = sizeof(seconds);
+            i_result = getsockopt(c->fd, SOL_SOCKET, SO_CONNECT_TIME,
+                (char *)&seconds, (PINT)&bytes);
+            if (i_result != NO_ERROR) {
+
+                err = ngx_socket_errno;
+
+                ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
+                    "ngx_http_lua_socket_tcp_handler(): getsockopt(SO_CONNECT_TIME) failed");
+
+				ngx_http_lua_socket_handle_read_error(r, u,
+                                                      NGX_HTTP_LUA_SOCKET_FT_ERROR);
+                return;
+            }
+            else {
+                if (seconds == 0xFFFFFFFF) {
+
+                    ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
+                        "ngx_http_lua_socket_tcp_handler(): connection not established yet!!!");
+
+                    ngx_http_lua_socket_handle_conn_error(r, u,
+                                                          NGX_HTTP_LUA_SOCKET_FT_ERROR);
+					return;
+                }
+                else {
+                    ngx_log_debug1(NGX_LOG_INFO, r->connection->log, 0,
+                        "ngx_http_lua_socket_tcp_handler(): connection has been established %d seconds",
+                        seconds);
+
+                }
+            }
+        }
+
         u->read_event_handler(r, u);
     }
 
-    ngx_http_run_posted_requests(c);
+    ngx_http_run_posted_requests(r_conn);
 }
 
 

@@ -111,7 +111,7 @@ do
       do
         local error_blob = headers.x_lapis_error
         if error_blob then
-          json = require("cjson")
+          json = require("rapidjson")
           local summary, err, trace
           do
             local _obj_0 = json.decode(error_blob)

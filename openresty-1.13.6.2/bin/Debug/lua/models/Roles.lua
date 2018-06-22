@@ -6,8 +6,12 @@ local types = schema.types
 
 local jituuid = require("resty.jit-uuid")
 
+-- Localize
+local cwd = (...):gsub('%.[^%.]+$', '') .. "."
+local default_options = require(cwd .. "default_options")
+
 local _M = {
-  _entity = Model:extend("roles", {
+  _entity = Model:extend(default_options, "roles", {
     primary_key = "id"
   }),
 }
@@ -24,7 +28,7 @@ function _M.get(id)
 end
 
 function _M.getByCode(code) 
-  return _M._entity:find( { Code = code })
+  return _M._entity:find({ Code = code })
 end
 
 return _M

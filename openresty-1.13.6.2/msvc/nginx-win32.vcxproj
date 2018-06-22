@@ -49,7 +49,7 @@
     <TargetName>nginx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>../bin/$(Configuration)/</OutDir>
+    <OutDir>D:\Sandbox\server\web\oss\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>nginx</TargetName>
@@ -101,7 +101,7 @@
       <AdditionalDependencies>vld.lib;jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
-      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <ShowProgress>NotSet</ShowProgress>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../src/nginx</AdditionalIncludeDirectories>

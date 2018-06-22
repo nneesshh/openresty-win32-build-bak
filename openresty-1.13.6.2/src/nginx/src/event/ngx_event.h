@@ -22,7 +22,8 @@ typedef struct {
     WSAOVERLAPPED    ovlp;
     ngx_event_t     *event;
     /* int              error; */
-    int              acceptex_flag : 1; /* 1 = waiting for acceptex event raised, 0 = event process over */
+    unsigned         acceptex_flag : 1; /* 1 = acceptex event posted, 0 = event process over */
+    unsigned         connectex_flag : 1; /* 1 = connectex event posted, 0 = event process over */
 } ngx_event_ovlp_t;
 
 #endif

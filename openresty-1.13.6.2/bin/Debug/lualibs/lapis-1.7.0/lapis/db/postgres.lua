@@ -45,16 +45,15 @@ local BACKENDS = {
       local _obj_0 = require("lapis.nginx.context")
       after_dispatch, increment_perf, set_perf = _obj_0.after_dispatch, _obj_0.increment_perf, _obj_0.set_perf
     end
-    local config = require("lapis.config").get()
-    local pg_config = assert(config.postgres, "missing postgres configuration")
     local pgmoon_conn
     local _query
-    _query = function(str)
+    _query = function(str, options)
+      assert(type(options) == "table", "wrong options type: it must be a table!")
       local pgmoon = ngx and ngx.ctx.pgmoon or pgmoon_conn
       if not (pgmoon) then
         local Postgres
         Postgres = require("pgmoon").Postgres
-        pgmoon = Postgres(pg_config)
+        pgmoon = Postgres(options)
         assert(pgmoon:connect())
         if ngx then
           ngx.ctx.pgmoon = pgmoon
@@ -212,30 +211,21 @@ append_all = function(t, ...)
     t[#t + 1] = select(i, ...)
   end
 end
-local connect
-connect = function()
-  init_logger()
-  return init_db()
-end
 local disconnect
 disconnect = function()
   assert(raw_disconnect, "no active connection")
   return raw_disconnect()
 end
-raw_query = function(...)
-  connect()
-  return raw_query(...)
-end
 local query
-query = function(str, ...)
+query = function(options, str, ...)
   if select("#", ...) > 0 then
     str = interpolate_query(str, ...)
   end
-  return raw_query(str)
+  return raw_query(options, str)
 end
 local _select
-_select = function(str, ...)
-  return query("SELECT " .. str, ...)
+_select = function(options, str, ...)
+  return query(options, "SELECT " .. str, ...)
 end
 local add_returning
 add_returning = function(buff, first, cur, following, ...)
@@ -252,7 +242,7 @@ add_returning = function(buff, first, cur, following, ...)
   end
 end
 local _insert
-_insert = function(tbl, values, ...)
+_insert = function(options, tbl, values, ...)
   local buff = {
     "INSERT INTO ",
     escape_identifier(tbl),
@@ -262,7 +252,7 @@ _insert = function(tbl, values, ...)
   if ... then
     add_returning(buff, true, ...)
   end
-  return raw_query(concat(buff))
+  return raw_query(options, concat(buff))
 end
 local add_cond
 add_cond = function(buffer, cond, ...)
@@ -275,7 +265,7 @@ add_cond = function(buffer, cond, ...)
   end
 end
 local _update
-_update = function(table, values, cond, ...)
+_update = function(options, table, values, cond, ...)
   local buff = {
     "UPDATE ",
     escape_identifier(table),
@@ -288,10 +278,10 @@ _update = function(table, values, cond, ...)
   if type(cond) == "table" then
     add_returning(buff, true, ...)
   end
-  return raw_query(concat(buff))
+  return raw_query(options, concat(buff))
 end
 local _delete
-_delete = function(table, cond, ...)
+_delete = function(options, table, cond, ...)
   local buff = {
     "DELETE FROM ",
     escape_identifier(table)
@@ -299,10 +289,10 @@ _delete = function(table, cond, ...)
   if cond then
     add_cond(buff, cond, ...)
   end
-  return raw_query(concat(buff))
+  return raw_query(options, concat(buff))
 end
 local _truncate
-_truncate = function(...)
+_truncate = function(options, ...)
   local tables = concat((function(...)
     local _accum_0 = { }
     local _len_0 = 1
@@ -316,7 +306,7 @@ _truncate = function(...)
     end
     return _accum_0
   end)(...), ", ")
-  return raw_query("TRUNCATE " .. tables .. " RESTART IDENTITY")
+  return raw_query(options, "TRUNCATE " .. tables .. " RESTART IDENTITY")
 end
 local parse_clause
 do
@@ -426,8 +416,12 @@ encode_case = function(exp, t, on_else)
   append_all(buff, "\nEND")
   return concat(buff)
 end
+local _init
+_init = function()
+  init_logger()
+  return init_db()
+end
 return {
-  connect = connect,
   disconnect = disconnect,
   query = query,
   raw = raw,
@@ -457,5 +451,6 @@ return {
   update = _update,
   delete = _delete,
   truncate = _truncate,
-  is_encodable = _is_encodable
+  is_encodable = _is_encodable,
+  init = _init
 }
