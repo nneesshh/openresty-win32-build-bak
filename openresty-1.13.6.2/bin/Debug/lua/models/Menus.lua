@@ -28,7 +28,10 @@ end
 
 function _M.getAll(ntype) 
   ntype = ntype or 0
-  return _M._entity:find_all({ ntype }, "Type")
+  return _M._entity:find_all({ ntype }, {
+      key = "Type",
+      clause = "order by SeqNo"
+  })
 end
 
 return _M
