@@ -6,7 +6,9 @@ local _M = {
 _M._config = require("lapis.config")
 _M._config(_M._configName, {
   mysql = {
-    host = "127.0.0.1",
+    --host = "127.0.0.1",
+    host = "192.168.1.110",
+    --host = "192.168.1.122",
     user = "root",
     password = "123123",
     database = "my_umb_web"

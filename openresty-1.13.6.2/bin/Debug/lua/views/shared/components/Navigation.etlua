@@ -1,4 +1,4 @@
-﻿<li class="header">功能菜单</li>
+﻿<li class="header">统计菜单</li>
 <%
     local Menus = require("models.Menus")
     local menuType = 1 -- none admin

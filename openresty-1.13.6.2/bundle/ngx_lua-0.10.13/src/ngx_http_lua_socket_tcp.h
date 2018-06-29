@@ -21,6 +21,8 @@
 #define NGX_HTTP_LUA_SOCKET_FT_CLIENTABORT   0x0080
 #define NGX_HTTP_LUA_SOCKET_FT_SSL           0x0100
 
+#define NGX_HTTP_LUA_SOCKET_FT_CONNECTFAILED 0x1000
+
 
 typedef struct ngx_http_lua_socket_tcp_upstream_s
         ngx_http_lua_socket_tcp_upstream_t;

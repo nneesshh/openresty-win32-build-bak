@@ -55,7 +55,10 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">用户登录</p>
-            <input id="errorInfo" type="hidden" value="<%= ErrorInfo %>" />
+            <% if errors then %>
+            <div class="text-danger"><%= errors[1] %></div>
+            <% end %>
+            
             <form action="/login" method="post">
                 <div class="form-group has-feedback">
                     <input name="UserName" type="text" class="form-control" placeholder="用户名" />
@@ -66,7 +69,7 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-xs-7 col-xs-offset-1">
                         <div class="checkbox icheck">
                             <label>
                                 <input name="RememberMe" type="checkbox"/> 记住我

@@ -769,6 +769,10 @@ ngx_http_lua_socket_error_retval_handler(ngx_http_request_t *r,
             lua_pushlstring(L, (char *) errstr, p - errstr);
 
         } else {
+#if (NGX_DEBUG)
+			// debug
+			printf("\n\tngx_http_lua_socket_error_retval_handler(): ft_type=%d", u->ft_type);
+#endif
             lua_pushliteral(L, "error");
         }
     }

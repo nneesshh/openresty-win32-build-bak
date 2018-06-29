@@ -50,6 +50,8 @@ elseif config.mysql then
     options.port = port
   end
   
+  options.pool = user .. ":" .. database .. ":" .. host .. ":" .. port
+  
   return options
 else
   return error("You have to configure either postgres or mysql")

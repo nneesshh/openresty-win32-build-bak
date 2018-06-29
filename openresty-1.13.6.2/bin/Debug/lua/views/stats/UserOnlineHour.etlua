@@ -1,0 +1,77 @@
+﻿<%
+    local createBy
+    if session.user then
+        createBy = session.user.Name
+    end
+
+    local labelList = {
+        '日期',
+        '0时',
+        '2时',
+        '6时',
+        '8时',
+        '9时',
+        '10时',
+        '13时',
+        '19时',
+        '21时',
+        '23时',
+    }
+
+    local fieldList = {
+        'day',
+        'h_00',
+        'h_02',
+        'h_06',
+        'h_08',
+        'h_09',
+        'h_10',
+        'h_13',
+        'h_19',
+        'h_21',
+        'h_23',
+    }
+%>
+
+<!-- render body -->
+<div class="row">
+    <!-- menu name -->
+    <div class="col-xs-10">
+        <h1> 小时在线 </h1>
+    </div>
+    <!-- data table -->
+    <div class="col-xs-10">
+        <div class="box box-primary">
+            <table class="table table-bordered table-hover dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <% for i, v in ipairs(labelList) do %>
+                        <th>
+                            <%= v %>
+                        </th>
+                        <% end %>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if StatsPage then
+                            for i, v in ipairs(StatsPage) do
+                    %>
+                    <tr>
+                            <% for i2, v2 in ipairs(fieldList) do %>
+                        <td>
+                            <%= v[v2] %>
+                        </td>
+                            <% end %>
+                    </tr>
+                    <%
+                            end
+                        end
+                    %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.row -->

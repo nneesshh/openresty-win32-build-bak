@@ -1,0 +1,82 @@
+﻿<%
+    local createBy
+    if session.user then
+        createBy = session.user.Name
+    end
+    
+    local labelList = {
+        '日期',
+        '充值次数',
+        '充值金额',
+        '充值人数',
+        '充值总次数',
+        '充值总金额',
+        '充值总人数',
+    }
+
+    local fieldList = {
+        'day',
+        'charge_num',
+        'charge_cash',
+        'charge_user_num',
+        'total_charge_num',
+        'total_charge_cash',
+        'total_charge_user_num',
+    }
+%>
+
+<!-- render body -->
+<div class="row">
+    <!-- menu name -->
+    <div class="col-xs-10">
+        <h1> 在线统计 </h1>
+    </div>
+    <!-- data table -->
+    <div class="col-xs-10">
+        <div class="box box-primary">
+            <table class="table table-bordered table-hover dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <% for i, v in ipairs(labelList) do %>
+                        <th>
+                            <%= v %>
+                        </th>
+                        <% end %>
+                        <th>ARPU</th>
+                        <th>ARPU TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if StatsPage then
+                            for i, v in ipairs(StatsPage) do
+                    %>
+                    <tr>
+                            <% for i2, v2 in ipairs(fieldList) do %>
+                        <td>
+                            <%= v[v2] %>
+                        </td>
+                            <% end %>
+                        
+                        <% if v.charge_user_num > 0 then %> 
+                        <td><%= v.charge_cash / v.charge_user_num %></td>
+                        <% else %> 
+                        <td>0.0</td>
+                        <% end %>
+
+                        <% if v.total_charge_user_num > 0 then %> 
+                        <td><%= v.total_charge_cash / v.total_charge_user_num %></td>
+                        <% else %> 
+                        <td>0.0</td>
+                        <% end %>
+                    </tr>
+                    <%
+                            end
+                        end
+                    %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.row -->

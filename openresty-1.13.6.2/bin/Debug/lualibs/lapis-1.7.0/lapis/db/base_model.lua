@@ -185,7 +185,7 @@ do
       end)(), "-")
     end,
     delete = function(self)
-      local res = self.__class.db.delete(self.__class:table_name(), self:_primary_cond())
+      local res = self.__class.db.delete(self.options, self.__class:table_name(), self:_primary_cond())
       return res.affected_rows and res.affected_rows > 0, res
     end,
     update = function(self, first, ...)
@@ -214,7 +214,7 @@ do
       end
       local cond = self.__class.db.encode_clause(self:_primary_cond())
       local tbl_name = self.__class.db.escape_identifier(self.__class:table_name())
-      local res = unpack(self.__class.db.select(tostring(fields) .. " from " .. tostring(tbl_name) .. " where " .. tostring(cond)))
+      local res = unpack(self.__class.db.select(self.options, tostring(fields) .. " from " .. tostring(tbl_name) .. " where " .. tostring(cond)))
       if not (res) then
         error(tostring(self.__class:table_name()) .. " failed to find row to refresh from, did the primary key change?")
       end

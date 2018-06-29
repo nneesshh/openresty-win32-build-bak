@@ -1,0 +1,16 @@
+﻿<li class="header">管理菜单</li>
+<%
+    local Menus = require("models.Menus")
+    local menuType = 0 -- admin
+    local all_menus = Menus.getAll(menuType)
+    local lastMenu = session.lastMenu
+    for k, v in ipairs(all_menus) do
+        local isActive = lastMenu == v.Code;  --判断当前功能是否处于激活
+        local active = isActive and "active" or ""
+%>
+
+        <li class="<%= active %>"><a href="<%= v.Url %>"><i class="fa fa-link"></i> <span><%= v.Name %></span></a></li>
+
+<%
+    end
+%>

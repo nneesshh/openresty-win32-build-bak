@@ -325,7 +325,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
 
                     /* Skip events from a closed socket */
                     if (ev->closed
-                        || (NGX_IOCP_IO == key && (1 == ovlp->acceptex_flag || ev->write == 1 && ev->disabled)))
+						|| (NGX_IOCP_ACCEPT != key && 1 == ovlp->acceptex_flag))
                     {
                         /* Event is already closed, or acceptex event is not ready yet, or write event is in disable state,
                            all events must be ignored except NGX_IOCP_ACCEPT. */

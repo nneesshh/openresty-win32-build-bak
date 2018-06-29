@@ -16,10 +16,12 @@ local _M = {
   }),
 }
 
-function _M.new() 
-  return _M._entity:create({
-    id  = jituuid.generate_v4(),
+function _M.create() 
+  local res, err = _M._entity:create({
+    Id  = jituuid.generate_v4(),
   })
+  assert(res, err)
+  return res
 end
 
 function _M.getByUserId(userId) 

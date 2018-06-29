@@ -1,0 +1,71 @@
+﻿<%
+    local id, createBy, createTime, content
+    if CurrentNews then
+        id = CurrentNews.Id
+        createTime = CurrentNews.CreateTime
+        content = CurrentNews.Content
+    end
+
+    local date = require("date")
+    d = date(false);
+%>
+
+<style type="text/css">
+    label {font-size:20px;}
+    textarea {font-size:16px;}
+    p {font-size:16px;}
+</style>
+
+<h2 class="text-center">修改更新公告</h2>
+
+<div class="row">
+    <div class="center-block" style="width:600px;margin:0 auto">
+        <form action="/AdminNews/Edit" method="POST">
+            <input type="hidden" name="Id" value=<%= id %> />
+            <% if errors then %>
+            <span class="text-danger"><%= errors[1] %></span>
+            <% end %>
+
+            <% if results then %>
+            <span class="text-success"><%= results.status %></span>
+            <% end %>
+
+            <div>
+                <label id="lCreateTime" for="CreateTime">日期:</label>
+                <br/>
+                <span style="font-size:20px;"><%= createTime %></span>
+            </div>
+
+            <div>
+                <label id="lContent" for="Content">内容:</label>
+                <textarea id="oriContent" name="Content" style="height:400px;width:600px;" onkeyup="convert()"><%= content %></textarea>
+            </div>
+
+            <p></p>
+            <label>效果预览:</label>
+            <div id="result" style="border:1px dotted black;"></div>
+            <br/>
+            <!-- <div class="form-group"> -->
+                <input type="submit" value="提交" class="btn btn-primary center-block margin-bottom" style="width:200px;"/>
+            <!-- </div> -->
+        </form>
+    </div>
+</div>
+
+<p></p>
+
+<div>
+    <a class="btn-lg" href="/AdminNews" >返回</a>
+</div>
+
+<script type="text/javascript">
+    function convert() {
+        var text = document.getElementById("oriContent").value;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("result").innerHTML = html;
+    }
+    
+    window.onload = convert;
+
+</script>

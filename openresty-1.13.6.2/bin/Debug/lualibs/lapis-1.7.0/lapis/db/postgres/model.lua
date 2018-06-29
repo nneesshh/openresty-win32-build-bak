@@ -85,7 +85,7 @@ do
       end
       if returning then
         do
-          local res = db.update(self.__class:table_name(), values, cond, unpack(returning))
+          local res = db.update(self.options, self.__class:table_name(), values, cond, unpack(returning))
           do
             local update = unpack(res)
             if update then
@@ -98,7 +98,7 @@ do
           return res
         end
       else
-        return db.update(self.__class:table_name(), values, cond)
+        return db.update(self.options, self.__class:table_name(), values, cond)
       end
     end
   }
@@ -188,9 +188,9 @@ do
     end
     local res
     if returning then
-      res = db.insert(self:table_name(), values, unpack(returning))
+      res = db.insert(self.options, self:table_name(), values, unpack(returning))
     else
-      res = db.insert(self:table_name(), values, self:primary_keys())
+      res = db.insert(self.options, self:table_name(), values, self:primary_keys())
     end
     if res then
       if returning and not return_all then

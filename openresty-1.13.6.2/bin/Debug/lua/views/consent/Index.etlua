@@ -1,0 +1,29 @@
+﻿<%
+    local id = Consent.Id
+    local sourceUrl = Consent.SourceUrl
+    local tips = Consent.Tips
+%>
+
+<div class="container page-consent">
+    <div class="row page-header">
+        <div class="text-center">
+            <h1>
+                <small>确认:<%= tips %></small>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="text-center">
+
+            <form action=<%= sourceUrl %> method="post" class="consent-form">
+                <input name="Id" type="hidden" value=<%= id%> />
+
+                <div class="consent-buttons">
+                    <button name="Button" value="yes" class="btn btn-primary" autofocus style="margin-right:20px;">确认</button>
+                    <button name="Button" value="no" class="btn">放弃</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

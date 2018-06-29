@@ -48,32 +48,34 @@
 
 </head>
 <body>
-    <div class="container">
-        <br />
-        <h4>
-            <p>当前时间：<font color="#003300"><span id="nowDateTimeSpan"></span></font></p>
-            <br />
-            <p><input class="form-control" id="targetDateSpan" value="2018/07/07"></input></p>
-            <p id="countDownP">距离项目正式上线还剩000天0000时0000分0000秒</p>
-        </h4>
-        <br />
-    </div>
-
-    <div class="container">
-        <div class="clock" style="margin:2em;"></div>
-        <!--div class="message"></div-->
-    </div>
-
-    <div class="container">
-        <br />
-        <br />
-        <br />
-        <div class="text-center">
-            <a href="<%= url_for('login') %>" class="btn btn-primary btn-block margin-bottom">进入系统</a>
+    <div class="jumbotron">
+        <div class="container">
+            <img src="static/images/logo.png" class="img-responsive center-block">
+            <div class="clock center-block" style="width:530px;margin:0 auto;"></div>
         </div>
-        <br />
-        <br />
-        <br />
+    </div>
+
+    <div class="panel panel-default" style="margin-top:-30px">
+        <div class="panel-body">
+            <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+                <h4>
+                    <p>当前时间：
+                        <font color="#003300"><span id="nowDateTimeSpan"></span>
+                        </font>
+                    </p>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">输入目标时间</span>
+                        <input class="form-control" id="targetDateSpan" value="2018/07/07">
+                    </div>
+                    <br/>
+                    <p id="countDownP">距离项目正式上线还剩000天0000时0000分0000秒</p>
+                </h4>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a href="<%= url_for('login') %>" class="btn btn-primary btn-lg" style="margin-left:47%">    进入系统
+            </a>
+        </div>
     </div>
 
     <!-- jQuery 3 -->

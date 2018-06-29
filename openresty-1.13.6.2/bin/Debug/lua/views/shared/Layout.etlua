@@ -116,7 +116,7 @@
                                     </div-->
                                     <div class="pull-right">
                                         <% if stringutil.isValidString(nick) then %>
-                                            <a href="url_for('signout')" class="btn btn-default btn-flat"><span class=" text-danger">注销</span></a>
+                                            <a href=<%= url_for("signout") %> class="btn btn-default btn-flat"><span class=" text-danger">注销</span></a>
                                         <% end %>
                                     </div>
                                 </li>
@@ -157,6 +157,23 @@
                     </div>
                 </form>
                 <!-- /.search form -->
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu">
+                    <% render("views.shared.components.AdminNavigation") %>
+                    <!--<li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-link"></i> <span>Multilevel</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#">Link in level 2</a></li>
+                                <li><a href="#">Link in level 2</a></li>
+                            </ul>
+                        </li>-->
+                </ul>
+                <!-- /.sidebar-menu -->
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
                     <% render("views.shared.components.Navigation") %>
@@ -303,11 +320,12 @@
     <!--
         <script src="dist/js/pages/dashboard2.js"></script>
     -->
+    <script type="text/javascript" src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
 
     <script src="/static/js/flipclock.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/bootstrap-paginator.js"></script>
-    <script src="layer/layer.js"></script>
-    <script src="jstree/dist/jstree.js"></script>
+    <script src="/static/lib/layer/layer.js"></script>
+    <script src="/static/lib/jstree/dist/jstree.js"></script>
 </body>
 </html>

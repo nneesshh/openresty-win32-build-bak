@@ -1,10 +1,12 @@
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 
-local lapis = require("lapis")
 local appconfig = require("appconfig")
 local config = appconfig.getConfig()
-local respond_to = require("lapis.application").respond_to
+
+local app_helpers = require("lapis.application")
+local respond_to = app_helpers.respond_to
+local capture_errors = app_helpers.capture_errors
 
 local auth = require(cwd .. "authorize")
 

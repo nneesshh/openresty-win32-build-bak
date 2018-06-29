@@ -67,7 +67,7 @@ do
         local time = self.__class.db.format_date()
         values.updated_at = values.updated_at or time
       end
-      return db.update(self.__class:table_name(), values, cond)
+      return db.update(self.options, self.__class:table_name(), values, cond)
     end
   }
   _base_0.__index = _base_0
@@ -133,7 +133,7 @@ do
       values.created_at = values.created_at or time
       values.updated_at = values.updated_at or time
     end
-    local res = db.insert(self:table_name(), values, self:primary_keys())
+    local res = db.insert(self.options, self:table_name(), values, self:primary_keys())
     if res then
       local new_id = res.last_auto_id or res.insert_id
       if not values[self.primary_key] and new_id and new_id ~= 0 then

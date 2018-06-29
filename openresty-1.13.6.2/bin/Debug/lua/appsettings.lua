@@ -12,6 +12,9 @@ package.path = package.path .. ";./lualibs/etlua-1.3.0/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-mysql-0.21/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-jit-uuid-0.0.7/lib/?.lua"
 
+-- date
+package.path = package.path .. ";./lualibs/luadate-2.1/?.lua"
+
 -- protobuf
 --package.path = package.path .. ";./lua/protobuf/?.lua;./lua/proto_pb/?.lua"
 

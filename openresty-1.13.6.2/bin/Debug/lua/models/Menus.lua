@@ -16,10 +16,12 @@ local _M = {
   }),
 }
 
-function _M.new() 
-  return _M._entity:create({
-    id  = jituuid.generate_v4(),
+function _M.create() 
+  local res, err = _M._entity:create({
+    Id  = jituuid.generate_v4(),
   })
+  assert(res, err)
+  return res
 end
 
 function _M.get(id) 
@@ -28,10 +30,12 @@ end
 
 function _M.getAll(ntype) 
   ntype = ntype or 0
+  --[[
   return _M._entity:find_all({ ntype }, {
-      key = "Type",
-      clause = "order by SeqNo"
-  })
+    key = "Type",
+    clause = "order by SeqNo"
+})]]
+  return _M._entity:select("WHERE Type = ? and hide = 0 ORDER BY SeqNo ASC", ntype, { fields = "*" })
 end
 
 return _M

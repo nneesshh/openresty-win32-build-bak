@@ -193,8 +193,7 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
     rev->ovlp.connectex_flag = 1;
     rev->ready = 0;
 
-    wev->disabled = 0;
-    rev->disabled = 0;
+	wev->ovlp.connectex_flag = 1;
 
     return NGX_OK;
 

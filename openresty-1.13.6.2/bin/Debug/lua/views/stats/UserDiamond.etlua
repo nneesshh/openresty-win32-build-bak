@@ -1,0 +1,72 @@
+﻿<%
+    local createBy
+    if session.user then
+        createBy = session.user.Name
+    end
+    
+    local labelList = {
+        '日期',
+        '加速生产',
+        '塔内复活',
+        '重置幽灵船',
+        '重置装备洗练次数',
+        '装备洗练',
+        '商人议价',
+        '商店购买',
+        '换技能',
+    }
+
+    local fieldList = {
+        'day',
+        'production_speed_up',
+        'dungeon_revive',
+        'ghost_ship_reset',
+        'equip_reset_refine_times',
+        'equip_refine',
+        'shopping_bargain',
+        'shopping_buy',
+        'sailor_exchange_skill',
+    }
+%>
+
+<!-- render body -->
+<div class="row">
+    <!-- menu name -->
+    <div class="col-xs-10">
+        <h1> 在线统计 </h1>
+    </div>
+    <!-- data table -->
+    <div class="col-xs-10">
+        <div class="box box-primary">
+            <table class="table table-bordered table-hover dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <% for i, v in ipairs(labelList) do %>
+                        <th>
+                            <%= v %>
+                        </th>
+                        <% end %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if StatsPage then
+                            for i, v in ipairs(StatsPage) do
+                    %>
+                    <tr>
+                            <% for i2, v2 in ipairs(fieldList) do %>
+                        <td>
+                            <%= v[v2] %>
+                        </td>
+                            <% end %>
+                    </tr>
+                    <%
+                            end
+                        end
+                    %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.row -->

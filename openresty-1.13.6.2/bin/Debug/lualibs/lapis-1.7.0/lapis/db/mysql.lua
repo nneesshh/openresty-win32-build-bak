@@ -91,7 +91,8 @@ BACKENDS = {
       if logger then
         logger.query(q)
       end
-      local db = ngx and ngx.ctx.resty_mysql_db
+      ngx.ctx.resty_mysql_db = ngx.ctx.resty_mysql_db or {}
+      local db = ngx and ngx.ctx.resty_mysql_db[options.pool]
       if not (db) then
         local err
         db, err = assert(mysql:new())
@@ -99,7 +100,7 @@ BACKENDS = {
         local ok, err, errcode, sqlstate = db:connect(options)
         assert(ok, err)
         if ngx then
-          ngx.ctx.resty_mysql_db = db
+          ngx.ctx.resty_mysql_db[options.pool] = db
           after_dispatch(function()
             return db:set_keepalive(max_idle_timeout, pool_size)
           end)

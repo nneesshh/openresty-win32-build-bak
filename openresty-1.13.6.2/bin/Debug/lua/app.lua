@@ -10,7 +10,7 @@ app:before_filter(function(self)
   print("got request: ", self.route_name)
   
   for k, v in pairs(self.params) do
-    print(k, v)
+    print(k, "=", v)
   end
 end)
 
