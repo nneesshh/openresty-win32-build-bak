@@ -59,11 +59,11 @@
     <style type="text/css">
       .jumbotron h1 {
         font-size:36px;
-        text-align:center;
+        /*text-align:center;*/
       }
-      h2{
+      /*h2{
         text-align:center;
-      }
+      }*/
       li{
         font-size:20px;
       }
@@ -90,6 +90,11 @@
             var html = converter.makeHtml(text);
             document.getElementById("result").innerHTML = html;
         }
+
+        var text = `测试阿莎还大声呼叫的风格和`;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("result").innerHTML = html;
         
         window.onload = convert;
     
