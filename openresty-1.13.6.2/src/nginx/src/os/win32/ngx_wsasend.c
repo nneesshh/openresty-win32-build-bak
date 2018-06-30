@@ -11,7 +11,7 @@
 
 
 #define NGX_WSABUF_SIZE_MAX  4096
-#define NGX_WSABUFS  8
+#define NGX_WSABUFS          16
 
 
 ssize_t
@@ -201,6 +201,7 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
     ovlp = (LPWSAOVERLAPPED) &c->write->ovlp;
     ngx_memzero(ovlp, sizeof(WSAOVERLAPPED));
 
+	sent = 0;
     rc = WSASend(c->fd, vec.elts, vec.nelts, &sent, 0, ovlp, NULL);
 
     ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
@@ -208,12 +209,15 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
     // debug
-    if (sent > 65535) {
-        printf("error sent(%ld) -- fd(%d)!!!!\n", sent, c->fd);
-    }
     printf("\nngx_overlapped_wsasend(): post event WSASend() of sent(%ld)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n",
         sent, vec.nelts,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
+
+	if (sent > 65535 || send != sent) {
+		printf("error of send(%ld)/sent(%ld) -- fd(%d)!!!!\n",
+			send, sent, c->fd);
+	}
+
 #endif
 
     if (rc == 0) {

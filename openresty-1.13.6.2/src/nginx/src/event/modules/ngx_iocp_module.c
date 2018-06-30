@@ -325,7 +325,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
 
                     /* Skip events from a closed socket */
                     if (ev->closed
-						|| (NGX_IOCP_ACCEPT != key && 1 == ovlp->acceptex_flag))
+                        || (NGX_IOCP_ACCEPT != key && 1 == ovlp->acceptex_flag))
                     {
                         /* Event is already closed, or acceptex event is not ready yet, or write event is in disable state,
                            all events must be ignored except NGX_IOCP_ACCEPT. */
@@ -333,11 +333,13 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     }
 
 #if (NGX_DEBUG)
-                    // debug
-                    if (0 == bytes) {
-                        ngx_connection_t *c = ev->data;
-                        printf("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
-                            c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
+                    if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
+                        // debug
+                        if (0 == bytes) {
+                            ngx_connection_t *c = ev->data;
+                            printf("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
+                        }
                     }
 
                     // debug
@@ -359,6 +361,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
                     }
+
 #endif
 
                     switch (key) {
@@ -387,6 +390,23 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     }
 
                     ev->available = bytes;
+
+#if (NGX_DEBUG)
+                    // debug
+                    if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
+                        if (0 == ev->write && bytes > 0) {
+                            ngx_connection_t *c = ev->data;
+                            char data[8096] = { 0 };
+                            memcpy(data, c->buffer->pos, bytes);
+                            printf("\n\t>>>> server read begin\n");
+                            printf("\t     c(%d) fd(%d) destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
+                                c->id, c->fd, c->destroyed,
+                                key, bytes,
+                                data);
+                            printf("\t<<<< server read end\n\n");
+                        }
+                    }
+#endif
 
                     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
                         "iocp event handler: %p", ev->handler);
