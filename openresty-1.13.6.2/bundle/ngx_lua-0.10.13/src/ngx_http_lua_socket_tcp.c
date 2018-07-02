@@ -2978,7 +2978,7 @@ ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
                     return;
                 }
                 else {
-                    ngx_log_debug1(NGX_LOG_INFO, r->connection->log, 0,
+                    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
                         "ngx_http_lua_socket_tcp_handler(): connection has been established %d seconds",
                         seconds);
 

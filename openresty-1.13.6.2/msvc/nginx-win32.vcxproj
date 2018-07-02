@@ -70,10 +70,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib;../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib/$(Configuration);../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vld.lib;jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.LIB;LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+      <ShowProgress>NotSet</ShowProgress>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../src/nginx</AdditionalIncludeDirectories>
@@ -97,7 +98,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib;../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib/$(Configuration);../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/src;../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vld.lib;jemalloc-v141-$(Configuration)-static.lib;Ws2_32.lib;libgd_a.lib;libpcre_a.lib;libperl526.a;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
