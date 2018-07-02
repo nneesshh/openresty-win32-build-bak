@@ -817,12 +817,16 @@ ngx_worker_thread(void *data)
     /* make vld happy */
     {
         int i;
-    
+
+        assert(_CrtCheckMemory());
+
         for (i = 0; cycle->modules[i]; i++) {
             if (cycle->modules[i]->exit_process) {
                 cycle->modules[i]->exit_process(cycle);
             }
         }
+
+        assert(_CrtCheckMemory());
 
         i = cycle->connection_n;
         do {
@@ -830,8 +834,11 @@ ngx_worker_thread(void *data)
             ngx_connection_t *c = &cycle->connections[i];
             if (c->read->data == c
                 && (c->fd != (ngx_socket_t)-1 || c->destroyed == 0)) {
-                if (c->pool)
+                if (c->pool) {
+                    assert(_CrtCheckMemory());
                     ngx_destroy_pool(c->pool);
+                    assert(_CrtCheckMemory());
+                }
             }
         } while (i);
         ngx_free(cycle->connections);
@@ -839,6 +846,8 @@ ngx_worker_thread(void *data)
         ngx_free(cycle->write_events);
 
         ngx_destroy_pool(cycle->pool);
+
+        assert(_CrtCheckMemory());
     }
     return 0;
 }
@@ -1030,6 +1039,7 @@ ngx_single_process_cycle(ngx_cycle_t *cycle)
         int count;
 
         fprintf(stderr, "\nServer say bye ...");
+        assert(_CrtCheckMemory());
 
         ngx_quit = 1;
         WaitForSingleObject(tid, INFINITE);

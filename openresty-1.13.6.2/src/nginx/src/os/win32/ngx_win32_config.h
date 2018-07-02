@@ -66,6 +66,8 @@
 #include <jemalloc/jemalloc.h>
 #ifdef NGX_WIN32
 #include <vld.h>
+#include <assert.h>
+#include <crtdbg.h>
 #endif
 
 #ifdef __WATCOMC__
