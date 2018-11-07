@@ -15,7 +15,7 @@
     <ProjectGuid>{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}</ProjectGuid>
     <RootNamespace>nginx</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -49,7 +49,7 @@
     <TargetName>nginx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>D:\Sandbox\server\web\oss\</OutDir>
+    <OutDir>../bin/$(Configuration)/</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>nginx</TargetName>
@@ -406,6 +406,7 @@
     <ClCompile Include="..\src\nginx\src\mail\ngx_mail_smtp_module.c" />
     <ClCompile Include="..\src\nginx\src\mail\ngx_mail_ssl_module.c" />
     <ClCompile Include="..\src\nginx\src\misc\ngx_cpp_test_module.cpp" />
+    <ClCompile Include="..\src\nginx\src\os\win32\lfs.c" />
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_alloc.c" />
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_dlopen.c" />
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_errno.c" />
@@ -709,6 +710,7 @@
     <ClInclude Include="..\src\nginx\src\mail\ngx_mail_pop3_module.h" />
     <ClInclude Include="..\src\nginx\src\mail\ngx_mail_smtp_module.h" />
     <ClInclude Include="..\src\nginx\src\mail\ngx_mail_ssl_module.h" />
+    <ClInclude Include="..\src\nginx\src\os\win32\lfs.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_alloc.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_atomic.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_dlopen.h" />
@@ -729,6 +731,7 @@
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_upstream.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_upstream_round_robin.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_variables.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\bundle\nginx-http-concat-module\config" />
@@ -749,10 +752,10 @@
     <None Include="..\src\nginx\src\os\win32\nginx_icon48.xpm" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
+    <ResourceCompile Include="nginx_win32.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\src\nginx\src\os\win32\nginx.rc" />
+    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

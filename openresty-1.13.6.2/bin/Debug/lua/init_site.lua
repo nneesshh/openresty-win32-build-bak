@@ -2,6 +2,7 @@ local delay = 60  -- in seconds
 local log = ngx.log
 local ERR = ngx.ERR
 
+package.path = package.path .. ";./lualibs/lua-resty-redis-0.26/lib/?.lua"
 local iredis = require("utils.redis_iresty")
 
 local init_site

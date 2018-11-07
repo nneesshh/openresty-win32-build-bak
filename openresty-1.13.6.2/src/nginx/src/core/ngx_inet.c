@@ -833,7 +833,7 @@ ngx_parse_inet_url(ngx_pool_t *pool, ngx_url_t *u)
 
         n = ngx_atoi(port, len);
 
-        if (n < 1 || n > 65535) {
+        if (n < 0 || n > 65535) {
             u->err = "invalid port";
             return NGX_ERROR;
         }
@@ -857,7 +857,7 @@ ngx_parse_inet_url(ngx_pool_t *pool, ngx_url_t *u)
 
                 if (n != NGX_ERROR) {
 
-                    if (n < 1 || n > 65535) {
+                    if (n < 0 || n > 65535) {
                         u->err = "invalid port";
                         return NGX_ERROR;
                     }
@@ -1024,7 +1024,7 @@ ngx_parse_inet6_url(ngx_pool_t *pool, ngx_url_t *u)
 
         n = ngx_atoi(port, len);
 
-        if (n < 1 || n > 65535) {
+        if (n < 0 || n > 65535) {
             u->err = "invalid port";
             return NGX_ERROR;
         }

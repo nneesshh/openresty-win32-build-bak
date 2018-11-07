@@ -68,6 +68,7 @@
 #include <vld.h>
 #include <assert.h>
 #include <crtdbg.h>
+#include <lfs.h>
 #endif
 
 #ifdef __WATCOMC__

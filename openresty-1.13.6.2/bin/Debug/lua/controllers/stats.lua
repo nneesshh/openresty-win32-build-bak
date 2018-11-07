@@ -99,4 +99,25 @@ return function(app)
     
   }))
 
+  app:match("statsonlinesnapshot", "/StatsUserOnlineSnapshot", respond_to({
+    --
+    before = function(self)
+      auth(self, "any", self.route_name)
+    end,
+    
+    --
+    GET = function(self)
+      local model = require("models.OssStatsOnlineSnapshot")
+      local d = require("date")(false)
+      local page = model.getPage(d:fmt("%F"))
+      
+      if page then
+        self.StatsPage = page
+      end
+      
+      return { render = "stats.UserOnlineSnapshot" }
+    end,
+    
+  }))
+
 end

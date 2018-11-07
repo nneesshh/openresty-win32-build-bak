@@ -29,6 +29,10 @@ ngx_uint_t             ngx_test_config;
 ngx_uint_t             ngx_dump_config;
 ngx_uint_t             ngx_quiet_mode;
 
+#if (NGX_WIN32)
+static FILE *          s_pid_fh_for_lock;
+#endif
+
 
 /* STUB NAME */
 static ngx_connection_t  dumb;
@@ -942,6 +946,11 @@ ngx_create_pidfile(ngx_str_t *name, ngx_log_t *log)
     ngx_file_t  file;
     u_char      pid[NGX_INT64_LEN + 2];
 
+#if (NGX_WIN32)
+	int         fno;
+#endif
+
+
     if (ngx_process > NGX_PROCESS_MASTER) {
         return NGX_OK;
     }
@@ -953,12 +962,35 @@ ngx_create_pidfile(ngx_str_t *name, ngx_log_t *log)
 
     create = ngx_test_config ? NGX_FILE_CREATE_OR_OPEN : NGX_FILE_TRUNCATE;
 
+#if (NGX_WIN32)
+	if (!ngx_test_config) {
+		/* lock (FLIE *) ptr */
+		s_pid_fh_for_lock = fopen(file.name.data, "at+");
+		if (NULL == s_pid_fh_for_lock
+			|| 0 != file_lock(s_pid_fh_for_lock, "w", 0, 1)) {
+			ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
+				"file_lock() for \"%s\" failed", file.name.data);
+			return NGX_ERROR;
+		}
+
+		len = ngx_snprintf(pid, NGX_INT64_LEN + 2, "%P%N", ngx_pid) - pid;
+
+		/* empty the file, then write pid */
+		fno = _fileno(s_pid_fh_for_lock);
+		file.fd = (HANDLE)_get_osfhandle(fno);
+		_chsize(fno, 0);
+
+		if (ngx_write_file(&file, pid, len, 0) == NGX_ERROR) {
+			return NGX_ERROR;
+		}
+    }
+#else
     file.fd = ngx_open_file(file.name.data, NGX_FILE_RDWR,
-                            create, NGX_FILE_DEFAULT_ACCESS);
+        create, NGX_FILE_DEFAULT_ACCESS);
 
     if (file.fd == NGX_INVALID_FILE) {
         ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
-                      ngx_open_file_n " \"%s\" failed", file.name.data);
+            ngx_open_file_n " \"%s\" failed", file.name.data);
         return NGX_ERROR;
     }
 
@@ -974,6 +1006,7 @@ ngx_create_pidfile(ngx_str_t *name, ngx_log_t *log)
         ngx_log_error(NGX_LOG_ALERT, log, ngx_errno,
                       ngx_close_file_n " \"%s\" failed", file.name.data);
     }
+#endif
 
     return NGX_OK;
 }
@@ -984,6 +1017,13 @@ ngx_delete_pidfile(ngx_cycle_t *cycle)
 {
     u_char           *name;
     ngx_core_conf_t  *ccf;
+
+#if (NGX_WIN32)
+    if (s_pid_fh_for_lock) {
+        file_unlock(s_pid_fh_for_lock, 0, 1);
+        fclose(s_pid_fh_for_lock);
+    }
+#endif
 
     ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
 

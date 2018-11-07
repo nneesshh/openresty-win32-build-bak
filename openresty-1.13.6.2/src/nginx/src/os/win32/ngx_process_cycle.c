@@ -1040,6 +1040,7 @@ ngx_single_process_cycle(ngx_cycle_t *cycle)
 
         fprintf(stderr, "\nServer say bye ...");
         assert(_CrtCheckMemory());
+		ngx_delete_pidfile(cycle);
 
         ngx_quit = 1;
         WaitForSingleObject(tid, INFINITE);

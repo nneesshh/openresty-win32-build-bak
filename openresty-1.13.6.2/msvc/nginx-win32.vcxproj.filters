@@ -1137,6 +1137,9 @@
     <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex.c">
       <Filter>src\event</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\nginx\src\os\win32\lfs.c">
+      <Filter>src\os\win32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\nginx\src\event\modules\ngx_iocp_module.h">
@@ -1979,6 +1982,10 @@
     <ClInclude Include="..\bundle\stream-echo-nginx-module-master\src\ddebug.h">
       <Filter>bundle\stream\echo</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\nginx\src\os\win32\lfs.h">
+      <Filter>src\os\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\nginx\src\dtrace\nginx.stp">
@@ -2031,13 +2038,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\src\nginx\src\os\win32\nginx.ico">
-      <Filter>src\os\win32</Filter>
-    </Image>
+    <ResourceCompile Include="nginx_win32.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\src\nginx\src\os\win32\nginx.rc">
-      <Filter>src\os\win32</Filter>
-    </ResourceCompile>
+    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
   </ItemGroup>
 </Project>

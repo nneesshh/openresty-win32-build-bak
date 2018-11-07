@@ -1,0 +1,6 @@
+#查看当前是否已开启事件调度器
+show variables like 'event_scheduler';
+
+#要想保证能够执行event事件，就必须保证定时器是开启状态，默认为关闭状态
+set global event_scheduler =1;
+#或者set GLOBAL event_scheduler = ON;

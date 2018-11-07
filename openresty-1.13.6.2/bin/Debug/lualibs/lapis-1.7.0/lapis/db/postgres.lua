@@ -416,11 +416,14 @@ encode_case = function(exp, t, on_else)
   append_all(buff, "\nEND")
   return concat(buff)
 end
-local _init
-_init = function()
+
+-- init
+local _init = function()
   init_logger()
   return init_db()
 end
+_init()
+
 return {
   disconnect = disconnect,
   query = query,
@@ -452,5 +455,4 @@ return {
   delete = _delete,
   truncate = _truncate,
   is_encodable = _is_encodable,
-  init = _init
 }

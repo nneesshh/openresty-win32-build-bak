@@ -11,7 +11,7 @@ do
   FALSE, NULL, TRUE, build_helpers, format_date, is_raw, raw, is_list, list, is_encodable = _obj_0.FALSE, _obj_0.NULL, _obj_0.TRUE, _obj_0.build_helpers, _obj_0.format_date, _obj_0.is_raw, _obj_0.raw, _obj_0.is_list, _obj_0.list, _obj_0.is_encodable
 end
 local conn, logger
-local BACKENDS, set_backend, set_raw_query, get_raw_query, escape_literal, escape_identifier, init_logger, init_db, raw_query, interpolate_query, encode_values, encode_assigns, encode_clause, append_all, add_cond, query, _select, _insert, _update, _delete, _truncate, _init
+local BACKENDS, set_backend, set_raw_query, get_raw_query, escape_literal, escape_identifier, init_logger, init_db, raw_query, interpolate_query, encode_values, encode_assigns, encode_clause, append_all, add_cond, query, _select, _insert, _update, _delete, _truncate
 BACKENDS = {
   raw = function(fn)
     return fn
@@ -92,12 +92,13 @@ BACKENDS = {
         logger.query(q)
       end
       ngx.ctx.resty_mysql_db = ngx.ctx.resty_mysql_db or {}
+      options.pool = options.pool or options.user .. ":" .. options.database .. ":" .. options.host .. ":" .. options.port
       local db = ngx and ngx.ctx.resty_mysql_db[options.pool]
       if not (db) then
-        local err
+        local ok, err, errcode, sqlstate
         db, err = assert(mysql:new())
         db:set_timeout(timeout)
-        local ok, err, errcode, sqlstate = db:connect(options)
+        ok, err, errcode, sqlstate = db:connect(options)
         assert(ok, err)
         if ngx then
           ngx.ctx.resty_mysql_db[options.pool] = db
@@ -262,10 +263,14 @@ end
 _truncate = function(options, table)
   return raw_query("TRUNCATE " .. escape_identifier(table), options)
 end
-_init = function()
+
+-- init 
+local _init = function()
   init_logger()
   return init_db()
 end
+_init()
+
 return {
   raw = raw,
   is_raw = is_raw,
@@ -292,5 +297,4 @@ return {
   update = _update,
   delete = _delete,
   truncate = _truncate,
-  init = _init
 }

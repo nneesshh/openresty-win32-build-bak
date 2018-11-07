@@ -6,6 +6,7 @@ package.cpath = package.cpath .. ";./?.dll;./clibs/?.dll"
 package.path = package.path .. ";./lualibs/lapis-1.7.0/?.lua;./lualibs/lapis-1.7.0/?/init.lua"
 package.path = package.path .. ";./lualibs/loadkit-1.1.0/?.lua"
 package.path = package.path .. ";./lualibs/etlua-1.3.0/?.lua"
+package.path = package.path .. ";./lualibs/lapis-redis/?.lua"
 
 
 -- resty: mysql, jit-uuid, redis, string

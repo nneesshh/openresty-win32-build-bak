@@ -33,10 +33,23 @@
     }
 %>
 
+<style type="text/css">
+    .line-legend li span{
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .line-legend {
+        list-style: none;
+    }
+</style>
+
 <!-- render body -->
 <div class="row">
     <!-- menu name -->
     <div class="col-xs-10">
+        <p class="pull-right">日期：<input type='text' class='selectData' id="date"></p>
         <h1> 小时在线 </h1>
     </div>
     <!-- data table -->
@@ -73,5 +86,258 @@
             </table>
         </div>
     </div>
+    <div class="col-xs-10">
+        <!-- /.box -->
+        <!-- BAR CHART -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">小时在线统计图</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="lineChart" style="height:250px;width:334px;" width="668" height="500"></canvas>
+                    <div id="legend" class="chart-legend"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col (RIGHT) -->
 </div>
+
 <!-- /.row -->
+<script src="static/lib/bower_components/jquery/dist/jquery.js"></script>
+<script src="static/lib/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<script>
+$.fn.datepicker.dates['cn'] = {   //切换为中文显示
+    days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+            daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
+            daysMin: ["日", "一", "二", "三", "四", "五", "六", "七"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+            today: "今天",
+            clear: "清除"
+    };
+        
+ $('.selectData').datepicker({
+    autoclose: true, //自动关闭
+    beforeShowDay: $.noop,    //在显示日期之前调用的函数
+    calendarWeeks: false,     //是否显示今年是第几周
+    clearBtn: false,          //显示清除按钮
+    daysOfWeekDisabled: [],   //星期几不可选
+    endDate: Infinity,        //日历结束日期
+    forceParse: true,         //是否强制转换不符合格式的字符串
+    format: 'yyyy-mm-dd',     //日期格式
+    keyboardNavigation: false, //是否显示箭头导航
+    language: 'cn',           //语言
+    minViewMode: 0,
+    orientation: "auto",      //方向
+    rtl: false,
+    startDate: -Infinity,     //日历开始日期
+    startView: 0,             //开始显示
+    todayBtn: false,          //今天按钮
+    todayHighlight: true,    //今天高亮
+    weekStart: 0              //星期几是开始
+});
+
+function today(){
+    var today=new Date();
+    var h=today.getFullYear();
+    var m=today.getMonth()+1;
+    var d=today.getDate();
+    return h+"-"+m+"-"+d;
+}
+document.getElementById("date").value = today();
+
+$(function () {
+    // Get context with jQuery - using jQuery's .get() method.
+    var lineChartCanvas = document.getElementById("lineChart").getContext('2d')
+    // var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+    // This will get the first returned node in the jQuery collection.
+    var lineChart = new Chart(lineChartCanvas)
+    var dataList = []
+    for (var index = 0; index < <%=#fieldList%>; index++)
+    {
+        dataList[index] = []
+    }
+
+    <% if StatsPage then
+        for i, v in ipairs(StatsPage) do
+    %>
+        dataList[0][<%=i%> - 1] = "<%=v[fieldList[1]]%>"
+        dataList[1][<%=i%> - 1] = "<%=v[fieldList[2]]%>"
+        dataList[2][<%=i%> - 1] = "<%=v[fieldList[3]]%>"
+        dataList[3][<%=i%> - 1] = "<%=v[fieldList[4]]%>"
+        dataList[4][<%=i%> - 1] = "<%=v[fieldList[5]]%>"
+        dataList[5][<%=i%> - 1] = "<%=v[fieldList[6]]%>"
+        dataList[6][<%=i%> - 1] = "<%=v[fieldList[7]]%>"
+        dataList[7][<%=i%> - 1] = "<%=v[fieldList[8]]%>"
+        dataList[8][<%=i%> - 1] = "<%=v[fieldList[9]]%>"
+        dataList[9][<%=i%> - 1] = "<%=v[fieldList[10]]%>"
+        dataList[10][<%=i%> - 1] = "<%=v[fieldList[11]]%>"
+    <%  end 
+       end 
+    %>
+
+    var lineChartData = {
+        labels  : dataList[0],
+        datasets: [
+            {
+                label               : "<%=labelList[2]%>",
+                fillColor           : 'rgba(0,255,255,0.9)',
+                strokeColor         : 'rgba(0,255,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,255,1)',
+                data                : dataList[1]
+            },
+            {
+                label               : "<%=labelList[3]%>",
+                fillColor           : 'rgba(0,128,255,0.9)',
+                strokeColor         : 'rgba(0,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,255,1)',
+                data                : dataList[2]
+            },
+            {
+                label               : "<%=labelList[4]%>",
+                fillColor           : 'rgba(0,255,128,0.9)',
+                strokeColor         : 'rgba(0,255,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,128,1)',
+                data                : dataList[3]
+            },
+            {
+                label               : "<%=labelList[5]%>",
+                fillColor           : 'rgba(0,128,128,0.9)',
+                strokeColor         : 'rgba(0,128,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,128,1)',
+                data                : dataList[4]
+            },
+            {
+                label               : "<%=labelList[6]%>",
+                fillColor           : 'rgba(0,0,128,0.9)',
+                strokeColor         : 'rgba(0,0,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,0,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,0,128,1)',
+                data                : dataList[5]
+            },
+            {
+                label               : "<%=labelList[7]%>",
+                fillColor           : 'rgba(128,0,255,0.9)',
+                strokeColor         : 'rgba(128,0,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(128,0,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(128,0,255,1)',
+                data                : dataList[6]
+            },
+            {
+                label               : "<%=labelList[8]%>",
+                fillColor           : 'rgba(255,255,0,0.9)',
+                strokeColor         : 'rgba(255,255,0,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,255,0,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,255,0,1)',
+                data                : dataList[7]
+            },
+            {
+                label               : "<%=labelList[9]%>",
+                fillColor           : 'rgba(255,128,0,0.9)',
+                strokeColor         : 'rgba(255,128,0,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,0,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,0,1)',
+                data                : dataList[8]
+            },
+            {
+                label               : "<%=labelList[10]%>",
+                fillColor           : 'rgba(255,128,255,0.9)',
+                strokeColor         : 'rgba(255,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,255,1)',
+                data                : dataList[9]
+            },
+            {
+                label               : "<%=labelList[11]%>",
+                fillColor           : 'rgba(128,128,128,0.9)',
+                strokeColor         : 'rgba(128,128,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(128,128,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(128,128,128,1)',
+                data                : dataList[10]
+            },
+        ]
+    }
+
+    var lineChartOptions = {
+
+        //Boolean - If we should show the scale at all
+        showScale               : true,
+        //Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines      : false,
+        //String - Colour of the grid lines
+        scaleGridLineColor      : 'rgba(0,0,0,.05)',
+        //Number - Width of the grid lines
+        scaleGridLineWidth      : 1,
+        //Boolean - Whether to show horizontal lines (except X axis)
+        scaleShowHorizontalLines: true,
+        //Boolean - Whether to show vertical lines (except Y axis)
+        scaleShowVerticalLines  : true,
+        //Boolean - Whether the line is curved between points
+        bezierCurve             : true,
+        //Number - Tension of the bezier curve between points
+        bezierCurveTension      : 0.3,
+        //Boolean - Whether to show a dot for each point
+        pointDot                : false,
+        //Number - Radius of each point dot in pixels
+        pointDotRadius          : 4,
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth     : 1,
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius : 20,
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke           : true,
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth      : 2,
+        //Boolean - Whether to fill the dataset with a color
+        datasetFill             : false,
+        //String - A legend template
+
+        //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+        maintainAspectRatio     : true,
+        //Boolean - whether to make the chart responsive to window resizing
+        responsive              : true
+    }
+
+    //Create the line chart
+    var chartLine = lineChart.Line(lineChartData, lineChartOptions)
+
+    var legendNote = chartLine.generateLegend();
+    document.getElementById("legend").innerHTML = legendNote;
+})
+</script>

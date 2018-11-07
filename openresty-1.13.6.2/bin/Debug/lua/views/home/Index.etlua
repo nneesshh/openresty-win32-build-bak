@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="panel-footer">
-            <a href="<%= url_for('login') %>" class="btn btn-primary btn-lg" style="margin-left:47%">    进入系统
+            <a href="<%= url_for('login') %>" class="btn btn-primary btn-lg center-block" style="width:200px;">    进入系统
             </a>
         </div>
     </div>

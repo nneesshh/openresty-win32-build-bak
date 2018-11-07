@@ -1,5 +1,3 @@
-local lapis = require("lapis")
-local db = require("lapis.db")
 local Model = require("lapis.db.model").Model
 local schema = require("lapis.db.schema")
 local types = schema.types
@@ -11,13 +9,13 @@ local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local default_options = require(cwd .. "default_options")
 
 local _M = {
-  _entity = Model:extend(require(cwd .. "GameDbUrls").getOptions(), "_oss_news", {
+  _db_entity = Model:extend(require(cwd .. "GameDbUrls").getOptions(), "_oss_news", {
     primary_key = "Id"
   }),
 }
 
 function _M.create() 
-  local res, err = _M._entity:create({
+  local res, err = _M._db_entity:create({
     Id  = jituuid.generate_v4(),
   })
   assert(res, err)
@@ -35,11 +33,11 @@ function _M.delete(obj)
 end
 
 function _M.get(id) 
-  return _M._entity:find(id)
+  return _M._db_entity:find(id)
 end
 
 function _M.getAll() 
-  return _M._entity:select("WHERE 1=1 ORDER BY CreateTime DESC", ntype, { fields = "*" })
+  return _M._db_entity:select("WHERE 1=1 ORDER BY CreateTime DESC", { fields = "*" })
 end
 
 return _M

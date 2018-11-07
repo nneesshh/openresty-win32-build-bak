@@ -1,0 +1,67 @@
+﻿<%
+    local createBy
+    if session.user then
+        createBy = session.user.Name
+    end
+    
+    local labelList = {
+        '日期',
+        '账号总数',
+        '新增账号',
+        '新增角色',
+        '最高在线',
+        '独立IP',
+    }
+
+    local fieldList = {
+        'day',
+        'accumulate_user',
+        'new_user',
+        'new_role',
+        'online_users',
+        'online_ips',
+    }
+%>
+
+<!-- render body -->
+<div class="row">
+    <!-- menu name -->
+    <div class="col-xs-10">
+        <h1> 当前在线 </h1>
+    </div>
+    <!-- data table -->
+    <div class="col-xs-10">
+        <div class="box box-primary">
+            <table class="table table-bordered table-hover dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <% for i, v in ipairs(labelList) do %>
+                        <th>
+                            <%= v %>
+                        </th>
+                        <% end %>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if StatsPage then
+                            for i, v in ipairs(StatsPage) do
+                    %>
+                    <tr>
+                            <% for i2, v2 in ipairs(fieldList) do %>
+                        <td>
+                            <%= v[v2] %>
+                        </td>
+                            <% end %>
+                    </tr>
+                    <%
+                            end
+                        end
+                    %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.row -->

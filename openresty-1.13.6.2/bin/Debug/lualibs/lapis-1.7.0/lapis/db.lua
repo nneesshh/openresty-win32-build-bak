@@ -1,12 +1,8 @@
 local config = require("lapis.config").get()
 if config.postgres then
-  local db = require("lapis.db.postgres")
-  db.init()
-  return db
+  return require("lapis.db.postgres")
 elseif config.mysql then
-  local db = require("lapis.db.mysql")
-  db.init()
-  return db
+  return require("lapis.db.mysql")
 else
-  return error("You have to configure either postgres or mysql")
+  error("You have to configure either postgres or mysql in \"lapis.config\"")
 end
