@@ -4,7 +4,7 @@
 - NOTICE:
     - Write to console(such as via "printf") after "FreeConsole()" will make iocp crash, maybe some overflow happens.
     - MUST NOT import "jquery.form.min.js" before "jquery.min.js", because it will raise "Uncaught TypeError: $(...).ajaxSubmit is not a function" error.
-    - JQuery form doesn't submit button value, we must do it by "".
+    - JQuery form doesn't submit button value, we must do it "MANUALLY".
 
 - Missing modules:
     - ngx_service
