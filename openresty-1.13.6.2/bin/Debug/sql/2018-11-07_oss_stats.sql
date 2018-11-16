@@ -893,8 +893,8 @@ BEGIN
 					ON user_state.`userid` = user_attribute.`userid`
 			) AS t
 			WHERE NOT ISNULL(t.logintime) 
-				AND (t.logintime BETWEEN DATE_SUB(p_query_time,INTERVAL 10 MINUTE) AND t.logintime < DATE_ADD(p_query_time,INTERVAL 10 MINUTE) 
-							OR (t.heartbeattime BETWEEN DATE_SUB(p_query_time,INTERVAL 10 MINUTE) AND t.heartbeattime < DATE_ADD(p_query_time,INTERVAL 10 MINUTE)));
+				AND (t.logintime BETWEEN DATE_SUB(p_query_time,INTERVAL 10 MINUTE) AND DATE_ADD(p_query_time,INTERVAL 10 MINUTE) 
+							OR (t.heartbeattime BETWEEN DATE_SUB(p_query_time,INTERVAL 10 MINUTE) AND DATE_ADD(p_query_time,INTERVAL 10 MINUTE)));
 
 	-- return snapshot
 	SELECT * FROM _oss_stats_online_snapshot;
