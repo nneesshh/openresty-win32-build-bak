@@ -203,13 +203,6 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
     n = c->recv(c, b->last, size);
     c->log_error = NGX_ERROR_INFO;
 
-#if (NGX_DEBUG)
-	// debug
-	printf("\ngx_http_keepalive_handlerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
-		c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
-		(uintptr_t)c->sockaddr, c->sockaddr->sa_family);
-#endif
-
     if (n == NGX_AGAIN) {
 
         if (!rev->timer_set) {
@@ -245,6 +238,13 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
         ngx_http_close_connection(c);
         return;
     }
+
+#if (NGX_DEBUG)
+	// debug
+	output_debug_string("\nngx_http_keepalive_handlerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+		c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+		(uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
 
     c->sent = 0;
     c->destroyed = 0;

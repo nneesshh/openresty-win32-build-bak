@@ -1072,7 +1072,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
     rev = c->read;
     wev = c->write;
     
-    // debug
+    // the "id" is for debug
     int id = c->id;
 
     ngx_memzero(c, sizeof(ngx_connection_t));
@@ -1204,7 +1204,7 @@ ngx_close_connection(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    printf("\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string("\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         fd,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif

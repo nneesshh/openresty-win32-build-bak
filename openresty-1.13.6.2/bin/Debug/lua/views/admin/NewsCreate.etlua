@@ -1,61 +1,81 @@
 ﻿<%
-    local id, createBy, createTime, content
-    if CurrentNews then
-        id = CurrentNews.Id
-        createTime = CurrentNews.CreateTime
-        content = CurrentNews.Content
-    end
-
     local date = require("date")
-    d = date(false);
+    local now = date(false);
 %>
 
-<style type="text/css">
-    label {font-size:20px;}
-    textarea {font-size:16px;}
-    p {font-size:16px;}
-</style>
+<script src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/lib/form-4.2.2/dist/jquery.form.min.js"></script>
+<script src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
 
-<h2 class="text-center">发布更新公告</h2>
+<script type="text/javascript">
+    function _do_ajax_submit_NewsCreateForm() {
+        var option = {
+            url : '/AdminNews/Create',
+            type : 'POST',
+            dataType: 'html',
+            //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(xmlhr, textStatus, errorThrown) {
+                alert("failed!!! xmlhr.status=" + xmlhr.status + 
+                        ", xmlhr.readyState=" + xmlhr.readyState + 
+                        ", textStatus=" + textStatus + 
+                        ", errorThrown=" + errorThrown);
+            },
+        };
+        $("#newsCreateForm").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    };
+</script>
+
+<h2 class="text-center">更新公告发布页面</h2>
 
 <div class="row" >
     <div class="center-block" style="width:600px;margin:0 auto">
-        <form action="/AdminNews/Create" method="POST">
+        <form id="newsCreateForm">
             <% if errors then %>
-            <span class="text-danger"><%= errors[1] %></span>
-            <div class="text-danger"><%= errors[1] %></div>
+            <div class="form-group">
+                <div class="text-danger"><%= errors[1] %></div>
+            </div>
             <% end %>
 
-            <div>
+            <% if success_infos then %>
+            <div class="form-group">
+                <div class="text-success"><%= success_infos[1] %></div>
+            </div>
+            <% end %>
+
+            <div class="form-group">
                 <label id="lCreateTime" for="CreateTime">日期:</label>
-                <br/>
                 <span style="font-size:20px;"><%= d:fmt('%F %T') %></span>
             </div>
 
-            <div>
+            <div class="form-group">
                 <label id="lContent" for="Content">内容:</label>
-                <br/>
-                <textarea id="oriContent" name="Content" style="height:400px;width:600px;" onkeyup="convert()"><%= content %></textarea>
+                <textarea id="oriContent" name="Content" style="height:400px;width:600px;" onkeyup="convert()"></textarea>
             </div>
 
-            <p></p>
-            <label>效果预览:</label>
-            <div id="result" style="border:1px dotted black;"></div>
-            <br/>
-            <p></p>
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
 
-            <!-- <div class="form-group"> -->
-                <input type="submit" value="提交" class="btn btn-primary margin-bottom center-block" style="width:200px;"/>
-            <!-- </div> -->
+            <div class="form-group">
+                <p></p>
+                <label>效果预览:</label>
+                <div id="result" style="border:1px dotted black;"></div>
+                <p></p>
+            </div>
+
+            <div class="form-group">
+                <a class="btn btn-primary margin-bottom center-block" style="width:200px;" href="javascript:void(0)" onclick="_do_ajax_submit_NewsCreateForm()">提交</a>
+            </div>
         </form>
     </div>
 </div>
 
 <p></p>
-<br/>
 
 <div>
-    <a class="btn-lg" href="/AdminNews" >返回</a>
+    <a class="btn-lg" href="javascript:void(0)" onclick="_do_ajax_call_News()">返回</a>
 </div>
 
 <script type="text/javascript">

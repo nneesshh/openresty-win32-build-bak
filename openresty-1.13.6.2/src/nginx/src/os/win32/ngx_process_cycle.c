@@ -1031,8 +1031,8 @@ ngx_single_process_cycle(ngx_cycle_t *cycle)
         exit(2);
     }
 
-    /* STUB */
-    WaitForSingleObject(ngx_stop_event, INFINITE);
+	/* STUB */
+	WaitForSingleObject(ngx_stop_event, INFINITE);
 
     /* make vld happy */
     {

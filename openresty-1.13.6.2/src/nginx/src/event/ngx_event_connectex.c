@@ -138,7 +138,7 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
 
 #if (NGX_DEBUG)
     // debug
-    printf("\nngx_event_connect_peerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string("\nngx_event_connect_peerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
 

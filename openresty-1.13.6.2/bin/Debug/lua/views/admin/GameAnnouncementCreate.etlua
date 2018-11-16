@@ -1,0 +1,110 @@
+﻿<%
+    local date = require("date")
+    local now = date(false);
+%>
+
+<script type="text/javascript">
+    function _do_ajax_submit_GameAnnouncementCreateForm() {
+        var option = {
+            url : '/AdminGameAnnouncement/Create',
+            type : 'POST',
+            dataType: 'html',
+            //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(xmlhr, textStatus, errorThrown) {
+                alert("failed!!! xmlhr.status=" + xmlhr.status + 
+                        ", xmlhr.readyState=" + xmlhr.readyState + 
+                        ", textStatus=" + textStatus + 
+                        ", errorThrown=" + errorThrown);
+            },
+        };
+        $("#gameAnnouncementCreateForm").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    };
+</script>
+
+<h2 class="text-center">GM公告发布页面</h2>
+
+<div class="row" >
+    <div class="center-block" style="width:600px;margin:0 auto">
+        <form id="gameAnnouncementCreateForm">
+            <% if errors then %>
+            <div class="form-group">
+                <div class="text-danger"><%= errors[1] %></div>
+            </div>
+            <% end %>
+
+            <% if success_infos then %>
+            <div class="form-group">
+                <div class="text-success"><%= success_infos[1] %></div>
+            </div>
+            <% end %>
+
+            <div class="form-group">
+                <label id="lDeadlineTime" for="DeadlineTime">截止时间:</label>
+                <input type="text" id="deadline_time" name="DeadlineTime" placeholder="请选择截止时间">
+            </div>
+
+            <div class="form-group">
+                <label id="lContent" for="Content">内容:</label>
+                <textarea id="oriContent" name="Content" style="height:400px;width:600px;"></textarea>
+            </div>
+
+            <p></p>
+
+            <div class="form-group">
+                <a class="btn btn-primary margin-bottom center-block" style="width:200px;" href="javascript:void(0)" onclick="_do_ajax_submit_GameAnnouncementCreateForm()">提交</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p></p>
+
+<div>
+    <a class="btn-lg" href="javascript:void(0)" onclick="_do_ajax_call_GameAnnouncement()">返回</a>
+</div>
+
+<link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
+<script type="text/javascript" src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+    
+        function now_plus_ten_min_text(){
+            var _now=new Date();
+            _now.setMinutes(_now.getMinutes()+10); //当前时间加10分钟
+            var yyyy=_now.getFullYear();
+            var mm=_now.getMonth()+1;           //显示月份比实际月份小1,所以要加1  
+            var dd=_now.getDate();
+            var hh=_now.getHours();
+            var ii=_now.getMinutes();
+             mm=mm<10?"0"+mm:mm;
+             dd=dd<10?"0"+dd:dd;
+             hh=hh<10?"0"+hh:hh;
+             ii=ii<10?"0"+ii:ii;
+            return yyyy+"-"+mm+"-"+dd+" "+hh+":"+ii+":00";
+        };
+        var initNowText = now_plus_ten_min_text();
+
+        document.getElementById("deadline_time").flatpickr({
+            minDate: "today",
+	        enableTime: true,
+            enableSeconds: true,
+            defaultDate: initNowText,
+            minuteIncrement: 1,
+            locale: "zh",
+	        enable: [
+		        {
+			        from: "today",
+			        to: new Date().fp_incr(30) // 30 days from now
+		        }
+	        ],
+        });
+    });
+
+</script>

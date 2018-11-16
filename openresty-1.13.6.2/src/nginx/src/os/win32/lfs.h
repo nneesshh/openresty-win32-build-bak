@@ -11,6 +11,9 @@
 
 #ifdef _WIN32
 #include <direct.h>
+#ifndef WIN32_LEAN_AND_MEAN
+#  define WIN32_LEAN_AND_MEAN 1
+#endif
 #include <windows.h>
 #include <io.h>
 #include <sys/locking.h>
@@ -82,6 +85,9 @@ int get_dir(char **ppath);
 
 lfs_dir_lock * lfs_lock_dir(const char *path);
 void lfs_unlock_dir(lfs_dir_lock *lock);
+
+int lock_file_win(const char *sFileName, void **ppOutHandle);
+int unlock_file_win(void *pHandle);
 
 int file_lock(FILE *fh, const char *mode, const long start, long len);
 int file_unlock(FILE *fh, const long start, long len);

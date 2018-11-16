@@ -190,7 +190,14 @@ _file_lock(FILE *fh, const char *mode, const long start, long len) {
 	int code;
 
 #ifdef _WIN32
-	/* lkmode valid values are:
+	/*
+	#define _LK_UNLCK  0  // unlock the file region
+	#define _LK_LOCK   1  // lock the file region
+	#define _LK_NBLCK  2  // non-blocking lock
+	#define _LK_RLCK   3  // lock for writing
+	#define _LK_NBRLCK 4  // non-blocking lock for writing
+
+	lkmode valid values are:
 	LK_LOCK    Locks the specified bytes. If the bytes cannot be locked, the program immediately tries again after 1 second. If, after 10 attempts, the bytes cannot be locked, the constant returns an error.
 	LK_NBLCK   Locks the specified bytes. If the bytes cannot be locked, the constant returns an error.
 	LK_NBRLCK  Same as _LK_NBLCK.
@@ -204,7 +211,7 @@ _file_lock(FILE *fh, const char *mode, const long start, long len) {
 	int lkmode;
 	switch (*mode) {
 	case 'r': lkmode = LK_NBLCK; break;
-	case 'w': lkmode = LK_NBLCK; break;
+	case 'w': lkmode = LK_RLCK; break;
 	case 'u': lkmode = LK_UNLCK; break;
 	default:
 		/* invalid mode */
@@ -349,6 +356,53 @@ lfs_unlock_dir(lfs_dir_lock *lock) {
 // static int lfs_f_setmode(lua_State *L) {
 // 	return lfs_g_setmode(L, check_file(L, 1, "setmode"), 2);
 // }
+
+int
+lock_file_win(const char *sFileName, void **ppOutHandle) {
+	HANDLE hFile;
+	BOOL bSuccess;
+
+	hFile = CreateFile(
+		sFileName,
+		GENERIC_READ | GENERIC_WRITE,
+		FILE_SHARE_READ,
+		NULL,
+		OPEN_ALWAYS,
+		0,
+		NULL);
+	if (hFile != INVALID_HANDLE_VALUE) {
+
+		bSuccess = LockFile(
+			hFile,
+			0,
+			0,
+			0,
+			0);
+		if (bSuccess) {
+			(*ppOutHandle) = hFile;
+			return 0;
+		}
+	}
+	return -1;
+}
+
+int 
+unlock_file_win(void *pHandle) {
+	BOOL bSuccess;
+
+	if (pHandle != INVALID_HANDLE_VALUE) {
+		bSuccess = UnlockFile(
+			(HANDLE)pHandle,
+			0,
+			0,
+			0,
+			0);
+		if (bSuccess) {
+			return 0;
+		}
+	}
+	return -1;
+}
 
 /*
 ** Locks a file.

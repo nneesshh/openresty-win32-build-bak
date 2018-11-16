@@ -1,34 +1,100 @@
 ﻿<%
+    local date = require("date")
+    local now = date(false);
+
     local createBy
     if session.user then
         createBy = session.user.Name
     end
+
+    local queryTime
+    if params then
+        queryTime = params.QueryTime
+    end
     
     local labelList = {
-        '日期',
-        '账号总数',
-        '新增账号',
-        '新增角色',
-        '最高在线',
-        '独立IP',
+        'ID',
+        '用户名',
+        '昵称',
+        '等级',
+        '经验值',
+        '登出时间',
+        '登入时间',
     }
 
     local fieldList = {
-        'day',
-        'accumulate_user',
-        'new_user',
-        'new_role',
-        'online_users',
-        'online_ips',
+        'ticketid',
+        'userid',
+        'nick',
+        'level',
+        'exp',
+        'logouttime',
+        'logintime',
     }
 %>
 
+<script type="text/javascript">
+    function _do_ajax_submit_UserOnlineSnapshotQueryForm() {
+        var option = {
+            url : '/StatsUserOnlineSnapshot',
+            type : 'POST',
+            dataType: 'html',
+            //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(xmlhr, textStatus, errorThrown) {
+                alert("failed!!! xmlhr.status=" + xmlhr.status + 
+                        ", xmlhr.readyState=" + xmlhr.readyState + 
+                        ", textStatus=" + textStatus + 
+                        ", errorThrown=" + errorThrown);
+            },
+        };
+        $("#userOnlineSnapshotQueryForm").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    };
+</script>
+
 <!-- render body -->
 <div class="row">
-    <!-- menu name -->
-    <div class="col-xs-10">
-        <h1> 当前在线 </h1>
+
+    <div class="center-block" style="width:600px;margin:0 auto">
+        <% if errors then %>
+        <div class="form-group">
+            <div class="text-danger"><%= errors[1] %></div>
+        </div>
+        <% end %>
+
+        <% if success_infos then %>
+        <div class="form-group">
+            <div class="text-success"><%= success_infos[1] %></div>
+        </div>
+        <% end %>
     </div>
+
+    <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+    <!-- query button -->
+    <div class="col-sm-12">
+        <form class="form-horizontal" role="form" id="userOnlineSnapshotQueryForm">
+            <div class="control-group">
+                <label class="col-sm-2 control-label" style="width:120px;">输入查询时间:</label>
+                <input class="col-sm-4" style="width:160px;" type="text" id="query_time" name="QueryTime" />
+                <div class="col-sm-2 ">
+                    <a class="btn btn-primary" style="width:100px;" href="javascript:void(0)" onclick="_do_ajax_submit_UserOnlineSnapshotQueryForm()">查询</a>
+                </div>
+            </div>
+        </form>
+    </div> 
+
+    <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+    <!-- menu name -->
+    <div class="col-sm-12">
+        <h1> 当前在线 </h1>
+        <h1> 总数: <%= StatsData and #StatsData or 0 %>  </h1>
+    </div>
+
     <!-- data table -->
     <div class="col-xs-10">
         <div class="box box-primary">
@@ -45,8 +111,8 @@
                 </thead>
                 <tbody>
                     <%
-                        if StatsPage then
-                            for i, v in ipairs(StatsPage) do
+                        if StatsData then
+                            for i, v in ipairs(StatsData) do
                     %>
                     <tr>
                             <% for i2, v2 in ipairs(fieldList) do %>
@@ -65,3 +131,31 @@
     </div>
 </div>
 <!-- /.row -->
+
+<link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
+<script type="text/javascript" src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+    
+        var initTimeText = "<%= queryTime or now:fmt('%F %T') %>"
+
+        var fp = document.getElementById("query_time").flatpickr({
+            minDate: new Date().fp_incr(-360),
+	        enableTime: true,
+            enableSeconds: true,
+            defaultDate: initTimeText,
+            minuteIncrement: 1,
+            locale: "zh",
+	        enable: [
+		        {
+			        from: new Date().fp_incr(-360),
+			        to: new Date().fp_incr(30),
+		        }
+	        ],
+        });
+    });
+
+</script>

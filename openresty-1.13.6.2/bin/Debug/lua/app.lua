@@ -1,6 +1,14 @@
 -- app.lua
+local date = require("date")
 local lapis = require("lapis")
 local app = lapis.Application()
+
+-- configure cookie settings:
+app.cookie_attributes = function(self)
+  -- 1 day to expire
+  local expires = date(true):adddays(1):fmt("${http}")
+  return "Expires=" .. expires .. "; Path=/; HttpOnly"
+end
 
 app:enable("etlua")
 app.layout = require "views.shared.Layout"

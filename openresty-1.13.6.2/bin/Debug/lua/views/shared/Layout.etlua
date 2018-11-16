@@ -36,10 +36,6 @@
     <link rel="stylesheet" href="/static/lib/bower_components/morris.js/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="/static/lib/bower_components/jvectormap/jquery-jvectormap.css">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="/static/lib/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="/static/lib/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="/static/lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
@@ -116,7 +112,7 @@
                                     </div-->
                                     <div class="pull-right">
                                         <% if stringutil.isValidString(nick) then %>
-                                            <a href=<%= url_for("signout") %> class="btn btn-default btn-flat"><span class=" text-danger">注销</span></a>
+                                            <a href=<%= url_for("login_signout") %> class="btn btn-default btn-flat"><span class=" text-danger">注销</span></a>
                                         <% end %>
                                     </div>
                                 </li>
@@ -209,7 +205,7 @@
                 </section>-->
             <!-- Main content -->
             <section class="content">
-                <!--当创建基于_Layout.cshtml布局页面的视图时，视图的内容会和布局页面合并，视图的内容会渲染呈现在content_for处-->
+                <!--当创建基于 Layout.etlua 布局页面的视图时，视图的内容会和布局页面合并，视图的内容会渲染呈现在content_for处-->
                 <% content_for("inner") %>
             </section>
             <!-- /.content -->
@@ -301,6 +297,7 @@
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/lib/form-4.2.2/dist/jquery.form.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="/static/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -327,5 +324,6 @@
     <script src="/static/js/bootstrap-paginator.js"></script>
     <script src="/static/lib/layer/layer.js"></script>
     <script src="/static/lib/jstree/dist/jstree.js"></script>
+
 </body>
 </html>

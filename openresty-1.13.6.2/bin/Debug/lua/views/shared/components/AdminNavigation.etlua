@@ -3,13 +3,42 @@
     local Menus = require("models.Menus")
     local menuType = 0 -- admin
     local all_menus = Menus.getAll(menuType)
-    local lastMenu = session.lastMenu
+
     for k, v in ipairs(all_menus) do
-        local isActive = lastMenu == v.Code;  --判断当前功能是否处于激活
-        local active = isActive and "active" or ""
 %>
 
-        <li class="<%= active %>"><a href="<%= v.Url %>"><i class="fa fa-link"></i> <span><%= v.Name %></span></a></li>
+        <script>
+            function _do_ajax_call_<%= v.Code %>() {
+                $(".sidebar-menu").children("li").each(function(index, element) {
+                    if ($(element).attr("class") == "active") {
+                        $(element).attr("class", "");
+                    }
+                });
+
+                $("#_ajax_menu_<%= v.Code %>").attr("class", "active");
+
+                $.ajax({
+                    url: "<%= v.Url %>",
+                    type: "GET",
+                    dataType: "html",
+                    //async: false,
+                    async: true,
+                    success: function(data) {
+                        $("#_ajax_call_result").html(data);
+                    },
+                    error: function(xmlhr, textStatus, errorThrown) {
+                        alert("[AdminNavigation::_do_ajax_call_<%= v.Code %>()] failed!!!" +
+                            "  xmlhr.status=" + xmlhr.status + 
+                            ", xmlhr.readyState=" + xmlhr.readyState + 
+                            ", textStatus=" + textStatus + 
+                            ", errorThrown=" + errorThrown);
+                    }
+        
+                });
+            }
+        </script>
+
+        <li class="" id="_ajax_menu_<%= v.Code %>"><a href="javascript:void(0)" onclick="_do_ajax_call_<%= v.Code %>()" ><i class="fa fa-link"></i> <span><%= v.Name %></span></a></li>
 
 <%
     end

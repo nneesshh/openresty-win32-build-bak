@@ -11,6 +11,45 @@
 #include <ngx_iocp_module.h>
 
 
+void
+output_debug_string(const char *format, ...)
+{
+	va_list args;
+
+#define OUTPUT_DEBUG_BUFSIZE 32768
+	static char buf[OUTPUT_DEBUG_BUFSIZE];
+	char *p;
+	char time_suffix[32];
+
+	time_t t = time(NULL);
+	struct tm tp;
+	localtime_s(&tp, &t);
+	_snprintf(
+		time_suffix
+		, sizeof(time_suffix)
+		, "_%d-%02d-%02d_%02d_%02d_%02d"
+		, tp.tm_year + 1900
+		, tp.tm_mon + 1
+		, tp.tm_mday
+		, tp.tm_hour
+		, tp.tm_min
+		, tp.tm_sec);
+
+	p = buf;
+	p += _snprintf(p, OUTPUT_DEBUG_BUFSIZE - 1, "\n\n\n____[tid(%d)][%s]____:", GetCurrentThreadId(), time_suffix);
+
+	va_start(args, format);
+	p += _vsnprintf(p, OUTPUT_DEBUG_BUFSIZE - strlen(buf) - 1, format, args);
+	va_end(args);
+
+	while (p > buf && isspace(p[-1]))
+	{
+		*--p = '\0';
+	}
+	ngx_write_console(stderr, buf, strlen(buf));
+}
+
+
 static ngx_int_t ngx_iocp_init(ngx_cycle_t *cycle, ngx_msec_t timer);
 static ngx_thread_value_t __stdcall ngx_iocp_timer(void *data);
 static void ngx_iocp_done(ngx_cycle_t *cycle);
@@ -251,7 +290,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
     ngx_uint_t flags)
 {
 #define OVLP_ENTRY_MAX 128
-    OVERLAPPED_ENTRY   overlappeds[OVLP_ENTRY_MAX];
+	OVERLAPPED_ENTRY   overlappeds[OVLP_ENTRY_MAX] = { 0 };
     LPOVERLAPPED_ENTRY ovlp_entry;
     u_long             count;
     u_long             i;
@@ -324,7 +363,8 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     ev = ovlp->event;
 
                     /* Skip events from a closed socket */
-                    if (ev->closed
+                    if (NULL == ev
+						|| ev->closed
                         || (NGX_IOCP_ACCEPT != key && 1 == ovlp->acceptex_flag))
                     {
                         /* Event is already closed, or acceptex event is not ready yet, or write event is in disable state,
@@ -337,7 +377,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                         // debug
                         if (0 == bytes) {
                             ngx_connection_t *c = ev->data;
-                            printf("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+							output_debug_string("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
                     }
@@ -346,18 +386,18 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     {
                         ngx_connection_t *c = ev->data;
                         if (0 == ev->write) {
-                            printf("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+							output_debug_string("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
                                 key,
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
                         else {
-                            printf("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+							output_debug_string("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
                                 key,
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
 
                         if (0 == ev->write && 0 != ev->ready) {
-                            printf("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
+							output_debug_string("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
                         }
                     }
@@ -398,12 +438,12 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                             ngx_connection_t *c = ev->data;
                             char data[8096] = { 0 };
                             memcpy(data, c->buffer->pos, bytes);
-                            printf("\n\t>>>> server read begin\n");
-                            printf("\t     c(%d) fd(%d) destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
+							output_debug_string("\n\t>>>> server read begin\n");
+							output_debug_string("\t     c(%d) fd(%d) destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
                                 c->id, c->fd, c->destroyed,
                                 key, bytes,
                                 data);
-                            printf("\t<<<< server read end\n\n");
+							output_debug_string("\t<<<< server read end\n\n");
                         }
                     }
 #endif

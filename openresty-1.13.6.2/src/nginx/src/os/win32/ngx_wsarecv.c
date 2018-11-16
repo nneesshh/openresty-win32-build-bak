@@ -122,7 +122,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
     // debug
-    printf("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
+    output_debug_string("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
         (uintptr_t)buf, (int)size, bytes,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, rev->write);
 #endif
@@ -140,6 +140,12 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
                            "WSARecv() posted");
             return NGX_AGAIN;
         }
+
+#if (NGX_DEBUG)
+		// debug
+		output_debug_string("\nngx_overlapped_wsarecv(): errno=(%llu)!!!!\n",
+			(uint64_t)err);
+#endif
 
         n = ngx_connection_error(c, err, "WSARecv() failed");
 

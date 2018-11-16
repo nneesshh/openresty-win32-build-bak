@@ -1,6 +1,10 @@
 # Build openresty-win32 with vs2017
 
 ## Features
+- NOTICE:
+    - Write to console(such as via "printf") after "FreeConsole()" will make iocp crash, maybe some overflow happens.
+    - MUST NOT import "jquery.form.min.js" before "jquery.min.js", because it will raise "Uncaught TypeError: $(...).ajaxSubmit is not a function" error.
+    - JQuery form doesn't submit button value, we must do it by "".
 
 - Missing modules:
     - ngx_service
@@ -9,6 +13,8 @@
     - ngx_http_geoip_module
     - ngx_http_degradation_module
     - ...
+
+
 
 ## Thirdparty Dependancy
 

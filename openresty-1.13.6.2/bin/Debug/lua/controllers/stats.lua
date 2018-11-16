@@ -1,6 +1,7 @@
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local ostime = os.time
+local date = require("date")
 
 local appconfig = require("appconfig")
 local config = appconfig.getConfig()
@@ -15,7 +16,7 @@ local validate = require("lapis.validate")
 local auth = require(cwd .. "authorize")
 
 return function(app)
-  app:match("statsonlinehour", "/StatsUserOnlineHour", respond_to({
+  app:match("stats_onlinehour", "/StatsUserOnlineHour", respond_to({
     --
     before = function(self)
       auth(self, "any", self.route_name)
@@ -24,19 +25,19 @@ return function(app)
     --
     GET = function(self)
       local model = require("models.OssStatsOnlineHour")
-      local d = require("date")(false)
+      local d = date(false)
       local page = model.getPage(d:fmt("%F"))
       
       if page then
         self.StatsPage = page
       end
       
-      return { render = "stats.UserOnlineHour" }
+      return { render = "stats.UserOnlineHour", layout = false }
     end,
     
   }))
 
-  app:match("statsonline", "/StatsUserOnline", respond_to({
+  app:match("stats_online", "/StatsUserOnline", respond_to({
     --
     before = function(self)
       auth(self, "any", self.route_name)
@@ -45,19 +46,19 @@ return function(app)
     --
     GET = function(self)
       local model = require("models.OssStatsOnline")
-      local d = require("date")(false)
+      local d = date(false)
       local page = model.getPage(d:fmt("%F"))
       
       if page then
         self.StatsPage = page
       end
       
-      return { render = "stats.UserOnline" }
+      return { render = "stats.UserOnline", layout = false }
     end,
     
   }))
 
-  app:match("statscharge", "/StatsUserCharge", respond_to({
+  app:match("stats_charge", "/StatsUserCharge", respond_to({
     --
     before = function(self)
       auth(self, "any", self.route_name)
@@ -66,19 +67,19 @@ return function(app)
     --
     GET = function(self)
       local model = require("models.OssStatsCharge")
-      local d = require("date")(false)
+      local d = date(false)
       local page = model.getPage(d:fmt("%F"))
       
       if page then
         self.StatsPage = page
       end
       
-      return { render = "stats.UserCharge" }
+      return { render = "stats.UserCharge", layout = false }
     end,
     
   }))
 
-  app:match("statsdiamond", "/StatsUserDiamond", respond_to({
+  app:match("stats_diamond", "/StatsUserDiamond", respond_to({
     --
     before = function(self)
       auth(self, "any", self.route_name)
@@ -87,19 +88,19 @@ return function(app)
     --
     GET = function(self)
       local model = require("models.OssStatsDiamond")
-      local d = require("date")(false)
+      local d = date(false)
       local page = model.getPage(d:fmt("%F"))
       
       if page then
         self.StatsPage = page
       end
       
-      return { render = "stats.UserDiamond" }
+      return { render = "stats.UserDiamond", layout = false }
     end,
     
   }))
 
-  app:match("statsonlinesnapshot", "/StatsUserOnlineSnapshot", respond_to({
+  app:match("stats_onlinesnapshot", "/StatsUserOnlineSnapshot", respond_to({
     --
     before = function(self)
       auth(self, "any", self.route_name)
@@ -108,15 +109,45 @@ return function(app)
     --
     GET = function(self)
       local model = require("models.OssStatsOnlineSnapshot")
-      local d = require("date")(false)
-      local page = model.getPage(d:fmt("%F"))
+      local d = date(false)
+      local data = model.getData(d:fmt("%F %T"))
       
-      if page then
-        self.StatsPage = page
+      if data then
+        self.StatsData = data
       end
       
-      return { render = "stats.UserOnlineSnapshot" }
+      return { render = "stats.UserOnlineSnapshot", layout = false }
     end,
+
+    --
+    POST = capture_errors(function(self)
+      validate.assert_valid(self.params, {
+        { "QueryTime", optional=true, min_length = 16, max_length = 22 },
+      })
+    
+      local model = require("models.OssStatsOnlineSnapshot")
+      local d = date(false)
+
+      --
+      if self.params.QueryTime ~= "" then
+        d = date(self.params.QueryTime)
+      end
+      
+      local data = model.getData(d:fmt("%F %T"))
+      
+      if data then
+        self.success_infos = { "Success" }
+        self.StatsData = data
+      end
+      
+      return { render = "stats.UserOnlineSnapshot", layout = false }
+
+    end,
+
+    -- on_error
+    function(self)
+        return { render = "stats.UserOnlineSnapshot", layout = false }
+    end)
     
   }))
 

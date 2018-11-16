@@ -33,7 +33,7 @@ function _M.getAll(ntype)
     key = "Type",
     clause = "order by SeqNo"
 })]]
-  return _M._db_entity:select("WHERE Type = ? and hide = 0 ORDER BY SeqNo ASC", ntype, { fields = "*" })
+  return _M._db_entity:select("WHERE Type = ? AND Hide = 0 ORDER BY SeqNo ASC", ntype, { fields = "*" })
 end
 
 return _M

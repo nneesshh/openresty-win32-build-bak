@@ -1,0 +1,125 @@
+﻿<%
+    local date = require("date")
+    local now = date(false);
+
+    local mailType, userId, subject, content, attachment
+    if errors and params then
+        mailType = params.MailType
+        userId = params.UserId
+        subject = params.Subject
+        content = params.Content
+        attachment = params.Attachment
+    elseif params then
+        mailType = params.MailType
+        userId = params.UserId
+        attachment = params.Attachment
+    end
+%>
+
+<script type="text/javascript">
+    function _do_ajax_submit_MailCreatePrivateForm() {
+        //var obj = $("#mailCreatePrivateForm").serialize();
+        //alert(obj)
+        var option = {
+            url : '/AdminMail/CreatePrivate',
+            type : 'POST',
+            dataType: 'html',
+            //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(xmlhr, textStatus, errorThrown) {
+                alert("failed!!! xmlhr.status=" + xmlhr.status + 
+                        ", xmlhr.readyState=" + xmlhr.readyState + 
+                        ", textStatus=" + textStatus + 
+                        ", errorThrown=" + errorThrown);
+            },
+        };
+        $("#mailCreatePrivateForm").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    };
+</script>
+
+<h2 class="text-center" class="text-danger">私人邮件发送页面</h2>
+
+<div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+
+<div class="row" >
+    <div class="center-block" style="width:600px;margin:0 auto">
+        <form id="mailCreatePrivateForm">
+            <% if errors then %>
+            <div class="form-group">
+                <div class="text-danger"><%= errors[1] %></div>
+            </div>
+            <% end %>
+
+            <% if success_infos then %>
+            <div class="form-group">
+                <div class="text-success"><%= success_infos[1] %></div>
+            </div>
+            <% end %>
+
+            <div class="form-group">
+                <label id="lCreateTime" for="CreateTime">日期:</label>
+                <span style="font-size:20px;"><%= d:fmt('%F %T') %></span>
+            </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+            <div class="form-group">
+                <label id="lMailType" for="MailType">邮件类型:</label>
+                <select name="MailType">
+                    <% if mailType and 0 == tonumber(mailType) then %>
+                    <option value="0" selected>普通</option>
+                    <option value="1">补偿</option>
+
+                    <% elseif mailType and 1 == tonumber(mailType) then %>
+                    <option value="0">普通</option>
+                    <option value="1" selected>补偿</option>
+
+                    <% else %>
+                    <option value="0">普通</option>
+                    <option value="1">补偿</option>
+
+                    <% end %>
+                </select>
+            </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+            <div class="form-group">
+                <label id="lUserId" for="UserId">收件人账号名称:</label>
+                <input type="text" name="UserId" style="height:30px;width:300px;" value="<%= userId or '' %>" />
+            </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+            <div class="form-group">
+                <label id="lSubject" for="Subject">主题:</label>
+                <input type="text" name="Subject" style="height:50px;width:600px;" value="<%= subject or '' %>" />
+            </div>
+
+            <div class="form-group">
+                <label id="lContent" for="Content">内容:</label>
+                <textarea id="oriContent" name="Content" style="height:100px;width:600px;"><%= content or '' %></textarea>
+            </div>
+
+            <div class="form-group"></div>
+                <label id="lAttachment" for="Attachment">附件:</label>
+                <textarea id="oriAttachment" name="Attachment" style="height:100px;width:600px;"><%= attachment or '' %></textarea>
+            </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+            <div class="form-group">
+                <a class="btn btn-primary margin-bottom center-block" style="width:200px;" href="javascript:void(0)" onclick="_do_ajax_submit_MailCreatePrivateForm()">提交</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p></p>
+
+<div>
+    <a class="btn-lg" href="javascript:void(0)" onclick="_do_ajax_call_Mail()">返回</a>
+</div>

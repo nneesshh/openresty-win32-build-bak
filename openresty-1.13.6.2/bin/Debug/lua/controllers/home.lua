@@ -21,14 +21,14 @@ return function(app)
   
   }))
 
-  app:match("welcome", "/home/welcome", respond_to({
+  app:match("home_welcome", "/home/welcome", respond_to({
     --
     before = function(self)
       auth(self, "any")
     end,
   
     GET = function(self)
-      return { render = "home.Welcome" }
+      return { render = "home.Welcome", layout = false }
     end,
     
   }))

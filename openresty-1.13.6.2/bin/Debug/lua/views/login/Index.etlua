@@ -29,10 +29,6 @@
     <link rel="stylesheet" href="static/lib/bower_components/morris.js/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="static/lib/bower_components/jvectormap/jquery-jvectormap.css">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="static/lib/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="static/lib/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="static/lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
@@ -90,5 +86,6 @@
 
     <!-- jQuery 3 -->
     <script src="static/lib/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/lib/form-4.2.2/dist/jquery.form.min.js"></script>
 </body>
 </html>

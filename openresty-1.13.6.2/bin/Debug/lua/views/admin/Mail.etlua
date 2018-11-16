@@ -1,0 +1,70 @@
+﻿<%
+    if session.user then
+        createBy = session.user.Name
+    end
+
+    -- save last
+    session.lastCode = "Mail"
+    session.lastUrl = "/AdminMail"
+%>
+
+<script src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/lib/form-4.2.2/dist/jquery.form.min.js"></script>
+<script src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
+
+<script type="text/javascript">
+    function _do_ajax_call_SendMail() {
+        $.ajax({
+            url: "/AdminMail/Create",
+            type: "GET",
+            dataType: "html",
+            //async: false,
+            async: true,
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(){
+                alert("failed!!!");
+            }
+        });
+    };
+
+    function _do_ajax_call_SendMailPrivate() {
+        $.ajax({
+            url: "/AdminMail/CreatePrivate",
+            type: "GET",
+            dataType: "html",
+            //async: false,
+            async: true,
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(){
+                alert("failed!!!");
+            }
+        });
+    };
+
+</script>
+
+<div class="row" >
+    <div class="col-sm-offset-3 col-sm-9">
+        <h1 class="text-center">GM邮件管理</h1>
+    </div>
+</div>
+
+<div class="clearfix" style="margin-bottom: 60px;"></div><!-- 清除浮动 -->
+
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-9">
+        <a class="btn btn-block" href="javascript:void(0)" onclick="_do_ajax_call_SendMail()"><h3><u>发送“系统”邮件</u></h3></a>
+    </div>
+</div>
+
+<div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-9">
+        <a class="btn btn-block" href="javascript:void(0)" onclick="_do_ajax_call_SendMailPrivate()"><h3><u>发送私人邮件</u></h3></a>
+    </div>
+</div>

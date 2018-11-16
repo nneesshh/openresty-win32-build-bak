@@ -41,7 +41,7 @@ return function(app)
         
         self.session.user = user
         self.session.roles = user_roles
-        return { redirect_to = self:url_for("welcome") }
+        return { redirect_to = self:url_for("home") }
       else
         assert_error(false, "用户名密码错误!")
       end
@@ -52,7 +52,7 @@ return function(app)
   end)
   }))
 
-  app:match("signout", "/signout", respond_to({
+  app:match("login_signout", "/signout", respond_to({
     --
     before = function(self)
       --auth(self, "any")

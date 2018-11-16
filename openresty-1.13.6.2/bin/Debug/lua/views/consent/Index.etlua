@@ -1,8 +1,39 @@
 ﻿<%
-    local id = Consent.Id
-    local sourceUrl = Consent.SourceUrl
-    local tips = Consent.Tips
+    local consent = Consent or {}
+    local id = consent.Id
+    local sourceUrl = consent.SourceUrl
+    local tips = consent.Tips
 %>
+
+<script src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/lib/form-4.2.2/dist/jquery.form.min.js"></script>
+<script src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
+
+<script type="text/javascript">
+    function _do_ajax_submit_ConsentForm(isConsent) {
+
+        var inputConsent = $("<input type='hidden' name='IsConsent' value='" + isConsent + "'/>")
+        $('#consentForm').append(inputConsent);
+
+        var option = {
+            url : '<%= sourceUrl %>',
+            type : 'POST',
+            dataType: 'html',
+            //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(xmlhr, textStatus, errorThrown) {
+                alert("failed!!! xmlhr.status=" + xmlhr.status + 
+                        ", xmlhr.readyState=" + xmlhr.readyState + 
+                        ", textStatus=" + textStatus + 
+                        ", errorThrown=" + errorThrown);
+            },
+        };
+        $("#consentForm").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    };
+</script>
 
 <div class="container page-consent">
     <div class="row page-header">
@@ -16,12 +47,12 @@
     <div class="row">
         <div class="text-center">
 
-            <form action=<%= sourceUrl %> method="post" class="consent-form">
+            <form id="consentForm" class="consent-form">
                 <input name="Id" type="hidden" value=<%= id%> />
 
                 <div class="consent-buttons">
-                    <button name="Button" value="yes" class="btn btn-primary" autofocus style="margin-right:20px;">确认</button>
-                    <button name="Button" value="no" class="btn">放弃</button>
+                    <button type="button" class="btn btn-primary" autofocus style="margin-right:20px;" onclick="_do_ajax_submit_ConsentForm('yes')">确认</button>
+                    <button type="button" class="btn" onclick="_do_ajax_submit_ConsentForm('no')">放弃</button>
                 </div>
             </form>
         </div>

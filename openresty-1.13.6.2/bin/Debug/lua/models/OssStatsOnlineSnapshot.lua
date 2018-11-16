@@ -12,25 +12,21 @@ local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local oss_options = require(cwd .. "GameDbUrls").getOptions()
 
 local _M = {
-  _db_entity = Model:extend(oss_options, "_oss_stats_online_snapshot", {
-    primary_key = { "timepoint", "userid" }
-  }),
+  
 }
 
-function _M.get(theDay) 
-  return _M._db_entity:find({ day = theDay })
-end
-
-function _M.getPage(theDay) 
-  local paginated = _M._db_entity:paginated("WHERE ticketid > 0", nil, { 
-    per_page = 10,
-    prepare_results = function(posts)
-      --Users:include_in(posts, "user_id")
-      return posts
+function _M.getData(theQueryTime) 
+  local data = {}
+  local res, d1, d2 = db.query(oss_options, "CALL __oss_do_stats_online_snapshot(?)", theQueryTime)
+  if res then
+    local n = #res
+    if n >= 2 then
+      for i, row in ipairs(res[1]) do  
+        table.insert(data, row)
+      end
+    end
   end
-  })
-  local page1 = paginated:get_page(1)
-  return page1
+  return data
 end
 
 return _M

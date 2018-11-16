@@ -1,6 +1,30 @@
-#�鿴��ǰ�Ƿ��ѿ����¼�������
+﻿-- MySQL设置全局变量connect_timeout为12小时（12*3600=43200）
+
+SET GLOBAL connect_timeout = 43200;
+SET GLOBAL net_read_timeout = 3600;
+SET GLOBAL net_write_timeout = 7200;
+
+-- 再次查看，确认参数是否修改成功
+
+show global variables like '%timeout%';
+
+
+
+-- 查看当前是否已开启事件调度器
 show variables like 'event_scheduler';
 
-#Ҫ�뱣֤�ܹ�ִ��event�¼����ͱ��뱣֤��ʱ���ǿ���״̬��Ĭ��Ϊ�ر�״̬
+-- 要想保证能够执行event事件，就必须保证定时器是开启状态，默认为关闭状态
 set global event_scheduler =1;
-#����set GLOBAL event_scheduler = ON;
+-- 或者
+set GLOBAL event_scheduler = ON;
+
+
+-- 修改表字段
+ALTER TABLE user_harbor_npc CHANGE `satisfaction` `satisfaction` int(11) NOT NULL COMMENT '满意度'
+ALTER TABLE user_state DROP COLUMN IF EXISTS `heartbeat_time`;
+ALTER TABLE user_state ADD COLUMN `heartbeat_time` DATETIME NOT NULL COMMENT '心跳时间';
+
+-- 日期转换
+select from_unixtime(1541581747);
+select unix_timestamp('2018-11-07 17:09:07');
+select date_format('2018-11-07 17:09:07', '%Y-%m-%d %H-%i-%s');  

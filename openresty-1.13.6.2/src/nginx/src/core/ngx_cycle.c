@@ -30,7 +30,7 @@ ngx_uint_t             ngx_dump_config;
 ngx_uint_t             ngx_quiet_mode;
 
 #if (NGX_WIN32)
-static FILE *          s_pid_fh_for_lock;
+static HANDLE          s_pid_file_handle_for_lock = INVALID_HANDLE_VALUE;
 #endif
 
 
@@ -946,11 +946,6 @@ ngx_create_pidfile(ngx_str_t *name, ngx_log_t *log)
     ngx_file_t  file;
     u_char      pid[NGX_INT64_LEN + 2];
 
-#if (NGX_WIN32)
-	int         fno;
-#endif
-
-
     if (ngx_process > NGX_PROCESS_MASTER) {
         return NGX_OK;
     }
@@ -965,21 +960,23 @@ ngx_create_pidfile(ngx_str_t *name, ngx_log_t *log)
 #if (NGX_WIN32)
 	if (!ngx_test_config) {
 		/* lock (FLIE *) ptr */
-		s_pid_fh_for_lock = fopen(file.name.data, "at+");
-		if (NULL == s_pid_fh_for_lock
-			|| 0 != file_lock(s_pid_fh_for_lock, "w", 0, 1)) {
+		if (0 != lock_file_win(file.name.data, &s_pid_file_handle_for_lock)
+			|| s_pid_file_handle_for_lock == INVALID_HANDLE_VALUE) {
 			ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
-				"file_lock() for \"%s\" failed", file.name.data);
+				"lock_file_win() for \"%s\" failed", file.name.data);
 			return NGX_ERROR;
 		}
 
 		len = ngx_snprintf(pid, NGX_INT64_LEN + 2, "%P%N", ngx_pid) - pid;
 
-		/* empty the file, then write pid */
-		fno = _fileno(s_pid_fh_for_lock);
-		file.fd = (HANDLE)_get_osfhandle(fno);
-		_chsize(fno, 0);
+		file.fd = s_pid_file_handle_for_lock;
 
+		/* empty the file */
+		SetFilePointer(s_pid_file_handle_for_lock, 0, NULL, FILE_BEGIN);
+		SetEndOfFile(s_pid_file_handle_for_lock);
+		FlushFileBuffers(s_pid_file_handle_for_lock);
+
+		/* write pid */
 		if (ngx_write_file(&file, pid, len, 0) == NGX_ERROR) {
 			return NGX_ERROR;
 		}
@@ -1019,9 +1016,9 @@ ngx_delete_pidfile(ngx_cycle_t *cycle)
     ngx_core_conf_t  *ccf;
 
 #if (NGX_WIN32)
-    if (s_pid_fh_for_lock) {
-        file_unlock(s_pid_fh_for_lock, 0, 1);
-        fclose(s_pid_fh_for_lock);
+    if (s_pid_file_handle_for_lock) {
+        unlock_file_win(s_pid_file_handle_for_lock);
+		s_pid_file_handle_for_lock = INVALID_HANDLE_VALUE;
     }
 #endif
 
