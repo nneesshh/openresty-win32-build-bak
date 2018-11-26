@@ -30,3 +30,4 @@
 + pgsql(libpg, openssl): https://www.enterprisedb.com/download-postgresql-binaries
 + perl: http://strawberryperl.com/releases.html
 + pcre: https://ftp.pcre.org/pub/pcre/
++ more not listed ...
