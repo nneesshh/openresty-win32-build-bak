@@ -43,10 +43,10 @@ dkms.conf
 *.exe
 *.tlog
 *.log
+*.user
 
 openresty-1\.13\.6\.2/msvc/\.vs/
-openresty-1\.13\.6\.2/msvc/Debug/nginx\.res
-openresty-1\.13\.6\.2/msvc/Release/nginx\.res
+openresty-1\.13\.6\.2/msvc/objs/
 
 openresty-1\.13\.6\.2/bin/Debug/\.vscode/
 openresty-1\.13\.6\.2/bin/Debug/nginx\.lib
