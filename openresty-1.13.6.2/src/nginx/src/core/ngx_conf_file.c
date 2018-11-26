@@ -999,6 +999,8 @@ ngx_conf_log_error(ngx_uint_t level, ngx_conf_t *cf, ngx_err_t err,
         p = ngx_log_errno(p, last, err);
     }
 
+	*p = '\0';
+
     if (cf->conf_file == NULL) {
         ngx_log_error(level, cf->log, 0, "%*s", p - errstr, errstr);
         return;

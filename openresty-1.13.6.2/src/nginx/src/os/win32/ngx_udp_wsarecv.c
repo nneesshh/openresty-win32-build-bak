@@ -83,7 +83,7 @@ ngx_udp_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
             return rev->available;
         }
 
-        if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED) &rev->ovlp,
+        if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED) &rev->evovlp,
                                    &bytes, 0, NULL)
             == 0)
         {
@@ -98,7 +98,7 @@ ngx_udp_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         return bytes;
     }
 
-    ovlp = (LPWSAOVERLAPPED) &rev->ovlp;
+    ovlp = (LPWSAOVERLAPPED) &rev->evovlp;
     ngx_memzero(ovlp, sizeof(WSAOVERLAPPED));
     wsabuf[0].buf = (char *) buf;
     wsabuf[0].len = size;

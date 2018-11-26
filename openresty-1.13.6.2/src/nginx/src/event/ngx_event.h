@@ -21,9 +21,11 @@
 typedef struct {
     WSAOVERLAPPED    ovlp;
     ngx_event_t     *event;
-    /* int              error; */
-    unsigned         acceptex_flag : 1; /* 1 = acceptex event posted, 0 = event process over */
-    unsigned         connectex_flag : 1; /* 1 = connectex event posted, 0 = event process over */
+
+	/* int              error; */
+    unsigned int     acceptex_flag : 1; /* 1 = acceptex event posted, 0 = event process over */
+    unsigned int     connectex_flag : 1; /* 1 = connectex event posted, 0 = event process over */
+	unsigned int     recv_mem_lock_flag : 1; /* 1= memory is locked by iocp, 0 = memory is free */
 } ngx_event_ovlp_t;
 
 #endif
@@ -114,7 +116,7 @@ struct ngx_event_s {
 
 
 #if (NGX_HAVE_IOCP)
-    ngx_event_ovlp_t ovlp;
+    ngx_event_ovlp_t evovlp;
 #endif
 
     ngx_uint_t       index;

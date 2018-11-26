@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -15,19 +15,20 @@
     <ProjectGuid>{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}</ProjectGuid>
     <RootNamespace>nginx</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -65,6 +66,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/pcre-8.42/build;../thirdparty/pcre-8.42;../thirdparty/strawberry-perl-5.26.2.1-32bit/perl/lib/CORE;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -84,7 +86,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NGX_HAVE_KEEPALIVE_TUNABLE=0;WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
@@ -196,16 +198,6 @@
     <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_variable.c" />
     <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_worker.c" />
     <ClCompile Include="..\bundle\ngx_lua_upstream-0.07\src\ngx_http_lua_upstream_module.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_escape.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_handler.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_keepalive.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_module.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_output.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_processor.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_rewrite.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_upstream.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_util.c" />
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_variable.c" />
     <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_api.c" />
     <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_args.c" />
     <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_balancer.c" />
@@ -316,6 +308,7 @@
     <ClCompile Include="..\src\nginx\src\event\ngx_event_connect.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_openssl.c" />
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_opensslex.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_openssl_stapling.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_pipe.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_posted.c" />
@@ -558,18 +551,6 @@
     <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_variable.h" />
     <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_worker.h" />
     <ClInclude Include="..\bundle\ngx_lua_upstream-0.07\src\ddebug.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_ddebug.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_escape.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_handler.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_keepalive.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_module.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_output.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_processor.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_rewrite.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_upstream.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_util.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_variable.h" />
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\resty_dbd_stream.h" />
     <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\api\ngx_stream_lua_api.h" />
     <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ddebug.h" />
     <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_args.h" />

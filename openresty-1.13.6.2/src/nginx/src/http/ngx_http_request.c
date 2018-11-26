@@ -355,7 +355,12 @@ ngx_http_init_connection(ngx_connection_t *c)
 
         hc->ssl = 1;
 
-        rev->handler = ngx_http_ssl_handshake;
+		if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+			rev->handler = ngx_http_ssl_handshakeex;
+		}
+		else {
+			rev->handler = ngx_http_ssl_handshake;
+		}
     }
     }
 #endif
@@ -459,10 +464,12 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
         /*
          * We are trying to not hold c->buffer's memory for an idle connection.
          */
-
-        if (ngx_pfree(c->pool, b->start) == NGX_OK) {
-            b->start = NULL;
-        }
+		if (0 == rev->active) {
+			if (ngx_pfree(c->pool, b->start) == NGX_OK) {
+				b->start = NULL;
+				b->pos = NULL;
+			}
+		}
 
         return;
     }
@@ -3025,19 +3032,35 @@ ngx_http_set_keepalive(ngx_http_request_t *r)
 
     b = c->buffer;
 
-    if (ngx_pfree(c->pool, b->start) == NGX_OK) {
+	if (0 == rev->active) {
+		if (ngx_pfree(c->pool, b->start) == NGX_OK) {
 
-        /*
-         * the special note for ngx_http_keepalive_handler() that
-         * c->buffer's memory was freed
-         */
+			/*
+			 * the special note for ngx_http_keepalive_handler() that
+			 * c->buffer's memory was freed
+			 */
+			b->start = NULL;
+			b->pos = NULL;
 
-        b->pos = NULL;
-
-    } else {
-        b->pos = b->start;
-        b->last = b->start;
-    }
+		}
+		else {
+			b->pos = b->start;
+			b->last = b->start;
+		}
+	}
+	else {
+		/* if data is still in buffer, error happens! stop keepalive action */
+		if (b->pos != b->last) {
+			ngx_log_error(NGX_LOG_ERR, c->log, 0,
+				"ngx_http_set_keepalive failed -- data corrupted");
+			ngx_http_close_connection(c);
+			return;
+		}
+		else {
+			b->pos = b->start;
+			b->last = b->start;
+		}
+	}
 
     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "hc free: %p",
                    hc->free);
@@ -3069,7 +3092,7 @@ ngx_http_set_keepalive(ngx_http_request_t *r)
     }
 
 #if (NGX_HTTP_SSL)
-    if (c->ssl) {
+    if (c->ssl && 0 == rev->active) {
         ngx_ssl_free_buffer(c);
     }
 #endif
@@ -3205,15 +3228,16 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
          * Like ngx_http_set_keepalive() we are trying to not hold
          * c->buffer's memory for a keepalive connection.
          */
+		if (0 == rev->active) {
+			if (ngx_pfree(c->pool, b->start) == NGX_OK) {
 
-        if (ngx_pfree(c->pool, b->start) == NGX_OK) {
-
-            /*
-             * the special note that c->buffer's memory was freed
-             */
-
-            b->pos = NULL;
-        }
+				/*
+				 * the special note that c->buffer's memory was freed
+				 */
+				b->start = NULL;
+				b->pos = NULL;
+			}
+		}
 
         return;
     }
@@ -3609,10 +3633,18 @@ ngx_http_close_connection(ngx_connection_t *c)
 #if (NGX_HTTP_SSL)
 
     if (c->ssl) {
-        if (ngx_ssl_shutdown(c) == NGX_AGAIN) {
-            c->ssl->handler = ngx_http_close_connection;
-            return;
-        }
+		if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+			if (ngx_ssl_shutdownex(c) == NGX_AGAIN) {
+				c->ssl->handler = ngx_http_close_connection;
+				return;
+			}
+		}
+		else {
+			if (ngx_ssl_shutdown(c) == NGX_AGAIN) {
+				c->ssl->handler = ngx_http_close_connection;
+				return;
+			}
+		}
     }
 
 #endif

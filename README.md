@@ -1,13 +1,19 @@
 # Build openresty-win32 with vs2017
 
 ## Features
-- NOTICE:
+- IOCP is supported in events, by "use iocp;" option
+- SSL is supported
+
+- Other tips:
     - Write to console(such as via "printf") after "FreeConsole()" will make iocp crash, maybe some overflow happens.
+    - WSARecv memory recycle in ngx_overlapped_wsarecv: ngx_get_connection() --> WSARecv lock memory --> ngx_getqueuedcompletionstatusex free memory --> ngx_get_connection() again ...
     - MUST NOT import "jquery.form.min.js" before "jquery.min.js", because it will raise "Uncaught TypeError: $(...).ajaxSubmit is not a function" error.
     - JQuery form doesn't submit button value, we must do it "MANUALLY".
+    - 
 
 - Missing modules:
     - ngx_service
+    - ngx_postgres
     - ngx_google_perftools_module
     - ngx_stream_geoip_module
     - ngx_http_geoip_module

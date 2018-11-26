@@ -142,8 +142,8 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
 
-    rev->ovlp.event = rev;
-    wev->ovlp.event = wev;
+    rev->evovlp.event = rev;
+    wev->evovlp.event = wev;
 
     rev->ready = 1;
     wev->ready = 1;
@@ -173,7 +173,7 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
         NULL,
         0,
         NULL,
-        (LPOVERLAPPED)&rev->ovlp)
+        (LPOVERLAPPED)&rev->evovlp)
         == 0)
     {
         err = ngx_socket_errno;
@@ -190,10 +190,10 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
         "connect(): %d", rc);
 
     /* use rev to wait for connectex result */
-    rev->ovlp.connectex_flag = 1;
+    rev->evovlp.connectex_flag = 1;
     rev->ready = 0;
 
-	wev->ovlp.connectex_flag = 1;
+	wev->evovlp.connectex_flag = 1;
 
     return NGX_OK;
 

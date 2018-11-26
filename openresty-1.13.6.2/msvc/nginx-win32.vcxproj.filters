@@ -52,9 +52,6 @@
     <Filter Include="bundle">
       <UniqueIdentifier>{89db305b-76cd-4a7f-a365-a59f58b603ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="bundle\postgres">
-      <UniqueIdentifier>{73f5f94a-350b-461d-9764-93683eabb646}</UniqueIdentifier>
-    </Filter>
     <Filter Include="bundle\ndk">
       <UniqueIdentifier>{39f247c7-793b-4ffd-b01a-86d7b2c8c789}</UniqueIdentifier>
     </Filter>
@@ -575,36 +572,6 @@
     </ClCompile>
     <ClCompile Include="..\config\ngx_modules.c">
       <Filter>config</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_keepalive.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_module.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_output.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_processor.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_rewrite.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_upstream.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_util.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_variable.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_escape.c">
-      <Filter>bundle\postgres</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_handler.c">
-      <Filter>bundle\postgres</Filter>
     </ClCompile>
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_realip_module.c">
       <Filter>src\stream</Filter>
@@ -1140,6 +1107,9 @@
     <ClCompile Include="..\src\nginx\src\os\win32\lfs.c">
       <Filter>src\os\win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_opensslex.c">
+      <Filter>src\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\nginx\src\event\modules\ngx_iocp_module.h">
@@ -1384,42 +1354,6 @@
     </ClInclude>
     <ClInclude Include="..\config\ngx_auto_headers.h">
       <Filter>config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_keepalive.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_module.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_output.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_processor.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_rewrite.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_upstream.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_util.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_variable.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\resty_dbd_stream.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_ddebug.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_escape.h">
-      <Filter>bundle\postgres</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_postgres-1.0\src\ngx_postgres_handler.h">
-      <Filter>bundle\postgres</Filter>
     </ClInclude>
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_script.h">
       <Filter>src\stream</Filter>

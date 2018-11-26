@@ -2935,10 +2935,10 @@ ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
 
         /* check connectex */
         if (ngx_event_flags & NGX_USE_IOCP_EVENT
-            && 1 == ev->ovlp.connectex_flag) {
+            && 1 == ev->evovlp.connectex_flag) {
 
-            ev->ovlp.connectex_flag = 0;
-			c->write->ovlp.connectex_flag = 0;
+            ev->evovlp.connectex_flag = 0;
+			c->write->evovlp.connectex_flag = 0;
 
             i_result = setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_CONNECT_CONTEXT, NULL, 0);
             if (i_result != NO_ERROR) {

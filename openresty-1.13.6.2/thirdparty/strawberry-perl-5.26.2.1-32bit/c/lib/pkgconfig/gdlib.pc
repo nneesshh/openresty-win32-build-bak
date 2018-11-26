@@ -1,0 +1,11 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: gd
+Description: GD graphics library
+Version: 2.2.4
+Cflags: -I${includedir}
+Libs.private:  -L${pcfiledir}/../../lib -L${pcfiledir}/../../lib -lz -L${pcfiledir}/../../lib -L${pcfiledir}/../../lib -lpng16 -lz -L${pcfiledir}/../../lib -L${pcfiledir}/../../lib -lfreetype -lz -lbz2 -lpng16 -lz -L${pcfiledir}/../../lib  -ljpeg -L${pcfiledir}/../../lib -L${pcfiledir}/../../lib -lXpm  -L${pcfiledir}/../../lib -ltiff -llzma -ljpeg -lz 
+Libs: -L${libdir} -lgd

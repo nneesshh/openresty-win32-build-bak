@@ -1,0 +1,735 @@
+/*doc
+---
+title: Primary blue
+name: colors-primaryblue
+category: colors
+---
+This color should be used to call attention to the main part of the app. Use sparingly.
+
+```html_example
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-primary-blue font-white">
+        #2c76b4
+      </div>
+    </div>
+  </div>
+</div>
+
+```
+
+*/
+.color-chip {
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  font-size: 1.25em;
+  height: 100px;
+  justify-content: center;
+  margin: 0 0 1em;
+  width: 100%; }
+
+.bg-primary-blue {
+  background-color: #2c76b4; }
+
+.border-primary-blue, .query-history .entry.selected {
+  border-color: #2c76b4; }
+
+.font-primary-blue, .query-history .entry.selected, .query-history .entry.selected .other-info {
+  color: #2c76b4; }
+
+/*doc
+---
+title: Grays
+name: Grays
+category: colors
+---
+For text, avoid using black or #000 to lower the contrast between the background and text.
+
+```html_example
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-gray-1">
+        #f9f9f9
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-gray-2">
+        #e8e8e8
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-gray-3">
+        #cccccc
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-gray-4">
+        #888888
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-gray-5 font-white">
+        #555555
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-gray-6 font-white">
+        #333333
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+.color-chip {
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  font-size: 1.25em;
+  height: 100px;
+  justify-content: center;
+  margin: 0 0 1em;
+  width: 100%; }
+
+.bg-gray-1 {
+  background-color: #f9f9f9; }
+
+.bg-gray-2 {
+  background-color: #e8e8e8; }
+
+.bg-gray-3 {
+  background-color: #cccccc; }
+
+.bg-gray-4 {
+  background-color: #888888; }
+
+.bg-gray-5 {
+  background-color: #555555; }
+
+.bg-gray-6 {
+  background-color: #333333; }
+
+.border-gray-1 {
+  border-color: #f9f9f9; }
+
+.border-gray-2 {
+  border-color: #e8e8e8; }
+
+.border-gray-3, .query-detail .block-divider {
+  border-color: #cccccc; }
+
+.border-gray-4 {
+  border-color: #888888; }
+
+.border-gray-5 {
+  border-color: #555555; }
+
+.border-gray-6 {
+  border-color: #333333; }
+
+.font-gray-4, .query-history .entry .other-info, .header-label, .query-detail .metadata-block .metadata .item .description, .query-detail .message-block .message .message-header {
+  color: #888888; }
+
+.font-gray-6 {
+  color: #333333; }
+
+.font-white {
+  color: #FFFFFF; }
+
+/*doc
+---
+title: Others
+name: z-othercolors
+category: colors
+---
+These colors should be used to highlight hover options in dropdown menus and catalog browser or to tell the user when something is right or wrong.
+
+
+```html_example
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-blue-1">
+        #e7f2ff
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-blue-2">
+        #84acdd
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-red-1">
+        #f2dede
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-red-2">
+        #de8585
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-red-3">
+        #d0021b
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-green-1">
+        #dff0d7
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-green-2">
+        #a2c189
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <div class="color-chip bg-green-3">
+        #3a773a
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+*/
+.color-chip {
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  font-size: 1.25em;
+  height: 100px;
+  justify-content: center;
+  margin: 0 0 1em;
+  width: 100%; }
+
+.bg-white-1, .query-history .entry, .query-detail .message-block .message .content .content-value {
+  background-color: #ffffff; }
+
+.bg-blue-1, .query-history .entry.selected {
+  background-color: #e7f2ff; }
+
+.bg-blue-2 {
+  background-color: #84acdd; }
+
+.bg-red-1, .ajs-message.ajs-error.ajs-visible, .query-history .entry.error {
+  background-color: #f2dede; }
+
+.bg-red-2 {
+  background-color: #de8585; }
+
+.bg-red-3 {
+  background-color: #d0021b; }
+
+.bg-green-1, .ajs-message.ajs-success.ajs-visible {
+  background-color: #dff0d7; }
+
+.bg-green-2 {
+  background-color: #a2c189; }
+
+.bg-green-3 {
+  background-color: #3a773a; }
+
+.border-blue-1 {
+  border-color: #e7f2ff; }
+
+.border-blue-2 {
+  border-color: #84acdd; }
+
+.border-red-1 {
+  border-color: #f2dede; }
+
+.border-red-2, .ajs-message.ajs-error.ajs-visible {
+  border-color: #de8585; }
+
+.border-red-3 {
+  border-color: #d0021b; }
+
+.border-green-1 {
+  border-color: #dff0d7; }
+
+.border-green-2, .ajs-message.ajs-success.ajs-visible {
+  border-color: #a2c189; }
+
+.border-green-3 {
+  border-color: #3a773a; }
+
+.font-red-3 {
+  color: #d0021b; }
+
+.font-green-3 {
+  color: #3a773a; }
+
+.font-white {
+  color: #FFFFFF; }
+
+/*doc
+---
+title: Typography
+name: typography
+category: typography
+---
+
+Font Typography
+
+```html_example_table
+<div class="text-14">
+  Body 14 px Helvetica Neue
+</div>
+
+<div class="text-14 text-bold">
+  Body 14 px Helvetica Neue bold
+</div>
+
+<div class="text-13">
+  Body 13 px Helvetica Neue
+</div>
+
+<div class="text-13 text-bold">
+  Body 13 px Helvetica Neue bold
+</div>
+
+<div class="text-12">
+  Body 12 px Helvetica Neue
+</div>
+
+<div class="text-12 text-bold">
+  Body 12 px Helvetica Neue bold
+</div>
+
+<div class="text-11">
+  Body 11 px Helvetica Neue
+</div>
+
+<div class="text-11 text-bold">
+  Body 11 px Helvetica Neue bold
+</div>
+```
+
+*/
+.text-bold {
+  font-weight: bold; }
+
+.text-14, .query-history .entry, .query-detail .metadata-block .metadata .item .value {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px; }
+
+.text-13, .query-history .entry .other-info, .query-detail .message-block .message .content .content-value {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px; }
+
+.text-12, .header-label, .query-detail .metadata-block .metadata .item .description, .query-detail .message-block .message .message-header {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px; }
+
+.text-11 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px; }
+
+.not-selectable, .query-detail .message-block .message .message-header {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  ms-user-select: none;
+  user-select: none;
+  cursor: default; }
+
+/*doc
+---
+title: Alerts
+name: alerts
+category: alerts
+---
+
+```html_example
+<div class="alert-row">
+  <div class="alert alert-success text-14 alert-box">
+    <div class="media">
+      <div class="media-body media-middle">
+        <div class="alert-icon success-icon">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </div>
+        <div class="alert-text">
+          Successfully run. Total query runtime: 32 msec. 1 row retrieved
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert-row">
+  <div class="alert alert-danger font-red text-14 alert-box">
+    <div class="media">
+      <div class="media-body media-middle">
+        <div class="alert-icon error-icon">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        </div>
+        <div class="alert-text">
+          Error retrieving properties - INTERNAL SERVER ERROR
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert-row">
+  <div class="alert alert-info font-blue text-14 alert-box">
+    <div class="media">
+      <div class="media-body media-middle">
+        <div class="alert-text">
+          This is a neutral message
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+```
+*/
+.media {
+  display: flex; }
+
+.media-body {
+  flex: 1; }
+
+.media-middle {
+  align-self: center; }
+
+.media-bottom {
+  align-self: flex-end; }
+
+.alert-row {
+  display: block;
+  width: auto; }
+
+.alert-box {
+  padding: 0px;
+  display: inline-block; }
+
+.alert.alert-info {
+  padding: 15px; }
+
+.alert-icon {
+  display: inline-block;
+  color: white;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  font-size: 14px; }
+
+.success-icon {
+  background: #3a773a; }
+
+.error-icon {
+  background: #d0021b; }
+
+.alert-text {
+  display: inline-block;
+  padding: 0 12px 0 10px; }
+
+.alert-row {
+  display: block; }
+
+.alert-box {
+  padding: 0px;
+  display: inline-block; }
+
+.alert-icon {
+  display: inline-block;
+  color: white;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  font-size: 14px;
+  text-align: center; }
+
+.success-icon {
+  background: #3a773a; }
+
+.error-icon {
+  background: #d0021b; }
+
+.alert-text {
+  display: inline-block;
+  padding: 0 12px 0 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.alert-info {
+  border-color: #84acdd; }
+
+.media-body {
+  vertical-align: top;
+  width: initial; }
+
+.ajs-message .media {
+  display: block; }
+
+.pg-prop-status-bar {
+  padding: 5px; }
+  .pg-prop-status-bar .media-body {
+    display: flex; }
+  .pg-prop-status-bar .alert-icon {
+    padding: 8px;
+    width: 35px;
+    height: 35px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+  .pg-prop-status-bar .alert-text {
+    flex-grow: 1;
+    border: 1px solid #de8585;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 7px 12px 5px 10px;
+    border-left: 0px; }
+  .pg-prop-status-bar .error-in-footer {
+    border-radius: 4px; }
+    .pg-prop-status-bar .error-in-footer .alert-text {
+      border-color: #de8585; }
+  .pg-prop-status-bar .success-in-footer {
+    border-radius: 4px; }
+    .pg-prop-status-bar .success-in-footer .alert-text {
+      border-color: #a2c189; }
+  .pg-prop-status-bar .info-in-footer {
+    border: 1px solid #2c76b4;
+    border-radius: 4px;
+    height: 35px; }
+    .pg-prop-status-bar .info-in-footer .alert-text {
+      border: 0px; }
+
+/* Overrides alertify js headers */
+.alertify {
+  /* Overrides alertify js headers hovering behaviour*/
+  /* Removes padding from alertify footer */
+  /* Restyling alertify buttons */
+  /* Replaces alertify button icons */
+  /* Prevent text blur in the runtime */
+  /* Restyling alertify dialogue panel boundaries */ }
+  .alertify .ajs-header {
+    padding: 6px 10px !important;
+    min-height: 35px;
+    max-height: 35px;
+    border-bottom: 2px solid darkgray;
+    background-color: #2C76B4;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0; }
+  .alertify .ajs-header:hover {
+    background-color: #2C76B4; }
+  .alertify .ajs-footer {
+    padding: 0;
+    min-height: 35px; }
+  .alertify .ajs-footer .ajs-buttons {
+    background-color: #D2D2D2;
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color: #555555; }
+  .alertify .ajs-footer .ajs-buttons.ajs-auxiliary .ajs-button,
+  .alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 0px; }
+  .alertify .ajs-footer .ajs-buttons .ajs-button {
+    min-width: 40px;
+    min-height: 30px; }
+  .alertify .ajs-commands {
+    margin: -22px 4px 0 0; }
+  .alertify .ajs-commands button {
+    margin-left: 5px; }
+  .alertify .ajs-dimmer,
+  .alertify .ajs-modal {
+    -webkit-transform: none; }
+  .alertify .ajs-commands button.ajs-maximize {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAZklEQVQ4jcWTuw2AMAxEn5jBs7B/e0gpmAiKEGRS5QDBSS7v+Q8fSsCWQgDTA+DsGgJYuypumTNkWCWZg9q/HIAOSDim/xTUcu0exXXaxQG0teRVWQPLx2Gbe8B55yNqv7C4GV/TDq//J11odoZgAAAAAElFTkSuQmCC);
+    background-size: 14px; }
+  .alertify .ajs-commands button.ajs-close {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAdklEQVQ4jd2SwQnAIAxF36GH0pOTFHEgF3IkR5LO0F4SCGJVEHroAy/f/E+igV+yAa6hO7nrcgAZuIBg9CBalppXEnDL0RA1q556ASdQqhBrLlLTxVch1uxHZiU2AuKs2Vdt23GGHSy/wfIvzOzBPhpjaRO/5wG/szevJ+ZXzAAAAABJRU5ErkJggg==); }
+  .alertify .ajs-dialog {
+    border: 3px solid #DDDDDD;
+    border-radius: 0; }
+  .alertify .ajs-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important; }
+  .alertify .ajs-handle {
+    right: -4px;
+    bottom: -4px; }
+
+.alertify.ajs-maximized .ajs-commands,
+.alertify.ajs-resizable .ajs-commands {
+  margin: 2px 0px 0 0; }
+
+.ajs-commands {
+  position: absolute;
+  width: auto !important; }
+
+.ajs-pin, .ajs-maximize, .ajs-close {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #9E9E9E !important;
+  background-color: #ddd !important;
+  font-size: 12px;
+  border-radius: 5px 5px 5px 5px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1; }
+
+.ajs-pin:hover, .ajs-maximize:hover, .ajs-close:hover {
+  border: 2px solid #CCCCCC !important; }
+
+.alertify.ajs-modeless.ajs-pinnable .ajs-commands button.ajs-pin {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAkElEQVQ4jWNkwAR8DAwMBxkYGMTQxF8xMDDYMzAwfMKiBwMYMDAw3GRgYPgPxTehYiSBKCQDonApYiLV1KFjABsDA4MpEt8UKkYUkGBgYDjPgAhAGD4PlSPooqNYNMPwUXRXM+IwBAbaoXQlktg/ZMUsWAxAVvASmyZCBiCDNwTkCRrwasANIOgFQoADinECAAtnIEoWoODLAAAAAElFTkSuQmCC);
+  background-size: 13px; }
+
+.alertify.ajs-maximized .ajs-commands button.ajs-maximize {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA8klEQVQ4jZ3QMUpDQRCH8V+ewULQE4iERTyCrQiDCpbaCKKljbV4A89gqVgGrCMDWlpaWwVPoFYiIjYv8hBJXjLN7s7u9+3wZ4aKiOWI2IJOi8dHuM7MXxj3WMHe3CRBKeUGvVJKllJG8CrmoNty6jMsYKeGoY/jtgI4bez7OMjMr2oKwaieRzDMIljDRUSgXQZPeG2cv7GOffQ7ETGPcyw2HozWQWY+jLN3M/MzIu4wwNKf+zeMFVSQmY/YbfzeuiqIiAonZgi1quErHNa9F7xPM8FlAx5iA9ttJRVu8VHDm5k5rDNpLRERWxHR+6c/MZMfLIJDwzY66IkAAAAASUVORK5CYII=); }
+
+/* Restyling alertify query results messages */
+.alertify-notifier.ajs-right {
+  min-width: 250px;
+  width: auto;
+  width: initial;
+  max-width: 800px; }
+
+.alertify-notifier.ajs-right .ajs-message.ajs-visible {
+  padding: 0;
+  right: 0;
+  width: auto;
+  width: initial; }
+
+.alertify-notifier .ajs-message {
+  border-radius: 4px; }
+
+button.pg-alertify-button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: auto; }
+
+.fa.pg-alertify-button:before {
+  font: normal normal normal 18px/1 FontAwesome;
+  margin-right: 5px; }
+
+.ajs-text-smoothing, .ajs-message.ajs-error.ajs-visible, .ajs-message.ajs-success.ajs-visible {
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased; }
+
+.media-body {
+  display: table-row; }
+
+.query-history .list-item {
+  border-bottom: 1px solid #cccccc; }
+
+.query-history .entry {
+  padding: -2px 18px -2px 8px;
+  font-family: monospace;
+  border: 2px solid transparent;
+  margin-left: 1px; }
+  .query-history .entry .other-info {
+    font-family: monospace;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+    .query-history .entry .other-info .timestamp {
+      align-self: flex-start; }
+  .query-history .entry .query {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    user-select: initial; }
+
+.query-history .entry.selected.error {
+  background-color: #d7d0d9; }
+
+.query-history .entry.selected {
+  font-weight: bold;
+  border: 2px solid; }
+  .query-history .entry.selected .other-info {
+    font-weight: bold; }
+
+.header-label, .query-detail .metadata-block .metadata .item .description, .query-detail .message-block .message .message-header {
+  display: block; }
+
+.query-detail {
+  width: 100%;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column; }
+  .query-detail .metadata-block {
+    flex: 1;
+    padding: 0 10px; }
+    .query-detail .metadata-block .metadata {
+      display: flex; }
+      .query-detail .metadata-block .metadata .item {
+        flex: 1; }
+        .query-detail .metadata-block .metadata .item .value {
+          display: block; }
+  .query-detail .query-statement-block {
+    flex: 5;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 0;
+    position: relative; }
+  .query-detail .block-divider {
+    margin-top: 11px;
+    margin-bottom: 8px; }
+  .query-detail .message-block {
+    flex: 2;
+    display: flex;
+    padding-left: 10px; }
+    .query-detail .message-block .message {
+      flex: 2 2 0%;
+      flex-direction: column;
+      display: flex; }
+      .query-detail .message-block .message .message-header {
+        flex: 0 0 auto; }
+      .query-detail .message-block .message .content {
+        flex: 0 1 auto;
+        overflow: auto;
+        position: relative;
+        height: 100%; }
+        .query-detail .message-block .message .content .content-value {
+          font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+          border: 0;
+          padding-left: 0;
+          position: absolute; }
+
+.has-error .pgadmin-controls > .form-control {
+  border-color: #d0021b;
+  position: relative; }
+
+.has-error .control-label {
+  color: #d0021b; }
+
+.has-error .pgadmin-controls:before {
+  font: normal normal normal 16px/1 FontAwesome;
+  content: "\F071";
+  text-decoration: inherit;
+  position: absolute;
+  color: #d0021b;
+  right: 15px;
+  padding-top: 10px;
+  z-index: 1; }

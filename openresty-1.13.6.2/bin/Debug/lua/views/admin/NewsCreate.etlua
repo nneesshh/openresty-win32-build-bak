@@ -48,7 +48,7 @@
 
             <div class="form-group">
                 <label id="lCreateTime" for="CreateTime">日期:</label>
-                <span style="font-size:20px;"><%= d:fmt('%F %T') %></span>
+                <span style="font-size:20px;"><%= now:fmt('%F %T') %></span>
             </div>
 
             <div class="form-group">

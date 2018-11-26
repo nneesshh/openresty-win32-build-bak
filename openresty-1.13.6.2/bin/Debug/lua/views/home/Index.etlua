@@ -48,7 +48,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     
 </head>
@@ -332,7 +332,7 @@
         //$(function(){/*...*/});是$(document).ready(function(){/*...*/})的简写形式，是在DOM加载完成后执行的回调函数，并且只会执行一次。
         $(function(){
             $.ajax({
-                url: "/home/welcome",
+                url: "/HomeWelcome",
                 type: "GET",
                 dataType: "html",
                 //async: false,
@@ -341,7 +341,7 @@
                     $("#_ajax_call_result").html(data);
                 },
                 error: function(xmlhr, textStatus, errorThrown){
-                    alert("[Index] call(/home/welcome) failed!!!");
+                    alert("[Index] call(/HomeWelcome) failed!!!");
                     alert("xmlhr.status=" + xmlhr.status);
                     alert("xmlhr.readyState=" + xmlhr.readyState);
                     alert("textStatus=" + textStatus);

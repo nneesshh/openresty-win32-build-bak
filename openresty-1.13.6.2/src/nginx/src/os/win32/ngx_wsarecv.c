@@ -96,7 +96,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
             return rev->available;
         }
 
-        if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED) &rev->ovlp,
+        if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED) &rev->evovlp,
                                    &bytes, 0, NULL)
             == 0)
         {
@@ -111,7 +111,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         return bytes;
     }
 
-    ovlp = (LPWSAOVERLAPPED) &rev->ovlp;
+    ovlp = (LPWSAOVERLAPPED) &rev->evovlp;
     ngx_memzero(ovlp, sizeof(WSAOVERLAPPED));
     wsabuf[0].buf = (char *) buf;
     wsabuf[0].len = size;
@@ -121,16 +121,27 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
     rc = WSARecv(c->fd, wsabuf, 1, &bytes, &flags, ovlp, NULL);
 
 #if (NGX_DEBUG)
+	if (size < 1024)
+		output_debug_string("\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) is too small!!!\n",
+			(int)size);
+
     // debug
     output_debug_string("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
         (uintptr_t)buf, (int)size, bytes,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, rev->write);
+
+	c->buffer_ref.start = buf;
+	c->buffer_ref.pos = buf;
+	c->buffer_ref.last = buf;
+	c->buffer_ref.end = buf + size;
+
 #endif
 
     ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "WSARecv ovlp: fd:%d rc:%d %ul of %z",
                    c->fd, rc, bytes, size);
 
+	/* SOCKET_ERROR == -1 */
     if (rc == -1) {
         err = ngx_socket_errno;
         if (err == WSA_IO_PENDING) {
@@ -138,6 +149,8 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
             rev->active = 1;
             ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,
                            "WSARecv() posted");
+
+			rev->evovlp.recv_mem_lock_flag = 1;
             return NGX_AGAIN;
         }
 
@@ -156,18 +169,20 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         return n;
     }
 
-    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+	if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
 
-        /*
-         * if a socket was bound with I/O completion port
-         * then GetQueuedCompletionStatus() would anyway return its status
-         * despite that WSARecv() was already complete
-         */
+		/*
+		* if a socket was bound with I/O completion port
+		* then GetQueuedCompletionStatus() would anyway return its status
+		* despite that WSARecv() was already complete
+		*/
 
-        rev->ready = 0; /* read event posted, don't post again before response */
-        rev->active = 1;
-        return NGX_AGAIN;
-    }
+		rev->ready = 0; /* read event posted, don't post again before response */
+		rev->active = 1; /* 1=active means "c->buffer should never be freed" */
+
+		rev->evovlp.recv_mem_lock_flag = 1;
+		return NGX_AGAIN;
+	}
 
     if (bytes == 0) {
         rev->eof = 1;
@@ -177,7 +192,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         rev->ready = 1;
     }
 
-    rev->active = 0;
+    rev->active = 0; /* c->buffer could be freed if active is 0 */
 
     return bytes;
 }

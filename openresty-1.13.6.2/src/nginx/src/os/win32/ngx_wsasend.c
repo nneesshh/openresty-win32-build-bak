@@ -69,7 +69,7 @@ ssize_t
 ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 {
     int               rc;
-    u_long            bsize, send, sent;
+    u_long            remain, drain, sent;
     ngx_err_t         err;
     ngx_event_t      *wev;
     ngx_array_t       vec;
@@ -92,7 +92,7 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
         }
         else {
-            if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED)&wev->ovlp,
+            if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED)&wev->evovlp,
                 &sent, 0, NULL)
                 == 0)
             {
@@ -134,7 +134,6 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
     vec.nalloc = NGX_WSABUFS;
     vec.pool = c->pool;
 
-    send = 0;
     wsabuf = NULL;
 
     /* try append the in data to the tail of the existent chain(c->out_pending),
@@ -144,14 +143,14 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         tail = &(*tail)->next;
     }
 
-    bsize = size;
+	remain = size;
 
     /* create the WSABUF and coalesce the neighbouring bufs */
-    while (vec.nelts < ngx_max_wsabufs && bsize > 0)
+    while (vec.nelts < ngx_max_wsabufs && remain > 0)
     {
         if ((*tail) == NULL) {
             /* alloc new chunk, and fill chunk data */
-            size = ngx_min(bsize, NGX_WSABUF_SIZE_MAX);
+            drain = ngx_min(remain, NGX_WSABUF_SIZE_MAX);
 
             ln = ngx_alloc_chain_link(c->pool);
             if (ln == NULL) {
@@ -159,8 +158,8 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
             }
 
             ln->buf = ngx_create_temp_buf(c->pool, NGX_WSABUF_SIZE_MAX);
-            ngx_copy(ln->buf->last, buf + send, size);
-            ln->buf->last += size;
+            ngx_copy(ln->buf->last, buf + (size - remain), drain);
+            ln->buf->last += drain;
             ln->next = NULL;
 
             (*tail) = ln;
@@ -171,19 +170,19 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
             }
 
             wsabuf->buf = (char *)(*tail)->buf->pos;
-            wsabuf->len = size;
+            wsabuf->len = drain;
 
         }
         else {
 
-            size = ngx_min(size, (u_long)((*tail)->buf->end - (*tail)->buf->last));
+			drain = ngx_min(remain, (u_long)((*tail)->buf->end - (*tail)->buf->last));
 
-            if (size > 0) {
+            if (drain > 0) {
                 /* fill chunk data */
-                ngx_copy((*tail)->buf->last, buf + send, size);
-                (*tail)->buf->last += size;
+                ngx_copy((*tail)->buf->last, buf + (size - remain), drain);
+                (*tail)->buf->last += drain;
 
-                wsabuf->len += size;
+                wsabuf->len += drain;
             }
             else {
                 /* chunk is full */
@@ -192,13 +191,11 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
             }
         }
 
-        send += size;
-
         /* drain buf */
-        bsize -= size;
+		remain -= drain;
     }
 
-    ovlp = (LPWSAOVERLAPPED) &c->write->ovlp;
+    ovlp = (LPWSAOVERLAPPED) &c->write->evovlp;
     ngx_memzero(ovlp, sizeof(WSAOVERLAPPED));
 
 	sent = 0;
@@ -213,16 +210,16 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         sent, vec.nelts,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
 
-	if (sent > 65535 || send != sent) {
-		output_debug_string("error of send(%ld)/sent(%ld) -- fd(%d)!!!!\n",
-			send, sent, c->fd);
+	if (sent > 65535 || size != sent) {
+		output_debug_string("error of size(%ld)/sent(%ld) -- fd(%d)!!!!\n",
+			size, sent, c->fd);
 	}
 
 #endif
 
     if (rc == 0) {
   
-        if (sent != size) {
+        if (size != sent) {
             wev->error = 1;
             return NGX_ERROR;
         }
@@ -240,14 +237,10 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         err = ngx_socket_errno;
 
         if (err == WSA_IO_PENDING) {
-            ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,
-                "WSASend() posted");
-            
-            c->sent += sent;
-
-            wev->active = 1;
-
-            return sent;
+			ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,
+				"WSASend() posted");
+			wev->active = 1;
+			return NGX_AGAIN;
         }
 
 #if (NGX_DEBUG)

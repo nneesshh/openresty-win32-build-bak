@@ -1,0 +1,1038 @@
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/catalog.c libxml2-2.9.4/catalog.c
+--- libxml2-2.9.4.original/catalog.c	2017-05-17 09:46:28.716588600 +0200
++++ libxml2-2.9.4/catalog.c	2017-05-17 09:46:28.239652300 +0200
+@@ -42,6 +42,7 @@
+ #include <libxml/globals.h>
+ 
+ #include "buf.h"
++#include "pathtools.h"
+ 
+ #define MAX_DELEGATE	50
+ #define MAX_CATAL_DEPTH	50
+@@ -69,16 +70,12 @@
+ 
+ #define XML_URN_PUBID "urn:publicid:"
+ #define XML_CATAL_BREAK ((xmlChar *) -1)
+-#ifndef XML_XML_DEFAULT_CATALOG
+-#define XML_XML_DEFAULT_CATALOG "file:///etc/xml/catalog"
+-#endif
++
+ #ifndef XML_SGML_DEFAULT_CATALOG
+ #define XML_SGML_DEFAULT_CATALOG "file:///etc/sgml/catalog"
+ #endif
+ 
+ #if defined(_WIN32) && defined(_MSC_VER)
+-#undef XML_XML_DEFAULT_CATALOG
+-static char XML_XML_DEFAULT_CATALOG[256] = "file:///etc/xml/catalog";
+ #if defined(_WIN32_WCE)
+ /* Windows CE don't have a A variant */
+ #define GetModuleHandleA GetModuleHandle
+@@ -3146,8 +3143,10 @@
+ 		}
+ 		catalogs = XML_XML_DEFAULT_CATALOG;
+     }
++#elif defined(__MINGW64_VERSION_MAJOR)
++	    catalogs = single_path_relocation(BINDIR, XML_XML_DEFAULT_CATALOG);
+ #else
+-	    catalogs = XML_XML_DEFAULT_CATALOG;
++		catalogs = XML_XML_DEFAULT_CATALOG;
+ #endif
+ 
+ 	catal = xmlCreateNewCatalog(XML_XML_CATALOG_TYPE,
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/configure.ac libxml2-2.9.4/configure.ac
+--- libxml2-2.9.4.original/configure.ac	2017-05-17 09:46:28.982776000 +0200
++++ libxml2-2.9.4/configure.ac	2017-05-17 09:46:28.208629100 +0200
+@@ -508,6 +508,7 @@
+ # include <sys/types.h>
+ # endif
+ ])
++AC_CHECK_HEADERS([ws2tcpip.h])
+ AC_CHECK_HEADERS([netinet/in.h], [], [],
+ [#if HAVE_SYS_TYPES_H
+ # include <sys/types.h>
+@@ -610,21 +611,33 @@
+ AC_TRY_COMPILE2([
+ #include <stddef.h>
+ #include <sys/types.h>
+-#include <sys/socket.h>],[
++#if HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#elif HAVE_WS2TCPIP_H
++#include <ws2tcpip.h>
++#endif],[
+ (void)getsockopt (1, 1, 1, NULL, (socklen_t *)NULL)],[
+   AC_MSG_RESULT(socklen_t *)
+   XML_SOCKLEN_T=socklen_t],[
+   AC_TRY_COMPILE2([
+ #include <stddef.h>
+ #include <sys/types.h>
+-#include <sys/socket.h>],[
++#if HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#elif HAVE_WS2TCPIP_H
++#include <ws2tcpip.h>
++#endif],[
+ (void)getsockopt (1, 1, 1, NULL, (size_t *)NULL)],[
+     AC_MSG_RESULT(size_t *)
+     XML_SOCKLEN_T=size_t],[
+     AC_TRY_COMPILE2([
+ #include <stddef.h>
+ #include <sys/types.h>
+-#include <sys/socket.h>],[
++#if HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#elif HAVE_WS2TCPIP_H
++#include <ws2tcpip.h>
++#endif],[
+ (void)getsockopt (1, 1, 1, NULL, (int *)NULL)],[
+       AC_MSG_RESULT(int *)
+       XML_SOCKLEN_T=int],[
+@@ -898,7 +911,7 @@
+     fi
+     if test "$PYTHON_VERSION" != "" -a "$PYTHON_SITE_PACKAGES" = ""
+     then
+-	if test -d $libdir/python$PYTHON_VERSION/site-packages
++	if test -d $(eval echo $libdir/python$PYTHON_VERSION/site-packages)
+ 	then
+ 	    PYTHON_SITE_PACKAGES=$libdir/python$PYTHON_VERSION/site-packages
+ 	else
+@@ -1640,10 +1653,9 @@
+  CPPFLAGS="$CPPFLAGS -DWIN32"
+  WIN32_EXTRA_LIBADD="-lws2_32"
+  WIN32_EXTRA_LDFLAGS="-no-undefined"
+- AC_DEFINE([_WINSOCKAPI_],1,[Using the Win32 Socket implementation])
+  if test "${PYTHON}" != ""
+  then
+-   WIN32_EXTRA_PYTHON_LIBADD="-L${pythondir}/../../libs -lpython$(echo ${PYTHON_VERSION} | tr -d .)"
++   WIN32_EXTRA_PYTHON_LIBADD="-shrext .pyd -L${pythondir}/../../lib -lpython${PYTHON_VERSION}"
+  fi
+  ;;
+  *-*-cygwin*)
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/include/libxml/catalog.h libxml2-2.9.4/include/libxml/catalog.h
+--- libxml2-2.9.4.original/include/libxml/catalog.h	2017-05-17 09:46:37.301766800 +0200
++++ libxml2-2.9.4/include/libxml/catalog.h	2017-05-17 09:46:28.255398700 +0200
+@@ -175,6 +175,19 @@
+ XMLPUBFUN const xmlChar * XMLCALL
+ 		xmlCatalogGetPublic	(const xmlChar *pubID);
+ 
++/* Location of the default catalog*/
++#if !defined(XML_XML_DEFAULT_CATALOG)
++	#if !defined(_WIN32)
++		#define XML_XML_DEFAULT_CATALOG "file:///etc/xml/catalog"
++	#elif defined(_WIN32) && defined(_MSC_VER)
++		static char XML_XML_DEFAULT_CATALOG[256] = "file:///etc/xml/catalog";
++	#elif defined(__MINGW32__) && !defined(__MINGW64__)
++		#define XML_XML_DEFAULT_CATALOG "/mingw32/etc/xml/catalog"
++	#elif defined(__MINGW64__)
++		#define XML_XML_DEFAULT_CATALOG "/mingw64/etc/xml/catalog"
++	#endif 
++#endif //!defined(XML_XML_DEFAULT_CATALOG)
++
+ #ifdef __cplusplus
+ }
+ #endif
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/include/wsockcompat.h libxml2-2.9.4/include/wsockcompat.h
+--- libxml2-2.9.4.original/include/wsockcompat.h	2017-05-17 09:46:38.535837600 +0200
++++ libxml2-2.9.4/include/wsockcompat.h	2017-05-17 09:46:27.598808300 +0200
+@@ -41,7 +41,7 @@
+ #define EWOULDBLOCK             WSAEWOULDBLOCK
+ #define ESHUTDOWN               WSAESHUTDOWN
+ 
+-#if (!defined(_MSC_VER) || (_MSC_VER < 1600))
++#if (!defined(_MSC_VER) || (_MSC_VER < 1600)) && !defined(__MINGW64_VERSION_MAJOR)
+ #define EINPROGRESS             WSAEINPROGRESS
+ #define EALREADY                WSAEALREADY
+ #define ENOTSOCK                WSAENOTSOCK
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/Makefile.am libxml2-2.9.4/Makefile.am
+--- libxml2-2.9.4.original/Makefile.am	2017-05-17 09:46:39.156709300 +0200
++++ libxml2-2.9.4/Makefile.am	2017-05-17 09:46:28.255398700 +0200
+@@ -55,7 +55,8 @@
+ 		$(trio_sources) \
+ 		xmlreader.c relaxng.c dict.c SAX2.c \
+ 		xmlwriter.c legacy.c chvalid.c pattern.c xmlsave.c \
+-		xmlmodule.c schematron.c xzlib.c
++		xmlmodule.c schematron.c xzlib.c \
++		pathtools.c
+ 
+ DEPS = $(top_builddir)/libxml2.la
+ LDADDS = $(STATIC_BINARIES) $(top_builddir)/libxml2.la $(THREAD_LIBS) $(Z_LIBS) $(LZMA_LIBS) $(ICONV_LIBS) $(M_LIBS) $(WIN32_EXTRA_LIBADD)
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/nanoftp.c libxml2-2.9.4/nanoftp.c
+--- libxml2-2.9.4.original/nanoftp.c	2017-05-17 09:46:39.234125800 +0200
++++ libxml2-2.9.4/nanoftp.c	2017-05-17 09:46:27.708253700 +0200
+@@ -31,6 +31,9 @@
+ #ifdef HAVE_SYS_SOCKET_H
+ #include <sys/socket.h>
+ #endif
++#ifdef HAVE_WS2TCPIP_H
++#include <ws2tcpip.h>
++#endif
+ #ifdef HAVE_NETINET_IN_H
+ #include <netinet/in.h>
+ #endif
+@@ -78,14 +81,16 @@
+ 
+ 
+ #if defined(__MINGW32__) || defined(_WIN32_WCE)
+-#ifndef _WINSOCKAPI_
+-#define _WINSOCKAPI_
+-#endif
+ #include <wsockcompat.h>
+ #include <winsock2.h>
++#if defined(__MINGW64_VERSION_MAJOR)
++#undef XML_SOCKLEN_T
++#define XML_SOCKLEN_T int
++#else
+ #undef XML_SOCKLEN_T
+ #define XML_SOCKLEN_T unsigned int
+ #endif
++#endif
+ 
+ /**
+  * A couple portability macros
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/nanohttp.c libxml2-2.9.4/nanohttp.c
+--- libxml2-2.9.4.original/nanohttp.c	2017-05-17 09:46:39.260543200 +0200
++++ libxml2-2.9.4/nanohttp.c	2017-05-17 09:46:27.521017700 +0200
+@@ -75,14 +75,15 @@
+ #endif
+ 
+ #if defined(__MINGW32__) || defined(_WIN32_WCE)
+-#ifndef _WINSOCKAPI_
+-#define _WINSOCKAPI_
+-#endif
+ #include <wsockcompat.h>
+ #include <winsock2.h>
+ #undef XML_SOCKLEN_T
++#if defined(__MINGW64_VERSION_MAJOR)
++#define XML_SOCKLEN_T int
++#else
+ #define XML_SOCKLEN_T unsigned int
+ #endif
++#endif
+ 
+ #include <libxml/globals.h>
+ #include <libxml/xmlerror.h>
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/pathtools.c libxml2-2.9.4/pathtools.c
+--- libxml2-2.9.4.original/pathtools.c	2017-05-17 09:46:41.424345000 +0200
++++ libxml2-2.9.4/pathtools.c	2017-05-17 09:46:28.271164400 +0200
+@@ -0,0 +1,538 @@
++/*
++      .Some useful path tools.
++        .ASCII only for now.
++   .Written by Ray Donnelly in 2014.
++   .Licensed under CC0 (and anything.
++  .else you need to license it under).
++      .No warranties whatsoever.
++  .email: <mingw.android@gmail.com>.
++ */
++
++#if defined(__APPLE__)
++#include <stdlib.h>
++#else
++#include <malloc.h>
++#endif
++#include <limits.h>
++#include <stdio.h>
++#include <string.h>
++#if defined(__linux__) || defined(__CYGWIN__) || defined(__MSYS__)
++#include <alloca.h>
++#endif
++#include <unistd.h>
++
++/* If you don't define this, then get_executable_path()
++   can only use argv[0] which will often not work well */
++#define IMPLEMENT_SYS_GET_EXECUTABLE_PATH
++
++#if defined(IMPLEMENT_SYS_GET_EXECUTABLE_PATH)
++#if defined(__linux__) || defined(__CYGWIN__) || defined(__MSYS__)
++/* Nothing needed, unistd.h is enough. */
++#elif defined(__APPLE__)
++#include <mach-o/dyld.h>
++#elif defined(_WIN32)
++#define WIN32_MEAN_AND_LEAN
++#include <windows.h>
++#include <psapi.h>
++#endif
++#endif /* defined(IMPLEMENT_SYS_GET_EXECUTABLE_PATH) */
++
++#include "pathtools.h"
++
++char *
++malloc_copy_string(char const * original)
++{
++  char * result = (char *) malloc (sizeof (char*) * strlen (original)+1);
++  if (result != NULL)
++  {
++    strcpy (result, original);
++  }
++  return result;
++}
++
++void
++sanitise_path(char * path)
++{
++  size_t path_size = strlen (path);
++
++  /* Replace any '\' with '/' */
++  char * path_p = path;
++  while ((path_p = strchr (path_p, '\\')) != NULL)
++  {
++    *path_p = '/';
++  }
++  /* Replace any '//' with '/' */
++  path_p = path;
++  while ((path_p = strstr (path_p, "//")) != NULL)
++  {
++    memmove (path_p, path_p + 1, path_size--);
++  }
++  return;
++}
++
++char *
++get_relative_path(char const * from_in, char const * to_in)
++{
++  size_t from_size = (from_in == NULL) ? 0 : strlen (from_in);
++  size_t to_size = (to_in == NULL) ? 0 : strlen (to_in);
++  size_t max_size = (from_size + to_size) * 2 + 4;
++  char * scratch_space = (char *) alloca (from_size + 1 + to_size + 1 + max_size + max_size);
++  char * from;
++  char * to;
++  char * common_part;
++  char * result;
++  size_t count;
++
++  /* No to, return "./" */
++  if (to_in == NULL)
++  {
++    return malloc_copy_string ("./");
++  }
++
++  /* If alloca failed or no from was given return a copy of to */
++  if (   from_in == NULL
++      || scratch_space == NULL )
++  {
++    return malloc_copy_string (to_in);
++  }
++
++  from = scratch_space;
++  strcpy (from, from_in);
++  to = from + from_size + 1;
++  strcpy (to, to_in);
++  common_part = to + to_size + 1;
++  result = common_part + max_size;
++  simplify_path (from);
++  simplify_path (to);
++
++  result[0] = '\0';
++
++  size_t match_size_dirsep = 0;  /* The match size up to the last /. Always wind back to this - 1 */
++  size_t match_size = 0;         /* The running (and final) match size. */
++  size_t largest_size = (from_size > to_size) ? from_size : to_size;
++  int to_final_is_slash = (to[to_size-1] == '/') ? 1 : 0;
++  char from_c;
++  char to_c;
++  for (match_size = 0; match_size < largest_size; ++match_size)
++  {
++    /* To simplify the logic, always pretend the strings end with '/' */
++    from_c = (match_size < from_size) ? from[match_size] : '/';
++    to_c =   (match_size <   to_size) ?   to[match_size] : '/';
++
++    if (from_c != to_c)
++    {
++      if (from_c != '\0' || to_c != '\0')
++      {
++        match_size = match_size_dirsep;
++      }
++      break;
++    }
++    else if (from_c == '/')
++    {
++      match_size_dirsep = match_size;
++    }
++  }
++  strncpy (common_part, from, match_size);
++  common_part[match_size] = '\0';
++  from += match_size;
++  to += match_size;
++  size_t ndotdots = 0;
++  char const* from_last = from + strlen(from) - 1;
++  while ((from = strchr (from, '/')) && from != from_last)
++  {
++    ++ndotdots;
++    ++from;
++  }
++  for (count = 0; count < ndotdots; ++count)
++  {
++    strcat(result, "../");
++  }
++  if (strlen(to) > 0)
++  {
++    strcat(result, to+1);
++  }
++  /* Make sure that if to ends with '/' result does the same, and
++     vice-versa. */
++  size_t size_result = strlen(result);
++  if ((to_final_is_slash == 1)
++      && (!size_result || result[size_result-1] != '/'))
++  {
++    strcat (result, "/");
++  }
++  else if (!to_final_is_slash
++           && size_result && result[size_result-1] == '/')
++  {
++    result[size_result-1] = '\0';
++  }
++
++  return malloc_copy_string (result);
++}
++
++void
++simplify_path(char * path)
++{
++  ssize_t n_toks = 1; /* in-case we need an empty initial token. */
++  ssize_t i, j;
++  size_t tok_size;
++  size_t in_size = strlen (path);
++  int it_ended_with_a_slash = (path[in_size - 1] == '/') ? 1 : 0;
++  char * result = path;
++  sanitise_path(result);
++  char * result_p = result;
++
++  do
++  {
++    ++n_toks;
++    ++result_p;
++  } while ((result_p = strchr (result_p, '/')) != NULL);
++
++  result_p = result;
++  char const ** toks = (char const **) alloca (sizeof (char const*) * n_toks);
++  n_toks = 0;
++  do
++  {
++    if (result_p > result)
++    {
++      *result_p++ = '\0';
++    }
++    else if (*result_p == '/')
++    {
++      /* A leading / creates an empty initial token. */
++      toks[n_toks++] = result_p;
++      *result_p++ = '\0';
++    }
++    toks[n_toks++] = result_p;
++  } while ((result_p = strchr (result_p, '/')) != NULL);
++
++  /* Remove all non-leading '.' and any '..' we can match
++     with an earlier forward path (i.e. neither '.' nor '..') */
++  for (i = 1; i < n_toks; ++i)
++  {
++    int removals[2] = { -1, -1 };
++    if ( strcmp (toks[i], "." ) == 0)
++    {
++      removals[0] = i;
++    }
++    else if ( strcmp (toks[i], ".." ) == 0)
++    {
++      /* Search backwards for a forward path to collapse.
++         If none are found then the .. also stays. */
++      for (j = i - 1; j > -1; --j)
++      {
++        if ( strcmp (toks[j], "." )
++          && strcmp (toks[j], ".." ) )
++        {
++          removals[0] = j;
++          removals[1] = i;
++          break;
++        }
++      }
++    }
++    for (j = 0; j < 2; ++j)
++    {
++      if (removals[j] >= 0) /* Can become -2 */
++      {
++        --n_toks;
++        memmove (&toks[removals[j]], &toks[removals[j]+1], (n_toks - removals[j])*sizeof (char*));
++        --i;
++        if (!j)
++        {
++          --removals[1];
++        }
++      }
++    }
++  }
++  result_p = result;
++  for (i = 0; i < n_toks; ++i)
++  {
++    tok_size = strlen(toks[i]);
++    memcpy (result_p, toks[i], tok_size);
++    result_p += tok_size;
++    if ((!i || tok_size) && ((i < n_toks - 1) || it_ended_with_a_slash == 1))
++    {
++      *result_p = '/';
++      ++result_p;
++    }
++  }
++  *result_p = '\0';
++}
++
++/* Returns actual_to by calculating the relative path from -> to and
++   applying that to actual_from. An assumption that actual_from is a
++   dir is made, and it may or may not end with a '/' */
++char const *
++get_relocated_path (char const * from, char const * to, char const * actual_from)
++{
++  char const * relative_from_to = get_relative_path (from, to);
++  char * actual_to = (char *) malloc (strlen(actual_from) + 2 + strlen(relative_from_to));
++  return actual_to;
++}
++
++int
++get_executable_path(char const * argv0, char * result, ssize_t max_size)
++{
++  char * system_result = (char *) alloca (max_size);
++  ssize_t system_result_size = -1;
++  ssize_t result_size = -1;
++
++  if (system_result != NULL)
++  {
++#if defined(IMPLEMENT_SYS_GET_EXECUTABLE_PATH)
++#if defined(__linux__) || defined(__CYGWIN__) || defined(__MSYS__)
++    system_result_size = readlink("/proc/self/exe", system_result, max_size);
++#elif defined(__APPLE__)
++    uint32_t bufsize = (uint32_t)max_size;
++    if (_NSGetExecutablePath(system_result, &bufsize) == 0)
++    {
++      system_result_size = (ssize_t)bufsize;
++    }
++#elif defined(_WIN32)
++    unsigned long bufsize = (unsigned long)max_size;
++    system_result_size = GetModuleFileNameA(NULL, system_result, bufsize);
++    if (system_result_size == 0 || system_result_size == (ssize_t)bufsize)
++    {
++      /* Error, possibly not enough space. */
++      system_result_size = -1;
++    }
++    else
++    {
++      /* Early conversion to unix slashes instead of more changes
++         everywhere else .. */
++      char * winslash;
++      system_result[system_result_size] = '\0';
++      while ((winslash = strchr (system_result, '\\')) != NULL)
++      {
++        *winslash = '/';
++      }
++    }
++#else
++#warning "Don't know how to get executable path on this system"
++#endif
++#endif /* defined(IMPLEMENT_SYS_GET_EXECUTABLE_PATH) */
++  }
++  /* Use argv0 as a default in-case of failure */
++  if (system_result_size != -1)
++  {
++    strncpy (result, system_result, system_result_size);
++    result[system_result_size] = '\0';
++  }
++  else
++  {
++    if (argv0 != NULL)
++    {
++      strncpy (result, argv0, max_size);
++      result[max_size-1] = '\0';
++    }
++    else
++    {
++      result[0] = '\0';
++    }
++  }
++  result_size = strlen (result);
++  return result_size;
++}
++
++char const *
++strip_n_prefix_folders(char const * path, size_t n)
++{
++  if (path == NULL)
++  {
++    return NULL;
++  }
++
++  if (path[0] != '/')
++  {
++    return path;
++  }
++
++  char const * last = path;
++  while (n-- && path != NULL)
++  {
++    last = path;
++    path = strchr (path + 1, '/');
++  }
++  return (path == NULL) ? last : path;
++}
++
++void
++strip_n_suffix_folders(char * path, size_t n)
++{
++  if (path == NULL)
++  {
++    return;
++  }
++  while (n--)
++  {
++    if (strrchr (path + 1, '/'))
++    {
++      *strrchr (path + 1, '/') = '\0';
++    }
++    else
++    {
++      return;
++    }
++  }
++  return;
++}
++
++size_t
++split_path_list(char const * path_list, char split_char, char *** arr)
++{
++  size_t path_count;
++  size_t path_list_size;
++  char const * path_list_p;
++
++  path_list_p = path_list;
++  if (path_list == NULL || path_list[0] == '\0')
++  {
++    return 0;
++  }
++  path_list_size = strlen (path_list);
++
++  path_count = 0;
++  do
++  {
++    ++path_count;
++    ++path_list_p;
++  }
++  while ((path_list_p = strchr (path_list_p, split_char)) != NULL);
++
++  /* allocate everything in one go. */
++  char * all_memory = (char *) malloc (sizeof (char *) * path_count + strlen(path_list) + 1);
++  if (all_memory == NULL)
++    return 0;
++  *arr = (char **)all_memory;
++  all_memory += sizeof (char *) * path_count;
++
++  path_count = 0;
++  path_list_p = path_list;
++  char const * next_path_list_p = 0;
++  do
++  {
++    next_path_list_p = strchr (path_list_p, split_char);
++    if (next_path_list_p != NULL)
++    {
++      ++next_path_list_p;
++    }
++    size_t this_size = (next_path_list_p != NULL)
++                       ? next_path_list_p - path_list_p - 1
++                       : &path_list[path_list_size] - path_list_p;
++    memcpy (all_memory, path_list_p, this_size);
++    all_memory[this_size] = '\0';
++    (*arr)[path_count++] = all_memory;
++    all_memory += this_size + 1;
++  } while ((path_list_p = next_path_list_p) != NULL);
++
++  return path_count;
++}
++
++char *
++get_relocated_path_list(char const * from, char const * to_path_list)
++{
++  char exe_path[MAX_PATH];
++  char * temp;
++  get_executable_path (NULL, &exe_path[0], sizeof (exe_path) / sizeof (exe_path[0]));
++  if ((temp = strrchr (exe_path, '/')) != NULL)
++  {
++    temp[1] = '\0';
++  }
++
++  char **arr = NULL;
++  /* Ask Alexey why he added this. Are we not 100% sure
++     that we're dealing with unix paths here? */
++  char split_char = ':';
++  if (strchr (to_path_list, ';'))
++  {
++    split_char = ';';
++  }
++  size_t count = split_path_list (to_path_list, split_char, &arr);
++  int result_size = 1 + (count - 1); /* count - 1 is for ; delim. */
++  size_t exe_path_size = strlen (exe_path);
++  size_t i;
++  /* Space required is:
++     count * (exe_path_size + strlen (rel_to_datadir))
++     rel_to_datadir upper bound is:
++     (count * strlen (from)) + (3 * num_slashes (from))
++     + strlen(arr[i]) + 1.
++     .. pathalogically num_slashes (from) is strlen (from)
++     (from = ////////) */
++  size_t space_required = (count * (exe_path_size + 4 * strlen (from))) + count - 1;
++  for (i = 0; i < count; ++i)
++  {
++    space_required += strlen (arr[i]);
++  }
++  char * scratch = (char *) alloca (space_required);
++  if (scratch == NULL)
++    return NULL;
++  for (i = 0; i < count; ++i)
++  {
++    char * rel_to_datadir = get_relative_path (from, arr[i]);
++    scratch[0] = '\0';
++    arr[i] = scratch;
++    strcat (scratch, exe_path);
++    strcat (scratch, rel_to_datadir);
++    simplify_path (arr[i]);
++    size_t arr_i_size = strlen (arr[i]);
++    result_size += arr_i_size;
++    scratch = arr[i] + arr_i_size + 1;
++  }
++  char * result = (char *) malloc (result_size);
++  if (result == NULL)
++  {
++    return NULL;
++  }
++  result[0] = '\0';
++  for (i = 0; i < count; ++i)
++  {
++    strcat (result, arr[i]);
++    if (i != count-1)
++    {
++#if defined(_WIN32)
++      strcat (result, ";");
++#else
++      strcat (result, ":");
++#endif
++    }
++  }
++  free ((void*)arr);
++  return result;
++}
++
++char *
++single_path_relocation(const char *from, const char *to)
++{
++#if defined(__MINGW32__)
++  char exe_path[PATH_MAX];
++  get_executable_path (NULL, &exe_path[0], sizeof(exe_path)/sizeof(exe_path[0]));
++  if (strrchr (exe_path, '/') != NULL)
++  {
++     strrchr (exe_path, '/')[1] = '\0';
++  }
++  char * rel_to_datadir = get_relative_path (from, to);
++  strcat (exe_path, rel_to_datadir);
++  simplify_path (&exe_path[0]);
++  return malloc_copy_string(exe_path);
++#else
++  return malloc_copy_string(to);
++#endif
++}
++
++char *
++pathlist_relocation(const char *from_path, const char *to_path_list)
++{
++#if defined(__MINGW32__)
++  static char stored_path[PATH_MAX];
++  static int stored = 0;
++  if (stored == 0)
++  {
++    char const * relocated = get_relocated_path_list(from_path, to_path_list);
++    strncpy (stored_path, relocated, PATH_MAX);
++    stored_path[PATH_MAX-1] = '\0';
++    free ((void *)relocated);
++    stored = 1;
++  }
++  return stored_path;
++#else
++  return (to_path_list);
++#endif
++}
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/pathtools.h libxml2-2.9.4/pathtools.h
+--- libxml2-2.9.4.original/pathtools.h	2017-05-17 09:46:41.443651600 +0200
++++ libxml2-2.9.4/pathtools.h	2017-05-17 09:46:28.286962800 +0200
+@@ -0,0 +1,59 @@
++/*
++      .Some useful path tools.
++        .ASCII only for now.
++   .Written by Ray Donnelly in 2014.
++   .Licensed under CC0 (and anything.
++  .else you need to license it under).
++      .No warranties whatsoever.
++  .email: <mingw.android@gmail.com>.
++ */
++
++#ifndef PATHTOOLS_H
++#define PATHTOOLS_H
++
++#include <unistd.h>
++#if defined(__APPLE__)
++#include <stdlib.h>
++#else
++#include <malloc.h>
++#endif
++#include <stdio.h>
++
++char * malloc_copy_string(char const * original);
++
++/* In-place replaces any '\' with '/' and any '//' with '/' */
++void sanitise_path(char * path);
++
++/* Uses a host OS specific function to determine the path of the executable,
++   if IMPLEMENT_SYS_GET_EXECUTABLE_PATH is defined, otherwise uses argv0. */
++int get_executable_path(char const * argv0, char * result, ssize_t max_size);
++
++/* Where possible, in-place removes occourances of '.' and 'path/..' */
++void simplify_path(char * path);
++
++/* Allocates (via malloc) and returns the path to get from from to to. */
++char * get_relative_path(char const * from, char const * to);
++
++size_t split_path_list(char const * path_list, char split_char, char *** arr);
++
++/* Advances path along by the amount that removes n prefix folders. */
++char const *
++strip_n_prefix_folders(char const * path, size_t n);
++
++/* NULL terminates path to remove n suffix folders. */
++void
++strip_n_suffix_folders(char * path, size_t n);
++
++char const * get_relocated_path (char const * from, char const * to, char const * actual_from);
++char * get_relocated_path_list(char const * from, char const * to_path_list);
++
++char * single_path_relocation(const char *from, const char *to);
++char * pathlist_relocation(const char *from_path, const char *to_path_list);
++
++#if defined (__MINGW32__) && !defined(__MINGW64__)
++#define BINDIR "/mingw32/bin"
++#elif defined (__MINGW64__) 
++#define BINDIR "/mingw64/bin"
++#endif
++
++#endif /* PATHTOOLS_H */
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/runtest.c libxml2-2.9.4/runtest.c
+--- libxml2-2.9.4.original/runtest.c	2017-05-17 09:47:41.589310600 +0200
++++ libxml2-2.9.4/runtest.c	2017-05-17 09:46:28.052301100 +0200
+@@ -128,6 +128,8 @@
+     char directory[500];
+     int len;
+ 
++    (void) flags;
++    (void) errfunc;
+     if ((pattern == NULL) || (pglob == NULL)) return(-1);
+ 
+     strncpy(directory, pattern, 499);
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/testThreadsWin32.c libxml2-2.9.4/testThreadsWin32.c
+--- libxml2-2.9.4.original/testThreadsWin32.c	2017-05-17 09:48:15.622290500 +0200
++++ libxml2-2.9.4/testThreadsWin32.c	2017-05-17 09:46:27.991224900 +0200
+@@ -17,7 +17,7 @@
+ static HANDLE tid[MAX_ARGC];
+ 
+ static const char *catalog = "test/threads/complex.xml";
+-static char *testfiles[] = {
++static const char *testfiles[] = {
+     "test/threads/abc.xml",
+     "test/threads/acb.xml",
+     "test/threads/bac.xml",
+@@ -83,13 +83,15 @@
+ }
+ 
+ int
+-main()
++main(int argc, char **argv)
+ {
+ 	unsigned int i, repeat;
+ 	unsigned int num_threads = sizeof(testfiles) / sizeof(testfiles[0]);
+ 	DWORD results[MAX_ARGC];
+ 	BOOL ret;
+ 
++        (void) argc;
++        (void) argv;
+ 	xmlInitParser();
+ 	for (repeat = 0;repeat < TEST_REPEAT_COUNT;repeat++)
+ 	{
+@@ -105,7 +107,7 @@
+ 		{
+ 			DWORD useless;
+ 			tid[i] = CreateThread(NULL, 0,
+-				thread_specific_data, testfiles[i], 0, &useless);
++				thread_specific_data, (LPVOID) testfiles[i], 0, &useless);
+ 			if (tid[i] == NULL)
+ 			{
+ 				perror("CreateThread");
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/threads.c libxml2-2.9.4/threads.c
+--- libxml2-2.9.4.original/threads.c	2017-05-17 09:48:15.688673000 +0200
++++ libxml2-2.9.4/threads.c	2017-05-17 09:46:28.318128200 +0200
+@@ -158,7 +158,7 @@
+ static DWORD mainthread;
+ static struct {
+     DWORD done;
+-    DWORD control;
++    LONG control;
+ } run_once = { 0, 0};
+ static volatile LPCRITICAL_SECTION global_init_lock = NULL;
+ 
+@@ -1000,12 +1000,15 @@
+ #elif defined(HAVE_WIN32_THREADS) && !defined(HAVE_COMPILER_TLS) && (!defined(LIBXML_STATIC) || defined(LIBXML_STATIC_FOR_DLL))
+ #if defined(LIBXML_STATIC_FOR_DLL)
+ BOOL XMLCALL
+-xmlDllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
++xmlDllMain(void *hinstDLL, unsigned long fdwReason, void *lpvReserved)
+ #else
+ BOOL WINAPI
+ DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+ #endif
+ {
++    /* Unused */
++    (void)(hinstDLL);
++    (void)(lpvReserved);
+     switch (fdwReason) {
+         case DLL_THREAD_DETACH:
+             if (globalkey != TLS_OUT_OF_INDEXES) {
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/timsort.h libxml2-2.9.4/timsort.h
+--- libxml2-2.9.4.original/timsort.h	2017-05-17 09:48:15.715212100 +0200
++++ libxml2-2.9.4/timsort.h	2017-05-17 09:46:28.083462900 +0200
+@@ -323,7 +323,15 @@
+     SORT_TYPE *tempstore = (SORT_TYPE *)realloc(store->storage, new_size * sizeof(SORT_TYPE));
+     if (tempstore == NULL)
+     {
+-      fprintf(stderr, "Error allocating temporary storage for tim sort: need %lu bytes", sizeof(SORT_TYPE) * new_size);
++      fprintf(stderr, "Error allocating temporary storage for tim sort: need "
++#if defined(_MSC_VER)
++          "%Iu"
++#elif defined(__MINGW32_MAJOR_VERSION)
++          "%u"
++#else
++          "%zu"
++#endif
++          " bytes",sizeof(SORT_TYPE) * new_size);
+       exit(1);
+     }
+     store->storage = tempstore;
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/uri.c libxml2-2.9.4/uri.c
+--- libxml2-2.9.4.original/uri.c	2017-05-17 09:48:16.055551800 +0200
++++ libxml2-2.9.4/uri.c	2017-05-17 09:46:27.412045100 +0200
+@@ -2390,7 +2390,6 @@
+  */
+ #if defined(_WIN32) && !defined(__CYGWIN__)
+     int len = 0;
+-    int i = 0;
+     xmlChar *p = NULL;
+ #endif
+     xmlURIPtr uri;
+@@ -2472,7 +2471,7 @@
+     len = xmlStrlen(path);
+     if ((len > 2) && IS_WINDOWS_PATH(path)) {
+         /* make the scheme 'file' */
+-	uri->scheme = xmlStrdup(BAD_CAST "file");
++	uri->scheme = (char *) xmlStrdup(BAD_CAST "file");
+ 	/* allocate space for leading '/' + path + string terminator */
+ 	uri->path = xmlMallocAtomic(len + 2);
+ 	if (uri->path == NULL) {
+@@ -2481,15 +2480,15 @@
+ 	}
+ 	/* Put in leading '/' plus path */
+ 	uri->path[0] = '/';
+-	p = uri->path + 1;
+-	strncpy(p, path, len + 1);
++	p = BAD_CAST (uri->path + 1);
++	strncpy((char *) p, (const char *) path, len + 1);
+     } else {
+-	uri->path = xmlStrdup(path);
++	uri->path = (char *) xmlStrdup(path);
+ 	if (uri->path == NULL) {
+ 	    xmlFreeURI(uri);
+ 	    return(NULL);
+ 	}
+-	p = uri->path;
++	p = BAD_CAST (uri->path);
+     }
+     /* Now change all occurences of '\' to '/' */
+     while (*p != '\0') {
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/xmlIO.c libxml2-2.9.4/xmlIO.c
+--- libxml2-2.9.4.original/xmlIO.c	2017-05-17 09:48:17.068816800 +0200
++++ libxml2-2.9.4/xmlIO.c	2017-05-17 09:46:27.551974100 +0200
+@@ -40,6 +40,9 @@
+ #endif
+ 
+ #if defined(WIN32) || defined(_WIN32)
++#ifdef HAVE_WS2TCPIP_H
++#include <ws2tcpip.h>
++#endif
+ #include <windows.h>
+ #endif
+ 
+@@ -59,7 +62,7 @@
+ #  endif
+ #else
+ #  ifdef HAVE__STAT
+-#    if defined(_WIN32) || defined (__DJGPP__) && !defined (__CYGWIN__)
++#    if (defined(_WIN32)  && !defined(__MINGW64_VERSION_MAJOR)) || defined (__DJGPP__) && !defined (__CYGWIN__)
+ #      define stat _stat
+ #    endif
+ #  endif
+@@ -665,7 +668,11 @@
+     wPath = __xmlIOWin32UTF8ToWChar(path);
+     if (wPath)
+     {
++#if !defined(__MINGW64_VERSION_MAJOR) || !(defined(_FILE_OFFSET_BITS) && (_FILE_OFFSET_BITS == 64))
+        retval = _wstat(wPath,info);
++#else
++       retval = _wstati64(wPath,info);
++#endif
+        xmlFree(wPath);
+     }
+     /* maybe path in native encoding */
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/xmllint.c libxml2-2.9.4/xmllint.c
+--- libxml2-2.9.4.original/xmllint.c	2017-05-17 09:48:17.094576800 +0200
++++ libxml2-2.9.4/xmllint.c	2017-05-17 09:46:28.286962800 +0200
+@@ -28,12 +28,15 @@
+ #endif
+ 
+ #ifdef __MINGW32__
+-#define _WINSOCKAPI_
+ #include <wsockcompat.h>
+ #include <winsock2.h>
+ #undef XML_SOCKLEN_T
++#if defined(__MINGW64_VERSION_MAJOR)
++#define XML_SOCKLEN_T int
++#else
+ #define XML_SOCKLEN_T unsigned int
+ #endif
++#endif
+ 
+ #ifdef HAVE_SYS_TIMEB_H
+ #include <sys/timeb.h>
+@@ -102,10 +105,6 @@
+ #include <libxml/xmlsave.h>
+ #endif
+ 
+-#ifndef XML_XML_DEFAULT_CATALOG
+-#define XML_XML_DEFAULT_CATALOG "file:///etc/xml/catalog"
+-#endif
+-
+ typedef enum {
+     XMLLINT_RETURN_OK = 0,	/* No error */
+     XMLLINT_ERR_UNCLASS = 1,	/* Unclassified */
+diff -r -u --strip-trailing-cr libxml2-2.9.4.original/xmlmodule.c libxml2-2.9.4/xmlmodule.c
+--- libxml2-2.9.4.original/xmlmodule.c	2017-05-17 09:48:17.150357600 +0200
++++ libxml2-2.9.4/xmlmodule.c	2017-05-17 09:46:27.929581900 +0200
+@@ -340,6 +340,12 @@
+      */
+     *symbol = GetProcAddressA(handle, name);
+ #else
++    /* FIXME: On the next ABI break change xmlModuleSymbol() prototype
++     * to use some dummy function pointer (doesn't matter what kind of
++     * function, as long as it's a function) instead of void*.
++     * ISO C does NOT require void* to be able to hold a function
++     * pointer, and any conformant compiler would warn about doing this:
++     */
+     *symbol = GetProcAddress(handle, name);
+ #endif
+     return (NULL == *symbol) ? -1 : 0;

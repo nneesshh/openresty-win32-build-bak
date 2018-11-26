@@ -638,7 +638,7 @@ ngx_http_v2_handle_connection(ngx_http_v2_connection_t *h2c)
     h2c->free_fake_connections = NULL;
 
 #if (NGX_HTTP_SSL)
-    if (c->ssl) {
+    if (c->ssl && 0 == c->read->active) {
         ngx_ssl_free_buffer(c);
     }
 #endif

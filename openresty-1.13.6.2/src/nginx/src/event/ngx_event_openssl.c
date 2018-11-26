@@ -1915,6 +1915,7 @@ ngx_ssl_free_buffer(ngx_connection_t *c)
     if (c->ssl->buf && c->ssl->buf->start) {
         if (ngx_pfree(c->pool, c->ssl->buf->start) == NGX_OK) {
             c->ssl->buf->start = NULL;
+			c->ssl->buf->pos = NULL;
         }
     }
 }

@@ -1036,6 +1036,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
     ngx_uint_t         instance;
     ngx_event_t       *rev, *wev;
     ngx_connection_t  *c;
+	int                id; /* for debug */
 
     /* disable warning: Win32 SOCKET is u_int while UNIX socket is int */
 
@@ -1048,6 +1049,14 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
     }
 
     c = ngx_cycle->free_connections;
+
+	if (c && c->read->evovlp.recv_mem_lock_flag == 1) {
+		ngx_log_error(NGX_LOG_ERR, log, 0,
+			"it should never happen, c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) -- the memory posted to recv is not freed correctly!!!",
+			c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
+
+		return NULL;
+	}
 
     if (c == NULL) {
         ngx_drain_connections((ngx_cycle_t *) ngx_cycle);
@@ -1072,8 +1081,8 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
     rev = c->read;
     wev = c->write;
     
-    // the "id" is for debug
-    int id = c->id;
+    /* the "id" is for debug */
+    id = c->id;
 
     ngx_memzero(c, sizeof(ngx_connection_t));
     c->id = id;

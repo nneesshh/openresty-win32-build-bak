@@ -154,6 +154,12 @@ ngx_event_accept(ngx_event_t *ev)
             return;
         }
 
+#if (NGX_DEBUG)
+		// debug
+		output_debug_string("\nngx_event_accept(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
+			c->id, c->fd, c->destroyed, ls->fd, s);
+#endif
+
         c->type = SOCK_STREAM;
 
 #if (NGX_STAT_STUB)

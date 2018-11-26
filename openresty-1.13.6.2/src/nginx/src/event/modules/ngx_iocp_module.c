@@ -301,8 +301,11 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
     ngx_err_t          err;
     ngx_msec_t         delta;
     ngx_event_t       *ev;
-    ngx_event_ovlp_t  *ovlp;
+    ngx_event_ovlp_t  *evovlp;
     
+#if (NGX_DEBUG)
+	ngx_connection_t  *c;
+#endif
 
     if (timer == NGX_TIMER_INFINITE) {
         timer = INFINITE;
@@ -352,20 +355,28 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
             if (overlappeds[i].lpOverlapped) {
                 ovlp_entry = &overlappeds[i];
                 key = ovlp_entry->lpCompletionKey;
-                ovlp = (ngx_event_ovlp_t *)ovlp_entry->lpOverlapped;
+                evovlp = (ngx_event_ovlp_t *)ovlp_entry->lpOverlapped;
                 bytes = ovlp_entry->dwNumberOfBytesTransferred;
 
-                if (ovlp) {
+                if (evovlp) {
 
                     ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                        "iocp: %d b:%d k:%d ov:%p", rc, bytes, key, ovlp);
+                        "iocp: %d b:%d k:%d ov:%p", rc, bytes, key, evovlp);
 
-                    ev = ovlp->event;
+                    ev = evovlp->event;
+
+#if (NGX_DEBUG)
+					// connection
+					c = ev->data;
+#endif
+
+					if (0 == ev->write) {
+						evovlp->recv_mem_lock_flag = 0; /* ngx_get_connection() use this flag to ensure that the memory posted to recv has already freed correctly */
+					}
 
                     /* Skip events from a closed socket */
-                    if (NULL == ev
-						|| ev->closed
-                        || (NGX_IOCP_ACCEPT != key && 1 == ovlp->acceptex_flag))
+                    if (ev->closed
+                        || (NGX_IOCP_ACCEPT != key && 1 == evovlp->acceptex_flag))
                     {
                         /* Event is already closed, or acceptex event is not ready yet, or write event is in disable state,
                            all events must be ignored except NGX_IOCP_ACCEPT. */
@@ -373,42 +384,46 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     }
 
 #if (NGX_DEBUG)
-                    if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
-                        // debug
-                        if (0 == bytes) {
-                            ngx_connection_t *c = ev->data;
-							output_debug_string("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
-                        }
-                    }
+					// debug
+					{
+						if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
+							if (0 == bytes) {
+								output_debug_string("\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- bytes(%d)\n",
+									c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, 
+									ev->write, key,
+									bytes);
+							}
+						}
 
-                    // debug
-                    {
-                        ngx_connection_t *c = ev->data;
-                        if (0 == ev->write) {
-							output_debug_string("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
-                                key,
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
-                        }
-                        else {
-							output_debug_string("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
-                                key,
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
-                        }
+						if (0 == ev->write) {
+							output_debug_string("\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- with buffer(0x%08x)(%d)_bytes(%d)\n",
+								key,
+								c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+								ev->write, key,
+								(uintptr_t)c->buffer_ref.last, (int)(c->buffer_ref.end - c->buffer_ref.last), bytes);
+						}
+						else {
+							output_debug_string("\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- bytes(%d)\n",
+								key,
+								c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+								ev->write, key,
+								bytes);
+						}
 
-                        if (0 == ev->write && 0 != ev->ready) {
-							output_debug_string("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d) -- bytes(%d)\n",
-                                c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, ev->write, bytes);
-                        }
-                    }
-
+						if (0 == ev->write && 0 != ev->ready) {
+							output_debug_string("\npost crashed!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- bytes(%d)\n",
+								c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+								ev->write, key,
+								bytes);
+						}
+					}
 #endif
 
                     switch (key) {
 
                     case NGX_IOCP_ACCEPT:
                         /* lpCompletionKey is the key of listen iocp port, but ev->ovlp is ovlp of normal iocp port */
-                        ovlp->acceptex_flag = 0;
+                        evovlp->acceptex_flag = 0;
                         if (bytes) {
                             ev->ready = 1;
                         }
@@ -435,9 +450,8 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     // debug
                     if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
                         if (0 == ev->write && bytes > 0) {
-                            ngx_connection_t *c = ev->data;
                             char data[8096] = { 0 };
-                            memcpy(data, c->buffer->pos, bytes);
+                            memcpy(data, c->buffer_ref.pos, bytes);
 							output_debug_string("\n\t>>>> server read begin\n");
 							output_debug_string("\t     c(%d) fd(%d) destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
                                 c->id, c->fd, c->destroyed,
@@ -502,7 +516,7 @@ ngx_iocp_create_port(ngx_event_t *ev, ngx_uint_t key)
     c->write->active = 1;
 
     ngx_log_debug3(NGX_LOG_DEBUG_EVENT, ev->log, 0,
-        "iocp add: fd:%d k:%ui ov:%p", c->fd, key, &ev->ovlp);
+        "iocp add: fd:%d k:%ui ov:%p", c->fd, key, &ev->evovlp);
 
     if (CreateIoCompletionPort((HANDLE)c->fd, iocp, key, 0) == NULL) {
         ngx_log_error(NGX_LOG_ALERT, c->log, ngx_errno,

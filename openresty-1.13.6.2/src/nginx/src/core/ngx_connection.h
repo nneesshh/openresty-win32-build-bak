@@ -159,6 +159,10 @@ struct ngx_connection_s {
 
     ngx_buf_t          *buffer;
 
+#if (NGX_DEBUG)
+	ngx_buf_t           buffer_ref; /* just a reference pointer for WSARecv */
+#endif
+
     ngx_queue_t         queue;
 
     ngx_atomic_uint_t   number;

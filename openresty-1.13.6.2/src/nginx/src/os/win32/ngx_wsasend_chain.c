@@ -151,7 +151,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
         }
         else {
-            if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED)&wev->ovlp,
+            if (WSAGetOverlappedResult(c->fd, (LPWSAOVERLAPPED)&wev->evovlp,
                 &sent, 0, NULL)
                 == 0)
             {
@@ -283,7 +283,7 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         }
     }
 
-    ovlp = (LPWSAOVERLAPPED) &c->write->ovlp;
+    ovlp = (LPWSAOVERLAPPED) &c->write->evovlp;
     ngx_memzero(ovlp, sizeof(WSAOVERLAPPED));
 
 	sent = 0;

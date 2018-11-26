@@ -5,6 +5,7 @@ static void ngx_http_lingering_close_handlerex(ngx_event_t *rev);
 
 #if (NGX_HTTP_SSL)
 static void ngx_http_ssl_handshakeex(ngx_event_t *rev);
+static void ngx_http_ssl_handshakeex2(ngx_event_t *rev);
 #endif
 
 
@@ -192,6 +193,8 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
         b->end = b->pos + size;
     }
 
+	size = b->end - b->last;
+
     /*
      * MSIE closes a keepalive connection with RST flag
      * so we ignore ECONNRESET here.
@@ -343,11 +346,6 @@ ngx_http_lingering_close_handlerex(ngx_event_t *rev)
 
     } while (rev->ready);
 
-    if (ngx_handle_read_event(rev, 0) != NGX_OK) {
-        ngx_http_close_request(r, 0);
-        return;
-    }
-
     clcf = ngx_http_get_module_loc_conf(r, ngx_http_core_module);
 
     timer *= 1000;
@@ -359,140 +357,262 @@ ngx_http_lingering_close_handlerex(ngx_event_t *rev)
     ngx_add_timer(rev, timer);
 }
 
+
 #if (NGX_HTTP_SSL)
 
 static void
 ngx_http_ssl_handshakeex(ngx_event_t *rev)
 {
-    u_char                    *p;
-    ssize_t                    n;
-    ngx_buf_t                 *b;
-    ngx_int_t                  rc;
-    ngx_connection_t          *c;
-    ngx_http_connection_t     *hc;
-    ngx_http_ssl_srv_conf_t   *sscf;
-    ngx_http_core_loc_conf_t  *clcf;
+	u_char                    *p;
+	ssize_t                    n, size;
+	ngx_buf_t                 *b;
+	ngx_connection_t          *c;
+	ngx_http_connection_t     *hc;
+	ngx_http_ssl_srv_conf_t   *sscf;
+	ngx_http_core_loc_conf_t  *clcf;
 
-    c = rev->data;
-    hc = c->data;
+	int                        ssl_remain;
 
-    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0,
-        "http check ssl handshake");
+	c = rev->data;
+	hc = c->data;
 
-    if (rev->timedout) {
-        ngx_log_error(NGX_LOG_INFO, c->log, NGX_ETIMEDOUT, "client timed out");
-        ngx_http_close_connection(c);
-        return;
-    }
+	ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0,
+		"http check ssl handshake");
 
-    if (c->close) {
-        ngx_http_close_connection(c);
-        return;
-    }
+	if (rev->timedout) {
+		ngx_log_error(NGX_LOG_INFO, c->log, NGX_ETIMEDOUT, "client timed out");
+		ngx_http_close_connection(c);
+		return;
+	}
 
-    b = c->buffer;
+	if (c->close) {
+		ngx_http_close_connection(c);
+		return;
+	}
 
-    n = c->recv(c, b->last, NGX_PROXY_PROTOCOL_MAX_HEADER + 1);
+	b = c->buffer;
 
-    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, rev->log, 0, "http recv(): %z", n);
+	if (b != NULL && b->pos < b->last) {
+		/* data read by ngx_acceptex() */
+		n = (b->last - b->pos);
+	}
+	else {
+		size = NGX_PROXY_PROTOCOL_MAX_HEADER + 1;
 
-    if (n == NGX_EAGAIN) {
-        rev->ready = 0;
+		/* recv */
+		if (b == NULL) {
+			b = ngx_create_temp_buf(c->pool, size);
+			if (b == NULL) {
+				ngx_http_close_connection(c);
+				return;
+			}
 
-        if (!rev->timer_set) {
-            ngx_add_timer(rev, c->listening->post_accept_timeout);
-            ngx_reusable_connection(c, 1);
-        }
+			c->buffer = b;
 
-        return;
-    }
+		}
+		else if (b->start == NULL) {
 
-    if (n == NGX_ERROR) {
-        ngx_http_close_connection(c);
-        return;
-    }
+			b->start = ngx_palloc(c->pool, size);
+			if (b->start == NULL) {
+				ngx_http_close_connection(c);
+				return;
+			}
 
-    /* data completed by ngx_overlapped_wsarecv() */
-    b->last += n;
+			b->pos = b->start;
+			b->last = b->start;
+			b->end = b->last + size;
+		}
 
-    if (hc->proxy_protocol) {
-        hc->proxy_protocol = 0;
+		n = c->recv(c, b->last, size);
 
-        p = ngx_proxy_protocol_read(c, b->pos, b->last);
+		ngx_log_debug1(NGX_LOG_DEBUG_HTTP, rev->log, 0, "http recv(): %z", n);
 
-        if (p == NULL) {
-            ngx_http_close_connection(c);
-            return;
-        }
+		if (n == NGX_AGAIN) {
 
-        b->pos = p;
+			if (!rev->timer_set) {
+				ngx_add_timer(rev, c->listening->post_accept_timeout);
+				ngx_reusable_connection(c, 1);
+			}
 
-        c->log->action = "SSL handshaking";
+			return;
+		}
 
-        /* data is not enough */
-        if (b->pos == b->last) {
-            b->pos = b->start;
-            b->last = b->start;
-            ngx_post_event(rev, &ngx_posted_events);
-            return;
-        }
+		if (n == NGX_ERROR) {
+			ngx_http_close_connection(c);
+			return;
+		}
 
-        n = 1;
-    }
+		if (n == 0) {
+			ngx_log_error(NGX_LOG_INFO, c->log, ngx_socket_errno,
+				"client %V closed ssl handshakeex connection", &c->addr_text);
+			ngx_http_close_connection(c);
+			return;
+		}
 
-    if (n == 1) {
-        if (b->pos[0] & 0x80 /* SSLv2 */ || b->pos[0] == 0x16 /* SSLv3/TLSv1 */) {
-            ngx_log_debug1(NGX_LOG_DEBUG_HTTP, rev->log, 0,
-                "https ssl handshake: 0x%02Xd", b->pos[0]);
+		/* data completed by ngx_overlapped_wsarecv() */
+		b->last += n;
+	}
 
-            clcf = ngx_http_get_module_loc_conf(hc->conf_ctx,
-                ngx_http_core_module);
+	if (hc->proxy_protocol) {
+		hc->proxy_protocol = 0;
 
-            if (clcf->tcp_nodelay && ngx_tcp_nodelay(c) != NGX_OK) {
-                ngx_http_close_connection(c);
-                return;
-            }
+		p = ngx_proxy_protocol_read(c, b->pos, b->last);
 
-            sscf = ngx_http_get_module_srv_conf(hc->conf_ctx,
-                ngx_http_ssl_module);
+		if (p == NULL) {
+			ngx_http_close_connection(c);
+			return;
+		}
 
-            if (ngx_ssl_create_connection(&sscf->ssl, c, NGX_SSL_BUFFER)
-                != NGX_OK)
-            {
-                ngx_http_close_connection(c);
-                return;
-            }
+		b->pos = p;
 
-            rc = ngx_ssl_handshake(c);
+		c->log->action = "SSL handshaking";
 
-            if (rc == NGX_AGAIN) {
+		/* data is not enough */
+		if (b->pos == b->last) {
+			b->pos = b->start;
+			b->last = b->start;
+			ngx_post_event(rev, &ngx_posted_events);
+			return;
+		}
 
-                if (!rev->timer_set) {
-                    ngx_add_timer(rev, c->listening->post_accept_timeout);
-                }
+		/* */
+		n = (b->last - b->pos);
+	}
 
-                ngx_reusable_connection(c, 0);
+	if (n >= 1) {
+		if (b->pos[0] & 0x80 /* SSLv2 */ || b->pos[0] == 0x16 /* SSLv3/TLSv1 */) {
+			ngx_log_debug1(NGX_LOG_DEBUG_HTTP, rev->log, 0,
+				"https ssl handshake: 0x%02Xd", b->pos[0]);
 
-                c->ssl->handler = ngx_http_ssl_handshake_handler;
-                return;
-            }
+			clcf = ngx_http_get_module_loc_conf(hc->conf_ctx,
+				ngx_http_core_module);
 
-            ngx_http_ssl_handshake_handler(c);
+			if (clcf->tcp_nodelay && ngx_tcp_nodelay(c) != NGX_OK) {
+				ngx_http_close_connection(c);
+				return;
+			}
 
-            return;
-        }
+			sscf = ngx_http_get_module_srv_conf(hc->conf_ctx,
+				ngx_http_ssl_module);
 
-        ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0, "plain http");
+			if (ngx_ssl_create_connectionex(&sscf->ssl, c, NGX_SSL_BUFFER)
+				!= NGX_OK)
+			{
+				ngx_http_close_connection(c);
+				return;
+			}
 
-        c->log->action = "waiting for request";
+			rev->handler = ngx_http_ssl_handshakeex2;
 
-        rev->handler = ngx_http_wait_request_handlerex;
-        ngx_http_wait_request_handlerex(rev);
+			ssl_remain = b->last - b->pos;
 
-        return;
-    }
+			if (ssl_remain > 0) {
+				rev->handler(rev);
+			}
 
-    ngx_log_error(NGX_LOG_INFO, c->log, 0, "client closed connection");
-    ngx_http_close_connection(c);
+			return;
+		}
+	}
+
+	ngx_log_error(NGX_LOG_INFO, c->log, 0, "client closed connection");
+	ngx_http_close_connection(c);
 }
+
+static void
+ngx_http_ssl_handshakeex2(ngx_event_t *rev)
+{
+	ssize_t                    n, size;
+	ngx_buf_t                 *b;
+	ngx_int_t                  rc;
+	ngx_connection_t          *c;
+	ngx_http_connection_t     *hc;
+
+	c = rev->data;
+	hc = c->data;
+
+	ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0,
+		"http check ssl handshake");
+
+	if (rev->timedout) {
+		ngx_log_error(NGX_LOG_INFO, c->log, NGX_ETIMEDOUT, "client timed out");
+		ngx_http_close_connection(c);
+		return;
+	}
+
+	if (c->close) {
+		ngx_http_close_connection(c);
+		return;
+	}
+
+	b = c->buffer;
+
+	if (b != NULL && b->pos < b->last) {
+		/* data read by ngx_acceptex() */
+		n = (b->last - b->pos);
+	}
+	else {
+		size = b->end - b->last;
+
+		n = c->recv(c, b->last, size);
+
+		ngx_log_debug1(NGX_LOG_DEBUG_HTTP, rev->log, 0, "http recv(): %z", n);
+
+		if (n == NGX_AGAIN) {
+
+			if (!rev->timer_set) {
+				ngx_add_timer(rev, c->listening->post_accept_timeout);
+				ngx_reusable_connection(c, 1);
+			}
+
+			return;
+		}
+
+		if (n == NGX_ERROR) {
+			ngx_http_close_connection(c);
+			return;
+		}
+
+		if (n == 0) {
+			ngx_log_error(NGX_LOG_INFO, c->log, ngx_socket_errno,
+				"client %V closed ssl handshakeex connection", &c->addr_text);
+			ngx_http_close_connection(c);
+			return;
+		}
+
+		/* data completed by ngx_overlapped_wsarecv() */
+		b->last += n;
+	}
+
+	if (n > 0) {
+
+		if (0 == c->ssl->handshaked) {
+			rc = ngx_ssl_handshakeex(c);
+
+			if (rc == NGX_AGAIN) {
+
+				if (!rev->timer_set) {
+					ngx_add_timer(rev, c->listening->post_accept_timeout);
+				}
+
+				ngx_reusable_connection(c, 0);
+
+				c->ssl->handler = ngx_http_ssl_handshake_handler;
+				return;
+			}
+		}
+		
+		ngx_http_ssl_handshake_handler(c);
+		return;
+	}
+
+	ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0, "plain http");
+
+	c->log->action = "waiting for request";
+
+	rev->handler = ngx_http_wait_request_handlerex;
+	ngx_http_wait_request_handlerex(rev);
+
+	return;
+}
+
 #endif

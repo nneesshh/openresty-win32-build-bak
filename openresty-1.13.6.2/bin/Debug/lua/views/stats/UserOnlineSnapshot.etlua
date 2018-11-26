@@ -79,7 +79,7 @@
         <form class="form-horizontal" role="form" id="userOnlineSnapshotQueryForm">
             <div class="control-group">
                 <label class="col-sm-2 control-label" style="width:120px;">输入查询时间:</label>
-                <input class="col-sm-4" style="width:160px;" type="text" id="query_time" name="QueryTime" />
+                <input class="col-sm-4" style="width:170px;" type="text" id="query_time" name="QueryTime" />
                 <div class="col-sm-2 ">
                     <a class="btn btn-primary" style="width:100px;" href="javascript:void(0)" onclick="_do_ajax_submit_UserOnlineSnapshotQueryForm()">查询</a>
                 </div>

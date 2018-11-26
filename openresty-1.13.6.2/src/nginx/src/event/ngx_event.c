@@ -758,11 +758,14 @@ ngx_event_process_init(ngx_cycle_t *cycle)
     do {
         i--;
 
-        c[i].id = i + 1; // for debug
+        c[i].id = i + 1; /* for debug */
         c[i].data = next;
         c[i].read = &cycle->read_events[i];
         c[i].write = &cycle->write_events[i];
         c[i].fd = (ngx_socket_t) -1;
+		
+		ngx_memzero(c[i].read, sizeof(ngx_event_t));
+		ngx_memzero(c[i].write, sizeof(ngx_event_t));
 
         next = &c[i];
     } while (i);

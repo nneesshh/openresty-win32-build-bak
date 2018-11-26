@@ -41,26 +41,17 @@ dkms.conf
 #
 *.zip
 *.exe
-
-openresty-1\.13\.6\.2/bin/Debug/logs/
-openresty-1\.13\.6\.2/msvc/\.vs/
-openresty-1\.13\.6\.2/thirdparty/strawberry-perl-5\.26\.2\.1-32bit/
-openresty-1\.13\.6\.2/thirdparty/x86/
-openresty-1\.13\.6\.2/thirdparty/x64/
-openresty-1\.13\.6\.2/thirdparty/libuv-1\.x/
-openresty-1\.13\.6\.2/bin/Debug/static_sample/
 *.tlog
-
 *.log
 
-openresty-1\.13\.6\.2/bin/Release/
-
+openresty-1\.13\.6\.2/msvc/\.vs/
+openresty-1\.13\.6\.2/msvc/Debug/nginx\.res
 openresty-1\.13\.6\.2/msvc/Release/nginx\.res
 
-openresty-1\.13\.6\.2/msvc/Debug/nginx\.res
-
-openresty-1\.13\.6\.2/bin/Release_20180802/
-
 openresty-1\.13\.6\.2/bin/Debug/\.vscode/
+openresty-1\.13\.6\.2/bin/Debug/nginx\.lib
+openresty-1\.13\.6\.2/bin/Debug/logs/
+openresty-1\.13\.6\.2/bin/Debug/static_sample/
 
-openresty-1\.13\.6\.2/bin/Release_20181116_192\.168\.1\.10/
+openresty-1\.13\.6\.2/bin/Release/
+openresty-1\.13\.6\.2/bin/Release_20181117/

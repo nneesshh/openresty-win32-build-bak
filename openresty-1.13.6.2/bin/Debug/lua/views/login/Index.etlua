@@ -39,7 +39,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 </head>
@@ -55,7 +55,7 @@
             <div class="text-danger"><%= errors[1] %></div>
             <% end %>
             
-            <form action="/login" method="post">
+            <form action="/Login" method="post">
                 <div class="form-group has-feedback">
                     <input name="UserName" type="text" class="form-control" placeholder="用户名" />
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>

@@ -362,7 +362,7 @@ lock_file_win(const char *sFileName, void **ppOutHandle) {
 	HANDLE hFile;
 	BOOL bSuccess;
 
-	hFile = CreateFile(
+	hFile = CreateFileA(
 		sFileName,
 		GENERIC_READ | GENERIC_WRITE,
 		FILE_SHARE_READ,

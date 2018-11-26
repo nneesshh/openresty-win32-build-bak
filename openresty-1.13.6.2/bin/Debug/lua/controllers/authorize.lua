@@ -25,7 +25,7 @@ return function(self, role, redirect_to)
   local result
   local ok = checkAuth(self, role)
   if ok then
-    result = stringutil.isValidString(redirect_to) and redirect_to or "home_welcome"
+    result = stringutil.isValidString(redirect_to) and redirect_to or "home"
   else
     result = "login"
   end

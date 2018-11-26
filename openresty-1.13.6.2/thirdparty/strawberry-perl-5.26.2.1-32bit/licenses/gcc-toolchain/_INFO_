@@ -1,0 +1,19 @@
+Package: gcc-7.1.0
+Homepage: http://gcc.gnu.org/
+Sources: https://ftp.gnu.org/gnu/gcc/gcc-7.1.0/gcc-7.1.0.tar.bz2
+
+Package: binutils-2.27
+Homepage: http://www.gnu.org/software/binutils/
+Sources: https://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.bz2
+
+Package: gdb-7.11.1
+Homepage: http://www.gnu.org/software/gdb/
+Sources: https://ftp.gnu.org/gnu/gdb/gdb-7.11.1.tar.xz
+
+Package: make-4.2.1
+Homepage: http://www.gnu.org/software/make/
+Sources: https://ftp.gnu.org/gnu/make/make-4.2.1.tar.bz2
+
+Package: mingw-w64-crt-v5.0.2
+Homepage: http://mingw-w64.sourceforge.net/
+Sources: http://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/mingw-w64-v5.0.2.tar.bz2

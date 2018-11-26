@@ -70,7 +70,7 @@ CREATE TABLE `game_announcement` (
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `proc_create_game_announcement`;
 
-CREATE PROCEDURE `proc_create_game_announcement`(IN `p_data` varchar(1000))
+CREATE PROCEDURE `proc_create_game_announcement`( IN `p_deadline` datetime, IN `p_data` varchar(1000))
 BEGIN
 	DECLARE p_now datetime DEFAULT 0;
 	DECLARE p_deadline datetime DEFAULT 0;

@@ -1,0 +1,8 @@
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/RUN_TESTS.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/zlib.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/example.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/zlibstatic.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/minigzip.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/INSTALL.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/ALL_BUILD.dir
+D:/dd/sdk32/support/zlib-1.2.11/build/CMakeFiles/ZERO_CHECK.dir

@@ -28,3 +28,77 @@ ALTER TABLE user_state ADD COLUMN `heartbeat_time` DATETIME NOT NULL COMMENT '�
 select from_unixtime(1541581747);
 select unix_timestamp('2018-11-07 17:09:07');
 select date_format('2018-11-07 17:09:07', '%Y-%m-%d %H-%i-%s');  
+
+
+-- password: Admin123.
+
+nginx 配置https签名证书
+一、生成证书
+
+    准备工作：
+        在环境变量中添加环境变量 OPENSSL_HOME 变量值：C:\OpenSSL-Win64\bin;        （变量值为openssl安装位置）
+        在path变量结尾添加如下 ： %OPENSSL_HOME%;
+
+    1.在 nginx 安装目录中创建ssl文件夹用于存放证书，然后以 
+       “ 管理员身份 ” 进入命令行模式进入ssl文件夹。
+
+    2.创建私钥：Enter pass phrase for root.key:（-- password: Admin123.）
+        openssl genrsa -des3 -out my_server_cert.key 1024
+
+    3.创建签名请求证书：
+        openssl req -new -key my_server_cert.key -out my_server_cert.csr
+        
+        输出内容为：
+Enter pass phrase for root.key: ← 输入前面创建的密码 
+Country Name (2 letter code) [AU]:CN ← 国家代号，中国输入CN 
+State or Province Name (full name) [Some-State]:BeiJing ← 省的全名，拼音 
+Locality Name (eg, city) []:BeiJing ← 市的全名，拼音 
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:MyCompany Corp. ← 公司英文名 
+Organizational Unit Name (eg, section) []: ← 可以不输入 
+Common Name (eg, YOUR name) []: ← 此时不输入 
+Email Address []:admin@mycompany.com ← 电子邮箱，可随意填
+Please enter the following ‘extra’ attributes 
+to be sent with your certificate request 
+A challenge password []: ← 可以不输入 
+An optional company name []: ← 可以不输入
+
+
+    4.使用上述私钥时除去必须的口令，否则会在启动nginx的时候需要输入密码。
+        copy my_server_cert.key my_server_cert.key.org (复制 my_server_cert.key 并重命名为 my_server_cert.key.org)
+
+        除去口令：
+        openssl rsa -in my_server_cert.key.org -out my_server_cert.key
+
+    5.最后标记证书使用上述私钥和CSR和有效期：
+        openssl x509 -req -days 365 -in my_server_cert.csr -signkey my_server_cert.key -out my_server_cert.crt
+
+二、配置nginx的https
+
+　　配置vim nginx.conf
+
+   
+
+ server {
+
+    listen       443 ssl;
+    server_name  192.168.2.90;
+    
+    ssl                        on;
+    ssl_certificate            ssl/my_server_cert.crt;
+    ssl_certificate_key        ssl/my_server_cert.key;
+    #ssl_session_cache          shared:SSL:1m;
+    ssl_session_timeout        600m;
+    #ssl_ciphers                HIGH:!aNULL:!MD5;
+    #ssl_prefer_server_ciphers  on;
+
+    #    ssl_prefer_server_ciphers  on;
+
+　　　　location / {
+
+                     root   html;
+
+            index  index.html index.htm;
+
+        }
+
+    }

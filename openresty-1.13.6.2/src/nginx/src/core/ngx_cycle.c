@@ -1015,16 +1015,20 @@ ngx_delete_pidfile(ngx_cycle_t *cycle)
     u_char           *name;
     ngx_core_conf_t  *ccf;
 
-#if (NGX_WIN32)
-    if (s_pid_file_handle_for_lock) {
-        unlock_file_win(s_pid_file_handle_for_lock);
-		s_pid_file_handle_for_lock = INVALID_HANDLE_VALUE;
-    }
-#endif
-
     ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
 
     name = ngx_new_binary ? ccf->oldpid.data : ccf->pid.data;
+
+#if (NGX_WIN32)
+	if (s_pid_file_handle_for_lock) {
+		unlock_file_win(s_pid_file_handle_for_lock);
+		if (ngx_close_file(s_pid_file_handle_for_lock) == NGX_FILE_ERROR) {
+			ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+				ngx_close_file_n " \"%s\" failed", name);
+		}
+		s_pid_file_handle_for_lock = INVALID_HANDLE_VALUE;
+	}
+#endif
 
     if (ngx_delete_file(name) == NGX_FILE_ERROR) {
         ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,

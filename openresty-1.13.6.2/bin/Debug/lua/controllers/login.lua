@@ -14,10 +14,20 @@ local validate = require("lapis.validate")
 local auth = require(cwd .. "authorize")
 
 return function(app)
-  app:match("login", "/login", respond_to({
+  app:match("entry", "/", respond_to({
+    --
+    before = nil,
+  
+    GET = function(self)
+      return { render = "Index", layout = false }
+    end,
+  
+  }))
+
+  app:match("login", "/Login", respond_to({
     --
     before = function(self)
-      auth(self, "any")
+      auth(self, "any") -- redirect to "home" if success
     end,
     
     GET = function(self)
@@ -52,17 +62,15 @@ return function(app)
   end)
   }))
 
-  app:match("login_signout", "/signout", respond_to({
+  app:match("login_signout", "/Signout", respond_to({
     --
-    before = function(self)
-      --auth(self, "any")
-    end,
+    before = nil,
   
     GET = function(self)
       -- clear session
       self.session.user = nil
       self.session.roles = nil
-      return { redirect_to = self:url_for("home") }
+      return { redirect_to = self:url_for("entry") }
     end,
     
   }))

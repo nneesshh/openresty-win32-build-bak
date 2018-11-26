@@ -85,6 +85,9 @@ struct ngx_ssl_connection_s {
     unsigned                    no_wait_shutdown:1;
     unsigned                    no_send_shutdown:1;
     unsigned                    handshake_buffer_set:1;
+
+	BIO                        *rbio_mem;
+	BIO                        *wbio_mem;
 };
 
 
@@ -173,7 +176,10 @@ ngx_int_t ngx_ssl_session_ticket_keys(ngx_conf_t *cf, ngx_ssl_t *ssl,
     ngx_array_t *paths);
 ngx_int_t ngx_ssl_session_cache_init(ngx_shm_zone_t *shm_zone, void *data);
 ngx_int_t ngx_ssl_create_connection(ngx_ssl_t *ssl, ngx_connection_t *c,
-    ngx_uint_t flags);
+	ngx_uint_t flags);
+
+ngx_int_t ngx_ssl_create_connectionex(ngx_ssl_t *ssl, ngx_connection_t *c,
+	ngx_uint_t flags);
 
 void ngx_ssl_remove_cached_session(SSL_CTX *ssl, ngx_ssl_session_t *sess);
 ngx_int_t ngx_ssl_set_session(ngx_connection_t *c, ngx_ssl_session_t *session);
@@ -242,8 +248,17 @@ ssize_t ngx_ssl_write(ngx_connection_t *c, u_char *data, size_t size);
 ssize_t ngx_ssl_recv_chain(ngx_connection_t *c, ngx_chain_t *cl, off_t limit);
 ngx_chain_t *ngx_ssl_send_chain(ngx_connection_t *c, ngx_chain_t *in,
     off_t limit);
+
+ngx_int_t ngx_ssl_handshakeex(ngx_connection_t *c);
+ssize_t ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size);
+ssize_t ngx_ssl_writeex(ngx_connection_t *c, u_char *data, size_t size);
+ssize_t ngx_ssl_recv_chainex(ngx_connection_t *c, ngx_chain_t *cl, off_t limit);
+ngx_chain_t *ngx_ssl_send_chainex(ngx_connection_t *c, ngx_chain_t *in,
+	off_t limit);
+
 void ngx_ssl_free_buffer(ngx_connection_t *c);
 ngx_int_t ngx_ssl_shutdown(ngx_connection_t *c);
+ngx_int_t ngx_ssl_shutdownex(ngx_connection_t *c);
 void ngx_cdecl ngx_ssl_error(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,
     char *fmt, ...);
 void ngx_ssl_cleanup_ctx(void *data);

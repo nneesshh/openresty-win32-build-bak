@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Version 1.3 &#8212; pgAdmin 4 3.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version 1.2" href="release_notes_1_2.html" />
+    <link rel="prev" title="Version 1.4" href="release_notes_1_4.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="release_notes_1_2.html" title="Version 1.2"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="release_notes_1_4.html" title="Version 1.4"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgAdmin 4 3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="release_notes.html" accesskey="U">Release Notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version-1-3">
+<h1>Version 1.3<a class="headerlink" href="#version-1-3" title="Permalink to this headline">¶</a></h1>
+<p>Release date: 2017-03-10</p>
+<p>This release contains a number of features and fixes reported since the release of pgAdmin4 1.2.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2036">Feature #2036</a> - Query tool efficiency - SlickGrid result set format efficiency</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2038">Feature #2038</a> - Query tool efficiency - Incremental back off when polling</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2163">Feature #2163</a> - Make syntax highlighting more visible</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2210">Feature #2210</a> - Build a universal Python wheel instead of per-python-version ones</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2215">Feature #2215</a> - Improve visibility of syntax highlighting colours</div>
+</div>
+</div>
+<div class="section" id="bug-fixes">
+<h2>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/1796">Bug #1796</a> - Add missing “Run Now” option for pgAdmin jobs</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/1797">Bug #1797</a> - Resolve encoding issues with DATA_DIR</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/1914">Bug #1914</a> - Resolved error utf8’ codec can’t decode byte</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/1983">Bug #1983</a> - Fix bug in Sql query contains Arabic Charaters</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2089">Bug #2089</a> - Add PARALLEL SAFE|UNSAFE|RESTRICTED support</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2115">Bug #2115</a> - Fix exclusion constraint reverse engineered SQL</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2119">Bug #2119</a> - Fix display of long integers and decimals</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2126">Bug #2126</a> - Correct node labels in Preferences for EDB functions and procedures</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2151">Bug #2151</a> - Display un-sized varlen column types correctly in the query tool</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2154">Bug #2154</a> - Fix display of long integers and decimals</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2159">Bug #2159</a> - Resolve issue where Query editor is not working with Python2.6</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2160">Bug #2160</a> - Various encoding fixes to allow ‘ascii’ codec to decode byte 0xc3 in position 66: ordinal not in range(128)</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2166">Bug #2166</a> - Resolved import/Export issue for a table</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2173">Bug #2173</a> - Resolved issues where Sequences API test cases are not working in PG9.2 and PPAS9.2</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2174">Bug #2174</a> - Resolved various file-system encoding/decoding related cases</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2185">Bug #2185</a> - Removed sorting columns on the treeview</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2192">Bug #2192</a> - Fix startup complete tests to ensure we properly poll the server for completed startup</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2198">Bug #2198</a> - Fix function arguments when generating create SQL</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2200">Bug #2200</a> - Properly handle event trigger functions in different schemas</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2201">Bug #2201</a> - Fix renaming of check constraints when the table name is changed at the same time</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2202">Bug #2202</a> - Fix issue where Dependents query fails due to non ascii characters</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2204">Bug #2204</a> - Fixed issue where pgadmin 4 jobs not showing any activity</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2205">Bug #2205</a> - Fix display of boolean nulls in the query tool</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2208">Bug #2208</a> - Ensure primary key column names are quoted in View Data mode of the Query Tool</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2212">Bug #2212</a> - Ensure servers are deleted when their parent group is deleted</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2213">Bug #2213</a> - Enable right click on browser tree</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2218">Bug #2218</a> - Show the correct indeterminate state when editing new boolean values</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2228">Bug #2228</a> - Authenticate the runtime to the server</div>
+<div class="line"><a class="reference external" href="https://redmine.postgresql.org/issues/2230">Bug #2230</a> - Prevent the Slonik logo obscuring the login dialogue on small displays in server mode</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Version 1.3</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">Connecting to a Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_cluster_objects.html">Managing Cluster Level Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managing_database_objects.html">Managing Database Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modifying_tables.html">Creating or Modifying a Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management_basics.html">Management Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup_and_restore.html">Backup and Restore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_tools.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">pgAdmin Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">pgAdmin Project Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pgagent.html">pgAgent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="release_notes.html">Release Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="release_notes_3_0.html">Version 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_2_1.html">Version 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_2_0.html">Version 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_1_6.html">Version 1.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_1_5.html">Version 1.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_1_4.html">Version 1.4</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Version 1.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_1_2.html">Version 1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_1_1.html">Version 1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes_1_0.html">Version 1.0</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="release_notes_1_2.html" title="Version 1.2"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="release_notes_1_4.html" title="Version 1.4"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgAdmin 4 3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="release_notes.html" >Release Notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013 - 2018, The pgAdmin Development Team.
+    </div>
+  </body>
+</html>

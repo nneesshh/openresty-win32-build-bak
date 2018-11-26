@@ -6,7 +6,7 @@ static void
 ngx_stream_proxy_protocol_handlerex(ngx_event_t *rev)
 {
     u_char                      *p;
-    ssize_t                      n;
+    ssize_t                      n, size;
     ngx_buf_t                   *b;
     ngx_connection_t            *c;
     ngx_stream_session_t        *s;
@@ -26,30 +26,68 @@ ngx_stream_proxy_protocol_handlerex(ngx_event_t *rev)
 
     b = c->buffer;
 
-    n = c->recv(c, b->last, NGX_PROXY_PROTOCOL_MAX_HEADER);
+	if (b != NULL && b->pos < b->last) {
+		/* data read by ngx_acceptex() */
+		n = (b->last - b->pos);
+	}
+	else {
+		size = NGX_PROXY_PROTOCOL_MAX_HEADER;
 
-    ngx_log_debug1(NGX_LOG_DEBUG_STREAM, c->log, 0, "recv(): %z", n);
+		/* recv */
+		if (b == NULL) {
+			b = ngx_create_temp_buf(c->pool, size);
+			if (b == NULL) {
+				ngx_stream_finalize_session(s, NGX_STREAM_OK);
+				return;
+			}
 
-    if (n == NGX_EAGAIN) {
-        rev->ready = 0;
+			c->buffer = b;
 
-        if (!rev->timer_set) {
-            cscf = ngx_stream_get_module_srv_conf(s,
-                ngx_stream_core_module);
+		}
+		else if (b->start == NULL) {
 
-            ngx_add_timer(rev, cscf->proxy_protocol_timeout);
-        }
+			b->start = ngx_palloc(c->pool, size);
+			if (b->start == NULL) {
+				ngx_stream_finalize_session(s, NGX_STREAM_OK);
+				return;
+			}
 
-        return;
-    }
+			b->pos = b->start;
+			b->last = b->start;
+			b->end = b->last + size;
+		}
 
-    if (n == NGX_ERROR) {
-        ngx_stream_finalize_session(s, NGX_STREAM_OK);
-        return;
-    }
+		n = c->recv(c, b->last, size);
 
-     /* data completed by ngx_overlapped_wsarecv() */
-    b->last += n;
+		ngx_log_debug1(NGX_LOG_DEBUG_STREAM, c->log, 0, "recv(): %z", n);
+
+		if (n == NGX_AGAIN) {
+
+			if (!rev->timer_set) {
+				cscf = ngx_stream_get_module_srv_conf(s,
+					ngx_stream_core_module);
+
+				ngx_add_timer(rev, cscf->proxy_protocol_timeout);
+			}
+
+			return;
+		}
+
+		if (n == NGX_ERROR) {
+			ngx_stream_finalize_session(s, NGX_STREAM_OK);
+			return;
+		}
+
+		if (n == 0) {
+			ngx_log_error(NGX_LOG_INFO, c->log, ngx_socket_errno,
+				"client %V closed stream PROXY protocol handlerex connection", &c->addr_text);
+			ngx_stream_finalize_session(s, NGX_STREAM_OK);
+			return;
+		}
+
+		/* data completed by ngx_overlapped_wsarecv() */
+		b->last += n;
+	}
 
     if (rev->timer_set) {
         ngx_del_timer(rev);

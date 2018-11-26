@@ -1,0 +1,18 @@
+{
+   "alien_build_version" : "1.39",
+   "perl_module_version" : "1.08",
+   "cflags_static" : " ",
+   "libs_static" : "-lgmp ",
+   "legacy" : {
+      "finished_installing" : 1,
+      "install_type" : "system",
+      "name" : "gmp",
+      "version" : "6.1.2",
+      "original_prefix" : "C:/strawberry/perl/vendor/lib/auto/share/dist/Alien-GMP"
+   },
+   "prefix" : "C:/strawberry/perl/vendor/lib/auto/share/dist/Alien-GMP",
+   "version" : "6.1.2",
+   "cflags" : " ",
+   "libs" : "-lgmp ",
+   "install_type" : "system"
+}

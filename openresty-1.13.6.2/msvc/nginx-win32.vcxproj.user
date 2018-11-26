@@ -7,9 +7,10 @@
     </LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerWorkingDirectory>../bin/Release_20180802/</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>../bin/Release_20181117</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerCommandArguments>
     </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommand>D:\www\_nneesshh_git\openresty-win32-build\openresty-1.13.6.2\bin\Release_20181116\nginx.exe</LocalDebuggerCommand>
   </PropertyGroup>
 </Project>

@@ -57,7 +57,7 @@ extern ngx_module_t  ngx_http_stub_status_module;
 extern ngx_module_t  ndk_http_module;
 extern ngx_module_t  ngx_coolkit_module;
 extern ngx_module_t  ngx_http_set_misc_module;
-extern ngx_module_t  ngx_postgres_module;
+//extern ngx_module_t  ngx_postgres_module;
 extern ngx_module_t  ngx_http_form_input_module;
 extern ngx_module_t  ngx_http_encrypted_session_module;
 extern ngx_module_t  ngx_http_lua_upstream_module;
@@ -165,7 +165,7 @@ ngx_module_t *ngx_modules[] = {
     &ndk_http_module,
     &ngx_coolkit_module,
     &ngx_http_set_misc_module,
-    &ngx_postgres_module,
+    //&ngx_postgres_module,
     &ngx_http_form_input_module,
     &ngx_http_encrypted_session_module,
     &ngx_http_lua_upstream_module,
@@ -275,7 +275,7 @@ char *ngx_module_names[] = {
     "ndk_http_module",
     "ngx_coolkit_module",
     "ngx_http_set_misc_module",
-    "ngx_postgres_module",
+    //"ngx_postgres_module",
     "ngx_http_form_input_module",
     "ngx_http_encrypted_session_module",
     "ngx_http_lua_upstream_module",

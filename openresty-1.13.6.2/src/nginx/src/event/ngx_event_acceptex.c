@@ -76,7 +76,7 @@ ngx_event_acceptex(ngx_event_t *rev)
     }
 
     /* io enabled after acceptex is ready */
-	c->write->ovlp.acceptex_flag = 0;
+	c->write->evovlp.acceptex_flag = 0;
 
     ngx_event_post_acceptex(ls, 1);
 
@@ -106,6 +106,7 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
     ngx_event_t       *rev, *wev;
     ngx_socket_t       s;
     ngx_connection_t  *c;
+	size_t             sockaddr_buffer_size;
 
     for (i = 0; i < n; i++) {
 
@@ -141,12 +142,21 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
             return NGX_ERROR;
         }
 
-        c->buffer = ngx_create_temp_buf(c->pool, ls->post_accept_buffer_size
-                                                 + 2 * (ls->socklen + 16));
+		/* c->buffer size must not be lower than "post_accept_buffer_size+2*(ls->socklen+16)" */
+		sockaddr_buffer_size = 2 * (ls->socklen + 16);
+		sockaddr_buffer_size = (sockaddr_buffer_size > ls->post_accept_buffer_size) ? sockaddr_buffer_size : ls->post_accept_buffer_size;
+		c->buffer = ngx_create_temp_buf(c->pool, ls->post_accept_buffer_size + sockaddr_buffer_size);
         if (c->buffer == NULL) {
             ngx_close_posted_connection(c);
             return NGX_ERROR;
         }
+
+#if (NGX_DEBUG)
+		c->buffer_ref.start = c->buffer->start;
+		c->buffer_ref.pos = c->buffer->pos;
+		c->buffer_ref.last = c->buffer->last;
+		c->buffer_ref.end = c->buffer->end;
+#endif
 
         c->local_sockaddr = ngx_palloc(c->pool, ls->socklen);
         if (c->local_sockaddr == NULL) {
@@ -173,8 +183,8 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         rev = c->read;
         wev = c->write;
 
-        rev->ovlp.event = rev;
-        wev->ovlp.event = wev;
+        rev->evovlp.event = rev;
+        wev->evovlp.event = wev;
         rev->handler = ngx_event_acceptex;
 
         rev->ready = 1;
@@ -196,7 +206,7 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
 
         if (ngx_acceptex(ls->fd, s, c->buffer->pos, ls->post_accept_buffer_size,
                          ls->socklen + 16, ls->socklen + 16,
-                         &rcvd, (LPOVERLAPPED) &rev->ovlp)
+                         &rcvd, (LPOVERLAPPED) &rev->evovlp)
             == 0)
         {
             err = ngx_socket_errno;
@@ -211,11 +221,11 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
 
         /* acceptex event posted, wait acceptex flag to be cleared, 
            and don't post again before response */
-        rev->ovlp.acceptex_flag = 1;
+        rev->evovlp.acceptex_flag = 1;
         rev->ready = 0;
 
         /* io disabled before acceptex is ready */
-		wev->ovlp.acceptex_flag = 1;
+		wev->evovlp.acceptex_flag = 1;
     }
 
     return NGX_OK;
