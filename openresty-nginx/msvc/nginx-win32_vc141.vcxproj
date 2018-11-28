@@ -728,13 +728,13 @@
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_time.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_user.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_win32_config.h" />
+    <ClInclude Include="..\src\nginx\src\os\win32\resource.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_script.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_ssl_module.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_upstream.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_upstream_round_robin.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_variables.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\bundle\nginx-http-concat-module\config" />
@@ -758,7 +758,7 @@
     <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="nginx-win32.rc" />
+    <ResourceCompile Include="..\src\nginx\src\os\win32\nginx-win32.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
