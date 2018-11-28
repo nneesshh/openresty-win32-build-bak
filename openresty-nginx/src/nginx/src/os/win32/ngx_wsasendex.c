@@ -103,7 +103,7 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
 
             /*if (wev->evovlp.error) {
-                ngx_connection_error(c, wev->ovlp.error, "WSASend() failed");
+                ngx_connection_error(c, wev->evovlp.error, "WSASend() failed");
                 return NGX_ERROR;
             }*/
 
@@ -283,7 +283,8 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
             wev->active = 1;
             /*return NGX_AGAIN;*/
             /* we treat WSA_IO_PENDING as succeed, so don't try send again. */
-            return sent;
+			/* sent maybe zero and not equal to size, so we always "return size" instead of "return sent".*/
+            return size;
         }
 
 #if (NGX_DEBUG)

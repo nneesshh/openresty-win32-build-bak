@@ -422,7 +422,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                       switch (key) {
 
                     case NGX_IOCP_ACCEPT:
-                        /* lpCompletionKey is the key of listen iocp port, but ev->ovlp is ovlp of normal iocp port */
+                        /* lpCompletionKey is the key of listen iocp port, but ev->evovlp is ovlp of normal iocp port */
                         evovlp->acceptex_flag = 0;
                         if (bytes) {
                             ev->ready = 1;

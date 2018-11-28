@@ -1124,7 +1124,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
         }
 
         c_prev = c_reuse;
-        c_reuse = c->data;
+        c_reuse = c_reuse->data;
     }
 
     if (c == NULL) {
