@@ -47,6 +47,7 @@ dkms.conf
 
 openresty-nginx/msvc/\.vs/
 openresty-nginx/msvc/objs/
+openresty-nginx/msvc/enc_temp_folder/
 
 openresty-nginx/bin/Debug/\.vscode/
 openresty-nginx/bin/Debug/nginx\.lib
