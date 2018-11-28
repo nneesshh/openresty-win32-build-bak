@@ -111,7 +111,6 @@ ngx_log_error_core(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,
     ssize_t      n;
     ngx_uint_t   wrote_stderr, debug_connection;
     u_char       errstr[NGX_MAX_ERROR_STR];
-
     ngx_log_intercept_pt    log_intercept = NULL;
 
     last = errstr + NGX_MAX_ERROR_STR;
@@ -167,7 +166,7 @@ ngx_log_error_core(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,
 
     ngx_linefeed(p);
 
-	*p = '\0';
+    *p = '\0';
 
     wrote_stderr = 0;
     debug_connection = (log->log_level & NGX_LOG_DEBUG_CONNECTION) != 0;
@@ -264,8 +263,6 @@ ngx_log_abort(ngx_err_t err, const char *fmt, ...)
     p = ngx_vsnprintf(errstr, sizeof(errstr) - 1, fmt, args);
     va_end(args);
 
-	*p = '\0';
-
     ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, err,
                   "%*s", p - errstr, errstr);
 }
@@ -296,7 +293,7 @@ ngx_log_stderr(ngx_err_t err, const char *fmt, ...)
 
     ngx_linefeed(p);
 
-	*p = '\0';
+    *p = '\0';
 
     (void) ngx_write_console(ngx_stderr, errstr, p - errstr);
 }

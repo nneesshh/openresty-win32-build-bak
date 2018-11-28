@@ -474,8 +474,6 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
                 goto shm_zone_found;
             }
 
-            ngx_shm_free(&oshm_zone[n].shm);
-
             break;
         }
 
@@ -666,14 +664,26 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
                 n = 0;
             }
 
-            if (oshm_zone[i].shm.name.len == shm_zone[n].shm.name.len
-                && ngx_strncmp(oshm_zone[i].shm.name.data,
-                               shm_zone[n].shm.name.data,
-                               oshm_zone[i].shm.name.len)
-                == 0)
+            if (oshm_zone[i].shm.name.len != shm_zone[n].shm.name.len) {
+                continue;
+            }
+
+            if (ngx_strncmp(oshm_zone[i].shm.name.data,
+                            shm_zone[n].shm.name.data,
+                            oshm_zone[i].shm.name.len)
+                != 0)
+            {
+                continue;
+            }
+
+            if (oshm_zone[i].tag == shm_zone[n].tag
+                && oshm_zone[i].shm.size == shm_zone[n].shm.size
+                && !oshm_zone[i].noreuse)
             {
                 goto live_shm_zone;
             }
+
+            break;
         }
 
         ngx_shm_free(&oshm_zone[i].shm);
@@ -841,6 +851,69 @@ failed:
         }
     }
 
+    /* free the newly created shared memory */
+
+    part = &cycle->shared_memory.part;
+    shm_zone = part->elts;
+
+    for (i = 0; /* void */ ; i++) {
+
+        if (i >= part->nelts) {
+            if (part->next == NULL) {
+                break;
+            }
+            part = part->next;
+            shm_zone = part->elts;
+            i = 0;
+        }
+
+        if (shm_zone[i].shm.addr == NULL) {
+            continue;
+        }
+
+        opart = &old_cycle->shared_memory.part;
+        oshm_zone = opart->elts;
+
+        for (n = 0; /* void */ ; n++) {
+
+            if (n >= opart->nelts) {
+                if (opart->next == NULL) {
+                    break;
+                }
+                opart = opart->next;
+                oshm_zone = opart->elts;
+                n = 0;
+            }
+
+            if (shm_zone[i].shm.name.len != oshm_zone[n].shm.name.len) {
+                continue;
+            }
+
+            if (ngx_strncmp(shm_zone[i].shm.name.data,
+                            oshm_zone[n].shm.name.data,
+                            shm_zone[i].shm.name.len)
+                != 0)
+            {
+                continue;
+            }
+
+            if (shm_zone[i].tag == oshm_zone[n].tag
+                && shm_zone[i].shm.size == oshm_zone[n].shm.size
+                && !shm_zone[i].noreuse)
+            {
+                goto old_shm_zone_found;
+            }
+
+            break;
+        }
+
+        ngx_shm_free(&shm_zone[i].shm);
+
+    old_shm_zone_found:
+
+        continue;
+    }
+
     if (ngx_test_config) {
         ngx_destroy_cycle_pools(&conf);
         return NULL;
@@ -919,7 +992,8 @@ ngx_init_zone_pool(ngx_cycle_t *cycle, ngx_shm_zone_t *zn)
 
 #else
 
-    file = ngx_pnalloc(cycle->pool, cycle->lock_file.len + zn->shm.name.len);
+    file = ngx_pnalloc(cycle->pool,
+                       cycle->lock_file.len + zn->shm.name.len + 1);
     if (file == NULL) {
         return NGX_ERROR;
     }
@@ -958,28 +1032,28 @@ ngx_create_pidfile(ngx_str_t *name, ngx_log_t *log)
     create = ngx_test_config ? NGX_FILE_CREATE_OR_OPEN : NGX_FILE_TRUNCATE;
 
 #if (NGX_WIN32)
-	if (!ngx_test_config) {
-		/* lock (FLIE *) ptr */
-		if (0 != lock_file_win(file.name.data, &s_pid_file_handle_for_lock)
-			|| s_pid_file_handle_for_lock == INVALID_HANDLE_VALUE) {
-			ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
-				"lock_file_win() for \"%s\" failed", file.name.data);
-			return NGX_ERROR;
-		}
+    if (!ngx_test_config) {
+        /* lock (FLIE *) ptr */
+        if (0 != lock_file_win(file.name.data, &s_pid_file_handle_for_lock)
+            || s_pid_file_handle_for_lock == INVALID_HANDLE_VALUE) {
+            ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
+                "lock_file_win() for \"%s\" failed", file.name.data);
+            return NGX_ERROR;
+        }
 
-		len = ngx_snprintf(pid, NGX_INT64_LEN + 2, "%P%N", ngx_pid) - pid;
+        len = ngx_snprintf(pid, NGX_INT64_LEN + 2, "%P%N", ngx_pid) - pid;
 
-		file.fd = s_pid_file_handle_for_lock;
+        file.fd = s_pid_file_handle_for_lock;
 
-		/* empty the file */
-		SetFilePointer(s_pid_file_handle_for_lock, 0, NULL, FILE_BEGIN);
-		SetEndOfFile(s_pid_file_handle_for_lock);
-		FlushFileBuffers(s_pid_file_handle_for_lock);
+        /* empty the file */
+        SetFilePointer(s_pid_file_handle_for_lock, 0, NULL, FILE_BEGIN);
+        SetEndOfFile(s_pid_file_handle_for_lock);
+        FlushFileBuffers(s_pid_file_handle_for_lock);
 
-		/* write pid */
-		if (ngx_write_file(&file, pid, len, 0) == NGX_ERROR) {
-			return NGX_ERROR;
-		}
+        /* write pid */
+        if (ngx_write_file(&file, pid, len, 0) == NGX_ERROR) {
+            return NGX_ERROR;
+        }
     }
 #else
     file.fd = ngx_open_file(file.name.data, NGX_FILE_RDWR,
@@ -1020,14 +1094,14 @@ ngx_delete_pidfile(ngx_cycle_t *cycle)
     name = ngx_new_binary ? ccf->oldpid.data : ccf->pid.data;
 
 #if (NGX_WIN32)
-	if (s_pid_file_handle_for_lock) {
-		unlock_file_win(s_pid_file_handle_for_lock);
-		if (ngx_close_file(s_pid_file_handle_for_lock) == NGX_FILE_ERROR) {
-			ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
-				ngx_close_file_n " \"%s\" failed", name);
-		}
-		s_pid_file_handle_for_lock = INVALID_HANDLE_VALUE;
-	}
+    if (s_pid_file_handle_for_lock) {
+        unlock_file_win(s_pid_file_handle_for_lock);
+        if (ngx_close_file(s_pid_file_handle_for_lock) == NGX_FILE_ERROR) {
+            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+                ngx_close_file_n " \"%s\" failed", name);
+        }
+        s_pid_file_handle_for_lock = INVALID_HANDLE_VALUE;
+    }
 #endif
 
     if (ngx_delete_file(name) == NGX_FILE_ERROR) {
@@ -1308,6 +1382,7 @@ ngx_shared_memory_add(ngx_conf_t *cf, ngx_str_t *name, size_t size, void *tag)
 
     shm_zone->data = NULL;
     shm_zone->shm.log = cf->cycle->log;
+    shm_zone->shm.addr = NULL;
     shm_zone->shm.size = size;
     shm_zone->shm.name = *name;
     shm_zone->shm.exists = 0;

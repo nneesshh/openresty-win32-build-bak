@@ -20,25 +20,24 @@
 
 #define NGX_DEBUG_POINTS_STOP   1
 #define NGX_DEBUG_POINTS_ABORT  2
+#define HAVE_INTERCEPT_ERROR_LOG_PATCH
 
 
 #define HAVE_PRIVILEGED_PROCESS_PATCH   1
 
 
-#define HAVE_INTERCEPT_ERROR_LOG_PATCH
-
-
 typedef struct ngx_shm_zone_s  ngx_shm_zone_t;
 
 typedef ngx_int_t (*ngx_shm_zone_init_pt) (ngx_shm_zone_t *zone, void *data);
-typedef ngx_int_t (*ngx_log_intercept_pt) (ngx_log_t *log, ngx_uint_t level,
-    u_char *buf, size_t len);
+typedef ngx_int_t(*ngx_log_intercept_pt) (ngx_log_t *log, ngx_uint_t level,
+    u_char * buf, size_t len);
 
 struct ngx_shm_zone_s {
     void                     *data;
     ngx_shm_t                 shm;
     ngx_shm_zone_init_pt      init;
     void                     *tag;
+    void                     *sync;
     ngx_uint_t                noreuse;  /* unsigned  noreuse:1; */
 };
 
@@ -127,6 +126,8 @@ typedef struct {
 
     ngx_array_t               env;
     char                    **environment;
+
+    ngx_uint_t                transparent;  /* unsigned  transparent:1; */
 } ngx_core_conf_t;
 
 

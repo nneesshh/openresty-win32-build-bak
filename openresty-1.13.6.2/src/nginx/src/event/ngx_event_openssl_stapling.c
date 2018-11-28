@@ -1106,6 +1106,10 @@ ngx_ssl_ocsp_write_handler(ngx_event_t *wev)
                 ngx_del_timer(wev);
             }
 
+            if (ngx_handle_write_event(wev, 0) != NGX_OK) {
+                ngx_ssl_ocsp_error(ctx);
+            }
+
             return;
         }
     }

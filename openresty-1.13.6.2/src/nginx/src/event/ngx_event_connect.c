@@ -20,7 +20,7 @@ static ngx_int_t ngx_event_connect_set_transparent(ngx_peer_connection_t *pc,
 ngx_int_t
 ngx_event_connect_peer(ngx_peer_connection_t *pc)
 {
-    int                rc, type;
+    int                rc, type, value;
 #if (NGX_HAVE_IP_BIND_ADDRESS_NO_PORT || NGX_LINUX)
     in_port_t          port;
 #endif
@@ -40,12 +40,9 @@ ngx_event_connect_peer(ngx_peer_connection_t *pc)
 
 #if (NGX_HAVE_SOCKET_CLOEXEC)
     s = ngx_socket(pc->sockaddr->sa_family, type | SOCK_CLOEXEC, 0);
-
 #else
-    s = ngx_socket(pc->sockaddr->sa_family, type, 0);
-
+     s = ngx_socket(pc->sockaddr->sa_family, type, 0);
 #endif
-
 
     ngx_log_debug2(NGX_LOG_DEBUG_EVENT, pc->log, 0, "%s socket %d",
                    (type == SOCK_STREAM) ? "stream" : "dgram", s);
@@ -62,7 +59,7 @@ ngx_event_connect_peer(ngx_peer_connection_t *pc)
     if (c == NULL) {
         if (ngx_close_socket(s) == -1) {
             ngx_log_error(NGX_LOG_ALERT, pc->log, ngx_socket_errno,
-                          ngx_close_socket_n "failed");
+                          ngx_close_socket_n " failed");
         }
 
         return NGX_ERROR;
@@ -77,6 +74,18 @@ ngx_event_connect_peer(ngx_peer_connection_t *pc)
             ngx_log_error(NGX_LOG_ALERT, pc->log, ngx_socket_errno,
                           "setsockopt(SO_RCVBUF) failed");
             goto failed;
+        }
+    }
+
+    if (pc->so_keepalive) {
+        value = 1;
+
+        if (setsockopt(s, SOL_SOCKET, SO_KEEPALIVE,
+                       (const void *) &value, sizeof(int))
+            == -1)
+        {
+            ngx_log_error(NGX_LOG_ALERT, pc->log, ngx_socket_errno,
+                          "setsockopt(SO_KEEPALIVE) failed, ignored");
         }
     }
 
@@ -404,7 +413,16 @@ ngx_event_connect_set_transparent(ngx_peer_connection_t *pc, ngx_socket_t s)
             return NGX_ERROR;
         }
 
+#else
+
+        ngx_log_error(NGX_LOG_ALERT, pc->log, 0,
+                      "could not enable transparent proxying for IPv6 "
+                      "on this platform");
+
+        return NGX_ERROR;
+
 #endif
+
         break;
 
 #endif /* NGX_HAVE_INET6 */

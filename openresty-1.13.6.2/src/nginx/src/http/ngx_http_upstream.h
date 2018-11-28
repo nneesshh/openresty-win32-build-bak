@@ -61,6 +61,7 @@ typedef struct {
     ngx_msec_t                       response_time;
     ngx_msec_t                       connect_time;
     ngx_msec_t                       header_time;
+    ngx_msec_t                       queue_time;
     off_t                            response_length;
     off_t                            bytes_received;
 
@@ -187,6 +188,7 @@ typedef struct {
     ngx_array_t                     *pass_headers;
 
     ngx_http_upstream_local_t       *local;
+    ngx_flag_t                       socket_keepalive;
 
 #if (NGX_HTTP_CACHE)
     ngx_shm_zone_t                  *cache_zone;
@@ -221,6 +223,8 @@ typedef struct {
     signed                           store:2;
     unsigned                         intercept_404:1;
     unsigned                         change_buffering:1;
+    unsigned                         pass_trailers:1;
+    unsigned                         preserve_output:1;
 
 #if (NGX_HTTP_SSL || NGX_COMPAT)
     ngx_ssl_t                       *ssl;
@@ -250,6 +254,7 @@ typedef struct {
 
 typedef struct {
     ngx_list_t                       headers;
+    ngx_list_t                       trailers;
 
     ngx_uint_t                       status_n;
     ngx_str_t                        status_line;
@@ -365,7 +370,7 @@ struct ngx_http_upstream_s {
     ngx_int_t                      (*rewrite_cookie)(ngx_http_request_t *r,
                                          ngx_table_elt_t *h);
 
-    ngx_msec_t                       timeout;
+    ngx_msec_t                       start_time;
 
     ngx_http_upstream_state_t       *state;
 
@@ -393,6 +398,7 @@ struct ngx_http_upstream_s {
 
     unsigned                         request_sent:1;
     unsigned                         request_body_sent:1;
+    unsigned                         request_body_blocked:1;
     unsigned                         header_sent:1;
 };
 

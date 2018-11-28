@@ -12,7 +12,10 @@
 
 ngx_queue_t  ngx_posted_accept_events;
 ngx_queue_t  ngx_posted_events;
+
+#ifdef HAVE_POSTED_DELAYED_EVENTS_PATCH
 ngx_queue_t  ngx_posted_delayed_events;
+#endif
 
 
 void

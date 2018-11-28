@@ -2938,7 +2938,7 @@ ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
             && 1 == ev->evovlp.connectex_flag) {
 
             ev->evovlp.connectex_flag = 0;
-			c->write->evovlp.connectex_flag = 0;
+            c->write->evovlp.connectex_flag = 0;
 
             i_result = setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_CONNECT_CONTEXT, NULL, 0);
             if (i_result != NO_ERROR) {

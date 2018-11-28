@@ -18,8 +18,6 @@ ngx_event_acceptex(ngx_event_t *rev)
 {
     ngx_listening_t   *ls;
     ngx_connection_t  *c;
-    struct sockaddr   *sockaddr, *local_sockaddr;
-    socklen_t          socklen, local_socklen;
 
     c = rev->data;
     ls = c->listening;
@@ -28,6 +26,12 @@ ngx_event_acceptex(ngx_event_t *rev)
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "AcceptEx: %d", c->fd);
 
+    /*if (rev->evovlp.error) {
+        ngx_log_error(NGX_LOG_CRIT, c->log, rev->evovlp.error,
+                      "AcceptEx() %V failed", &ls->addr_text);
+        return;
+    }*/
+
     /* SO_UPDATE_ACCEPT_CONTEXT is required for shutdown() to work */
 
     if (setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_ACCEPT_CONTEXT,
@@ -35,8 +39,8 @@ ngx_event_acceptex(ngx_event_t *rev)
         == -1)
     {
         ngx_log_error(NGX_LOG_CRIT, c->log, ngx_socket_errno,
-                      "setsockopt(SO_UPDATE_ACCEPT_CONTEXT) failed for %d/%d",
-                      c->fd, ls->fd);
+                      "setsockopt(SO_UPDATE_ACCEPT_CONTEXT) failed for %V",
+                      &c->addr_text);
         /* TODO: close socket */
         return;
     }
@@ -45,8 +49,8 @@ ngx_event_acceptex(ngx_event_t *rev)
                              ls->post_accept_buffer_size,
                              ls->socklen + 16,
                              ls->socklen + 16,
-                             &local_sockaddr, &local_socklen,
-                             &sockaddr, &socklen);
+                             &c->local_sockaddr, &c->local_socklen,
+                             &c->sockaddr, &c->socklen);
 
     if (ls->post_accept_buffer_size) {
         c->buffer->last += rev->available;
@@ -55,9 +59,6 @@ ngx_event_acceptex(ngx_event_t *rev)
     } else {
         c->buffer = NULL;
     }
-
-    ngx_memcpy(c->local_sockaddr, local_sockaddr, local_socklen);
-    ngx_memcpy(c->sockaddr, sockaddr, socklen);
 
     if (ls->addr_ntop) {
         c->addr_text.data = ngx_pnalloc(c->pool, ls->addr_text_max_len);
@@ -76,7 +77,7 @@ ngx_event_acceptex(ngx_event_t *rev)
     }
 
     /* io enabled after acceptex is ready */
-	c->write->evovlp.acceptex_flag = 0;
+    c->write->evovlp.acceptex_flag = 0;
 
     ngx_event_post_acceptex(ls, 1);
 
@@ -90,13 +91,6 @@ ngx_event_acceptex(ngx_event_t *rev)
 
 
 ngx_int_t
-ngx_event_create_listenex(ngx_event_t *ev, ngx_uint_t flags)
-{
-    return -1;
-}
-
-
-ngx_int_t
 ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
 {
     u_long             rcvd;
@@ -106,7 +100,8 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
     ngx_event_t       *rev, *wev;
     ngx_socket_t       s;
     ngx_connection_t  *c;
-	size_t             sockaddr_buffer_size;
+
+    size_t             sockaddr_buffer_size;
 
     for (i = 0; i < n; i++) {
 
@@ -142,20 +137,21 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
             return NGX_ERROR;
         }
 
-		/* c->buffer size must not be lower than "post_accept_buffer_size+2*(ls->socklen+16)" */
-		sockaddr_buffer_size = 2 * (ls->socklen + 16);
-		sockaddr_buffer_size = (sockaddr_buffer_size > ls->post_accept_buffer_size) ? sockaddr_buffer_size : ls->post_accept_buffer_size;
-		c->buffer = ngx_create_temp_buf(c->pool, ls->post_accept_buffer_size + sockaddr_buffer_size);
+        /* c->buffer size must not be lower than "post_accept_buffer_size+2*(ls->socklen+16)" */
+        sockaddr_buffer_size = 2 * (ls->socklen + 16);
+        sockaddr_buffer_size = (sockaddr_buffer_size > ls->post_accept_buffer_size) ? sockaddr_buffer_size : ls->post_accept_buffer_size;
+        c->buffer = ngx_create_temp_buf(c->pool, ls->post_accept_buffer_size
+                                                 + sockaddr_buffer_size);
         if (c->buffer == NULL) {
             ngx_close_posted_connection(c);
             return NGX_ERROR;
         }
 
 #if (NGX_DEBUG)
-		c->buffer_ref.start = c->buffer->start;
-		c->buffer_ref.pos = c->buffer->pos;
-		c->buffer_ref.last = c->buffer->last;
-		c->buffer_ref.end = c->buffer->end;
+        c->buffer_ref.start = c->buffer->start;
+        c->buffer_ref.pos = c->buffer->pos;
+        c->buffer_ref.last = c->buffer->last;
+        c->buffer_ref.end = c->buffer->end;
 #endif
 
         c->local_sockaddr = ngx_palloc(c->pool, ls->socklen);
@@ -225,7 +221,7 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         rev->ready = 0;
 
         /* io disabled before acceptex is ready */
-		wev->evovlp.acceptex_flag = 1;
+        wev->evovlp.acceptex_flag = 1;
     }
 
     return NGX_OK;

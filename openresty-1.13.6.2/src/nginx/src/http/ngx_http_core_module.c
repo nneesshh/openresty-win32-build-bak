@@ -8,7 +8,6 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_http.h>
-#include <ngx_http_probe.h>
 
 
 typedef struct {
@@ -402,6 +401,13 @@ static ngx_command_t  ngx_http_core_commands[] = {
       offsetof(ngx_http_core_loc_conf_t, sendfile_max_chunk),
       NULL },
 
+    { ngx_string("subrequest_output_buffer_size"),
+      NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
+      ngx_conf_set_size_slot,
+      NGX_HTTP_LOC_CONF_OFFSET,
+      offsetof(ngx_http_core_loc_conf_t, subrequest_output_buffer_size),
+      NULL },
+
     { ngx_string("aio"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
       ngx_http_core_set_aio,
@@ -651,8 +657,8 @@ static ngx_command_t  ngx_http_core_commands[] = {
       NULL },
 
     { ngx_string("no_error_pages"),
-      NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LIF_CONF
-                        |NGX_CONF_NOARGS,
+      NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LIF_CONF
+                         | NGX_CONF_NOARGS,
       ngx_http_core_no_error_pages,
       NGX_HTTP_LOC_CONF_OFFSET,
       0,
@@ -2233,8 +2239,6 @@ ngx_http_subrequest(ngx_http_request_t *r,
     ngx_http_postponed_request_t  *pr, *p;
 
     if (r->subrequests == 0) {
-        ngx_http_probe_subrequest_cycle(r, uri, args);
-
         ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
                       "subrequests cycle while processing \"%V\"", uri);
         return NGX_ERROR;
@@ -2247,6 +2251,12 @@ ngx_http_subrequest(ngx_http_request_t *r,
         ngx_log_error(NGX_LOG_CRIT, r->connection->log, 0,
                       "request reference counter overflow "
                       "while processing \"%V\"", uri);
+        return NGX_ERROR;
+    }
+
+    if (r->subrequest_in_memory) {
+        ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
+                      "nested in-memory subrequest \"%V\"", uri);
         return NGX_ERROR;
     }
 
@@ -2318,6 +2328,7 @@ ngx_http_subrequest(ngx_http_request_t *r,
     sr->unparsed_uri = r->unparsed_uri;
     sr->method_name = ngx_http_core_get_method;
     sr->http_protocol = r->http_protocol;
+    sr->schema = r->schema;
 
     ngx_http_set_exten(sr);
 
@@ -2330,6 +2341,10 @@ ngx_http_subrequest(ngx_http_request_t *r,
     sr->variables = r->variables;
 
     sr->log_handler = r->log_handler;
+
+    if (sr->subrequest_in_memory) {
+        sr->filter_need_in_memory = 1;
+    }
 
     if (!sr->background) {
         if (c->data == r && r->postponed == NULL) {
@@ -2376,14 +2391,13 @@ ngx_http_subrequest(ngx_http_request_t *r,
         sr->method_name = r->method_name;
         sr->loc_conf = r->loc_conf;
         sr->valid_location = r->valid_location;
+        sr->valid_unparsed_uri = r->valid_unparsed_uri;
         sr->content_handler = r->content_handler;
         sr->phase_handler = r->phase_handler;
         sr->write_event_handler = ngx_http_core_run_phases;
 
         ngx_http_update_location_config(sr);
     }
-
-    ngx_http_probe_subrequest_start(sr);
 
     return ngx_http_post_request(sr, NULL);
 }
@@ -3253,6 +3267,15 @@ ngx_http_core_create_srv_conf(ngx_conf_t *cf)
     cscf->merge_slashes = NGX_CONF_UNSET;
     cscf->underscores_in_headers = NGX_CONF_UNSET;
 
+    if (cf->conf_file) {
+        cscf->file_name = cf->conf_file->file.name.data;
+        cscf->line = cf->conf_file->line;
+    }
+    else {
+        cscf->file_name = NULL;
+        cscf->line = 0;
+    }
+
     return cscf;
 }
 
@@ -3349,6 +3372,7 @@ ngx_http_core_create_loc_conf(ngx_conf_t *cf)
      *     clcf->types = NULL;
      *     clcf->default_type = { 0, NULL };
      *     clcf->error_log = NULL;
+     *     clcf->error_pages = NULL;
      *     clcf->client_body_path = NULL;
      *     clcf->regex = NULL;
      *     clcf->exact_match = 0;
@@ -3370,6 +3394,7 @@ ngx_http_core_create_loc_conf(ngx_conf_t *cf)
     clcf->internal = NGX_CONF_UNSET;
     clcf->sendfile = NGX_CONF_UNSET;
     clcf->sendfile_max_chunk = NGX_CONF_UNSET_SIZE;
+    clcf->subrequest_output_buffer_size = NGX_CONF_UNSET_SIZE;
     clcf->aio = NGX_CONF_UNSET;
     clcf->aio_write = NGX_CONF_UNSET;
 #if (NGX_THREADS)
@@ -3590,6 +3615,9 @@ ngx_http_core_merge_loc_conf(ngx_conf_t *cf, void *parent, void *child)
     ngx_conf_merge_value(conf->sendfile, prev->sendfile, 0);
     ngx_conf_merge_size_value(conf->sendfile_max_chunk,
                               prev->sendfile_max_chunk, 0);
+    ngx_conf_merge_size_value(conf->subrequest_output_buffer_size,
+                              prev->subrequest_output_buffer_size,
+                              (size_t) ngx_pagesize);
     ngx_conf_merge_value(conf->aio, prev->aio, NGX_HTTP_AIO_OFF);
     ngx_conf_merge_value(conf->aio_write, prev->aio_write, 0);
 #if (NGX_THREADS)
@@ -4677,7 +4705,7 @@ ngx_http_core_error_page(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 static char *
 ngx_http_core_no_error_pages(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 {
-    ngx_http_core_loc_conf_t *clcf = conf;
+    ngx_http_core_loc_conf_t * clcf = conf;
 
     if (clcf->error_pages == NULL) {
         return "is duplicate";
@@ -4686,9 +4714,9 @@ ngx_http_core_no_error_pages(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
     if (clcf->error_pages != NGX_CONF_UNSET_PTR) {
         return "conflicts with \"error_page\"";
     }
-
+    
     clcf->error_pages = NULL;
-
+    
     return NGX_CONF_OK;
 }
 

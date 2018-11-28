@@ -67,7 +67,7 @@ ngx_read_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
 
     ovlp.Internal = 0;
     ovlp.InternalHigh = 0;
-    
+
 #ifdef _WIN64
     ovlp.Offset = (u_long)offset & 0x00000000FFFFFFFF;
     ovlp.OffsetHigh = (u_long)(offset >> 32);
@@ -75,7 +75,6 @@ ngx_read_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
     ovlp.Offset = (u_long)offset;
     ovlp.OffsetHigh = (u_long)0;
 #endif
-
     ovlp.hEvent = NULL;
 
     povlp = &ovlp;
@@ -106,7 +105,7 @@ ngx_write_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
 
     ovlp.Internal = 0;
     ovlp.InternalHigh = 0;
-    
+
 #ifdef _WIN64
     ovlp.Offset = (u_long)offset & 0x00000000FFFFFFFF;
     ovlp.OffsetHigh = (u_long)(offset >> 32);
@@ -114,7 +113,6 @@ ngx_write_file(ngx_file_t *file, u_char *buf, size_t size, off_t offset)
     ovlp.Offset = (u_long)offset;
     ovlp.OffsetHigh = (u_long)0;
 #endif
-
     ovlp.hEvent = NULL;
 
     povlp = &ovlp;
@@ -212,13 +210,13 @@ ngx_write_console(ngx_fd_t fd, void *buf, size_t size)
     (void) CharToOemBuff(buf, buf, size);
 
 #if (NGX_WIN32)
-	OutputDebugString(buf);
-	return size;
+    OutputDebugString(buf);
+    return size;
 #else
     if (WriteFile(fd, buf, size, &n, NULL) != 0) {
         return (size_t) n;
     }
-	return -1;
+    return -1;
 #endif
 }
 
@@ -378,10 +376,10 @@ ngx_create_file_mapping(ngx_file_mapping_t *fm)
 #ifdef _WIN64
     fm->handle = CreateFileMapping(fm->fd, NULL, PAGE_READWRITE,
                                    (u_long) ((off_t) fm->size >> 32),
-                                   (u_long) ((off_t) fm->size & 0x00000000ffffffff),
+                                   (u_long) ((off_t) fm->size & 0xffffffff),
                                    NULL);
 #else
-	fm->handle = CreateFileMapping(fm->fd, NULL, PAGE_READWRITE,
+    fm->handle = CreateFileMapping(fm->fd, NULL, PAGE_READWRITE,
                                    (u_long) ((off_t) 0),
                                    (u_long) ((off_t) fm->size),
                                    NULL);

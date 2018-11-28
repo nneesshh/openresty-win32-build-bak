@@ -77,8 +77,8 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
     rev = c->read;
 
     if (!rev->ready) {
-        ngx_log_error(NGX_LOG_ERR, c->log, 0, "ngx_overlapped_wsarecv(): second wsa post");
-        return NGX_ERROR;
+        ngx_log_error(NGX_LOG_ALERT, c->log, 0, "second wsa post");
+        return NGX_AGAIN;
     }
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0,
@@ -88,6 +88,10 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         rev->complete = 0;
 
         if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+            /*if (rev->evovlp.error) {
+                ngx_connection_error(c, rev->ovlp.error, "WSARecv() failed");
+                return NGX_ERROR;
+            }*/
 
             ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,
                            "WSARecv ovlp: fd:%d %ul of %z",
@@ -121,27 +125,29 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
     rc = WSARecv(c->fd, wsabuf, 1, &bytes, &flags, ovlp, NULL);
 
 #if (NGX_DEBUG)
-	if (size < 1024)
-		output_debug_string("\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) is too small!!!\n",
-			(int)size);
+    if (size < 1024)
+        output_debug_string("\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) is too small!!!\n",
+            (int)size);
 
     // debug
     output_debug_string("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
         (uintptr_t)buf, (int)size, bytes,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, rev->write);
 
-	c->buffer_ref.start = buf;
-	c->buffer_ref.pos = buf;
-	c->buffer_ref.last = buf;
-	c->buffer_ref.end = buf + size;
+    c->buffer_ref.start = buf;
+    c->buffer_ref.pos = buf;
+    c->buffer_ref.last = buf;
+    c->buffer_ref.end = buf + size;
 
 #endif
+
+    rev->complete = 0;
 
     ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "WSARecv ovlp: fd:%d rc:%d %ul of %z",
                    c->fd, rc, bytes, size);
 
-	/* SOCKET_ERROR == -1 */
+    /* SOCKET_ERROR == -1 */
     if (rc == -1) {
         err = ngx_socket_errno;
         if (err == WSA_IO_PENDING) {
@@ -150,14 +156,14 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
             ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,
                            "WSARecv() posted");
 
-			rev->evovlp.recv_mem_lock_flag = 1;
+            rev->evovlp.recv_mem_lock_flag = 1;                           
             return NGX_AGAIN;
         }
 
 #if (NGX_DEBUG)
-		// debug
-		output_debug_string("\nngx_overlapped_wsarecv(): errno=(%llu)!!!!\n",
-			(uint64_t)err);
+        // debug
+        output_debug_string("\nngx_overlapped_wsarecv(): errno=(%llu)!!!!\n",
+            (uint64_t)err);
 #endif
 
         n = ngx_connection_error(c, err, "WSARecv() failed");
@@ -169,20 +175,20 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         return n;
     }
 
-	if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
 
-		/*
-		* if a socket was bound with I/O completion port
-		* then GetQueuedCompletionStatus() would anyway return its status
-		* despite that WSARecv() was already complete
-		*/
+        /*
+         * if a socket was bound with I/O completion port
+         * then GetQueuedCompletionStatus() would anyway return its status
+         * despite that WSARecv() was already complete
+         */
 
-		rev->ready = 0; /* read event posted, don't post again before response */
-		rev->active = 1; /* 1=active means "c->buffer should never be freed" */
+        rev->ready = 0; /* read event just posted or bytes already arrived, don't post again before response */
+        rev->active = 1; /* 1=active means "c->buffer should never be freed" */
 
-		rev->evovlp.recv_mem_lock_flag = 1;
-		return NGX_AGAIN;
-	}
+        rev->evovlp.recv_mem_lock_flag = 1;
+        return NGX_AGAIN;
+    }
 
     if (bytes == 0) {
         rev->eof = 1;

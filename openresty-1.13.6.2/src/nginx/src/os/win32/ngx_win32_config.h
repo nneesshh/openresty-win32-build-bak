@@ -58,14 +58,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-//#ifdef __GNUC__
+#ifdef __GNUC__
 #include <stdint.h>
-//#endif
+#endif
 #include <ctype.h>
 #include <locale.h>
-#include <jemalloc/jemalloc.h>
+
+/* win32 toolchains */
 #ifdef NGX_WIN32
 #include <vld.h>
+#include <stdint.h>
+#include <stdbool.h>
 #include <assert.h>
 #include <crtdbg.h>
 #include <lfs.h>
@@ -176,14 +179,17 @@ typedef int                 intptr_t;
 typedef u_int               uintptr_t;
 #endif
 
+/* win32 toolchains */
+/* resolve: error C2061: _off_t */
+/*#ifndef __MINGW64_VERSION_MAJOR*/
+
+/* Windows defines off_t as long, which is 32-bit */
+/*typedef __int64             off_t;
+#define _OFF_T_DEFINED
+
+#endif*/
 #include <sys/stat.h>
-//#ifndef __MINGW64_VERSION_MAJOR
-//
-///* Windows defines off_t as long, which is 32-bit */
-//typedef __int64             off_t;
-//#define _OFF_T_DEFINED
-//
-//#endif
+
 
 #ifdef __WATCOMC__
 
@@ -225,6 +231,8 @@ typedef int                 sig_atomic_t;
 #define NGX_TIME_T_LEN          (sizeof("-9223372036854775808") - 1)
 #define NGX_TIME_T_SIZE         8
 #define NGX_MAX_TIME_T_VALUE    9223372036854775807
+
+/* win32 toolchains */
 #define NGX_OFF_T_LEN           (sizeof("-9223372036854775808") - 1)
 #define NGX_MAX_OFF_T_VALUE     9223372036854775807
 
@@ -236,12 +244,16 @@ typedef int                 sig_atomic_t;
 #define NGX_TIME_T_LEN          (sizeof("-2147483648") - 1)
 #define NGX_TIME_T_SIZE         4
 #define NGX_MAX_TIME_T_VALUE    2147483647
+
+/* win32 toolchains */
 #define NGX_OFF_T_LEN           (sizeof("-2147483648") - 1)
 #define NGX_MAX_OFF_T_VALUE     2147483647
 
 #endif
 
-
+/* win32 toolchains */
+/*#define NGX_OFF_T_LEN           (sizeof("-9223372036854775807") - 1)
+#define NGX_MAX_OFF_T_VALUE     9223372036854775807 */
 #define NGX_SIG_ATOMIC_T_SIZE   4
 
 

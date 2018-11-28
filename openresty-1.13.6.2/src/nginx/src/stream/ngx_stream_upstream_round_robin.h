@@ -142,6 +142,7 @@ ngx_int_t ngx_stream_upstream_get_round_robin_peer(ngx_peer_connection_t *pc,
 void ngx_stream_upstream_free_round_robin_peer(ngx_peer_connection_t *pc,
     void *data, ngx_uint_t state);
 
+
 #if (NGX_STREAM_SSL)
 ngx_int_t ngx_stream_upstream_set_round_robin_peer_session(
     ngx_peer_connection_t *pc, void *data);

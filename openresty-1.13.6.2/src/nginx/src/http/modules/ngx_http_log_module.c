@@ -92,6 +92,11 @@ typedef struct {
 } ngx_http_log_var_t;
 
 
+#define NGX_HTTP_LOG_ESCAPE_DEFAULT  0
+#define NGX_HTTP_LOG_ESCAPE_JSON     1
+#define NGX_HTTP_LOG_ESCAPE_NONE     2
+
+
 static void ngx_http_log_write(ngx_http_request_t *r, ngx_http_log_t *log,
     u_char *buf, size_t len);
 static ssize_t ngx_http_log_script_write(ngx_http_request_t *r,
@@ -128,17 +133,21 @@ static u_char *ngx_http_log_request_length(ngx_http_request_t *r, u_char *buf,
     ngx_http_log_op_t *op);
 
 static ngx_int_t ngx_http_log_variable_compile(ngx_conf_t *cf,
-    ngx_http_log_op_t *op, ngx_str_t *value, ngx_uint_t json);
+    ngx_http_log_op_t *op, ngx_str_t *value, ngx_uint_t escape);
 static size_t ngx_http_log_variable_getlen(ngx_http_request_t *r,
     uintptr_t data);
 static u_char *ngx_http_log_variable(ngx_http_request_t *r, u_char *buf,
     ngx_http_log_op_t *op);
 static uintptr_t ngx_http_log_escape(ngx_http_log_loc_conf_t *lcf, u_char *dst,
-    u_char *src, size_t size);
+    u_char * src, size_t size);
 static size_t ngx_http_log_json_variable_getlen(ngx_http_request_t *r,
     uintptr_t data);
 static u_char *ngx_http_log_json_variable(ngx_http_request_t *r, u_char *buf,
     ngx_http_log_op_t *op);
+static size_t ngx_http_log_unescaped_variable_getlen(ngx_http_request_t *r,
+    uintptr_t data);
+static u_char *ngx_http_log_unescaped_variable(ngx_http_request_t *r,
+    u_char *buf, ngx_http_log_op_t *op);
 
 
 static void *ngx_http_log_create_main_conf(ngx_conf_t *cf);
@@ -181,13 +190,13 @@ static ngx_command_t  ngx_http_log_commands[] = {
       NULL },
 
     { ngx_string("log_escape_non_ascii"),
-      NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG,
+      NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_CONF_FLAG,
       ngx_conf_set_flag_slot,
       NGX_HTTP_LOC_CONF_OFFSET,
       offsetof(ngx_http_log_loc_conf_t, escape_non_ascii),
       NULL },
 
-      ngx_null_command
+     ngx_null_command
 };
 
 
@@ -915,7 +924,7 @@ ngx_http_log_request_length(ngx_http_request_t *r, u_char *buf,
 
 static ngx_int_t
 ngx_http_log_variable_compile(ngx_conf_t *cf, ngx_http_log_op_t *op,
-    ngx_str_t *value, ngx_uint_t json)
+    ngx_str_t *value, ngx_uint_t escape)
 {
     ngx_int_t  index;
 
@@ -926,11 +935,18 @@ ngx_http_log_variable_compile(ngx_conf_t *cf, ngx_http_log_op_t *op,
 
     op->len = 0;
 
-    if (json) {
+    switch (escape) {
+    case NGX_HTTP_LOG_ESCAPE_JSON:
         op->getlen = ngx_http_log_json_variable_getlen;
         op->run = ngx_http_log_json_variable;
+        break;
 
-    } else {
+    case NGX_HTTP_LOG_ESCAPE_NONE:
+        op->getlen = ngx_http_log_unescaped_variable_getlen;
+        op->run = ngx_http_log_unescaped_variable;
+        break;
+
+    default: /* NGX_HTTP_LOG_ESCAPE_DEFAULT */
         op->getlen = ngx_http_log_variable_getlen;
         op->run = ngx_http_log_variable;
     }
@@ -982,7 +998,7 @@ ngx_http_log_variable(ngx_http_request_t *r, u_char *buf, ngx_http_log_op_t *op)
 
     } else {
         lcf = ngx_http_get_module_loc_conf(r, ngx_http_log_module);
-        return (u_char *) ngx_http_log_escape(lcf, buf, value->data, value->len);
+        return (u_char *)ngx_http_log_escape(lcf, buf, value->data, value->len);
     }
 }
 
@@ -991,8 +1007,8 @@ static uintptr_t
 ngx_http_log_escape(ngx_http_log_loc_conf_t *lcf, u_char *dst, u_char *src,
     size_t size)
 {
-    ngx_uint_t                   n;
-    static u_char                hex[] = "0123456789ABCDEF";
+    ngx_uint_t      n;
+    static u_char   hex[] = "0123456789ABCDEF";
 
     static uint32_t   escape[] = {
         0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
@@ -1014,8 +1030,8 @@ ngx_http_log_escape(ngx_http_log_loc_conf_t *lcf, u_char *dst, u_char *src,
 
     if (lcf->escape_non_ascii) {
         ngx_memset(&escape[4], 0xff, sizeof(uint32_t) * 4);
-
-    } else {
+    }
+    else {
         ngx_memzero(&escape[4], sizeof(uint32_t) * 4);
     }
 
@@ -1092,6 +1108,39 @@ ngx_http_log_json_variable(ngx_http_request_t *r, u_char *buf,
     } else {
         return (u_char *) ngx_escape_json(buf, value->data, value->len);
     }
+}
+
+
+static size_t
+ngx_http_log_unescaped_variable_getlen(ngx_http_request_t *r, uintptr_t data)
+{
+    ngx_http_variable_value_t  *value;
+
+    value = ngx_http_get_indexed_variable(r, data);
+
+    if (value == NULL || value->not_found) {
+        return 0;
+    }
+
+    value->escape = 0;
+
+    return value->len;
+}
+
+
+static u_char *
+ngx_http_log_unescaped_variable(ngx_http_request_t *r, u_char *buf,
+    ngx_http_log_op_t *op)
+{
+    ngx_http_variable_value_t  *value;
+
+    value = ngx_http_get_indexed_variable(r, op->data);
+
+    if (value == NULL || value->not_found) {
+        return buf;
+    }
+
+    return ngx_cpymem(buf, value->data, value->len);
 }
 
 
@@ -1561,18 +1610,21 @@ ngx_http_log_compile_format(ngx_conf_t *cf, ngx_array_t *flushes,
     size_t               i, len;
     ngx_str_t           *value, var;
     ngx_int_t           *flush;
-    ngx_uint_t           bracket, json;
+    ngx_uint_t           bracket, escape;
     ngx_http_log_op_t   *op;
     ngx_http_log_var_t  *v;
 
-    json = 0;
+    escape = NGX_HTTP_LOG_ESCAPE_DEFAULT;
     value = args->elts;
 
     if (s < args->nelts && ngx_strncmp(value[s].data, "escape=", 7) == 0) {
         data = value[s].data + 7;
 
         if (ngx_strcmp(data, "json") == 0) {
-            json = 1;
+            escape = NGX_HTTP_LOG_ESCAPE_JSON;
+
+        } else if (ngx_strcmp(data, "none") == 0) {
+            escape = NGX_HTTP_LOG_ESCAPE_NONE;
 
         } else if (ngx_strcmp(data, "default") != 0) {
             ngx_conf_log_error(NGX_LOG_EMERG, cf, 0,
@@ -1661,7 +1713,7 @@ ngx_http_log_compile_format(ngx_conf_t *cf, ngx_array_t *flushes,
                     }
                 }
 
-                if (ngx_http_log_variable_compile(cf, op, &var, json)
+                if (ngx_http_log_variable_compile(cf, op, &var, escape)
                     != NGX_OK)
                 {
                     return NGX_CONF_ERROR;

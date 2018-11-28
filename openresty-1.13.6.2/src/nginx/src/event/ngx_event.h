@@ -22,10 +22,10 @@ typedef struct {
     WSAOVERLAPPED    ovlp;
     ngx_event_t     *event;
 
-	/* int              error; */
+    /* int              error; */
     unsigned int     acceptex_flag : 1; /* 1 = acceptex event posted, 0 = event process over */
     unsigned int     connectex_flag : 1; /* 1 = connectex event posted, 0 = event process over */
-	unsigned int     recv_mem_lock_flag : 1; /* 1= memory is locked by iocp, 0 = memory is free */
+    unsigned int     recv_mem_lock_flag : 1; /* 1= memory is locked by iocp, 0 = memory is free */
 } ngx_event_ovlp_t;
 
 #endif
@@ -504,16 +504,23 @@ extern ngx_module_t           ngx_event_core_module;
 
 
 #define ngx_event_get_conf(conf_ctx, module)                                  \
-             (*(ngx_get_conf(conf_ctx, ngx_events_module))) [module.ctx_index];
+             (*(ngx_get_conf(conf_ctx, ngx_events_module))) [module.ctx_index]
 
 
 
 void ngx_event_accept(ngx_event_t *ev);
 #if !(NGX_WIN32)
 void ngx_event_recvmsg(ngx_event_t *ev);
+void ngx_udp_rbtree_insert_value(ngx_rbtree_node_t *temp,
+    ngx_rbtree_node_t *node, ngx_rbtree_node_t *sentinel);
 #endif
+void ngx_delete_udp_connection(void *data);
 ngx_int_t ngx_trylock_accept_mutex(ngx_cycle_t *cycle);
+ngx_int_t ngx_enable_accept_events(ngx_cycle_t *cycle);
 u_char *ngx_accept_log_error(ngx_log_t *log, u_char *buf, size_t len);
+#if (NGX_DEBUG)
+void ngx_debug_accepted_connection(ngx_event_conf_t *ecf, ngx_connection_t *c);
+#endif
 
 
 void ngx_process_events_and_timers(ngx_cycle_t *cycle);

@@ -194,11 +194,13 @@ ngx_module_t  ngx_event_core_module = {
 void
 ngx_process_events_and_timers(ngx_cycle_t *cycle)
 {
-    ngx_uint_t  flags;
-    ngx_msec_t  timer, delta;
+    ngx_uint_t   flags;
+    ngx_msec_t   timer, delta;
 
-    ngx_queue_t     *q;
-    ngx_event_t     *ev;
+#ifdef HAVE_POSTED_DELAYED_EVENTS_PATCH
+    ngx_queue_t *q;
+    ngx_event_t *ev;
+#endif
 
     if (ngx_timer_resolution) {
         timer = NGX_TIMER_INFINITE;
@@ -219,12 +221,14 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
 #endif
     }
 
+#ifdef HAVE_POSTED_DELAYED_EVENTS_PATCH
     if (!ngx_queue_empty(&ngx_posted_delayed_events)) {
         ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                       "posted delayed event queue not empty"
-                       " making poll timeout 0");
+            "posted delayed event queue not empty"
+            " making poll timeout 0");
         timer = 0;
     }
+#endif
 
     if (ngx_use_accept_mutex) {
         if (ngx_accept_disabled > 0) {
@@ -269,34 +273,38 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
 
     ngx_event_process_posted(cycle, &ngx_posted_events);
 
+#ifdef HAVE_POSTED_DELAYED_EVENTS_PATCH
     while (!ngx_queue_empty(&ngx_posted_delayed_events)) {
         q = ngx_queue_head(&ngx_posted_delayed_events);
-
+        
         ev = ngx_queue_data(q, ngx_event_t, queue);
         if (ev->delayed) {
             /* start of newly inserted nodes */
             for (/* void */;
-                 q != ngx_queue_sentinel(&ngx_posted_delayed_events);
-                 q = ngx_queue_next(q))
-            {
+                    q != ngx_queue_sentinel(&ngx_posted_delayed_events);
+                    q = ngx_queue_next(q))
+                {
                 ev = ngx_queue_data(q, ngx_event_t, queue);
                 ev->delayed = 0;
 
-                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                               "skipping delayed posted event %p,"
-                               " till next iteration", ev);
-            }
+                    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                        "skipping delayed posted event %p,"
+                         " till next iteration", ev);
+                }
 
-            break;
+                break;
+
         }
 
-        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                       "delayed posted event %p", ev);
+            ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                "delayed posted event %p", ev);
 
-        ngx_delete_posted_event(ev);
+            ngx_delete_posted_event(ev);
 
-        ev->handler(ev);
+            ev->handler(ev);
+
     }
+#endif
 }
 
 
@@ -450,11 +458,51 @@ ngx_handle_write_event(ngx_event_t *wev, size_t lowat)
 static char *
 ngx_event_init_conf(ngx_cycle_t *cycle, void *conf)
 {
+#if (NGX_HAVE_REUSEPORT)
+    ngx_uint_t        i;
+    ngx_listening_t  *ls;
+#endif
+
     if (ngx_get_conf(cycle->conf_ctx, ngx_events_module) == NULL) {
         ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
                       "no \"events\" section in configuration");
         return NGX_CONF_ERROR;
     }
+
+    if (cycle->connection_n < cycle->listening.nelts + 1) {
+
+        /*
+         * there should be at least one connection for each listening
+         * socket, plus an additional connection for channel
+         */
+
+        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+                      "%ui worker_connections are not enough "
+                      "for %ui listening sockets",
+                      cycle->connection_n, cycle->listening.nelts);
+
+        return NGX_CONF_ERROR;
+    }
+
+#if (NGX_HAVE_REUSEPORT)
+
+    ls = cycle->listening.elts;
+    for (i = 0; i < cycle->listening.nelts; i++) {
+
+        if (!ls[i].reuseport || ls[i].worker != 0) {
+            continue;
+        }
+
+        if (ngx_clone_listening(cycle, &ls[i]) != NGX_OK) {
+            return NGX_CONF_ERROR;
+        }
+
+        /* cloning may change cycle->listening.elts */
+
+        ls = cycle->listening.elts;
+    }
+
+#endif
 
     return NGX_CONF_OK;
 }
@@ -640,7 +688,9 @@ ngx_event_process_init(ngx_cycle_t *cycle)
 
     ngx_queue_init(&ngx_posted_accept_events);
     ngx_queue_init(&ngx_posted_events);
+#ifdef HAVE_POSTED_DELAYED_EVENTS_PATCH
     ngx_queue_init(&ngx_posted_delayed_events);
+#endif
 
     if (ngx_event_timer_init(cycle->log) == NGX_ERROR) {
         return NGX_ERROR;
@@ -763,9 +813,9 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         c[i].read = &cycle->read_events[i];
         c[i].write = &cycle->write_events[i];
         c[i].fd = (ngx_socket_t) -1;
-		
-		ngx_memzero(c[i].read, sizeof(ngx_event_t));
-		ngx_memzero(c[i].write, sizeof(ngx_event_t));
+        
+        ngx_memzero(c[i].read, sizeof(ngx_event_t));
+        ngx_memzero(c[i].write, sizeof(ngx_event_t));
 
         next = &c[i];
     } while (i);

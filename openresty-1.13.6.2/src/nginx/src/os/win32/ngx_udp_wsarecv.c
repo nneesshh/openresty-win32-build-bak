@@ -75,6 +75,10 @@ ngx_udp_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
         rev->complete = 0;
 
         if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+            /*if (rev->evovlp.error) {
+                ngx_connection_error(c, rev->evovlp.error, "WSARecv() failed");
+                return NGX_ERROR;
+            }*/
 
             ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,
                            "WSARecv ovlp: fd:%d %ul of %z",

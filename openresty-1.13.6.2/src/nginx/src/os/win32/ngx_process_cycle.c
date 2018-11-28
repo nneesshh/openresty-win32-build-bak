@@ -31,6 +31,7 @@ static ngx_thread_value_t __stdcall ngx_cache_loader_thread(void *data);
 ngx_uint_t     ngx_process;
 ngx_uint_t     ngx_worker;
 ngx_pid_t      ngx_pid;
+ngx_pid_t      ngx_parent;
 
 ngx_uint_t     ngx_inherited;
 ngx_pid_t      ngx_new_binary;
@@ -883,6 +884,11 @@ ngx_worker_process_exit(ngx_cycle_t *cycle)
         }
     }
 
+    if (saved_init_cycle_pool != NULL && saved_init_cycle_pool != cycle->pool) {
+        ngx_destroy_pool(saved_init_cycle_pool);
+        saved_init_cycle_pool = NULL;
+    }
+
     ngx_destroy_pool(cycle->pool);
 
     exit(0);
@@ -1031,8 +1037,8 @@ ngx_single_process_cycle(ngx_cycle_t *cycle)
         exit(2);
     }
 
-	/* STUB */
-	WaitForSingleObject(ngx_stop_event, INFINITE);
+    /* STUB */
+    WaitForSingleObject(ngx_stop_event, INFINITE);
 
     /* make vld happy */
     {
@@ -1040,7 +1046,7 @@ ngx_single_process_cycle(ngx_cycle_t *cycle)
 
         fprintf(stderr, "\nServer say bye ...");
         assert(_CrtCheckMemory());
-		ngx_delete_pidfile(cycle);
+        ngx_delete_pidfile(cycle);
 
         ngx_quit = 1;
         WaitForSingleObject(tid, INFINITE);

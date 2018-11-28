@@ -503,6 +503,7 @@ ngx_http_perl_init_interpreter(ngx_conf_t *cf, ngx_http_perl_main_conf_t *pmcf)
             return NGX_CONF_ERROR;
         }
 
+        /*if (ngx_http_perl_run_requires(aTHX_ pmcf->requires, cf->log)*/
         if (ngx_http_perl_run_requires(pmcf->perl, pmcf->requires, cf->log)
             != NGX_OK)
         {

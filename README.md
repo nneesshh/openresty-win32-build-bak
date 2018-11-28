@@ -18,6 +18,7 @@
     - ngx_stream_geoip_module
     - ngx_http_geoip_module
     - ngx_http_degradation_module
+    - ngx_http_probe(dtrace)
     - ...
 
 
