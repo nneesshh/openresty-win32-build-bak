@@ -453,7 +453,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                             char data[8096] = { 0 };
                             memcpy(data, c->buffer_ref.pos, bytes);
                             output_debug_string("\n\t>>>> server read begin\n");
-                            output_debug_string("\t     c(%d) fd(%d) destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
+                            output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
                                 c->id, c->fd, c->destroyed,
                                 key, bytes,
                                 data);

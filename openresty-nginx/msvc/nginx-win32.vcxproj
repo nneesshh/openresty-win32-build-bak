@@ -45,13 +45,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>../bin/$(Configuration)/</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
+    <IntDir>objs/$(Configuration)/vc/</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>nginx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>../bin/$(Configuration)/</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
+    <IntDir>objs/$(Configuration)/vc/</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>nginx</TargetName>
   </PropertyGroup>
@@ -306,13 +306,14 @@
     <ClCompile Include="..\src\nginx\src\event\ngx_event_accept.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_acceptex.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_connect.c" />
-    <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex.c" />
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex_win32.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_openssl.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_opensslex.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_openssl_stapling.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_pipe.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_posted.c" />
     <ClCompile Include="..\src\nginx\src\event\ngx_event_timer.c" />
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_udp.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_access_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_addition_filter_module.c" />
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_auth_basic_module.c" />
@@ -380,6 +381,7 @@
     <ClCompile Include="..\src\nginx\src\http\ngx_http_variables.c" />
     <ClCompile Include="..\src\nginx\src\http\ngx_http_write_filter_module.c" />
     <ClCompile Include="..\src\nginx\src\http\v2\ngx_http_v2.c" />
+    <ClCompile Include="..\src\nginx\src\http\v2\ngx_http_v2_encode.c" />
     <ClCompile Include="..\src\nginx\src\http\v2\ngx_http_v2_filter_module.c" />
     <ClCompile Include="..\src\nginx\src\http\v2\ngx_http_v2_huff_decode.c" />
     <ClCompile Include="..\src\nginx\src\http\v2\ngx_http_v2_huff_encode.c" />
@@ -417,8 +419,8 @@
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_win32_init.c" />
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsarecv.c" />
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsarecv_chain.c" />
-    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasend.c" />
-    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasend_chain.c" />
+    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasendex.c" />
+    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasend_chainex.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_access_module.c" />
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_core_module.c" />
@@ -706,13 +708,13 @@
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_time.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_user.h" />
     <ClInclude Include="..\src\nginx\src\os\win32\ngx_win32_config.h" />
+    <ClInclude Include="..\src\nginx\src\os\win32\resource.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_script.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_ssl_module.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_upstream.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_upstream_round_robin.h" />
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream_variables.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\bundle\nginx-http-concat-module\config" />
@@ -733,10 +735,10 @@
     <None Include="..\src\nginx\src\os\win32\nginx_icon48.xpm" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="nginx_win32.rc" />
+    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
+    <ResourceCompile Include="..\src\nginx\src\os\win32\nginx-win32.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

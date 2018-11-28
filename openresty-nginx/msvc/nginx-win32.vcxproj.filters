@@ -354,12 +354,6 @@
     <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsarecv_chain.c">
       <Filter>src\os\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasend.c">
-      <Filter>src\os\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasend_chain.c">
-      <Filter>src\os\win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_referer_module.c">
       <Filter>src\http\modules</Filter>
     </ClCompile>
@@ -1101,13 +1095,25 @@
     <ClCompile Include="..\src\nginx\src\http\ngx_http_request.c">
       <Filter>src\http</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex.c">
-      <Filter>src\event</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\nginx\src\os\win32\lfs.c">
       <Filter>src\os\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\src\nginx\src\event\ngx_event_opensslex.c">
+      <Filter>src\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex_win32.c">
+      <Filter>src\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasendex.c">
+      <Filter>src\os\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nginx\src\os\win32\ngx_wsasend_chainex.c">
+      <Filter>src\os\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nginx\src\http\v2\ngx_http_v2_encode.c">
+      <Filter>src\http\v2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nginx\src\event\ngx_event_udp.c">
       <Filter>src\event</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1919,7 +1925,7 @@
     <ClInclude Include="..\src\nginx\src\os\win32\lfs.h">
       <Filter>src\os\win32</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\src\nginx\src\os\win32\resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\nginx\src\dtrace\nginx.stp">
@@ -1972,9 +1978,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="nginx_win32.rc" />
+    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\src\nginx\src\os\win32\nginx.ico" />
+    <ResourceCompile Include="..\src\nginx\src\os\win32\nginx-win32.rc" />
   </ItemGroup>
 </Project>

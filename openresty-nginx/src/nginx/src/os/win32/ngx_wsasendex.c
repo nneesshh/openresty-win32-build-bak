@@ -230,6 +230,12 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
         n = WSASend(c->fd, vec.elts, vec.nelts, &sent, 0, ovlp, NULL);
 
+        /* SOCKET_ERROR == -1 */
+        if (n == -1) {
+            /* "ngx_socket_errno" must just after WSASend, otherwise the err maybe cleared by other system call such as "OutputDebugString()" */
+            err = ngx_socket_errno;
+        }
+
         ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
                        "WSASend: fd:%d, %d, %ul of %uz", c->fd, n, sent, size);
 
@@ -270,8 +276,6 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
             return sent;
         }
-
-        err = ngx_socket_errno;
 
         if (err == WSA_IO_PENDING) {
             ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,

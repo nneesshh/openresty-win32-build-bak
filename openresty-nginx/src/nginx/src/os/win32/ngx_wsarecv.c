@@ -124,14 +124,20 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
     rc = WSARecv(c->fd, wsabuf, 1, &bytes, &flags, ovlp, NULL);
 
+	/* SOCKET_ERROR == -1 */
+    if (rc == -1) {
+        /* "ngx_socket_errno" must just after WSARecv, otherwise the err maybe cleared by other system call such as "OutputDebugString()" */
+        err = ngx_socket_errno;
+    }
+
 #if (NGX_DEBUG)
     if (size < 1024)
         output_debug_string("\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) is too small!!!\n",
             (int)size);
 
     // debug
-    output_debug_string("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
-        (uintptr_t)buf, (int)size, bytes,
+    output_debug_string("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld)ovlp(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
+        (uintptr_t)buf, (int)size, bytes, (uintptr_t)ovlp,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, rev->write);
 
     c->buffer_ref.start = buf;
@@ -141,15 +147,13 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
 #endif
 
-    rev->complete = 0;
-
-    ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
+    /*ngx_log_debug4(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "WSARecv ovlp: fd:%d rc:%d %ul of %z",
-                   c->fd, rc, bytes, size);
+                   c->fd, rc, bytes, size);*/
 
     /* SOCKET_ERROR == -1 */
     if (rc == -1) {
-        err = ngx_socket_errno;
+
         if (err == WSA_IO_PENDING) {
             rev->ready = 0; /* read event already posted and still in processing, don't post again before response */
             rev->active = 1;
