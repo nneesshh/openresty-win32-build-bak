@@ -377,7 +377,7 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
      * connection: we keeps the IOCP event buffer(the c->buffer or r->header_in)'s memory
      * , and frees the large header buffers that are always allocated outside the c->pool.
      */
-	/*
+    /*
     b = c->buffer;
 
     if (ngx_pfree(c->pool, b->start) == NGX_OK) {
@@ -393,6 +393,22 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
         b->pos = b->start;
         b->last = b->start;
     }*/
+
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_http_set_keepaliveex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
+
+    /* MUST reset buf to ensure enough space to contain output data from SSL_read. */
+    if (b && b->pos == b->last) {
+        b->last = b->pos = b->start;
+    } else {
+        /* There is still data in buffer, it must be ERROR for keepalive!!!  */
+        ngx_http_close_connection(c);
+        return;
+    }
 
     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "hc free: %p",
                    hc->free);
@@ -478,6 +494,13 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
     ngx_connection_t  *c;
 
     c = rev->data;
+
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_http_keepalive_handlerex(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
 
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http keepalive handler");
 
@@ -588,13 +611,6 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
         return;
     }
 
-#if (NGX_DEBUG)
-    // debug
-    output_debug_string("\nngx_http_keepalive_handlerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
-        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
-        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
-#endif
-
     c->sent = 0;
     c->destroyed = 0;
 
@@ -602,6 +618,13 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
 
     rev->handler = ngx_http_process_request_line;
     ngx_http_process_request_line(rev);
+
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_http_keepalive_handlerex(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
 }
 
 

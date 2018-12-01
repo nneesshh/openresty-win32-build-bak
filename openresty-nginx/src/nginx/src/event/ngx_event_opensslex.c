@@ -594,20 +594,21 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
                 size -= ssl_read_num;
 
                 if (size == 0) {
+                    /* NORMALLY, size MUST NOT be zero, the SSL_read data size can't be exactly equal buf size(it MUST be overflow whe "size == 0") */
 #if (NGX_DEBUG)
                     // debug
                     {
                         char data[8192] = { 0 };
                         memcpy(data, ssl_buf, bytes);
-                        output_debug_string("\n\t>>>> SSL_read full begin\n");
+                        output_debug_string("\n\t>>>> SSL_read !!!!!!overflow!!!!!! begin\n");
                         output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d) -- data: \n\n%s\n",
                             c->id, c->fd, c->destroyed,
                             bytes,
                             data);
-                        output_debug_string("\t<<<< SSL_read full end\n\n");
+                        output_debug_string("\t<<<< SSL_read !!!!!!overflow!!!!!! end\n\n");
                     }
 #endif
-                    return bytes;
+                    return NGX_ERROR;
                 }
 
                 buf += ssl_read_num;
