@@ -1,6 +1,13 @@
 ﻿<%
     local date = require("date")
     local now = date(false);
+
+    local playInterval
+    if errors and params then
+        playInterval = params.PlayInterval
+     elseif params then
+        playInterval = params.PlayInterval
+    end
 %>
 
 <script type="text/javascript">
@@ -43,9 +50,22 @@
             <% end %>
 
             <div class="form-group">
-                <label id="lDeadlineTime" for="DeadlineTime">截止时间:</label>
-                <input type="text" id="deadline_time" name="DeadlineTime" placeholder="请选择截止时间">
+                <label class="col-sm-3 control-label">截止时间:</label>
+                <div class="col-sm-9">
+                    <input style="width:170px;" type="text" id="deadlineTime" name="DeadlineTime" />
+                </div>
             </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">播放间隔（秒）:</label>
+                <div class="col-sm-9">
+                    <input type="text" name="PlayInterval" style="height:20px;width:60px;" value="<%= playInterval or '30' %>" />
+                </div>
+            </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
 
             <div class="form-group">
                 <label id="lContent" for="Content">内容:</label>
@@ -91,7 +111,7 @@
         };
         var initNowText = now_plus_ten_min_text();
 
-        document.getElementById("deadline_time").flatpickr({
+        document.getElementById("deadlineTime").flatpickr({
             minDate: "today",
 	        enableTime: true,
             enableSeconds: true,

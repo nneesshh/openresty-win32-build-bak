@@ -322,7 +322,7 @@
     <script src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
     <script src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
     <script src="/static/lib/layer/layer.js"></script>
-    <script src="/static/lib/jstree/dist/jstree.js"></script>
+    <script src="/static/lib/jstree/dist/jstree.min.js"></script>
 
     <script src="/static/js/flipclock.js"></script>
     <script src="/static/js/app.js"></script>

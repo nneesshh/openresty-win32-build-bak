@@ -1,0 +1,60 @@
+﻿<script src="/static/lib/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/lib/form-4.2.2/dist/jquery.form.min.js"></script>
+<script src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
+
+<script type="text/javascript">
+    function _do_ajax_call_PlayerManageQueryOnline() {
+        $.ajax({
+            url: "/PlayerManage/QueryOnline",
+            type: "GET",
+            dataType: "html",
+            //async: false,
+            async: true,
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(){
+                alert("failed!!!");
+            }
+        });
+    };
+
+    function _do_ajax_call_PlayerManageQueryCharge() {
+        $.ajax({
+            url: "/PlayerManage/QueryCharge",
+            type: "GET",
+            dataType: "html",
+            //async: false,
+            async: true,
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(){
+                alert("failed!!!");
+            }
+        });
+    };
+
+</script>
+
+<div class="row" >
+    <div class="col-sm-offset-1 col-sm-3">
+        <h1 class="text-center">游戏玩家数据查询</h1>
+    </div>
+</div>
+
+<div class="clearfix" style="margin-bottom: 60px;"></div><!-- 清除浮动 -->
+
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-3">
+        <a class="btn btn-block" href="javascript:void(0)" onclick="_do_ajax_call_PlayerManageQueryOnline()"><h3><u>查询在线</u></h3></a>
+    </div>
+</div>
+
+<div class="clearfix" style="margin-bottom: 20px;"></div><!-- 清除浮动 -->
+
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-3">
+        <a class="btn btn-block" href="javascript:void(0)" onclick="_do_ajax_call_PlayerManageQueryCharge()"><h3><u>查询充值</u></h3></a>
+    </div>
+</div>

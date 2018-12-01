@@ -25,9 +25,9 @@ local _M = {
 --  MailData_MAIL_TYPE_MAIL_TYPE_GUILD = 5,
 --  MailData_MAIL_TYPE_MAIL_TYPE_LV_SHOPPING = 6
 
-function _M.create(deadlineTime, content) 
+function _M.create(deadlineTime, playInterval, content) 
   local data = {}
-  local res, d1, d2 = db.query(oss_options, "CALL proc_create_game_announcement(?,?)", deadlineTime, content)
+  local res, d1, d2 = db.query(oss_options, "CALL __oss_create_game_announcement(?,?,?)", deadlineTime, playInterval, content)
   if res then
     local n = #res
     if n >= 2 then

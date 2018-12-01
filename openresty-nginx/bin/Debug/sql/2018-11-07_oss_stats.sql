@@ -16,39 +16,89 @@ Date: 2018-06-28 21:27:28
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Procedure structure for proc_i_create_game_mail
+-- Procedure structure for __oss_do_player_query_online
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `proc_i_create_game_mail`;
+DROP PROCEDURE IF EXISTS `__oss_do_player_query_online`;
 
-CREATE PROCEDURE `proc_i_create_game_mail`(IN `p_subid` int, IN `p_mailtype` int, IN `p_subject` varchar(500), IN `p_content` varchar(500), IN `p_attachment` varchar(500))
+CREATE PROCEDURE `__oss_do_player_query_online`(IN `p_userid` varchar(50))
 BEGIN
-	DECLARE p_burntime datetime DEFAULT 0;
-	SET p_burntime = '2999-01-01';
-
 	-- 
-	INSERT INTO i_game_mail(`subid`, `mailtype`, `sender_type`, `sender_userid`, `sender_role_nick`,
-													`mailto_type`, `mailto_userid`,
-													`subject`, `content`, `attachment`, 
-													`createtime`, `burntime`)
-			VALUES(p_subid, p_mailtype, 0,'system','系统', 0,'everybody', p_subject, p_content, p_attachment, NOW(), p_burntime);
+	SELECT user_attribute.*, user_state.heartbeat_time AS heartbeattime, user_state.logout_time AS logouttime, user_state.login_time AS logintime
+		FROM user_attribute INNER JOIN user_state
+		ON user_state.`userid` = user_attribute.`userid` AND user_state.`userid` = p_userid
+		LIMIT 1;
+
 END;
 
 -- ----------------------------
--- Procedure structure for proc_i_create_game_mail_private
+-- Procedure structure for __oss_do_player_query_charge
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `proc_i_create_game_mail_private`;
+DROP PROCEDURE IF EXISTS `__oss_do_player_query_charge`;
 
-CREATE PROCEDURE `proc_i_create_game_mail_private`(IN `p_subid` int, IN `p_mailtype` int, IN `p_userid` varchar(50), IN `p_subject` varchar(500), IN `p_content` varchar(500), IN `p_attachment` varchar(500))
+CREATE PROCEDURE `__oss_do_player_query_charge`(IN `p_userid` varchar(50), IN `p_begintime` datetime, IN `p_endtime` datetime)
+BEGIN
+	-- 
+	SELECT user_attribute.*, game_charge.charge_type, game_charge.charge_cash, game_charge.charge_state, game_charge.createtime AS charge_time, game_charge.goodsid
+		FROM user_attribute INNER JOIN game_charge
+		ON user_attribute.`userid` = game_charge.`userid` AND user_attribute.`userid` = p_userid
+		ORDER BY charge_time DESC;
+
+END;
+
+-- ----------------------------
+-- Table structure for i_game_mail
+-- ----------------------------
+DROP TABLE IF EXISTS `i_game_mail`;
+CREATE TABLE `i_game_mail` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '邮件id',
+  `subid` int(11) NOT NULL COMMENT '子id，用于排序',
+  `mailtype` int(11) NOT NULL COMMENT '邮件类型，0 = 未知类型，1 = 系统补偿，2 = 首充，3 = 月卡',
+  `sender_type` int(11) NOT NULL COMMENT '寄件类型，0 = 系统，1 = 私人',
+  `sender_userid` varchar(50) NOT NULL COMMENT '寄件人地址',
+  `sender_role_nick` varchar(50) NOT NULL COMMENT '寄件人角色昵称',
+  `mailto_type` int(11) NOT NULL COMMENT '收件类型，0 = 全体，1 = 单体',
+  `mailto_userid` varchar(50) NOT NULL COMMENT '收件人地址',
+  `mailto_level` int(11) NOT NULL DEFAULT '0' COMMENT '收件人等级限制， 0 = 不限制',
+  `ignore_rule` int(11) NOT NULL DEFAULT '0' COMMENT '用户忽略规则， 0 = 不忽略， 1 = 忽略新注册用户',
+  `subject` varchar(500) NOT NULL COMMENT '邮件主题',
+  `content` varchar(500) NOT NULL COMMENT '邮件正文',
+  `attachment` varchar(500) NOT NULL COMMENT '附件物品',
+  `createtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '生成时间',
+  `burntime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '销毁时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Procedure structure for __oss_create_game_mail
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `__oss_create_game_mail`;
+
+CREATE PROCEDURE `__oss_create_game_mail`(IN `p_subid` int, IN `p_mailtype` int, IN `p_subject` varchar(500), IN `p_content` varchar(500), IN `p_attachment` varchar(500), IN `p_createtime` datetime, IN `p_burntime` datetime, IN `p_mailto_level` int, IN `p_ignore_rule` int)
+BEGIN
+	-- 
+	INSERT INTO i_game_mail(`subid`, `mailtype`, `sender_type`, `sender_userid`, `sender_role_nick`,
+													`mailto_type`, `mailto_userid`, `mailto_level`, `ignore_rule`,
+													`subject`, `content`, `attachment`,
+													`createtime`, `burntime`)
+			VALUES(p_subid,p_mailtype,0,'system','系统', 0,'everybody',p_mailto_level,p_ignore_rule, p_subject,p_content,p_attachment, p_createtime,p_burntime);
+END;
+
+-- ----------------------------
+-- Procedure structure for __oss_create_game_mail_private
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `__oss_create_game_mail_private`;
+
+CREATE PROCEDURE `__oss_create_game_mail_private`(IN `p_subid` int, IN `p_mailtype` int, IN `p_userid` varchar(50), IN `p_subject` varchar(500), IN `p_content` varchar(500), IN `p_attachment` varchar(500))
 BEGIN
 	DECLARE p_burntime datetime DEFAULT 0;
 	SET p_burntime = '2999-01-01';
 
 	-- 
 	INSERT INTO i_game_mail(`subid`, `mailtype`, `sender_type`, `sender_userid`, `sender_role_nick`,
-													`mailto_type`, `mailto_userid`,
-													`subject`, `content`, `attachment`, 
+													`mailto_type`, `mailto_userid`, `mailto_level`, `ignore_rule`,
+													`subject`, `content`, `attachment`,
 													`createtime`, `burntime`)
-			VALUES(p_subid, p_mailtype, 0,'system','系统', 1, p_userid, p_subject, p_content, p_attachment, NOW(), p_burntime);
+			VALUES(p_subid,p_mailtype,0,'system','系统', 0,p_userid,0,1, p_subject,p_content,p_attachment, NOW(),p_burntime);
 END;
 
 -- ----------------------------
@@ -66,20 +116,20 @@ CREATE TABLE `game_announcement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Procedure structure for proc_create_game_announcement
+-- Procedure structure for __oss_create_game_announcement
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `proc_create_game_announcement`;
+DROP PROCEDURE IF EXISTS `__oss_create_game_announcement`;
 
-CREATE PROCEDURE `proc_create_game_announcement`( IN `p_deadline` datetime, IN `p_data` varchar(1000))
+CREATE PROCEDURE `__oss_create_game_announcement`(IN `p_deadlinetime` datetime, IN `p_playinterval` int, IN `p_data` varchar(1000))
 BEGIN
-	DECLARE p_now datetime DEFAULT 0;
-	DECLARE p_deadline datetime DEFAULT 0;
-	SET p_now = NOW();
-	SET p_deadline = DATE_ADD(p_now,INTERVAL 10 MINUTE);
+	-- DECLARE p_now datetime DEFAULT 0;
+	-- DECLARE p_deadline datetime DEFAULT 0;
+	-- SET p_now = NOW();
+	-- SET p_deadline = DATE_ADD(p_now,INTERVAL 10 MINUTE);
 
 	-- 
 	INSERT INTO game_announcement(`type`, `timestamp`, `circle_seconds`, `read`, `data`)
-			VALUES(1, p_deadline, 30, 1, p_data);
+			VALUES(1, p_deadlinetime, p_playinterval, 1, p_data);
 END;
 
 -- ----------------------------

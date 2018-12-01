@@ -1,6 +1,7 @@
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local ostime = os.time
+local date = require("date")
 
 local appconfig = require("appconfig")
 local config = appconfig.getConfig()
@@ -45,6 +46,9 @@ return function(app)
         { "Subject", exists = true, min_length = 2, max_length = 500 },
         { "Content", exists = true, min_length = 2, max_length = 500 },
         { "Attachment", min_length = 0, max_length = 500 },
+        { "BurnTime", optional=true, min_length = 16, max_length = 22 },
+        { "MailtoLevel", min_length = 1, max_length = 3 },
+        { "IgnoreRule", min_length = 1, max_length = 3 },
       })
     
       -- check Attachment format
@@ -61,10 +65,36 @@ return function(app)
             assert_error(false, "Attachment format is invalid!")
         end
       end
-      
+
+      -- createtime
+      local d1 = date(false)
+      local createtime = d1:fmt("%F %T")
+
+      -- check burntime
+      local burntime = "2999-01-01"
+      if self.params.Burntime ~= "" then
+        local d2 = date(self.params.Burntime)
+        if d2 > d1 then
+          burntime = d2:fmt("%F %T")
+        end
+      end
+
+      -- check mailto_level
+      local mailto_level = self.params.MailtoLevel
+      if not tonumber(mailto_level) then
+        mailto_level = "0"
+      end
+
+      -- check ignore_rule
+      local ignore_rule = self.params.IgnoreRule
+      if not tonumber(ignore_rule) then
+        ignore_rule = "0"
+      end
+
       local Mail = require("models.Mail")
       
-      local obj = Mail.create(self.params.MailType, self.params.Subject, self.params.Content, self.params.Attachment)
+      local obj = Mail.create(self.params.MailType, self.params.Subject, self.params.Content, self.params.Attachment,
+                              createtime, burntime, mailto_level, ignore_rule)
       if obj and self.session.user then
         self.success_infos = { "Success" }
         return { render = "admin.MailCreate", layout = false }
@@ -113,13 +143,15 @@ return function(app)
         end
       end
       
-      local Mail = require("models.Mail")
+      local PlayerManage = require("models.PlayerManage")
       
       -- check userid 
-      local bExist = Mail.checkUserId(self.params.UserId)
+      local bExist = PlayerManage.checkUserId(self.params.UserId)
       if not bExist then
-        assert_error(false, "UserId is invalid!")
+        assert_error(false, "UserId(" .. tostring(self.params.UserId) ..  ") not exist!!!")
       end
+
+      local Mail = require("models.Mail")
       
       local obj = Mail.createPrivate(self.params.MailType, self.params.UserId, self.params.Subject, self.params.Content, self.params.Attachment)
       if obj and self.session.user then

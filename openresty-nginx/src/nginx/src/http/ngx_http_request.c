@@ -454,34 +454,12 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
             return;
         }
 
-        if (0 == rev->active) {
-            /*
-             * We are trying to not hold c->buffer's memory for an idle connection.
-             */
+        /*
+         * We are trying to not hold c->buffer's memory for an idle connection.
+         */
 
-            if (ngx_pfree(c->pool, b->start) == NGX_OK) {
-                b->start = NULL;
-                b->pos = NULL;
-            }
-            else {
-                ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                    "ngx_http_wait_request_handler failed -- connection pool corrupted");
-                ngx_http_close_connection(c);
-                return;
-            }
-        }
-        else {
-            /* if data is still in buffer, error happens! */
-            if (b->pos != b->last) {
-                ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                    "ngx_http_wait_request_handler failed -- data corrupted");
-                ngx_http_close_connection(c);
-                return;
-            }
-            else {
-                b->pos = b->start;
-                b->last = b->start;
-            }
+        if (ngx_pfree(c->pool, b->start) == NGX_OK) {
+            b->start = NULL;
         }
 
         return;
@@ -997,7 +975,12 @@ ngx_http_process_request_line(ngx_event_t *rev)
     for ( ;; ) {
 
         if (rc == NGX_AGAIN) {
-            n = ngx_http_read_request_header(r);
+            if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+                n = ngx_http_read_request_headerex(r);
+            }
+            else {
+                n = ngx_http_read_request_header(r);
+            }
 
             if (n == NGX_AGAIN || n == NGX_ERROR) {
                 break;
@@ -1323,7 +1306,11 @@ ngx_http_process_request_headers(ngx_event_t *rev)
                 }
             }
 
-            n = ngx_http_read_request_header(r);
+            if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+                n = ngx_http_read_request_headerex(r);
+            } else {
+                n = ngx_http_read_request_header(r);
+            }
 
             if (n == NGX_AGAIN || n == NGX_ERROR) {
                 break;
@@ -2653,7 +2640,11 @@ ngx_http_finalize_connection(ngx_http_request_t *r)
          && r->keepalive
          && clcf->keepalive_timeout > 0)
     {
-        ngx_http_set_keepalive(r);
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+            ngx_http_set_keepaliveex(r);
+        } else {
+            ngx_http_set_keepalive(r);
+        }
         return;
     }
 
@@ -3051,35 +3042,18 @@ ngx_http_set_keepalive(ngx_http_request_t *r)
 
     b = c->buffer;
 
-    if (0 == rev->active) {
-        if (ngx_pfree(c->pool, b->start) == NGX_OK) {
+    if (ngx_pfree(c->pool, b->start) == NGX_OK) {
 
-            /*
-             * the special note for ngx_http_keepalive_handler() that
-             * c->buffer's memory was freed
-             */
-            b->start = NULL;
-            b->pos = NULL;
-        }
-        else {
-            ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                "ngx_http_set_keepalive failed -- connection pool corrupted");
-            ngx_http_close_connection(c);
-            return;
-        }
-    }
-    else {
-        /* if data is still in buffer, error happens! stop keepalive action */
-        if (b->pos != b->last) {
-            ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                "ngx_http_set_keepalive failed -- data corrupted");
-            ngx_http_close_connection(c);
-            return;
-        }
-        else {
-            b->pos = b->start;
-            b->last = b->start;
-        }
+        /*
+         * the special note for ngx_http_keepalive_handler() that
+         * c->buffer's memory was freed
+         */
+
+        b->pos = NULL;
+
+    } else {
+        b->pos = b->start;
+        b->last = b->start;
     }
 
     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "hc free: %p",
@@ -3117,12 +3091,7 @@ ngx_http_set_keepalive(ngx_http_request_t *r)
     }
 #endif
 
-    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
-        rev->handler = ngx_http_keepalive_handlerex;
-    }
-    else {
-        rev->handler = ngx_http_keepalive_handler;
-    }
+    rev->handler = ngx_http_keepalive_handler;
 
     if (wev->active && (ngx_event_flags & NGX_USE_LEVEL_EVENT)) {
         if (ngx_del_event(wev, NGX_WRITE_EVENT, 0) != NGX_OK) {
@@ -3244,39 +3213,18 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
             return;
         }
 
-        if (0 == rev->active) {
+        /*
+         * Like ngx_http_set_keepalive() we are trying to not hold
+         * c->buffer's memory for a keepalive connection.
+         */
+
+        if (ngx_pfree(c->pool, b->start) == NGX_OK) {
+
             /*
-             * Like ngx_http_set_keepalive() we are trying to not hold
-             * c->buffer's memory for a keepalive connection.
-            */
+             * the special note that c->buffer's memory was freed
+             */
 
-            if (ngx_pfree(c->pool, b->start) == NGX_OK) {
-
-                /*
-                 * the special note that c->buffer's memory was freed
-                 */
-                b->start = NULL;
-                b->pos = NULL;
-            }
-            else {
-                ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                    "ngx_http_keepalive_handler failed -- connection pool corrupted");
-                ngx_http_close_connection(c);
-                return;
-            }
-        }
-        else {
-            /* if data is still in buffer, error happens! */
-            if (b->pos != b->last) {
-                ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                    "ngx_http_keepalive_handler failed -- data corrupted");
-                ngx_http_close_connection(c);
-                return;
-            }
-            else {
-                b->pos = b->start;
-                b->last = b->start;
-            }
+            b->pos = NULL;
         }
 
         return;

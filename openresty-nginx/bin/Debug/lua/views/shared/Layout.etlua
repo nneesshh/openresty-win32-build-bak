@@ -323,7 +323,7 @@
     <script src="/static/js/app.js"></script>
     <script src="/static/js/bootstrap-paginator.js"></script>
     <script src="/static/lib/layer/layer.js"></script>
-    <script src="/static/lib/jstree/dist/jstree.js"></script>
+    <script src="/static/lib/jstree/dist/jstree.min.js"></script>
 
 </body>
 </html>

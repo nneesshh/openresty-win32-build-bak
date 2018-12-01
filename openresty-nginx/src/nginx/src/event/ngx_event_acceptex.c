@@ -52,13 +52,8 @@ ngx_event_acceptex(ngx_event_t *rev)
                              &c->local_sockaddr, &c->local_socklen,
                              &c->sockaddr, &c->socklen);
 
-    if (ls->post_accept_buffer_size) {
-        c->buffer->last += rev->available;
-        c->buffer->end = c->buffer->start + ls->post_accept_buffer_size;
-
-    } else {
-        c->buffer = NULL;
-    }
+    /* data read by ngx_acceptex() */
+    c->buffer->last += rev->available;
 
     if (ls->addr_ntop) {
         c->addr_text.data = ngx_pnalloc(c->pool, ls->addr_text_max_len);

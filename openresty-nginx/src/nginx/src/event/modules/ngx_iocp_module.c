@@ -450,7 +450,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     // debug
                     if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
                         if (0 == ev->write && bytes > 0) {
-                            char data[8096] = { 0 };
+                            char data[8192] = { 0 };
                             memcpy(data, c->buffer_ref.pos, bytes);
                             output_debug_string("\n\t>>>> server read begin\n");
                             output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     key(%d) bytes(%d) -- data: \n\n%s\n",
@@ -463,7 +463,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
 #endif
 
                     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
-                        "iocp event handler: %p", ev->handler);
+                                   "iocp event handler: %p", ev->handler);
 
                     ev->handler(ev);
                 }
@@ -516,11 +516,11 @@ ngx_iocp_create_port(ngx_event_t *ev, ngx_uint_t key)
     c->write->active = 1;
 
     ngx_log_debug3(NGX_LOG_DEBUG_EVENT, ev->log, 0,
-        "iocp add: fd:%d k:%ui ov:%p", c->fd, key, &ev->evovlp);
+                   "iocp add: fd:%d k:%ui ov:%p", c->fd, key, &ev->evovlp);
 
     if (CreateIoCompletionPort((HANDLE)c->fd, iocp, key, 0) == NULL) {
         ngx_log_error(NGX_LOG_ALERT, c->log, ngx_errno,
-            "CreateIoCompletionPort() failed");
+                      "CreateIoCompletionPort() failed");
         return NGX_ERROR;
     }
 

@@ -12,10 +12,6 @@ local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local oss_options = require(cwd .. "GameDbUrls").getOptions()
 
 local _M = {
-  _db_user_entity = Model:extend(oss_options, "user_attribute", {
-    primary_key = "day"
-  }),
-
   _subid = 0
 }
 
@@ -27,10 +23,10 @@ local _M = {
 --  MailData_MAIL_TYPE_MAIL_TYPE_GUILD = 5,
 --  MailData_MAIL_TYPE_MAIL_TYPE_LV_SHOPPING = 6
 
-function _M.create(mailtype, subject, content, attachment) 
+function _M.create(mailtype, subject, content, attachment, createtime, burntime, mailto_level, ignore_rule) 
   local subid = _M._subid + 1
   local data = {}
-  local res, d1, d2 = db.query(oss_options, "CALL proc_i_create_game_mail(?,?,?,?,?)", subid, mailtype, subject, content, attachment)
+  local res, d1, d2 = db.query(oss_options, "CALL __oss_create_game_mail(?,?,?,?,?,?,?,?,?)", subid, mailtype, subject, content, attachment, createtime, burntime, mailto_level, ignore_rule)
   if res then
     local n = #res
     if n >= 2 then
@@ -48,7 +44,7 @@ end
 function _M.createPrivate(mailtype, userid, subject, content, attachment) 
   local subid = _M._subid + 1
   local data = {}
-  local res, d1, d2 = db.query(oss_options, "CALL proc_i_create_game_mail_private(?,?,?,?,?,?)", subid, mailtype, userid, subject, content, attachment)
+  local res, d1, d2 = db.query(oss_options, "CALL __oss_create_game_mail_private(?,?,?,?,?,?)", subid, mailtype, userid, subject, content, attachment)
   if res then
     local n = #res
     if n >= 2 then
@@ -61,11 +57,6 @@ function _M.createPrivate(mailtype, userid, subject, content, attachment)
     _M._subid = subid
   end
   return data
-end
-
-function _M.checkUserId(userId)
-    local result = _M._db_user_entity:select("WHERE userid = ?", userId, { fields = "*" });
-    return result and #result > 0
 end
 
 return _M

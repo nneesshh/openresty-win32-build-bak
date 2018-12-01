@@ -128,20 +128,20 @@ return function(app)
       local model = require("models.OssStatsOnlineSnapshot")
       local d = date(false)
 
-      --
+      -- check QueryTime
       if self.params.QueryTime ~= "" then
         d = date(self.params.QueryTime)
       end
       
       local data = model.getData(d:fmt("%F %T"))
       
-      if data then
+      if data and self.session.user then
         self.success_infos = { "Success" }
         self.StatsData = data
+        return { render = "stats.UserOnlineSnapshot", layout = false }
+      else
+        --assert_error(false, "xxxx错误!")
       end
-      
-      return { render = "stats.UserOnlineSnapshot", layout = false }
-
     end,
 
     -- on_error

@@ -2,15 +2,21 @@
     local date = require("date")
     local now = date(false);
 
-    local mailType, subject, content, attachment
+    local mailType, subject, content, attachment, burntime, mailtoLevel, ignoreRule
     if errors and params then
         mailType = params.MailType
         subject = params.Subject
         content = params.Content
         attachment = params.Attachment
+        burntime = params.Burntime
+        mailtoLevel = params.MailtoLevel
+        ignoreRule = params.IgnoreRule
     elseif params then
         mailType = params.MailType
         attachment = params.Attachment
+        burntime = params.Burntime
+        mailtoLevel = params.MailtoLevel
+        ignoreRule = params.IgnoreRule
     end
 %>
 
@@ -44,7 +50,7 @@
 
 <div class="row" >
     <div class="center-block" style="width:600px;margin:0 auto">
-        <form id="mailCreateForm">
+        <form id="mailCreateForm" class="form-horizontal" role="form">
             <% if errors then %>
             <div class="form-group">
                 <div class="text-danger"><%= errors[1] %></div>
@@ -58,29 +64,55 @@
             <% end %>
 
             <div class="form-group">
-                <label id="lCreateTime" for="CreateTime">日期:</label>
-                <span style="font-size:20px;"><%= now:fmt('%F %T') %></span>
+                <label class="col-sm-3 control-label">起始时间:</label>
+                <div class="col-sm-9">
+                    <p class="form-control-static"><%= now:fmt('%F %T') %></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">截止时间:</label>
+                <div class="col-sm-9">
+                    <input style="width:170px;" type="text" id="burntime" name="Burntime" />
+                </div>
             </div>
 
             <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
 
             <div class="form-group">
-                <label id="lMailType" for="MailType">邮件类型:</label>
-                <select name="MailType">
-                    <% if mailType and 0 == tonumber(mailType) then %>
-                    <option value="0" selected>普通</option>
-                    <option value="1">补偿</option>
+                <label class="col-sm-3 control-label">邮件类型:</label>
+                <div class="col-sm-9">
+                    <select name="MailType">
+                        <% if mailType and 0 == tonumber(mailType) then %>
+                        <option value="0" selected>普通</option>
+                        <option value="1">补偿</option>
 
-                    <% elseif mailType and 1 == tonumber(mailType) then %>
-                    <option value="0">普通</option>
-                    <option value="1" selected>补偿</option>
+                        <% elseif mailType and 1 == tonumber(mailType) then %>
+                        <option value="0">普通</option>
+                        <option value="1" selected>补偿</option>
 
-                    <% else %>
-                    <option value="0">普通</option>
-                    <option value="1">补偿</option>
+                        <% else %>
+                        <option value="0">普通</option>
+                        <option value="1">补偿</option>
 
-                    <% end %>
-                </select>
+                        <% end %>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">收件人等级限制:</label>
+                <div class="col-sm-9">
+                    <input type="text" name="MailtoLevel" style="height:20px;width:60px;" value="<%= mailtoLevel or '0' %>" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">忽略新注册用户:</label>
+                <div class="col-sm-9">
+                    <input type="radio" checked name="IgnoreRule" value="0" /><label>否</label>
+                    <input type="radio" name="IgnoreRule" value="1" /><label>是</label>
+                </div>
             </div>
 
             <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
@@ -95,7 +127,7 @@
                 <textarea id="oriContent" name="Content" style="height:100px;width:600px;"><%= content or '' %></textarea>
             </div>
 
-            <div class="form-group"></div>
+            <div class="form-group">
                 <label id="lAttachment" for="Attachment">附件:</label>
                 <textarea id="oriAttachment" name="Attachment" style="height:100px;width:600px;"><%= attachment or '' %></textarea>
             </div>
@@ -114,3 +146,27 @@
 <div>
     <a class="btn-lg" href="javascript:void(0)" onclick="_do_ajax_call_Mail()">返回</a>
 </div>
+
+<script type="text/javascript">
+
+    $(function(){
+    
+        var initTimeText = ""
+
+        var fp = document.getElementById("burntime").flatpickr({
+            minDate: "today",
+	        enableTime: true,
+            enableSeconds: true,
+            defaultDate: initTimeText,
+            minuteIncrement: 1,
+            locale: "zh",
+	        enable: [
+		        {
+			        from: "today",
+			        to: new Date().fp_incr(1000),
+		        }
+	        ],
+        });
+    });
+
+</script>

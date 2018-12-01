@@ -124,7 +124,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
     rc = WSARecv(c->fd, wsabuf, 1, &bytes, &flags, ovlp, NULL);
 
-	/* SOCKET_ERROR == -1 */
+    /* SOCKET_ERROR == -1 */
     if (rc == -1) {
         /* "ngx_socket_errno" must just after WSARecv, otherwise the err maybe cleared by other system call such as "OutputDebugString()" */
         err = ngx_socket_errno;
@@ -134,6 +134,11 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
     if (size < 1024)
         output_debug_string("\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) is too small!!!\n",
             (int)size);
+
+    if (size > 8000)
+        output_debug_string("\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) is too big!!!\n",
+        (int)size);
+
 
     // debug
     output_debug_string("\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld)ovlp(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n", 
@@ -188,7 +193,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
          */
 
         rev->ready = 0; /* read event just posted or bytes already arrived, don't post again before response */
-        rev->active = 1; /* 1=active means "c->buffer should never be freed" */
+        rev->active = 1; /* 1=active means "c->buffer should never be freed", for iocp recv event, always "rev->active==1" */
 
         rev->evovlp.recv_mem_lock_flag = 1;
         return NGX_AGAIN;

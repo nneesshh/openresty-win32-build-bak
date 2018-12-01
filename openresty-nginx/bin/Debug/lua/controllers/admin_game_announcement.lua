@@ -1,6 +1,7 @@
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."
 local ostime = os.time
+local date = require("date")
 
 local appconfig = require("appconfig")
 local config = appconfig.getConfig()
@@ -48,12 +49,34 @@ return function(app)
     POST = capture_errors(function(self)
       validate.assert_valid(self.params, {
         { "DeadlineTime", exists = true, min_length = 16, max_length = 22 },
+        { "PlayInterval", exists = true, min_length = 1, max_length = 3 },
         { "Content", exists = true, min_length = 2, max_length = 4096 },
       })
+    
+      -- nowtime
+      local d1 = date(false)
+      local nowtime = d1:fmt("%F %T")
+    
+      -- check deadline_time
+      local ten_min_later = date(nowtime):addminutes(10)
+      local deadline_time = ten_min_later:fmt("%F %T")
+      
+      if self.params.DeadlineTime ~= "" then
+        local d2 = date(self.params.DeadlineTime)
+        if d2 > d1 then
+          deadline_time = d2:fmt("%F %T")
+        end
+      end
+      
+      -- check mailto_level
+      local play_interval = self.params.PlayInterval
+      if not tonumber(play_interval) then
+        play_interval = "30"
+      end
       
       local GameAnnouncement = require("models.GameAnnouncement")
       
-      local obj = GameAnnouncement.create(self.params.DeadlineTime, self.params.Content)
+      local obj = GameAnnouncement.create(deadline_time, play_interval, self.params.Content)
       if obj and self.session.user then
         return { redirect_to = self:url_for("admin_game_announcement") }
       else

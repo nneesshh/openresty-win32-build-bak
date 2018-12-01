@@ -166,7 +166,11 @@ ngx_log_error_core(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,
 
     ngx_linefeed(p);
 
-    *p = '\0';
+    if (p - errstr >= NGX_MAX_ERROR_STR) {
+        errstr[NGX_MAX_ERROR_STR -1] = '\0';
+    } else {
+        *p = '\0';
+    }
 
     wrote_stderr = 0;
     debug_connection = (log->log_level & NGX_LOG_DEBUG_CONNECTION) != 0;
@@ -293,7 +297,11 @@ ngx_log_stderr(ngx_err_t err, const char *fmt, ...)
 
     ngx_linefeed(p);
 
-    *p = '\0';
+    if (p - errstr >= NGX_MAX_ERROR_STR) {
+        errstr[NGX_MAX_ERROR_STR -1] = '\0';
+    } else {
+        *p = '\0';
+    }
 
     (void) ngx_write_console(ngx_stderr, errstr, p - errstr);
 }

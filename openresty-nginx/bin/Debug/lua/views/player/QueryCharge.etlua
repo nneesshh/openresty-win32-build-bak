@@ -7,39 +7,50 @@
         createBy = session.user.Name
     end
 
-    local queryTime
+    local userId
     if params then
-        queryTime = params.QueryTime
+        userId = params.UserId
     end
     
     local labelList = {
         'ID',
         '用户名',
         '昵称',
-        '等级',
-        '经验值',
-        '登出时间',
-        '登入时间',
+        '充值类型',
+        '充值金额(元)',
+        '充值状态',
+        '充值时间',
+        '商品id',        
     }
 
     local fieldList = {
         'ticketid',
         'userid',
         'nick',
-        'level',
-        'exp',
-        'logouttime',
-        'logintime',
+        'charge_type',
+        'charge_cash',
+        'charge_state',
+        'charge_time',        
+        'goodsid',
+        
     }
 %>
 
 <script type="text/javascript">
-    function _do_ajax_submit_UserOnlineSnapshotQueryForm() {
+    function _do_ajax_submit_query_charge_PlayerManageForm() {
         
         $("#successInfo").empty();
 
+        var l = fp.selectedDates;
+        if (l.length >= 2) {
+            var beginDate = $("<input type='hidden' name='BeginDate' value='" + flatpickr.formatDate(l[0], "Y-m-d") + "'/>")
+            var endDate = $("<input type='hidden' name='EndDate' value='" + flatpickr.formatDate(l[1], "Y-m-d") + "'/>")
+            $('#playerManageForm').append(beginDate);
+            $('#playerManageForm').append(endDate);
+        }
+
         var option = {
-            url : '/StatsUserOnlineSnapshot',
+            url : '/PlayerManage/QueryCharge',
             type : 'POST',
             dataType: 'html',
             //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
@@ -53,9 +64,10 @@
                         ", errorThrown=" + errorThrown);
             },
         };
-        $("#userOnlineSnapshotQueryForm").ajaxSubmit(option);
+        $("#playerManageForm").ajaxSubmit(option);
         return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
     };
+
 </script>
 
 <!-- render body -->
@@ -79,14 +91,23 @@
 
     <!-- query button -->
     <div class="col-sm-12">
-        <form class="form-horizontal" role="form" id="userOnlineSnapshotQueryForm">
+        <form class="form-horizontal" role="form" id="playerManageForm">
             <div class="form-group">
-                <label class="col-sm-2 control-label" style="width:120px;">输入查询时间:</label>
-                <div class="col-sm-4 ">
-                    <input style="width:170px;" type="text" id="query_time" name="QueryTime" />
+                <label class="col-sm-2 control-label" style="width:200px;">输入玩家账号名称:</label>
+                <div class="col-sm-4">
+                    <input style="width:230px;" type="text" id="userId" name="UserId" value="<%= userId or '' %>" />
                 </div>
                 <div class="col-sm-2 ">
-                    <a class="btn btn-primary" style="width:100px;" href="javascript:void(0)" onclick="_do_ajax_submit_UserOnlineSnapshotQueryForm()">查询</a>
+                    <a class="btn btn-primary" style="width:100px;" href="javascript:void(0)" onclick="_do_ajax_submit_query_charge_PlayerManageForm()">查询</a>
+                </div>
+            </div>
+
+            <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="width:200px;">选择时间范围:</label>
+                <div class="col-sm-4">
+                    <input style="width:230px;" type="text" id="queryRangeTime" name="QueryRangeTime" />
                 </div>
             </div>
         </form>
@@ -96,8 +117,7 @@
 
     <!-- menu name -->
     <div class="col-sm-12">
-        <h1> 当前在线 </h1>
-        <h1> 总数: <%= StatsData and #StatsData or 0 %>  </h1>
+        <h1> 玩家充值信息 </h1>
     </div>
 
     <!-- data table -->
@@ -116,8 +136,8 @@
                 </thead>
                 <tbody>
                     <%
-                        if StatsData then
-                            for i, v in ipairs(StatsData) do
+                        if PlayerData then
+                            for i, v in ipairs(PlayerData) do
                     %>
                     <tr>
                             <% for i2, v2 in ipairs(fieldList) do %>
@@ -134,30 +154,32 @@
             </table>
         </div>
     </div>
+
 </div>
 <!-- /.row -->
 
-<link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
-<script type="text/javascript" src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
+<div>
+    <a class="btn-lg" href="javascript:void(0)" onclick="_do_ajax_call_GamePlayer()">返回</a>
+</div>
 
 <script type="text/javascript">
 
+    var fp
+
     $(function(){
     
-        var initTimeText = "<%= queryTime or now:fmt('%F %T') %>"
+        var initTimeText = ""
 
-        var fp = document.getElementById("query_time").flatpickr({
-            minDate: new Date().fp_incr(-360),
-	        enableTime: true,
-            enableSeconds: true,
-            defaultDate: initTimeText,
-            minuteIncrement: 1,
+        fp = document.getElementById("queryRangeTime").flatpickr({
+            mode: "range",
+            maxDate: "today",
+            dateFormat: "Y-m-d",
+            //defaultDate: ["2018-10-10", "2016-10-20"],
             locale: "zh",
 	        enable: [
 		        {
-			        from: new Date().fp_incr(-360),
-			        to: new Date().fp_incr(30),
+			        from: new Date().fp_incr(-1000),
+			        to: "today",
 		        }
 	        ],
         });
