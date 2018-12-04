@@ -1311,6 +1311,12 @@ ngx_ssl_create_connection(ngx_ssl_t *ssl, ngx_connection_t *c, ngx_uint_t flags)
 
     c->ssl = sc;
 
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_ssl_create_connection(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... ssl_flags(%d)\n",
+        (uintptr_t)sc->connection, (uintptr_t)sc->connection->rbio, (uintptr_t)sc->connection->wbio, (uintptr_t)sc->connection->bbio,
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, flags);
+#endif
     return NGX_OK;
 }
 
@@ -1368,6 +1374,13 @@ ngx_ssl_handshake(ngx_connection_t *c)
 
     ngx_ssl_clear_error(c->log);
 
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_ssl_handshake(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+        (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
+#endif
+
     n = SSL_do_handshake(c->ssl->connection);
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_do_handshake: %d", n);
@@ -1406,6 +1419,12 @@ ngx_ssl_handshake(ngx_connection_t *c)
 #endif
 #endif
 
+#if (NGX_DEBUG)
+        // debug
+        output_debug_string("\nngx_ssl_handshake(): handshake ok, ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+            (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
+            c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
+#endif
         return NGX_OK;
     }
 
@@ -1742,6 +1761,11 @@ ngx_ssl_recv(ngx_connection_t *c, u_char *buf, size_t size)
 {
     int  n, bytes;
 
+#if (NGX_DEBUG)
+    u_char *ssl_buf;
+    size_t  ssl_buf_size;
+#endif
+
 #ifdef SSL_READ_EARLY_DATA_SUCCESS
     if (c->ssl->in_early) {
         return ngx_ssl_recv_early(c, buf, size);
@@ -1762,6 +1786,11 @@ ngx_ssl_recv(ngx_connection_t *c, u_char *buf, size_t size)
     bytes = 0;
 
     ngx_ssl_clear_error(c->log);
+
+#if (NGX_DEBUG)
+    ssl_buf = buf;
+    ssl_buf_size = size;
+#endif
 
     /*
      * SSL_read() may return data in parts, so try to read
@@ -1799,6 +1828,24 @@ ngx_ssl_recv(ngx_connection_t *c, u_char *buf, size_t size)
                 c->read->ready = 1;
             }
 
+#if (NGX_DEBUG)
+    // debug
+    {
+        char data[8192] = { 0 };
+        size_t len = ngx_min(sizeof(data) - 1, bytes);
+        char *p;
+        memcpy(data, ssl_buf, len);
+        output_debug_string("\n\t>>>> SSL_read begin\n");
+        output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d/%d) -- data: \n\n%s\n",
+            c->id, c->fd, c->destroyed,
+            len, bytes,
+            data);
+        p = ngx_hex_dump((u_char *)data, (u_char *)ssl_buf, len);
+        *p = '\0';
+        output_debug_string("\tdata_hex: \n\n%s\n", data);
+        output_debug_string("\n\t<<<< SSL_read end\n\n");
+    }
+#endif
             return bytes;
         }
 
@@ -2457,6 +2504,13 @@ ngx_ssl_shutdown(ngx_connection_t *c)
 {
     int        n, sslerr, mode;
     ngx_err_t  err;
+
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_ssl_shutdownx(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+        (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
+#endif
 
     if (SSL_in_init(c->ssl->connection)) {
         /*

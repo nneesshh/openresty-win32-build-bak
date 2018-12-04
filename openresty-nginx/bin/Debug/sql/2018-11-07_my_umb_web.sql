@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-16 15:44:15
+Date: 2018-12-03 09:40:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -110,6 +110,7 @@ CREATE TABLE `menus` (
 -- Records of menus
 -- ----------------------------
 INSERT INTO `menus` VALUES ('10d66160-84d1-468b-93f7-81e6b99c8982', 'User', 'fa fa-link', '用户管理', '00000000-0000-0000-0000-000000000000', '', '3', '0', '/AdminUser', '1');
+INSERT INTO `menus` VALUES ('10d66160-84d1-468b-93f7-81e6b99c8983', 'GamePlayer', 'fa fa-link', '游戏玩家数据查询', '00000000-0000-0000-0000-000000000000', '', '7', '0', '/PlayerManage', '0');
 INSERT INTO `menus` VALUES ('7389c75c-cc61-40b7-909c-737d599347b7', 'Role', 'fa fa-link', '角色管理', '00000000-0000-0000-0000-000000000000', '', '2', '0', '/AdminRole', '1');
 INSERT INTO `menus` VALUES ('7ea404ab-1de1-49be-b846-effbe2c85a1a', 'GameQuest', 'fa fa-link', '任务统计', '00000000-0000-0000-0000-000000000000', '', '13', '1', '/StatsUserQuest', '1');
 INSERT INTO `menus` VALUES ('843e0bba-66f7-4190-8a98-6df4dafe15ab', 'Department', 'fa fa-link', '组织机构管理', '00000000-0000-0000-0000-000000000000', '', '1', '0', '/AdminDepartment', '1');

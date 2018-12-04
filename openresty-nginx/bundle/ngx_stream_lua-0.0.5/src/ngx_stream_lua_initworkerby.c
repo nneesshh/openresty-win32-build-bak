@@ -305,7 +305,7 @@ ngx_stream_lua_init_worker(ngx_cycle_t *cycle)
     (void) lmcf->init_worker_handler(cycle->log, lmcf, lmcf->lua);
 
     ngx_destroy_pool(c->pool);
-	c->pool = NULL;
+    c->pool = NULL;
     return NGX_OK;
 
 failed:

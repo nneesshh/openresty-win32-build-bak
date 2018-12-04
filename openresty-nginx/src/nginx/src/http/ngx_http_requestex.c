@@ -152,7 +152,7 @@ ngx_http_wait_request_handlerex(ngx_event_t *rev)
 
         if (b->pos == b->last) {
             /*
-             * MUST post an IOCP read event again because no more data after skipping proxy protocol.
+             * MUST post an IOCP read event again because we need more data for proxy protocol skipping.
              */
             if (c->read->ready) {
                 if (ngx_recv(c, b->last, size) == NGX_ERROR) {
@@ -331,16 +331,6 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
 
     c->data = hc;
 
-    /*
-     * MUST post an IOCP read event again because rev->ready maybe 1
-     */
-    if (rev->ready) {
-        if (ngx_recv(c, b->last, b->end - b->last) == NGX_ERROR) {
-            ngx_http_close_connection(c);
-            return;
-        }
-    }
-
     wev = c->write;
     wev->handler = ngx_http_empty_handler;
 
@@ -372,6 +362,13 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
         return;
     }
 
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_http_set_keepaliveex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
+
     /*
      * To keep a memory footprint as small as possible for an idle keepalive
      * connection: we keeps the IOCP event buffer(the c->buffer or r->header_in)'s memory
@@ -394,16 +391,22 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
         b->last = b->start;
     }*/
 
-#if (NGX_DEBUG)
-    // debug
-    output_debug_string("\nngx_http_set_keepaliveex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
-        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
-        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
-#endif
-
-    /* MUST reset buf to ensure enough space to contain output data from SSL_read. */
+    /*
+     * NOTICE: we keep the c->buffer becasue SSL_read maybe not complete yet, and we MUST
+     *         reset buf to ensure enough space to contain output data from SSL_read.
+     */
     if (b && b->pos == b->last) {
         b->last = b->pos = b->start;
+
+        /*
+         * MUST post an IOCP read event again because rev->ready maybe 1
+         */
+        if (rev->ready) {
+            if (ngx_recv(c, b->last, b->end - b->last) == NGX_ERROR) {
+                ngx_http_close_connection(c);
+                return;
+            }
+        }
     } else {
         /* There is still data in buffer, it must be ERROR for keepalive!!!  */
         ngx_http_close_connection(c);

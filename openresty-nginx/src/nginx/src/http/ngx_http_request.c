@@ -3147,6 +3147,13 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
 
     c = rev->data;
 
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_http_keepalive_handler(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
+
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http keepalive handler");
 
     if (rev->timedout || c->close) {
@@ -3265,6 +3272,13 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
 
     rev->handler = ngx_http_process_request_line;
     ngx_http_process_request_line(rev);
+
+#if (NGX_DEBUG)
+    // debug
+    output_debug_string("\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+        c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+        (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
+#endif
 }
 
 

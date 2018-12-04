@@ -145,8 +145,8 @@ ngx_ssl_create_connectionex(ngx_ssl_t *ssl, ngx_connection_t *c, ngx_uint_t flag
 #if (NGX_DEBUG)
     // debug
     output_debug_string("\nngx_ssl_create_connectionex(): rbio_mem(0x%08x)wbio_mem(0x%08x), ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... ssl_flags(%d)\n",
-        (uintptr_t)sc->rbio_mem, (uintptr_t)sc->wbio_mem,
-        (uintptr_t)sc->connection, (uintptr_t)sc->connection->rbio, (uintptr_t)sc->connection->wbio, (uintptr_t)sc->connection->bbio,
+        (uintptr_t)c->ssl->rbio_mem, (uintptr_t)c->ssl->wbio_mem,
+        (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, flags);
 #endif
 
@@ -214,19 +214,19 @@ ngx_ssl_handshakeex(ngx_connection_t *c)
     }
 
     /* handle rbio_mem(SSL_read) */
+    ssl_ret = 0;
     if (n > 0) {
         size = n;
         ssl_ret = BIO_write(c->ssl->rbio_mem, b->pos, size);
-        if (ssl_ret > 0) {
-            b->pos += ssl_ret;
-        }
-        else {
+        if (ssl_ret <= 0) {
             sslerr = SSL_get_error(c->ssl->connection, ssl_ret);
             if (is_ssl_error(sslerr)) {
                 return NGX_ERROR;
             }
             return NGX_AGAIN;
         }
+
+        b->pos += n;
     }
 
 #if (NGX_DEBUG)
@@ -242,6 +242,22 @@ ngx_ssl_handshakeex(ngx_connection_t *c)
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_do_handshake: %d", n);
 
     if (n == 1) {
+
+        if (b->pos != b->last) {
+            /* ssl handshake buffer must be empty */
+            ngx_log_error(NGX_LOG_ERR, c->log, 0,
+                "ngx_ssl_handshakeex failed -- ssl handshake buffer must be empty when shakehand ok");
+            return NGX_ERROR;
+        }
+
+        /* post IOCP read event */
+        NGX_SSL_POST_IOCP_READ_EVENT(c);
+
+        /* handle wbio_mem(via SSL_write) */
+        rc = ngx_ssl_bio_mem_send(c->ssl, c);
+        if (NGX_OK != rc) {
+            return NGX_ERROR;
+        }
 
 #if (NGX_DEBUG)
         ngx_ssl_handshake_logex(c);
@@ -267,13 +283,6 @@ ngx_ssl_handshakeex(ngx_connection_t *c)
 #endif
 #endif
 
-        if (b->pos != b->last) {
-            /* ssl handshake buffer must be empty */
-            ngx_log_error(NGX_LOG_ERR, c->log, 0,
-                          "ngx_ssl_handshakeex failed -- ssl handshake buffer is not empty");
-            return NGX_ERROR;
-        }
-
 #if (NGX_DEBUG)
         // debug
         output_debug_string("\nngx_ssl_handshakeex(): handshake ok, rbio_mem(0x%08x)wbio_mem(0x%08x), ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
@@ -281,13 +290,6 @@ ngx_ssl_handshakeex(ngx_connection_t *c)
             (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
             c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
-
-        /* handle wbio_mem(via SSL_write) */
-        rc = ngx_ssl_bio_mem_send(c->ssl, c);
-        if (NGX_OK != rc) {
-            return NGX_ERROR;
-        }
-       
         return NGX_OK;
     }
 
@@ -540,10 +542,12 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
 
     ngx_ssl_clear_errorex(c->log);
 
-    /*
-     * SSL_read() may return data in parts, so try to read
-     * until SSL_read() would return no data
-     */
+#if (NGX_DEBUG)
+    ssl_buf = buf;
+    ssl_buf_size = size;
+#endif
+
+    ssl_ret = 0;
 
     do {
 
@@ -566,11 +570,6 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
             }
             return NGX_AGAIN;
         }
-
-#if (NGX_DEBUG)
-        ssl_buf = buf;
-        ssl_buf_size = size;
-#endif
 
         /*
          * SSL_read() may return data in parts, so try to read
@@ -599,13 +598,18 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
                     // debug
                     {
                         char data[8192] = { 0 };
-                        memcpy(data, ssl_buf, bytes);
+                        size_t len = ngx_min(sizeof(data) - 1, bytes);
+                        char *p;
+                        memcpy(data, ssl_buf, len);
                         output_debug_string("\n\t>>>> SSL_read !!!!!!overflow!!!!!! begin\n");
-                        output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d) -- data: \n\n%s\n",
+                        output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d/%d) -- data: \n\n%s\n",
                             c->id, c->fd, c->destroyed,
-                            bytes,
+                            (int)len, bytes,
                             data);
-                        output_debug_string("\t<<<< SSL_read !!!!!!overflow!!!!!! end\n\n");
+                        p = ngx_hex_dump((u_char *)data, (u_char *)ssl_buf, len);
+                        *p = '\0';
+                        output_debug_string("\tdata_hex: \n\n%s\n", data);
+                        output_debug_string("\n\t<<<< SSL_read !!!!!!overflow!!!!!! end\n\n");
                     }
 #endif
                     return NGX_ERROR;
@@ -621,13 +625,18 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
                     // debug
                     {
                         char data[8192] = { 0 };
-                        memcpy(data, ssl_buf, bytes);
+                        size_t len = ngx_min(sizeof(data) - 1, bytes);
+                        char *p;
+                        memcpy(data, ssl_buf, len);
                         output_debug_string("\n\t>>>> SSL_read begin\n");
-                        output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d) -- data: \n\n%s\n",
+                        output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d/%d) -- data: \n\n%s\n",
                             c->id, c->fd, c->destroyed,
-                            bytes,
+                            (int)len, bytes,
                             data);
-                        output_debug_string("\t<<<< SSL_read end\n\n");
+                        p = ngx_hex_dump((u_char *)data, (u_char *)ssl_buf, len);
+                        *p = '\0';
+                        output_debug_string("\tdata_hex: \n\n%s\n", data);
+                        output_debug_string("\n\t<<<< SSL_read end\n\n");
                     }
 #endif
                 return bytes;
@@ -641,6 +650,13 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
                 return 0;
 
             case NGX_ERROR:
+#if (NGX_DEBUG)
+                // debug
+                output_debug_string("\nngx_ssl_recvex(): SSL_read() parse input data failed, rbio_mem(0x%08x)wbio_mem(0x%08x), ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+                    (uintptr_t)c->ssl->rbio_mem, (uintptr_t)c->ssl->wbio_mem,
+                    (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
+                    c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
+#endif
                 c->read->error = 1;
 
                 /* fall through */
@@ -650,7 +666,7 @@ ngx_ssl_recvex(ngx_connection_t *c, u_char *buf, size_t size)
             }
         }
 
-    } while (0);
+    } while (1);
 
     return NGX_ERROR;
 }
@@ -1021,9 +1037,6 @@ ngx_ssl_writeex(ngx_connection_t *c, u_char *data, size_t size)
 
         ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, 0,
                        "SSL_write: want read");
-
-        /* post IOCP read event */
-        NGX_SSL_POST_IOCP_READ_EVENT(c);
 
         /*
          * we do not set the timer because there is already
