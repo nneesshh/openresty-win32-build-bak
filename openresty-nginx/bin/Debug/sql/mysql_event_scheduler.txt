@@ -102,3 +102,55 @@ An optional company name []: ← 可以不输入
         }
 
     }
+
+
+
+    一直想找一个可以测试各个地方、运营商网络的办法，终于在各方推荐和搜索的情况下找了17ce 和 360奇云测两个网站，感觉非常实用，
+在以后的网络定位中，成了我必备使用的工具，可以非常方便的监控各个运营商、各个地区网站的访问是否通不通、访问的速度快不快等问题
+
+
+ab测试网站压力: 
+        ./ab.exe -r -n 10000 -c 100 https://192.168.1.110:8282/
+        ./ab.exe -c 2 -n 2 http://192.168.1.110:8181/
+
+        for https
+        ./abs.exe -r -n 10000 -c 1000 https://192.168.1.110:8282/Home
+        ./abs.exe -r -n 10000 -c 1000 https://192.168.1.110:8282/static/lib/flatpickr4.5.2/l10n/zh.js
+
+whireshark 过滤器: 
+        http and ip.addr == 192.168.1.110 and tcp.port in {8282}
+        ssl and ip.addr == 192.168.1.110 and tcp.port in {8282}
+        http and ip.addr == 192.168.1.110 and tcp.port == 8282
+
+        ip.addr==192.168.1.110 and tcp.port in {8282} and (tcp.dstport == 63058 or tcp.srcport == 63058)
+        (tcp or ssl) and ip.addr==192.168.1.110 and tcp.port in {8282} and (tcp.dstport == 55626 or tcp.srcport == 55626)
+
+http and ip.addr == 192.168.1.122 and tcp.port == 8181
+microsoft edge: 
+    about:flags -- 开发者工具设置
+
+    开启回环命令 -- 
+    CheckNetIsolation LoopbackExempt -a -n=Microsoft.MicrosoftEdge_8wekyb3d8bbwe 
+
+    添加回环路由
+    route ADD192.168.1.110 MASK 255.255.255.255 192.168.1.5 METRIC 1
+
+    移除
+    route DELETE 192.168.1.110
+
+
+SSL 流程:                首次连接                                              |     重新连接
+    Read <-- 517     Client Hello                                         |     517     Client Hello
+
+    Send ==>914    Server Hello                                         |     152      Server Hello
+                              Certificate                                                            Change Cipher Spec
+                              Server Key Exchange                                            Encrypted Handshake Message
+                              Server Hello Done
+
+    Read <-- 126     Client Exchange                                    |     51       Change Cipher Spec
+                              Change Cipher Spec                                             Encrypted Handshake Message
+                              Encrypted Handshake Message
+
+    Send ==>242     New Session Ticket
+                              Change Cipher Spec
+                              Encrypted Handshake Message
