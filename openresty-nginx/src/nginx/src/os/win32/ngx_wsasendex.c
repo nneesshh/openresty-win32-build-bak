@@ -283,7 +283,7 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
             wev->active = 1;
             /*return NGX_AGAIN;*/
             /* we treat WSA_IO_PENDING as succeed, so don't try send again. */
-			/* sent maybe zero and not equal to size, so we always "return size" instead of "return sent".*/
+            /* sent maybe zero and not equal to size, so we always "return size" instead of "return sent".*/
             return size;
         }
 

@@ -1,0 +1,6 @@
+D:/www/LuaJIT-2.0.5/BUILD/CMakeFiles/luajit.dir
+D:/www/LuaJIT-2.0.5/BUILD/CMakeFiles/minilua.dir
+D:/www/LuaJIT-2.0.5/BUILD/CMakeFiles/buildvm.dir
+D:/www/LuaJIT-2.0.5/BUILD/CMakeFiles/luajit-bin.dir
+D:/www/LuaJIT-2.0.5/BUILD/CMakeFiles/ALL_BUILD.dir
+D:/www/LuaJIT-2.0.5/BUILD/CMakeFiles/ZERO_CHECK.dir

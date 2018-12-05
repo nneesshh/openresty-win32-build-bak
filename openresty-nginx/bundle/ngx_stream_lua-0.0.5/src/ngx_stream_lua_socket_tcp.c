@@ -2878,8 +2878,8 @@ ngx_stream_lua_socket_tcp_handler(ngx_event_t *ev)
     ngx_stream_lua_socket_tcp_upstream_t           *u;
     ngx_connection_t                               *c;
 
-	int         seconds, bytes, i_result;
-	ngx_err_t   err;
+    int         seconds, bytes, i_result;
+    ngx_err_t   err;
 
     c = ev->data;
     u = c->data;
@@ -2906,10 +2906,10 @@ ngx_stream_lua_socket_tcp_handler(ngx_event_t *ev)
                 err = ngx_socket_errno;
 
                 ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
-                    "ngx_http_lua_socket_tcp_handler(): setsockopt(SO_UPDATE_CONNECT_CONTEXT) failed");
+                              "ngx_http_lua_socket_tcp_handler(): setsockopt(SO_UPDATE_CONNECT_CONTEXT) failed");
 
                 ngx_stream_lua_socket_handle_read_error(r, u,
-					                                    NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
+                                                        NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
                 return;
             }
 
@@ -2921,9 +2921,9 @@ ngx_stream_lua_socket_tcp_handler(ngx_event_t *ev)
                 err = ngx_socket_errno;
 
                 ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
-                    "ngx_http_lua_socket_tcp_handler(): getsockopt(SO_CONNECT_TIME) failed");
+                              "ngx_http_lua_socket_tcp_handler(): getsockopt(SO_CONNECT_TIME) failed");
 
-				ngx_stream_lua_socket_handle_read_error(r, u,
+                ngx_stream_lua_socket_handle_read_error(r, u,
                                                         NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
                 return;
             }
@@ -2931,15 +2931,15 @@ ngx_stream_lua_socket_tcp_handler(ngx_event_t *ev)
                 if (seconds == 0xFFFFFFFF) {
 
                     ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-                        "ngx_http_lua_socket_tcp_handler(): connection not established yet!!!");
+                                  "ngx_http_lua_socket_tcp_handler(): connection not established yet!!!");
 
-					ngx_stream_lua_socket_handle_read_error(r, u,
-						                                    NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
+                    ngx_stream_lua_socket_handle_read_error(r, u,
+                                                            NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
                     return;
                 }
                 else {
                     ngx_log_debug1(NGX_LOG_INFO, r->connection->log, 0,
-                        "ngx_http_lua_socket_tcp_handler(): connection has been established %d seconds",
+                                   "ngx_http_lua_socket_tcp_handler(): connection has been established %d seconds",
                         seconds);
 
                 }

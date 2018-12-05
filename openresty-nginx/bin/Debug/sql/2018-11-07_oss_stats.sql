@@ -16,6 +16,244 @@ Date: 2018-06-28 21:27:28
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for _oss_stats_retention
+-- ----------------------------
+DROP TABLE IF EXISTS `_oss_stats_retention`;
+CREATE TABLE `_oss_stats_retention` (
+  `day` date NOT NULL DEFAULT '0000-00-00' COMMENT '日期',
+  `accumulate_user` int(11) NOT NULL COMMENT '累积用户总数',
+  `online_users` int(11) NOT NULL COMMENT '在线用户总数',
+  `new_user` int(11) NOT NULL COMMENT '新用户数',
+  `retention_1` int(11) NOT NULL COMMENT '次日留存数',
+  `new_user_retention_1` int(11) NOT NULL COMMENT '次日留存数（新增）',
+  `retention_3` int(11) NOT NULL COMMENT '3日留存数',
+  `new_user_retention_3` int(11) NOT NULL COMMENT '3日留存数（新增）',
+  `retention_7` int(11) NOT NULL COMMENT '7日留存数',
+  `new_user_retention_7` int(11) NOT NULL COMMENT '7日留存数（新增）',
+  `retention_30` int(11) NOT NULL COMMENT '30日留存数',
+  `new_user_retention_30` int(11) NOT NULL COMMENT '30日留存数（新增）',
+
+  PRIMARY KEY (`day`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Procedure structure for __oss_do_stats_retention
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `__oss_do_stats_retention`;
+
+CREATE PROCEDURE `__oss_do_stats_retention`(IN `p_day` datetime)
+BEGIN
+	DECLARE p_date datetime DEFAULT 0;
+	DECLARE p_date_1 datetime DEFAULT 0;
+	DECLARE p_date_3 datetime DEFAULT 0;
+	DECLARE p_date_7 datetime DEFAULT 0;
+	DECLARE p_date_30 datetime DEFAULT 0;
+
+	SET p_date = DATE(p_day);
+	SET p_date_1 = DATE_SUB(p_date,INTERVAL 1 DAY);
+	SET p_date_3 = DATE_SUB(p_date,INTERVAL 3 DAY);
+	SET p_date_7 = DATE_SUB(p_date,INTERVAL 7 DAY);
+	SET p_date_30 = DATE_SUB(p_date,INTERVAL 30 DAY);
+
+	-- 
+	INSERT INTO _oss_stats_retention(`day`, `accumulate_user`)
+		SELECT p_date AS `day`, COUNT(*) AS `accumulate_user` FROM gate_account WHERE DATE(createtime) <= p_date
+		ON DUPLICATE KEY UPDATE `accumulate_user` = VALUES(`accumulate_user`);
+
+	-- 
+	INSERT INTO _oss_stats_retention(`day`, `online_users`)
+		SELECT p_date AS `day`, COUNT(DISTINCT(userid)) AS `online_users` FROM gate_log_online 
+			WHERE action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY)
+		ON DUPLICATE KEY UPDATE `online_users` = VALUES(`online_users`);
+
+	-- 
+	INSERT INTO _oss_stats_retention(`day`, `new_user`)
+		SELECT p_date AS `day`, COUNT(*) AS `new_user` FROM gate_account WHERE DATE(createtime) = p_date
+		ON DUPLICATE KEY UPDATE `new_user` = VALUES(`new_user`);
+
+
+	-- p_date_1
+	INSERT INTO _oss_stats_retention(`day`, `accumulate_user`)
+		SELECT p_date_1 AS `day`, COUNT(*) AS `accumulate_user` FROM gate_account WHERE DATE(createtime) <= p_date_1
+		ON DUPLICATE KEY UPDATE `accumulate_user` = VALUES(`accumulate_user`);
+
+	-- p_date_1
+	INSERT INTO _oss_stats_retention(`day`, `online_users`)
+		SELECT p_date_1 AS `day`, COUNT(DISTINCT(userid)) AS `online_users` FROM gate_log_online 
+			WHERE action_time BETWEEN p_date_1 AND DATE_ADD(p_date_1,INTERVAL 1 DAY)
+		ON DUPLICATE KEY UPDATE `online_users` = VALUES(`online_users`);
+
+	-- p_date_1
+	INSERT INTO _oss_stats_retention(`day`, `new_user`)
+		SELECT p_date_1 AS `day`, COUNT(*) AS `new_user` FROM gate_account WHERE DATE(createtime) = p_date_1
+		ON DUPLICATE KEY UPDATE `new_user` = VALUES(`new_user`);
+
+	-- retention_1
+	INSERT INTO _oss_stats_retention(`day`, `retention_1`)
+		(SELECT p_date_1 AS `day`, COUNT(DISTINCT(t1.userid)) AS `retention_1` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date_1 AND DATE_ADD(p_date_1,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `retention_1` = VALUES(`retention_1`);
+
+	-- new_user_retention_1
+	INSERT INTO _oss_stats_retention(`day`, `new_user_retention_1`)
+		(SELECT p_date_1 AS `day`, COUNT(DISTINCT(t1.userid)) AS `new_user_retention_1` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE DATE(gate_account.createtime) = p_date_1
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `new_user_retention_1` = VALUES(`new_user_retention_1`);
+
+
+	-- p_date_3
+	INSERT INTO _oss_stats_retention(`day`, `accumulate_user`)
+		SELECT p_date_3 AS `day`, COUNT(*) AS `accumulate_user` FROM gate_account WHERE DATE(createtime) <= p_date_3
+		ON DUPLICATE KEY UPDATE `accumulate_user` = VALUES(`accumulate_user`);
+
+	-- p_date_3
+	INSERT INTO _oss_stats_retention(`day`, `online_users`)
+		SELECT p_date_3 AS `day`, COUNT(DISTINCT(userid)) AS `online_users` FROM gate_log_online 
+			WHERE action_time BETWEEN p_date_3 AND DATE_ADD(p_date_3,INTERVAL 1 DAY)
+		ON DUPLICATE KEY UPDATE `online_users` = VALUES(`online_users`);
+
+	-- p_date_3
+	INSERT INTO _oss_stats_retention(`day`, `new_user`)
+		SELECT p_date_3 AS `day`, COUNT(*) AS `new_user` FROM gate_account WHERE DATE(createtime) = p_date_3
+		ON DUPLICATE KEY UPDATE `new_user` = VALUES(`new_user`);
+
+	-- retention_3
+	INSERT INTO _oss_stats_retention(`day`, `retention_3`)
+		(SELECT p_date_3 AS `day`, COUNT(DISTINCT(t1.userid)) AS `retention_3` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date_3 AND DATE_ADD(p_date_3,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `retention_3` = VALUES(`retention_3`);
+
+	-- new_user_retention_3
+	INSERT INTO _oss_stats_retention(`day`, `new_user_retention_3`)
+		(SELECT p_date_3 AS `day`, COUNT(DISTINCT(t1.userid)) AS `new_user_retention_3` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE DATE(gate_account.createtime) = p_date_3
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `new_user_retention_3` = VALUES(`new_user_retention_3`);
+
+
+	-- p_date_7
+	INSERT INTO _oss_stats_retention(`day`, `accumulate_user`)
+		SELECT p_date_7 AS `day`, COUNT(*) AS `accumulate_user` FROM gate_account WHERE DATE(createtime) <= p_date_7
+		ON DUPLICATE KEY UPDATE `accumulate_user` = VALUES(`accumulate_user`);
+
+	-- p_date_7
+	INSERT INTO _oss_stats_retention(`day`, `online_users`)
+		SELECT p_date_7 AS `day`, COUNT(DISTINCT(userid)) AS `online_users` FROM gate_log_online 
+			WHERE action_time BETWEEN p_date_7 AND DATE_ADD(p_date_7,INTERVAL 1 DAY)
+		ON DUPLICATE KEY UPDATE `online_users` = VALUES(`online_users`);
+
+	-- p_date_7
+	INSERT INTO _oss_stats_retention(`day`, `new_user`)
+		SELECT p_date_7 AS `day`, COUNT(*) AS `new_user` FROM gate_account WHERE DATE(createtime) = p_date_7
+		ON DUPLICATE KEY UPDATE `new_user` = VALUES(`new_user`);
+
+	-- retention_7
+	INSERT INTO _oss_stats_retention(`day`, `retention_7`)
+		(SELECT p_date_7 AS `day`, COUNT(DISTINCT(t1.userid)) AS `retention_7` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date_7 AND DATE_ADD(p_date_7,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `retention_7` = VALUES(`retention_7`);
+
+	-- new_user_retention_7
+	INSERT INTO _oss_stats_retention(`day`, `new_user_retention_7`)
+		(SELECT p_date_7 AS `day`, COUNT(DISTINCT(t1.userid)) AS `new_user_retention_7` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE DATE(gate_account.createtime) = p_date_7
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `new_user_retention_7` = VALUES(`new_user_retention_7`);
+
+
+	-- p_date_30
+	INSERT INTO _oss_stats_retention(`day`, `accumulate_user`)
+		SELECT p_date_30 AS `day`, COUNT(*) AS `accumulate_user` FROM gate_account WHERE DATE(createtime) <= p_date_30
+		ON DUPLICATE KEY UPDATE `accumulate_user` = VALUES(`accumulate_user`);
+
+	-- p_date_30
+	INSERT INTO _oss_stats_retention(`day`, `online_users`)
+		SELECT p_date_30 AS `day`, COUNT(DISTINCT(userid)) AS `online_users` FROM gate_log_online 
+			WHERE action_time BETWEEN p_date_30 AND DATE_ADD(p_date_30,INTERVAL 1 DAY)
+		ON DUPLICATE KEY UPDATE `online_users` = VALUES(`online_users`);
+
+	-- p_date_30
+	INSERT INTO _oss_stats_retention(`day`, `new_user`)
+		SELECT p_date_30 AS `day`, COUNT(*) AS `new_user` FROM gate_account WHERE DATE(createtime) = p_date_30
+		ON DUPLICATE KEY UPDATE `new_user` = VALUES(`new_user`);
+
+	-- retention_30
+	INSERT INTO _oss_stats_retention(`day`, `retention_30`)
+		(SELECT p_date_30 AS `day`, COUNT(DISTINCT(t1.userid)) AS `retention_30` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date_30 AND DATE_ADD(p_date_30,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `retention_30` = VALUES(`retention_30`);
+
+    -- new_user_retention_30
+	INSERT INTO _oss_stats_retention(`day`, `new_user_retention_30`)
+		(SELECT p_date_30 AS `day`, COUNT(DISTINCT(t1.userid)) AS `new_user_retention_30` 
+		    FROM (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE gate_log_online.action_time BETWEEN p_date AND DATE_ADD(p_date,INTERVAL 1 DAY) 
+											AND gate_account.userid = gate_log_online.userid) AS t1,
+                 (SELECT gate_account.*, gate_log_online.action_time FROM gate_log_online LEFT JOIN gate_account
+											ON gate_account.userid = gate_log_online.userid
+										WHERE DATE(gate_account.createtime) = p_date_30
+											AND gate_account.userid = gate_log_online.userid) AS t2
+            WHERE t2.userid = t1.userid)
+		ON DUPLICATE KEY UPDATE `new_user_retention_30` = VALUES(`new_user_retention_30`);
+
+END;
+
+-- ----------------------------
 -- Procedure structure for __oss_do_player_query_online
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `__oss_do_player_query_online`;
@@ -80,7 +318,7 @@ BEGIN
 													`mailto_type`, `mailto_userid`, `mailto_level`, `ignore_rule`,
 													`subject`, `content`, `attachment`,
 													`createtime`, `burntime`)
-			VALUES(p_subid,p_mailtype,0,'system','系统', 0,'everybody',p_mailto_level,p_ignore_rule, p_subject,p_content,p_attachment, p_createtime,p_burntime);
+			VALUES(p_subid,p_mailtype,99,'oss','GM系统邮件后台', 0,'everybody',p_mailto_level,p_ignore_rule, p_subject,p_content,p_attachment, p_createtime,p_burntime);
 END;
 
 -- ----------------------------
@@ -98,7 +336,7 @@ BEGIN
 													`mailto_type`, `mailto_userid`, `mailto_level`, `ignore_rule`,
 													`subject`, `content`, `attachment`,
 													`createtime`, `burntime`)
-			VALUES(p_subid,p_mailtype,0,'system','系统', 0,p_userid,0,1, p_subject,p_content,p_attachment, NOW(),p_burntime);
+			VALUES(p_subid,p_mailtype,99,'oss(private)','GM邮件后台(私人)', 1,p_userid,0,1, p_subject,p_content,p_attachment, NOW(),p_burntime);
 END;
 
 -- ----------------------------

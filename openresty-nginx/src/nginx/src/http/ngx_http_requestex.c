@@ -893,6 +893,15 @@ ngx_http_ssl_handshakeex(ngx_event_t *rev)
 
             return;
         }
+
+        ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0, "plain http");
+
+        c->log->action = "waiting for request";
+
+        rev->handler = ngx_http_wait_request_handlerex;
+        ngx_http_wait_request_handlerex(rev);
+
+        return;
     }
 
     ngx_log_error(NGX_LOG_INFO, c->log, 0, "client closed connection");

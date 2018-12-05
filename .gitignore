@@ -45,7 +45,8 @@ dkms.conf
 *.log
 *.user
 
-openresty-nginx/msvc/\.vs/
+.vs/
+
 openresty-nginx/msvc/objs/
 openresty-nginx/msvc/enc_temp_folder/
 
@@ -55,4 +56,4 @@ openresty-nginx/bin/Debug/logs/
 openresty-nginx/bin/Debug/static_sample/
 
 openresty-nginx/bin/Release/
-openresty-nginx/bin/Release_20181117/
+openresty-nginx/bin/__publish/

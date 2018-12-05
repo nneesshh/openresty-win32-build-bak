@@ -454,19 +454,19 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                             size_t len = ngx_min(sizeof(data) - 1, bytes);
                             char *p;
 
-							memcpy(data, c->buffer_ref.pos, len);
+                            memcpy(data, c->buffer_ref.pos, len);
                             output_debug_string("\n\t>>>> server read begin\n");
 
-							if (c->buffer) {
-								output_debug_string("\t     c->buffer(0x%08x) -- start(0x%08x)end(0x%08x)size(%d),pos(0x%08x)last(0x%08x)\n",
-									(uintptr_t)c->buffer,
-									(uintptr_t)c->buffer->start, (uintptr_t)c->buffer->end, (int)(c->buffer->end - c->buffer->start),
-									(uintptr_t)c->buffer->pos, (uintptr_t)c->buffer->last, (int)(c->buffer->last - c->buffer->pos));
-							}
-							output_debug_string("\t     c->buffer_ref(0x%08x) -- start(0x%08x)end(0x%08x)size(%d),pos(0x%08x)last(0x%08x)\n",
-								(uintptr_t)&c->buffer_ref,
-								(uintptr_t)c->buffer_ref.start, (uintptr_t)c->buffer_ref.end, (int)(c->buffer_ref.end - c->buffer_ref.start),
-								(uintptr_t)c->buffer_ref.pos, (uintptr_t)c->buffer_ref.last, (int)(c->buffer_ref.last - c->buffer_ref.pos));
+                            if (c->buffer) {
+                                output_debug_string("\t     c->buffer(0x%08x) -- start(0x%08x)end(0x%08x)size(%d),pos(0x%08x)last(0x%08x)\n",
+                                    (uintptr_t)c->buffer,
+                                    (uintptr_t)c->buffer->start, (uintptr_t)c->buffer->end, (int)(c->buffer->end - c->buffer->start),
+                                    (uintptr_t)c->buffer->pos, (uintptr_t)c->buffer->last, (int)(c->buffer->last - c->buffer->pos));
+                            }
+                            output_debug_string("\t     c->buffer_ref(0x%08x) -- start(0x%08x)end(0x%08x)size(%d),pos(0x%08x)last(0x%08x)\n",
+                                (uintptr_t)&c->buffer_ref,
+                                (uintptr_t)c->buffer_ref.start, (uintptr_t)c->buffer_ref.end, (int)(c->buffer_ref.end - c->buffer_ref.start),
+                                (uintptr_t)c->buffer_ref.pos, (uintptr_t)c->buffer_ref.last, (int)(c->buffer_ref.last - c->buffer_ref.pos));
 
                             output_debug_string("\t     c(%d)fd(%d)destroyed(%d)\n\t     key(%d) bytes(%d/%d) -- data: \n\n%s\n",
                                 c->id, c->fd, c->destroyed,
