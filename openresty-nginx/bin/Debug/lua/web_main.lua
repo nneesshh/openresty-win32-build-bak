@@ -1,4 +1,4 @@
-package.path = package.path .. ";./?.lua;./lua/?.lua;./lua/?/init.lua;./src/?.lua;./src/?/init.lua;./lua/protobuf/?.lua;./lua/proto_pb/?.lua"
+package.path = package.path .. ";./?.lua;./lua/?.lua;./lua/?/init.lua;./lualibs/?.lua;./lualibs/?/init.lua;./src/?.lua;./src/?/init.lua"
 package.cpath = package.cpath .. ";./?.dll;./clibs/?.dll"
 
 --[[
@@ -14,6 +14,9 @@ require('mobdebug').start('192.168.1.110') --<-- only insert this line
 
 require("appsettings")
 
+-- protobuf
+--package.path = package.path .. ";./lualibs/protobuf/?.lua"
+--package.path = package.path .. ";./lua/proto_pb/?.lua"
 --require("test_web")
 --require("test_protodb")
 
