@@ -589,6 +589,10 @@ BEGIN
 	CALL __oss_do_stats_diamond2(p_today);
 	CALL __oss_do_stats_diamond2(p_yesterday);
 
+	--
+	CALL __oss_do_stats_retention(p_today);
+	CALL __oss_do_stats_retention(p_yesterday);
+
 END;
 
 

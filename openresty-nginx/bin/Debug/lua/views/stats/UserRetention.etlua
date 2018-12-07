@@ -1,0 +1,597 @@
+﻿<%
+    local date = require("date")
+    local now = date(false);
+
+    local createBy
+    if session.user then
+        createBy = session.user.Name
+    end
+
+    local queryTime
+    if params then
+        queryTime = params.QueryTime
+    end
+    
+    local labelList = {
+        '日期',
+        '账号总数',
+        '在线账号',
+        '新增账号',
+        '次日留存数',
+        '次日留存率',
+        '次日留存数（新增）',
+        '次日留存率（新增）',
+        '3日留存数',
+        '3日留存率',
+        '3日留存数（新增）',
+        '3日留存率（新增）',
+        '7日留存数',
+        '7日留存率',
+        '7日留存数（新增）',
+        '7日留存率（新增）',
+        '30日留存数',
+        '30日留存率',
+        '30日留存数（新增）',
+        '30日留存率（新增）',
+    }
+
+    local fieldList = {
+        'day',
+        'accumulate_user',
+        'online_users',
+        'new_user',
+        'retention_1',
+        'retention_rate_1',
+        'new_user_retention_1',
+        'new_user_retention_rate_1',
+        'retention_3',
+        'retention_rate_3',
+        'new_user_retention_3',
+        'new_user_retention_rate_3',
+        'retention_7',
+        'retention_rate_7',
+        'new_user_retention_7',
+        'new_user_retention_rate_7',
+        'retention_30',
+        'retention_rate_30',
+        'new_user_retention_30',
+        'new_user_retention_rate_30',
+    }
+
+    for i, v in ipairs(StatsPage) do
+        if v.online_users > 0 then
+            v['retention_rate_1'] = string.format("%.2f", v.retention_1 / v.online_users)
+            v['retention_rate_3'] = string.format("%.2f", v.retention_3 / v.online_users)
+            v['retention_rate_7'] = string.format("%.2f", v.retention_7 / v.online_users)
+            v['retention_rate_30'] = string.format("%.2f", v.retention_30 / v.online_users)
+        else
+            v['retention_rate_1'] = "0.0"
+            v['retention_rate_3'] = "0.0"
+            v['retention_rate_7'] = "0.0"
+            v['retention_rate_30'] = "0.0"
+        end
+
+        if v.new_user > 0 then
+            v['new_user_retention_rate_1'] = string.format("%.2f", v.new_user_retention_1 / v.new_user)
+            v['new_user_retention_rate_3'] = string.format("%.2f", v.new_user_retention_3 / v.new_user)
+            v['new_user_retention_rate_7'] = string.format("%.2f", v.new_user_retention_7 / v.new_user)
+            v['new_user_retention_rate_30'] = string.format("%.2f", v.new_user_retention_30 / v.new_user)
+        else
+            v['new_user_retention_rate_1'] = "0.0"
+            v['new_user_retention_rate_3'] = "0.0"
+            v['new_user_retention_rate_7'] = "0.0"
+            v['new_user_retention_rate_30'] = "0.0"
+        end
+    end
+%>
+
+<script type="text/javascript">
+    function _do_ajax_submit_UserRetentionQueryForm() {
+        
+        $("#successInfo").empty();
+
+        var option = {
+            url : '/StatsUserRetention',
+            type : 'POST',
+            dataType: 'html',
+            //headers: { "ClientCallMode" : "ajax" }, //添加请求头部
+            success: function(data) {
+                $("#_ajax_call_result").html(data);
+            },
+            error: function(xmlhr, textStatus, errorThrown) {
+                alert("failed!!! xmlhr.status=" + xmlhr.status + 
+                        ", xmlhr.readyState=" + xmlhr.readyState + 
+                        ", textStatus=" + textStatus + 
+                        ", errorThrown=" + errorThrown);
+            },
+        };
+        $("#userRetentionQueryForm").ajaxSubmit(option);
+        return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+    };
+</script>
+
+<style type="text/css">
+    .line-legend li span{
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .line-legend {
+        list-style: none;
+    }
+</style>
+
+<!-- render body -->
+<div class="row">
+
+    <div class="center-block" style="width:600px;margin:0 auto">
+        <% if errors then %>
+        <div class="form-group">
+            <div class="text-danger"><%= errors[1] %></div>
+        </div>
+        <% end %>
+
+        <% if success_infos then %>
+        <div class="form-group">
+            <div id="successInfo" class="text-success"><%= success_infos[1] %></div>
+        </div>
+        <% end %>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+    <!-- query button -->
+    <div class="col-sm-12">
+        <form class="form-horizontal" role="form" id="userRetentionQueryForm">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="width:120px;">输入查询时间:</label>
+                <div class="col-sm-2 ">
+                    <input style="width:100px;" type="text" id="query_time" name="QueryTime" />
+                </div>
+                <div class="col-sm-2 ">
+                    <a class="btn btn-primary" style="width:100px;" href="javascript:void(0)" onclick="_do_ajax_submit_UserRetentionQueryForm()">查询</a>
+                </div>
+            </div>
+        </form>
+    </div> 
+
+    <div class="clearfix" style="margin-bottom: 10px;"></div><!-- 清除浮动 -->
+
+    <!-- menu name -->
+    <div class="col-sm-12">
+        <h1> 留存率统计 </h1>
+        <h1> 总数: <%= StatsPage and #StatsPage or 0 %>  </h1>
+    </div>
+
+    <!-- data table -->
+    <div class="col-xs-10">
+        <div class="box box-primary">
+            <table class="table table-bordered table-hover dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <% for i, v in ipairs(labelList) do %>
+                        <th>
+                            <%= v %>
+                        </th>
+                        <% end %>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if StatsPage then
+                            for i, v in ipairs(StatsPage) do
+                    %>
+                    <tr>
+                            <% for i2, v2 in ipairs(fieldList) do %>
+                        <td>
+                            <%= v[v2] %>
+                        </td>
+                            <% end %>
+                    </tr>
+                    <%
+                            end
+                        end
+                    %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <!-- LINE CHART -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">活跃用户留存率统计图</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="lineChart3" style="height:250px;width:334px;" width="668" height="500"></canvas>
+                    <div id="legend3" class="chart-legend"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- LINE CHART -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">新增用户留存率统计图</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="lineChart4" style="height:250px;width:334px;" width="668" height="500"></canvas>
+                    <div id="legend4" class="chart-legend"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- LINE CHART -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">活跃用户留存数统计图</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="lineChart" style="height:250px;width:334px;" width="668" height="500"></canvas>
+                    <div id="legend" class="chart-legend"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- LINE CHART -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">新增用户留存数统计图</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="lineChart2" style="height:250px;width:334px;" width="668" height="500"></canvas>
+                    <div id="legend2" class="chart-legend"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col (RIGHT) -->
+</div>
+<!-- /.row -->
+
+<link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
+<script type="text/javascript" src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+    
+        var initTimeText = "<%= queryTime or now:fmt('%F') %>"
+
+        var fp = document.getElementById("query_time").flatpickr({
+            minDate: new Date().fp_incr(-360),
+	        enableTime: false,
+            enableSeconds: false,
+            defaultDate: initTimeText,
+            minuteIncrement: 1,
+            locale: "zh",
+	        enable: [
+		        {
+			        from: new Date().fp_incr(-360),
+			        to: new Date().fp_incr(30),
+		        }
+	        ],
+        });
+
+        var lineChartOptions = {
+
+            //Boolean - If we should show the scale at all
+            showScale               : true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines      : false,
+            //String - Colour of the grid lines
+            scaleGridLineColor      : 'rgba(0,0,0,.05)',
+            //Number - Width of the grid lines
+            scaleGridLineWidth      : 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines  : true,
+            //Boolean - Whether the line is curved between points
+            bezierCurve             : true,
+            //Number - Tension of the bezier curve between points
+            bezierCurveTension      : 0.3,
+            //Boolean - Whether to show a dot for each point
+            pointDot                : true,
+            //Number - Radius of each point dot in pixels
+            pointDotRadius          : 4,
+            //Number - Pixel width of point dot stroke
+            pointDotStrokeWidth     : 1,
+            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius : 20,
+            //Boolean - Whether to show a stroke for datasets
+            datasetStroke           : true,
+            //Number - Pixel width of dataset stroke
+            datasetStrokeWidth      : 2,
+            //Boolean - Whether to fill the dataset with a color
+            datasetFill             : false,
+            //String - A legend template
+
+            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio     : true,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive              : true
+        }
+
+        var dataList = []
+        for (var index = 0; index < <%=#fieldList%>; index++)
+        {
+            dataList[index] = []
+        }
+
+        <% 
+            if StatsPage then
+                for i, v in ipairs(StatsPage) do 
+                    for i2, v2 in ipairs(fieldList) do
+        %>
+                        dataList[<%=i2%>-1][<%=i%>-1] = "<%=v[v2]%>"
+        <%  
+                    end
+                end 
+            end 
+        %>
+
+        var datasetsList = [
+            {
+                label               : "<%=labelList[2]%>",
+                fillColor           : 'rgba(0,255,255,0.9)',
+                strokeColor         : 'rgba(0,255,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,255,1)',
+                data                : dataList[1]
+            },
+            {
+                label               : "<%=labelList[3]%>",
+                fillColor           : 'rgba(0,128,255,0.9)',
+                strokeColor         : 'rgba(0,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,255,1)',
+                data                : dataList[2]
+            },
+            {
+                label               : "<%=labelList[4]%>",
+                fillColor           : 'rgba(0,255,128,0.9)',
+                strokeColor         : 'rgba(0,255,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,128,1)',
+                data                : dataList[3]
+            },
+            {
+                label               : "<%=labelList[5]%>",
+                fillColor           : 'rgba(0,128,128,0.9)',
+                strokeColor         : 'rgba(0,128,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,128,1)',
+                data                : dataList[4]
+            },
+            {
+                label               : "<%=labelList[6]%>",
+                fillColor           : 'rgba(0,0,128,0.9)',
+                strokeColor         : 'rgba(0,0,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,0,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,0,128,1)',
+                data                : dataList[5]
+            },
+            {
+                label               : "<%=labelList[7]%>",
+                fillColor           : 'rgba(128,0,255,0.9)',
+                strokeColor         : 'rgba(128,0,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(128,0,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(128,0,255,1)',
+                data                : dataList[6]
+            },
+            {
+                label               : "<%=labelList[8]%>",
+                fillColor           : 'rgba(255,128,0,0.9)',
+                strokeColor         : 'rgba(255,128,0,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,0,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,0,1)',
+                data                : dataList[7]
+            },
+            {
+                label               : "<%=labelList[9]%>",
+                fillColor           : 'rgba(255,128,255,0.9)',
+                strokeColor         : 'rgba(255,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,255,1)',
+                data                : dataList[8]
+            },
+            {
+                label               : "<%=labelList[10]%>",
+                fillColor           : 'rgba(255,128,255,0.9)',
+                strokeColor         : 'rgba(255,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,255,1)',
+                data                : dataList[9]
+            },
+            {
+                label               : "<%=labelList[11]%>",
+                fillColor           : 'rgba(128,128,128,0.9)',
+                strokeColor         : 'rgba(128,128,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(128,128,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(128,128,128,1)',
+                data                : dataList[10]
+            },
+        ]
+
+        //
+        datasetsList[1].label = "<%=labelList[3]%>",
+        datasetsList[1].data = dataList[2] // online_users
+        datasetsList[2].label = "<%=labelList[5]%>",
+        datasetsList[2].data = dataList[4] // retention_1
+        datasetsList[3].label = "<%=labelList[9]%>",
+        datasetsList[3].data = dataList[8] // retention_3
+        datasetsList[4].label = "<%=labelList[13]%>",
+        datasetsList[4].data = dataList[12] // retention_7
+        datasetsList[5].label = "<%=labelList[17]%>",
+        datasetsList[5].data = dataList[16] // retention_30
+
+        var lineChartData1 = {
+            labels  : dataList[0],
+            datasets: [
+                datasetsList[1],
+                datasetsList[2],
+                datasetsList[3],
+                datasetsList[4],
+                datasetsList[5],
+            ]
+        }
+
+        // Create the lineChart_1
+        var canvas_1 = document.getElementById("lineChart").getContext('2d')
+        var chartObj_1 = new Chart(canvas_1)
+        var lineChart_1 = chartObj_1.Line(lineChartData1, lineChartOptions)
+        var legendNote_1 = lineChart_1.generateLegend();
+        document.getElementById("legend").innerHTML = legendNote_1;
+
+        //
+        datasetsList[1].label = "<%=labelList[4]%>",
+        datasetsList[1].data = dataList[3] // new_user
+        datasetsList[2].label = "<%=labelList[7]%>",
+        datasetsList[2].data = dataList[6] // new_user_retention_1
+        datasetsList[3].label = "<%=labelList[11]%>",
+        datasetsList[3].data = dataList[10] // new_user_retention_3
+        datasetsList[4].label = "<%=labelList[15]%>",
+        datasetsList[4].data = dataList[14] // new_user_retention_7
+        datasetsList[5].label = "<%=labelList[19]%>",
+        datasetsList[5].data = dataList[18] // new_user_retention_30
+
+        var lineChartData2 = {
+            labels  : dataList[0],
+            datasets: [
+                datasetsList[1],
+                datasetsList[2],
+                datasetsList[3],
+                datasetsList[4],
+                datasetsList[5],
+            ]
+        }
+
+        // Create the lineChart_2
+        var canvas_2 = document.getElementById("lineChart2").getContext('2d')
+        var chartObj_2 = new Chart(canvas_2)
+        var lineChart_2 = chartObj_2.Line(lineChartData2, lineChartOptions)
+        var legendNote_2 = lineChart_2.generateLegend();
+        document.getElementById("legend2").innerHTML = legendNote_2;
+
+        //
+        datasetsList[1].label = "<%=labelList[6]%>",
+        datasetsList[1].data = dataList[5] // retention_rate_1
+        datasetsList[2].label = "<%=labelList[10]%>",
+        datasetsList[2].data = dataList[9] // retention_rate_3
+        datasetsList[3].label = "<%=labelList[14]%>",
+        datasetsList[3].data = dataList[13] // retention_rate_7
+        datasetsList[4].label = "<%=labelList[18]%>",
+        datasetsList[4].data = dataList[17] // retention_rate_30
+
+        var lineChartData3 = {
+            labels  : dataList[0],
+            datasets: [
+                datasetsList[1],
+                datasetsList[2],
+                datasetsList[3],
+                datasetsList[4],
+            ]
+        }
+
+        // Create the lineChart_3
+        var canvas_3 = document.getElementById("lineChart3").getContext('2d')
+        var chartObj_3 = new Chart(canvas_3)
+        var lineChart_3 = chartObj_3.Line(lineChartData3, lineChartOptions)
+        var legendNote_3 = lineChart_3.generateLegend();
+        document.getElementById("legend3").innerHTML = legendNote_3;
+
+        //
+        datasetsList[1].label = "<%=labelList[8]%>",
+        datasetsList[1].data = dataList[7] // new_user_retention_rate_1
+        datasetsList[2].label = "<%=labelList[12]%>",
+        datasetsList[2].data = dataList[11] // new_user_retention_rate_3
+        datasetsList[3].label = "<%=labelList[16]%>",
+        datasetsList[3].data = dataList[15] // new_user_retention_rate_7
+        datasetsList[4].label = "<%=labelList[20]%>",
+        datasetsList[4].data = dataList[19] // new_user_retention_rate_30
+
+        var lineChartData4 = {
+            labels  : dataList[0],
+            datasets: [
+                datasetsList[1],
+                datasetsList[2],
+                datasetsList[3],
+                datasetsList[4],
+            ]
+        }
+
+        // Create the lineChart_4
+        var canvas_4 = document.getElementById("lineChart4").getContext('2d')
+        var chartObj_4 = new Chart(canvas_4)
+        var lineChart_4 = chartObj_4.Line(lineChartData4, lineChartOptions)
+        var legendNote_4 = lineChart_4.generateLegend();
+        document.getElementById("legend4").innerHTML = legendNote_4;
+
+    });
+
+</script>

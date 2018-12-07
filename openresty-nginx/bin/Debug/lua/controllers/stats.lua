@@ -151,4 +151,54 @@ return function(app)
     
   }))
 
+app:match("stats_retention", "/StatsUserRetention", respond_to({
+    --
+    before = function(self)
+      auth(self, "any", self.route_name)
+    end,
+    
+    --
+    GET = function(self)
+      local model = require("models.OssStatsRetention")
+      local d = date(false)
+      
+      local page = model.getPage(d:fmt("%F"))
+      
+      if page then
+        self.StatsPage = page
+      end
+      
+      return { render = "stats.UserRetention", layout = false }
+    end,
+
+    --
+    POST = capture_errors(function(self)
+      validate.assert_valid(self.params, {
+        { "QueryTime", optional=true, min_length = 10, max_length = 10 },
+      })
+    
+      local model = require("models.OssStatsRetention")
+      local d = date(false)
+
+      -- check QueryTime
+      if self.params.QueryTime ~= "" then
+        d = date(self.params.QueryTime)
+      end
+      
+      local page = model.getPage(d:fmt("%F"))
+      
+      if page then
+        self.success_infos = { "Success" }
+        self.StatsPage = page
+      end
+      
+      return { render = "stats.UserRetention", layout = false }
+    end,
+
+    -- on_error
+    function(self)
+        return { render = "stats.UserRetention", layout = false }
+    end)
+    
+  }))
 end

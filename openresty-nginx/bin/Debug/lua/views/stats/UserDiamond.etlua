@@ -81,8 +81,7 @@
         </div>
     </div>
     <div class="col-xs-10">
-        <!-- /.box -->
-        <!-- BAR CHART -->
+        <!-- LINE CHART -->
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">钻石消费统计图</h3>
@@ -111,118 +110,6 @@
 
 <script>
     $(function() {
-        // Get context with jQuery - using jQuery's .get() method.
-        var lineChartCanvas = document.getElementById("lineChart").getContext('2d')
-        // var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-        // This will get the first returned node in the jQuery collection.
-        var lineChart = new Chart(lineChartCanvas)
-        var dataList = []
-        for (var index = 0; index < <%=#fieldList%>; index++)
-        {
-            dataList[index] = []
-        }
-
-        <% if StatsPage then
-            for i, v in ipairs(StatsPage) do
-        %>
-            dataList[0][<%=i%> - 1] = "<%=v[fieldList[1]]%>"
-            dataList[1][<%=i%> - 1] = "<%=v[fieldList[2]]%>"
-            dataList[2][<%=i%> - 1] = "<%=v[fieldList[3]]%>"
-            dataList[3][<%=i%> - 1] = "<%=v[fieldList[4]]%>"
-            dataList[4][<%=i%> - 1] = "<%=v[fieldList[5]]%>"
-            dataList[5][<%=i%> - 1] = "<%=v[fieldList[6]]%>"
-            dataList[6][<%=i%> - 1] = "<%=v[fieldList[7]]%>"
-            dataList[7][<%=i%> - 1] = "<%=v[fieldList[8]]%>"
-            dataList[8][<%=i%> - 1] = "<%=v[fieldList[9]]%>"
-        <%  end 
-        end 
-        %>
-
-        var lineChartData = {
-            labels  : dataList[0],
-            datasets: [
-                {
-                    label               : "<%=labelList[2]%>",
-                    fillColor           : 'rgba(0,255,255,0.9)',
-                    strokeColor         : 'rgba(0,255,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,255,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,255,255,1)',
-                    data                : dataList[1]
-                },
-                {
-                    label               : "<%=labelList[3]%>",
-                    fillColor           : 'rgba(0,128,255,0.9)',
-                    strokeColor         : 'rgba(0,128,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,128,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,128,255,1)',
-                    data                : dataList[2]
-                },
-                {
-                    label               : "<%=labelList[4]%>",
-                    fillColor           : 'rgba(0,255,128,0.9)',
-                    strokeColor         : 'rgba(0,255,128,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,255,128,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,255,128,1)',
-                    data                : dataList[3]
-                },
-                {
-                    label               : "<%=labelList[5]%>",
-                    fillColor           : 'rgba(0,128,128,0.9)',
-                    strokeColor         : 'rgba(0,128,128,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,128,128,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,128,128,1)',
-                    data                : dataList[4]
-                },
-                {
-                    label               : "<%=labelList[6]%>",
-                    fillColor           : 'rgba(0,0,128,0.9)',
-                    strokeColor         : 'rgba(0,0,128,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,0,128,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,0,128,1)',
-                    data                : dataList[5]
-                },
-                {
-                    label               : "<%=labelList[7]%>",
-                    fillColor           : 'rgba(128,0,255,0.9)',
-                    strokeColor         : 'rgba(128,0,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(128,0,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(128,0,255,1)',
-                    data                : dataList[6]
-                },
-                {
-                    label               : "<%=labelList[8]%>",
-                    fillColor           : 'rgba(255,255,0,0.9)',
-                    strokeColor         : 'rgba(255,255,0,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(255,255,0,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(255,255,0,1)',
-                    data                : dataList[7]
-                },
-                {
-                    label               : "<%=labelList[9]%>",
-                    fillColor           : 'rgba(255,128,0,0.9)',
-                    strokeColor         : 'rgba(255,128,0,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(255,128,0,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(255,128,0,1)',
-                    data                : dataList[8]
-                },
-            ]
-        }
 
         var lineChartOptions = {
 
@@ -243,7 +130,7 @@
             //Number - Tension of the bezier curve between points
             bezierCurveTension      : 0.3,
             //Boolean - Whether to show a dot for each point
-            pointDot                : false,
+            pointDot                : true,
             //Number - Radius of each point dot in pixels
             pointDotRadius          : 4,
             //Number - Pixel width of point dot stroke
@@ -264,10 +151,127 @@
             responsive              : true
         }
 
-        //Create the line chart
-        var chartLine = lineChart.Line(lineChartData, lineChartOptions)
+        var dataList = []
+        for (var index = 0; index < <%=#fieldList%>; index++)
+        {
+            dataList[index] = []
+        }
 
-        var legendNote = chartLine.generateLegend();
-        document.getElementById("legend").innerHTML = legendNote;
+        <% 
+            if StatsPage then
+                for i, v in ipairs(StatsPage) do 
+                    for i2, v2 in ipairs(fieldList) do
+        %>
+                        dataList[<%=i2%>-1][<%=i%>-1] = "<%=v[v2]%>"
+        <%  
+                    end
+                end 
+            end 
+        %>
+
+        var datasetsList = [
+            {
+                label               : "<%=labelList[2]%>",
+                fillColor           : 'rgba(0,255,255,0.9)',
+                strokeColor         : 'rgba(0,255,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,255,1)',
+                data                : dataList[1]
+            },
+            {
+                label               : "<%=labelList[3]%>",
+                fillColor           : 'rgba(0,128,255,0.9)',
+                strokeColor         : 'rgba(0,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,255,1)',
+                data                : dataList[2]
+            },
+            {
+                label               : "<%=labelList[4]%>",
+                fillColor           : 'rgba(0,255,128,0.9)',
+                strokeColor         : 'rgba(0,255,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,128,1)',
+                data                : dataList[3]
+            },
+            {
+                label               : "<%=labelList[5]%>",
+                fillColor           : 'rgba(0,128,128,0.9)',
+                strokeColor         : 'rgba(0,128,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,128,1)',
+                data                : dataList[4]
+            },
+            {
+                label               : "<%=labelList[6]%>",
+                fillColor           : 'rgba(0,0,128,0.9)',
+                strokeColor         : 'rgba(0,0,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,0,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,0,128,1)',
+                data                : dataList[5]
+            },
+            {
+                label               : "<%=labelList[7]%>",
+                fillColor           : 'rgba(128,0,255,0.9)',
+                strokeColor         : 'rgba(128,0,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(128,0,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(128,0,255,1)',
+                data                : dataList[6]
+            },
+            {
+                label               : "<%=labelList[8]%>",
+                fillColor           : 'rgba(255,128,0,0.9)',
+                strokeColor         : 'rgba(255,128,0,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,0,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,0,1)',
+                data                : dataList[7]
+            },
+            {
+                label               : "<%=labelList[9]%>",
+                fillColor           : 'rgba(255,128,255,0.9)',
+                strokeColor         : 'rgba(255,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,255,1)',
+                data                : dataList[8]
+            },
+        ]
+
+        var lineChartData1 = {
+            labels  : dataList[0],
+            datasets: [
+                datasetsList[0],
+                datasetsList[1],
+                datasetsList[2],
+                datasetsList[3],
+                datasetsList[4],
+                datasetsList[5],
+                datasetsList[6],
+                datasetsList[7],
+            ]
+        }
+
+        // Create the lineChart_1
+        var canvas_1 = document.getElementById("lineChart").getContext('2d')
+        var chartObj_1 = new Chart(canvas_1)
+        var lineChart_1 = chartObj_1.Line(lineChartData1, lineChartOptions)
+        var legendNote_1 = lineChart_1.generateLegend();
+        document.getElementById("legend").innerHTML = legendNote_1;
+
     })
 </script>

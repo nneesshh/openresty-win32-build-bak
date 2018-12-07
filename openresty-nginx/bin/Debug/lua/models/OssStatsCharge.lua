@@ -26,7 +26,11 @@ function _M.getPage(theDay)
       return posts
   end
   })
+
   local page1 = paginated:get_page(1)
+  
+  -- revert sort oder to day asc
+  table.sort(page1, function(a,b) return a.day <  b.day end)  
   return page1
 end
 

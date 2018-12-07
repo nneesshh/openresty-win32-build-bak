@@ -12,6 +12,8 @@
         '充值总次数',
         '充值总金额',
         '充值总人数',
+        'ARPU',
+        'ARPU TOTAL'
     }
 
     local fieldList = {
@@ -22,7 +24,23 @@
         'total_charge_num',
         'total_charge_cash',
         'total_charge_user_num',
+        'arpu',
+        'arpu_total',
     }
+
+    for i, v in ipairs(StatsPage) do
+        if v.charge_user_num > 0 then
+            v['arpu'] = string.format("%.2f", v.charge_cash / v.charge_user_num)
+        else
+            v['arpu'] = "0.0"
+        end
+
+        if v.total_charge_user_num > 0 then
+            v['arpu_total'] = string.format("%.2f", v.total_charge_cash / v.total_charge_user_num)
+        else
+            v['arpu_total'] = "0.0"
+        end
+    end
 %>
 
 <style type="text/css">
@@ -54,9 +72,7 @@
                             <%= v %>
                         </th>
                         <% end %>
-                        <th>ARPU</th>
-                        <th>ARPU TOTAL</th>
-                    </tr>
+                      </tr>
                 </thead>
                 <tbody>
                     <%
@@ -69,18 +85,6 @@
                             <%= v[v2] %>
                         </td>
                             <% end %>
-                        
-                        <% if v.charge_user_num > 0 then %> 
-                        <td><%= v.charge_cash / v.charge_user_num %></td>
-                        <% else %> 
-                        <td>0.0</td>
-                        <% end %>
-
-                        <% if v.total_charge_user_num > 0 then %> 
-                        <td><%= v.total_charge_cash / v.total_charge_user_num %></td>
-                        <% else %> 
-                        <td>0.0</td>
-                        <% end %>
                     </tr>
                     <%
                             end
@@ -91,8 +95,7 @@
         </div>
     </div>
     <div class="col-xs-10">
-        <!-- /.box -->
-        <!-- BAR CHART -->
+        <!-- chart1 -->
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">充值统计图</h3>
@@ -111,9 +114,9 @@
                     <div id="legend" class="chart-legend"></div>
                 </div>
             </div>
-            <!-- /.box-body -->
         </div>
-        <!-- /.box -->
+
+        <!-- chart3 -->
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">ARPU统计图</h3>
@@ -128,8 +131,8 @@
             </div>
             <div class="box-body">
                 <div class="chart">
-                    <canvas id="lineChart2" style="height:250px;width:334px;" width="668" height="500"></canvas>
-                    <div id="legend2" class="chart-legend"></div>
+                    <canvas id="lineChart3" style="height:250px;width:334px;" width="668" height="500"></canvas>
+                    <div id="legend3" class="chart-legend"></div>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -142,111 +145,7 @@
 
 <script>
     $(function() {
-        // Get context with jQuery - using jQuery's .get() method.
-        var lineChartCanvas = document.getElementById("lineChart").getContext('2d')
-        // This will get the first returned node in the jQuery collection.
-        var lineChart = new Chart(lineChartCanvas)
-        var ARPUList = []
-        var ARPUTOTALList = []
-        var dataList = []
-        for (var index = 0; index < <%=#fieldList%>; index++)
-        {
-            dataList[index] = []
-        }
-
-        <% 
-            if StatsPage then
-                for i, v in ipairs(StatsPage) do 
-        %>
-                    dataList[0][<%=i%> - 1] = "<%=v[fieldList[1]]%>"
-                    dataList[1][<%=i%> - 1] = "<%=v[fieldList[2]]%>"
-                    dataList[2][<%=i%> - 1] = "<%=v[fieldList[3]]%>"
-                    dataList[3][<%=i%> - 1] = "<%=v[fieldList[4]]%>"
-                    dataList[4][<%=i%> - 1] = "<%=v[fieldList[5]]%>"
-                    dataList[5][<%=i%> - 1] = "<%=v[fieldList[6]]%>"
         
-                    <% if v.charge_user_num > 0 then %> 
-                        ARPUList[<%=i%> - 1] = <%= v.charge_cash / v.charge_user_num %>
-                    <% else %> 
-                        ARPUList[<%=i%> - 1] = 0
-                    <% end %>
-        
-                    <% if v.total_charge_user_num > 0 then %> 
-                    ARPUTOTALList[<%=i%> - 1] = <%= v.total_charge_cash / v.total_charge_user_num %>
-                    <% else %> 
-                        ARPUTOTALList[<%=i%> - 1] = 0
-                    <% end %>
-        <%  
-                end 
-            end 
-        %>
-
-        var lineChartData = {
-            labels  : dataList[0],
-            datasets: [
-                {
-                    label               : "<%=labelList[2]%>",
-                    fillColor           : 'rgba(0,255,255,0.9)',
-                    strokeColor         : 'rgba(0,255,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,255,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,255,255,1)',
-                    data                : dataList[1]
-                },
-                {
-                    label               : "<%=labelList[3]%>",
-                    fillColor           : 'rgba(0,128,255,0.9)',
-                    strokeColor         : 'rgba(0,128,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,128,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,128,255,1)',
-                    data                : dataList[2]
-                },
-                {
-                    label               : "<%=labelList[4]%>",
-                    fillColor           : 'rgba(0,255,128,0.9)',
-                    strokeColor         : 'rgba(0,255,128,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,255,128,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,255,128,1)',
-                    data                : dataList[3]
-                },
-                {
-                    label               : "<%=labelList[5]%>",
-                    fillColor           : 'rgba(0,128,128,0.9)',
-                    strokeColor         : 'rgba(0,128,128,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,128,128,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,128,128,1)',
-                    data                : dataList[4]
-                },
-                {
-                    label               : "<%=labelList[6]%>",
-                    fillColor           : 'rgba(0,0,128,0.9)',
-                    strokeColor         : 'rgba(0,0,128,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(0,0,128,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(0,0,128,1)',
-                    data                : dataList[5]
-                },
-                {
-                    label               : "<%=labelList[7]%>",
-                    fillColor           : 'rgba(128,0,255,0.9)',
-                    strokeColor         : 'rgba(128,0,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(128,0,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(128,0,255,1)',
-                    data                : dataList[6]
-                },
-            ]
-        }
-
         var lineChartOptions = {
 
             //Boolean - If we should show the scale at all
@@ -266,7 +165,7 @@
             //Number - Tension of the bezier curve between points
             bezierCurveTension      : 0.3,
             //Boolean - Whether to show a dot for each point
-            pointDot                : false,
+            pointDot                : true,
             //Number - Radius of each point dot in pixels
             pointDotRadius          : 4,
             //Number - Pixel width of point dot stroke
@@ -287,41 +186,134 @@
             responsive              : true
         }
 
-        //Create the line chart
-        var chartLine = lineChart.Line(lineChartData, lineChartOptions)
-        var legendNote = chartLine.generateLegend();
-        document.getElementById("legend").innerHTML = legendNote;
+        var dataList = []
+        for (var index = 0; index < <%=#fieldList%>; index++)
+        {
+            dataList[index] = []
+        }
 
-        var lineChartCanvas2 = document.getElementById("lineChart2").getContext('2d')
-        var lineChart2 = new Chart(lineChartCanvas2)
-        var lineChartData2 = {
+        <% 
+            if StatsPage then
+                for i, v in ipairs(StatsPage) do 
+                    for i2, v2 in ipairs(fieldList) do
+        %>
+                        dataList[<%=i2%>-1][<%=i%>-1] = "<%=v[v2]%>"
+        <%  
+                    end
+                end 
+            end 
+        %>
+
+        var datasetsList = [
+            {
+                label               : "<%=labelList[2]%>",
+                fillColor           : 'rgba(0,255,255,0.9)',
+                strokeColor         : 'rgba(0,255,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,255,1)',
+                data                : dataList[1]
+            },
+            {
+                label               : "<%=labelList[3]%>",
+                fillColor           : 'rgba(0,128,255,0.9)',
+                strokeColor         : 'rgba(0,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,255,1)',
+                data                : dataList[2]
+            },
+            {
+                label               : "<%=labelList[4]%>",
+                fillColor           : 'rgba(0,255,128,0.9)',
+                strokeColor         : 'rgba(0,255,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,255,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,255,128,1)',
+                data                : dataList[3]
+            },
+            {
+                label               : "<%=labelList[5]%>",
+                fillColor           : 'rgba(0,128,128,0.9)',
+                strokeColor         : 'rgba(0,128,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,128,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,128,128,1)',
+                data                : dataList[4]
+            },
+            {
+                label               : "<%=labelList[6]%>",
+                fillColor           : 'rgba(0,0,128,0.9)',
+                strokeColor         : 'rgba(0,0,128,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(0,0,128,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(0,0,128,1)',
+                data                : dataList[5]
+            },
+            {
+                label               : "<%=labelList[7]%>",
+                fillColor           : 'rgba(128,0,255,0.9)',
+                strokeColor         : 'rgba(128,0,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(128,0,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(128,0,255,1)',
+                data                : dataList[6]
+            },
+            {
+                label               : "<%=labelList[8]%>",
+                fillColor           : 'rgba(255,128,0,0.9)',
+                strokeColor         : 'rgba(255,128,0,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,0,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,0,1)',
+                data                : dataList[7]
+            },
+            {
+                label               : "<%=labelList[9]%>",
+                fillColor           : 'rgba(255,128,255,0.9)',
+                strokeColor         : 'rgba(255,128,255,0.8)',
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(255,128,255,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(255,128,255,1)',
+                data                : dataList[8]
+            },
+        ]
+
+        var lineChartData1 = {
             labels  : dataList[0],
             datasets: [
-                {
-                    label               : "ARPU",
-                    fillColor           : 'rgba(255,128,0,0.9)',
-                    strokeColor         : 'rgba(255,128,0,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(255,128,0,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(255,128,0,1)',
-                    data                : ARPUList
-                },
-                {
-                    label               : "ARPU TOTAL",
-                    fillColor           : 'rgba(255,128,255,0.9)',
-                    strokeColor         : 'rgba(255,128,255,0.8)',
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(255,128,255,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(255,128,255,1)',
-                    data                : ARPUTOTALList
-                },
+                datasetsList[1], // charge_cash
+                datasetsList[2], // charge_user_num
             ]
         }
 
-        var chartLine2 = lineChart2.Line(lineChartData2, lineChartOptions)
-        var legendNote2 = chartLine2.generateLegend();
-        document.getElementById("legend2").innerHTML = legendNote2;
+        var lineChartData3 = {
+            labels  : dataList[0],
+            datasets: [
+                datasetsList[6], // arpu
+            ]
+        }
+
+        // Create the lineChart_1
+        var canvas_1 = document.getElementById("lineChart").getContext('2d')
+        var chartObj_1 = new Chart(canvas_1)
+        var lineChart_1 = chartObj_1.Line(lineChartData1, lineChartOptions)
+        var legendNote_1 = lineChart_1.generateLegend();
+        document.getElementById("legend").innerHTML = legendNote_1;
+
+        // Create the lineChart_3
+        var canvas_3 = document.getElementById("lineChart3").getContext('2d')
+        var chartObj_3 = new Chart(canvas_3)
+        var lineChart_3 = chartObj_3.Line(lineChartData3, lineChartOptions)
+        var legendNote_3 = lineChart_3.generateLegend();
+        document.getElementById("legend3").innerHTML = legendNote_3;
     })
 </script>
