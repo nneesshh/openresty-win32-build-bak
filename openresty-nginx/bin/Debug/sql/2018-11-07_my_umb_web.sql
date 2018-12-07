@@ -120,8 +120,9 @@ INSERT INTO `menus` VALUES ('cf6072f1-d246-4a57-a461-2a98f5ba270b', 'Diamond', '
 INSERT INTO `menus` VALUES ('d7f8090b-a07d-48df-9142-8bcc613c6d93', 'News', 'fa fa-link', '更新公告管理', '00000000-0000-0000-0000-000000000000', '', '4', '0', '/AdminNews', '0');
 INSERT INTO `menus` VALUES ('d7f8090b-a07d-48df-9142-8bcc613c6d94', 'GameAnnouncement', 'fa fa-link', 'GM公告管理', '00000000-0000-0000-0000-000000000000', '', '5', '0', '/AdminGameAnnouncement', '0');
 INSERT INTO `menus` VALUES ('d7f8090b-a07d-48df-9142-8bcc613c6d96', 'Mail', 'fa fa-link', 'GM邮件管理', '00000000-0000-0000-0000-000000000000', '', '6', '0', '/AdminMail', '0');
-INSERT INTO `menus` VALUES ('e04d00ed-007f-4466-8eb8-668e17057888', 'OnlineHour', 'fa fa-link', '小时在线', '00000000-0000-0000-0000-000000000000', '', '15', '1', '/StatsUserOnlineHour', '0');
-INSERT INTO `menus` VALUES ('f04d00ed-007f-4466-8eb8-668e17057888', 'OnlineSnapshot', 'fa fa-link', '当前在线', '00000000-0000-0000-0000-000000000000', '', '16', '1', '/StatsUserOnlineSnapshot', '0');
+INSERT INTO `menus` VALUES ('e04d00ed-007f-4466-8eb8-668e17057678', 'OnlineHour', 'fa fa-link', '小时在线', '00000000-0000-0000-0000-000000000000', '', '15', '1', '/StatsUserOnlineHour', '0');
+INSERT INTO `menus` VALUES ('f04d00ed-007f-4466-8eb8-668e17057788', 'OnlineSnapshot', 'fa fa-link', '当前在线', '00000000-0000-0000-0000-000000000000', '', '16', '1', '/StatsUserOnlineSnapshot', '0');
+INSERT INTO `menus` VALUES ('f04d00ed-007f-4466-8eb8-668e17057889', 'Retention', 'fa fa-link', '留存率统计', '00000000-0000-0000-0000-000000000000', '', '17', '1', '/StatsUserRetention', '0');
 
 -- ----------------------------
 -- Table structure for rolemenus
