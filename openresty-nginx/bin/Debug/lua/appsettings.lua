@@ -1,3 +1,7 @@
+-- common
+package.path = package.path .. ";./lualibs/?.lua;./lualibs/?/init.lua;./lua/?.lua;./lua/?/init.lua"
+package.cpath = package.cpath .. ";./?.dll;./clibs/?.dll"
+
 -- lapis
 package.path = package.path .. ";./lualibs/lapis-1.7.0/?.lua;./lualibs/lapis-1.7.0/?/init.lua"
 package.path = package.path .. ";./lualibs/loadkit-1.1.0/?.lua"
