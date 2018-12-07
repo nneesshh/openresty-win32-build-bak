@@ -202,22 +202,15 @@ ngx_write_fd(ngx_fd_t fd, void *buf, size_t size)
 ssize_t
 ngx_write_console(ngx_fd_t fd, void *buf, size_t size)
 {
-#if (NGX_WIN32)
-#else
-    u_long  n;
-#endif
+	u_long  n;
 
     (void) CharToOemBuff(buf, buf, size);
 
-#if (NGX_WIN32)
-    OutputDebugString(buf);
-    return size;
-#else
     if (WriteFile(fd, buf, size, &n, NULL) != 0) {
         return (size_t) n;
     }
+
     return -1;
-#endif
 }
 
 

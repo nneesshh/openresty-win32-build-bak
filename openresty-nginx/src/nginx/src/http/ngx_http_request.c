@@ -3149,7 +3149,7 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string("\nngx_http_keepalive_handler(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c, "\nngx_http_keepalive_handler(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -3275,7 +3275,7 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string("\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c, "\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -3341,7 +3341,11 @@ ngx_http_lingering_close_handler(ngx_event_t *rev)
     ngx_connection_t          *c;
     ngx_http_request_t        *r;
     ngx_http_core_loc_conf_t  *clcf;
+
+    /* IOCP DOESN'T like buffer on stack, it need buffer in heap 
     u_char                     buffer[NGX_HTTP_LINGERING_BUFFER_SIZE];
+    */
+    ngx_buf_t                 *b;
 
     c = rev->data;
     r = c->data;
@@ -3360,21 +3364,38 @@ ngx_http_lingering_close_handler(ngx_event_t *rev)
         return;
     }
 
-    do {
-        n = c->recv(c, buffer, NGX_HTTP_LINGERING_BUFFER_SIZE);
+    /*
+     * NOTICE: c->buffer must be empty.
+     */
+    if (c->read->ready) {
+        b = c->buffer;
 
-        ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "lingering read: %z", n);
-
-        if (n == NGX_AGAIN) {
-            break;
+        if (b && b->pos == b->last) {
+            b->last = b->pos = b->start;
         }
-
-        if (n == NGX_ERROR || n == 0) {
+        else {
+            /* There is still data in buffer, it must be ERROR for linger close!!!  */
             ngx_http_close_request(r, 0);
             return;
         }
 
-    } while (rev->ready);
+        do {
+            /* n = c->recv(c, buffer, NGX_HTTP_LINGERING_BUFFER_SIZE); */
+            n = c->recv(c, b->last, b->end - b->last);
+
+            ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "lingering read: %z", n);
+
+            if (n == NGX_AGAIN) {
+                break;
+            }
+
+            if (n == NGX_ERROR || n == 0) {
+                ngx_http_close_request(r, 0);
+                return;
+            }
+
+        } while (rev->ready);
+    }
 
     if (ngx_handle_read_event(rev, 0) != NGX_OK) {
         ngx_http_close_request(r, 0);
@@ -3593,7 +3614,7 @@ ngx_http_free_request(ngx_http_request_t *r, ngx_int_t rc)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string("\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(r->connection, "\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
         r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection,
         (uintptr_t)r->connection->sockaddr, r->connection->sockaddr->sa_family);
 #endif
@@ -3663,7 +3684,7 @@ ngx_http_close_connection(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string("\nngx_http_close_connection(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c, "\nngx_http_close_connection(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
 

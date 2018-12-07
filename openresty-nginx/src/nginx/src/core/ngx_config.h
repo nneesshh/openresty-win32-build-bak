@@ -141,6 +141,5 @@ typedef intptr_t        ngx_flag_t;
 
 #endif
 
-extern void output_debug_string(const char *format, ...);
 
 #endif /* _NGX_CONFIG_H_INCLUDED_ */

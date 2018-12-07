@@ -19,6 +19,10 @@ ngx_event_acceptex(ngx_event_t *rev)
     ngx_listening_t   *ls;
     ngx_connection_t  *c;
 
+    /* NOTICE: sockaddr would get corruption because acceptex feature, wo we must store it into temp buffer and copy manually */
+    struct sockaddr   *sockaddr, *local_sockaddr;
+    socklen_t          socklen, local_socklen;
+
     c = rev->data;
     ls = c->listening;
 
@@ -49,11 +53,21 @@ ngx_event_acceptex(ngx_event_t *rev)
                              ls->post_accept_buffer_size,
                              ls->socklen + 16,
                              ls->socklen + 16,
-                             &c->local_sockaddr, &c->local_socklen,
-                             &c->sockaddr, &c->socklen);
+                             &local_sockaddr, &local_socklen,
+                             &sockaddr, &socklen);
 
     /* data read by ngx_acceptex() */
     c->buffer->last += rev->available;
+
+    /* NOTICE: ngx_getacceptexsockaddrs() will return local_sockaddr pointer and sockaddr pointer on the
+     *         "c->buffer->pos" memory, but the data they point to may be erased when recv data into "c->buffer"
+     *         , or the pointers themselves would be corruptted when the "c->buffer" is reallocated, so we 
+     *         must store it into temp buffer and copy manually to keep them valid.
+     */
+    c->local_sockaddr = ngx_palloc(c->pool, ls->socklen);
+    c->sockaddr = ngx_palloc(c->pool, ls->socklen);
+    ngx_memcpy(c->local_sockaddr, local_sockaddr, local_socklen);
+    ngx_memcpy(c->sockaddr, sockaddr, socklen);
 
     if (ls->addr_ntop) {
         c->addr_text.data = ngx_pnalloc(c->pool, ls->addr_text_max_len);
@@ -149,18 +163,6 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         c->buffer_ref.end = c->buffer->end;
 #endif
 
-        c->local_sockaddr = ngx_palloc(c->pool, ls->socklen);
-        if (c->local_sockaddr == NULL) {
-            ngx_close_posted_connection(c);
-            return NGX_ERROR;
-        }
-
-        c->sockaddr = ngx_palloc(c->pool, ls->socklen);
-        if (c->sockaddr == NULL) {
-            ngx_close_posted_connection(c);
-            return NGX_ERROR;
-        }
-
         *log = ls->log;
         c->log = log;
 
@@ -191,7 +193,7 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string("\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
+        output_debug_string(c, "\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
             c->id, c->fd, c->destroyed, ls->fd, s);
 #endif
 
@@ -213,10 +215,12 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         /* acceptex event posted, wait acceptex flag to be cleared, 
            and don't post again before response */
         rev->evovlp.acceptex_flag = 1;
+        rev->evovlp.recv_mem_lock_flag = 1; /* always 1 when accpetex */
         rev->ready = 0;
 
         /* io disabled before acceptex is ready */
         wev->evovlp.acceptex_flag = 1;
+        wev->evovlp.recv_mem_lock_flag = 0; /* always 0 because wev ingnore this flag */
     }
 
     return NGX_OK;
@@ -247,5 +251,6 @@ ngx_close_posted_connection(ngx_connection_t *c)
 u_char *
 ngx_acceptex_log_error(ngx_log_t *log, u_char *buf, size_t len)
 {
-    return ngx_snprintf(buf, len, " while posting AcceptEx() on %V", log->data);
+    /*return ngx_snprintf(buf, len, " while posting AcceptEx() on %V", log->data);*/
+    return ngx_snprintf(buf, len, "\n while posting AcceptEx()\n");
 }

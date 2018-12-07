@@ -49,7 +49,7 @@
     <TargetName>nginx</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>../bin/$(Configuration)/</OutDir>
+    <OutDir>../bin/__publish/</OutDir>
     <IntDir>objs/$(Configuration)/vc141/</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>nginx</TargetName>
@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=0;_CONSOLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=0;_CONSOLE;NGX_LUA_USE_ASSERT=1;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -86,7 +86,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=0;_CONSOLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;NO_JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;NGX_LUA_USE_ASSERT=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />

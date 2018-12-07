@@ -111,4 +111,7 @@ void ngx_cpuinfo(void);
 
 extern ngx_pool_t        *saved_init_cycle_pool;
 
+extern void output_debug_string(ngx_connection_t *c, const char *format, ...);
+
+
 #endif /* _NGX_CORE_H_INCLUDED_ */

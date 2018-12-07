@@ -1179,7 +1179,10 @@ ngx_stream_echo_discarded_request_handler(ngx_event_t *rev)
 static ngx_int_t
 ngx_stream_echo_read_discarded_request(ngx_stream_session_t *s)
 {
+    /* IOCP DOESN'T like buffer on stack, it need buffer in heap
     u_char               buffer[NGX_STREAM_ECHO_DISCARD_BUFFER_SIZE];
+    */
+    ngx_buf_t           *b;
     ssize_t              n;
     ngx_connection_t    *c;
 
@@ -1188,14 +1191,26 @@ ngx_stream_echo_read_discarded_request(ngx_stream_session_t *s)
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0,
                    "stream echo read discarded request");
 
-    for ( ;; ) {
-#if 0
-        if (!c->read->ready) {
-            return NGX_AGAIN;
-        }
-#endif
+    /*
+     * NOTICE: c->buffer must be empty.
+     */
+    if (!c->read->ready) {
+        return NGX_AGAIN;
+    }
+    b = c->buffer;
 
-        n = c->recv(c, buffer, sizeof(buffer));
+    if (b && b->pos == b->last) {
+        b->last = b->pos = b->start;
+    } else {
+        /* There is still data in buffer, it must be ERROR for discard!!!  */
+        ngx_close_connection(c);
+        return NGX_ERROR;
+    }
+
+    for ( ;; ) {
+
+        /* n = c->recv(c, buffer, sizeof(buffer)); */
+        n = c->recv(c, b->last, b->end - b->last);
 
         if (n == NGX_ERROR) {
             c->error = 1;
@@ -1506,7 +1521,10 @@ ngx_stream_echo_set_lingering_close(ngx_stream_session_t *s,
 static void
 ngx_stream_echo_lingering_close_handler(ngx_event_t *rev)
 {
+    /* IOCP DOESN'T like buffer on stack, it need buffer in heap
     u_char                       buffer[NGX_STREAM_ECHO_LINGERING_BUFFER_SIZE];
+    */
+    ngx_buf_t                   *b;
     ssize_t                      n;
     ngx_msec_t                   timer;
     ngx_connection_t            *c;
@@ -1536,29 +1554,46 @@ ngx_stream_echo_lingering_close_handler(ngx_event_t *rev)
         return;
     }
 
-    do {
-        n = c->recv(c, buffer, NGX_STREAM_ECHO_LINGERING_BUFFER_SIZE);
+    /*
+     * NOTICE: c->buffer must be empty.
+     */
+    if (c->read->ready) {
+        b = c->buffer;
 
-        ngx_log_debug1(NGX_LOG_DEBUG_STREAM, c->log, 0,
-                       "stream echo lingering read: %d", n);
-
-        if (n == NGX_ERROR || n == 0) {
-            ngx_stream_echo_finalize(s, NGX_ERROR);
+        if (b && b->pos == b->last) {
+            b->last = b->pos = b->start;
+        }
+        else {
+            /* There is still data in buffer, it must be ERROR for echo linger close!!!  */
+            ngx_close_connection(c);
             return;
         }
 
+        do {
+            /*n = c->recv(c, buffer, NGX_STREAM_ECHO_LINGERING_BUFFER_SIZE);*/
+            n = c->recv(c, b->last, b->end - b->last);
+
+            ngx_log_debug1(NGX_LOG_DEBUG_STREAM, c->log, 0,
+                           "stream echo lingering read: %d", n);
+
+            if (n == NGX_ERROR || n == 0) {
+                ngx_stream_echo_finalize(s, NGX_ERROR);
+                return;
+            }
+
 #if (NGX_HAVE_EPOLL)
-        if ((ngx_event_flags & NGX_USE_EPOLL_EVENT)
-            && n < NGX_STREAM_ECHO_LINGERING_BUFFER_SIZE)
-        {
-            /* the current socket is of the stream type,
-             * so we don't have to read until EAGAIN
-             * with epoll ET, reducing one syscall. */
-            rev->ready = 0;
-        }
+            if ((ngx_event_flags & NGX_USE_EPOLL_EVENT)
+                && n < NGX_STREAM_ECHO_LINGERING_BUFFER_SIZE)
+            {
+                /* the current socket is of the stream type,
+                 * so we don't have to read until EAGAIN
+                 * with epoll ET, reducing one syscall. */
+                rev->ready = 0;
+            }
 #endif
 
-    } while (rev->ready);
+        } while (rev->ready);
+    }
 
     if (ngx_handle_read_event(rev, 0) != NGX_OK) {
         ngx_stream_echo_finalize(s, NGX_ERROR);

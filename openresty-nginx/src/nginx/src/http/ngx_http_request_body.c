@@ -659,7 +659,11 @@ ngx_http_read_discarded_request_body(ngx_http_request_t *r)
     ssize_t    n;
     ngx_int_t  rc;
     ngx_buf_t  b;
+
+    /* IOCP DOESN'T like buffer on stack, it need buffer in heap
     u_char     buffer[NGX_HTTP_DISCARD_BUFFER_SIZE];
+    */
+    ngx_buf_t *b2;
 
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
                    "http read discarded body");
@@ -667,6 +671,22 @@ ngx_http_read_discarded_request_body(ngx_http_request_t *r)
     ngx_memzero(&b, sizeof(ngx_buf_t));
 
     b.temporary = 1;
+
+    /*
+     * NOTICE: c->buffer must be empty.
+     */
+    if (!r->connection->read->ready) {
+        return NGX_AGAIN;
+    }
+    b2 = r->connection->buffer;
+
+    if (b2 && b2->pos == b2->last) {
+        b2->last = b2->pos = b2->start;
+    } else {
+        /* There is still data in buffer, it must be ERROR for discard!!!  */
+        ngx_close_connection(r->connection);
+        return NGX_ERROR;
+    }
 
     for ( ;; ) {
         if (r->headers_in.content_length_n == 0) {
@@ -681,7 +701,8 @@ ngx_http_read_discarded_request_body(ngx_http_request_t *r)
         size = (size_t) ngx_min(r->headers_in.content_length_n,
                                 NGX_HTTP_DISCARD_BUFFER_SIZE);
 
-        n = r->connection->recv(r->connection, buffer, size);
+        /*n = r->connection->recv(r->connection, buffer, size);*/
+        n = r->connection->recv(r->connection, b2->last, b2->end - b2->last);
 
         if (n == NGX_ERROR) {
             r->connection->error = 1;
@@ -696,8 +717,8 @@ ngx_http_read_discarded_request_body(ngx_http_request_t *r)
             return NGX_OK;
         }
 
-        b.pos = buffer;
-        b.last = buffer + n;
+        b.pos = b2->last;
+        b.last = b2->last + n;
 
         rc = ngx_http_discard_request_body_filter(r, &b);
 

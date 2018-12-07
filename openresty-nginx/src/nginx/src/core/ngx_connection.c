@@ -1114,7 +1114,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
 
     while (c_reuse) {
         /* check if the memory posted to recv was freed correctly */
-        if (c_reuse && c_reuse->read->evovlp.recv_mem_lock_flag == 0) {
+        if (c_reuse->read->evovlp.recv_mem_lock_flag == 0) {
             if (c_prev) {
                 c_prev->data = c_reuse->data;
                 c_reuse->data = ngx_cycle->free_connections;
@@ -1282,7 +1282,7 @@ ngx_close_connection(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string("\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c, "\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         fd,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
