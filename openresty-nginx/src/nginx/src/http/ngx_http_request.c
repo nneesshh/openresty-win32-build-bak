@@ -3393,6 +3393,7 @@ ngx_http_lingering_close_handler(ngx_event_t *rev)
     ngx_add_timer(rev, timer);
 }
 
+
 void
 ngx_http_empty_handler(ngx_event_t *wev)
 {
