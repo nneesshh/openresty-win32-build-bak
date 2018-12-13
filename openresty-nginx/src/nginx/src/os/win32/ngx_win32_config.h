@@ -66,12 +66,13 @@
 
 /* win32 toolchains */
 #ifdef NGX_WIN32
-#include <vld.h>
+/*#include <vld.h>*/
 #include <stdint.h>
 #include <stdbool.h>
 #include <assert.h>
 #include <crtdbg.h>
 #include <lfs.h>
+/*#include <jemalloc/jemalloc.h>*/
 #endif
 
 #ifdef __WATCOMC__

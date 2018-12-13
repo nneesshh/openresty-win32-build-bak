@@ -38,6 +38,7 @@
     <ProjectGuid>{09028CFD-4EB7-491D-869C-0708DB97ED44}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>test_threads</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

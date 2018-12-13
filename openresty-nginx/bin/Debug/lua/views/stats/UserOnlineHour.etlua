@@ -33,18 +33,6 @@
     }
 %>
 
-<style type="text/css">
-    .line-legend li span{
-        width: 1em;
-        height: 1em;
-        display: inline-block;
-        margin-right: 5px;
-    }
-    .line-legend {
-        list-style: none;
-    }
-</style>
-
 <!-- render body -->
 <div class="row">
     <!-- menu name -->
@@ -102,7 +90,6 @@
             <div class="box-body">
                 <div class="chart">
                     <canvas id="lineChart" style="height:250px;width:334px;" width="668" height="500"></canvas>
-                    <div id="legend" class="chart-legend"></div>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -111,52 +98,12 @@
     </div>
     <!-- /.col (RIGHT) -->
 </div>
-
 <!-- /.row -->
 
 <script>
     $(function() {
-                var lineChartOptions = {
 
-            //Boolean - If we should show the scale at all
-            showScale               : true,
-            //Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines      : false,
-            //String - Colour of the grid lines
-            scaleGridLineColor      : 'rgba(0,0,0,.05)',
-            //Number - Width of the grid lines
-            scaleGridLineWidth      : 1,
-            //Boolean - Whether to show horizontal lines (except X axis)
-            scaleShowHorizontalLines: true,
-            //Boolean - Whether to show vertical lines (except Y axis)
-            scaleShowVerticalLines  : true,
-            //Boolean - Whether the line is curved between points
-            bezierCurve             : true,
-            //Number - Tension of the bezier curve between points
-            bezierCurveTension      : 0.3,
-            //Boolean - Whether to show a dot for each point
-            pointDot                : true,
-            //Number - Radius of each point dot in pixels
-            pointDotRadius          : 4,
-            //Number - Pixel width of point dot stroke
-            pointDotStrokeWidth     : 1,
-            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-            pointHitDetectionRadius : 20,
-            //Boolean - Whether to show a stroke for datasets
-            datasetStroke           : true,
-            //Number - Pixel width of dataset stroke
-            datasetStrokeWidth      : 2,
-            //Boolean - Whether to fill the dataset with a color
-            datasetFill             : false,
-            //String - A legend template
-
-            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio     : true,
-            //Boolean - whether to make the chart responsive to window resizing
-            responsive              : true
-        }
-
-        var dataList = []
+        var dataList = [];
         for (var index = 0; index < <%=#fieldList%>; index++)
         {
             dataList[index] = []
@@ -174,130 +121,61 @@
             end 
         %>
 
-        var datasetsList = [
-            {
-                label               : "<%=labelList[2]%>",
-                fillColor           : 'rgba(0,255,255,0.9)',
-                strokeColor         : 'rgba(0,255,255,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(0,255,255,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(0,255,255,1)',
-                data                : dataList[1]
-            },
-            {
-                label               : "<%=labelList[3]%>",
-                fillColor           : 'rgba(0,128,255,0.9)',
-                strokeColor         : 'rgba(0,128,255,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(0,128,255,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(0,128,255,1)',
-                data                : dataList[2]
-            },
-            {
-                label               : "<%=labelList[4]%>",
-                fillColor           : 'rgba(0,255,128,0.9)',
-                strokeColor         : 'rgba(0,255,128,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(0,255,128,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(0,255,128,1)',
-                data                : dataList[3]
-            },
-            {
-                label               : "<%=labelList[5]%>",
-                fillColor           : 'rgba(0,128,128,0.9)',
-                strokeColor         : 'rgba(0,128,128,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(0,128,128,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(0,128,128,1)',
-                data                : dataList[4]
-            },
-            {
-                label               : "<%=labelList[6]%>",
-                fillColor           : 'rgba(0,0,128,0.9)',
-                strokeColor         : 'rgba(0,0,128,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(0,0,128,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(0,0,128,1)',
-                data                : dataList[5]
-            },
-            {
-                label               : "<%=labelList[7]%>",
-                fillColor           : 'rgba(128,0,255,0.9)',
-                strokeColor         : 'rgba(128,0,255,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(128,0,255,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(128,0,255,1)',
-                data                : dataList[6]
-            },
-            {
-                label               : "<%=labelList[8]%>",
-                fillColor           : 'rgba(255,128,0,0.9)',
-                strokeColor         : 'rgba(255,128,0,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(255,128,0,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(255,128,0,1)',
-                data                : dataList[7]
-            },
-            {
-                label               : "<%=labelList[9]%>",
-                fillColor           : 'rgba(255,128,255,0.9)',
-                strokeColor         : 'rgba(255,128,255,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(255,128,255,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(255,128,255,1)',
-                data                : dataList[8]
-            },
-            {
-                label               : "<%=labelList[10]%>",
-                fillColor           : 'rgba(255,128,255,0.9)',
-                strokeColor         : 'rgba(255,128,255,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(255,128,255,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(255,128,255,1)',
-                data                : dataList[9]
-            },
-            {
-                label               : "<%=labelList[11]%>",
-                fillColor           : 'rgba(128,128,128,0.9)',
-                strokeColor         : 'rgba(128,128,128,0.8)',
-                pointColor          : '#3b8bba',
-                pointStrokeColor    : 'rgba(128,128,128,1)',
-                pointHighlightFill  : '#fff',
-                pointHighlightStroke: 'rgba(128,128,128,1)',
-                data                : dataList[10]
-            },
-        ]
+        datasetList1 = [];
+        chart_utils_addDataset(datasetList1, "<%=labelList[2]%>", dataList[1]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[3]%>", dataList[2]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[4]%>", dataList[3]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[5]%>", dataList[4]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[6]%>", dataList[5]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[7]%>", dataList[6]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[8]%>", dataList[7]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[9]%>", dataList[8]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[10]%>", dataList[9]);
+        chart_utils_addDataset(datasetList1, "<%=labelList[11]%>", dataList[10]);
 
-        var lineChartData1 = {
-            labels  : dataList[0],
-            datasets: [
-                datasetsList[0],
-                datasetsList[1],
-                datasetsList[2],
-                datasetsList[3],
-                datasetsList[4],
-                datasetsList[5],
-                datasetsList[6],
-                datasetsList[7],
-                datasetsList[8],
-                datasetsList[9],
-            ]
-        }
+        var config_1 = {
+			type: 'line',
+			data: {
+                labels  : dataList[0],
+                datasets: datasetList1,
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: '', //'Chart.js Line Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: '日期'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: '人次'
+                        }
+                    }]
+                }
+            }
+        };
 
         // Create the lineChart_1
-        var canvas_1 = document.getElementById("lineChart").getContext('2d')
-        var chartObj_1 = new Chart(canvas_1)
-        var lineChart_1 = chartObj_1.Line(lineChartData1, lineChartOptions)
-        var legendNote_1 = lineChart_1.generateLegend();
-        document.getElementById("legend").innerHTML = legendNote_1;
+        var ctx_1 = document.getElementById("lineChart").getContext('2d')
+        var line_1 = new Chart(ctx_1, config_1)
+        // line_1.update();
+
     })
 </script>

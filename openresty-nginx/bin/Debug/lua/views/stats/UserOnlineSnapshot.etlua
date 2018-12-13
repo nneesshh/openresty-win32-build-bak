@@ -137,10 +137,6 @@
 </div>
 <!-- /.row -->
 
-<link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
-<script type="text/javascript" src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
-
 <script type="text/javascript">
 
     $(function(){

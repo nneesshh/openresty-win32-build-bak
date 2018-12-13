@@ -202,7 +202,7 @@ ngx_write_fd(ngx_fd_t fd, void *buf, size_t size)
 ssize_t
 ngx_write_console(ngx_fd_t fd, void *buf, size_t size)
 {
-	u_long  n;
+    u_long  n;
 
     (void) CharToOemBuff(buf, buf, size);
 

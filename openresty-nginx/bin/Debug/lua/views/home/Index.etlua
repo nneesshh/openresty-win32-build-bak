@@ -38,8 +38,6 @@
     <link rel="stylesheet" href="/static/lib/bower_components/jvectormap/jquery-jvectormap.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="/static/lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <!-- datetime picker -->
-    <link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -303,8 +301,6 @@
     <script src="/static/lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="/static/lib/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/static/lib/dist/js/adminlte.min.js"></script>
     <!-- Sparkline -->
     <script src="/static/lib/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
     <!-- jvectormap  -->
@@ -312,21 +308,31 @@
     <script src="/static/lib/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <!-- SlimScroll -->
     <script src="/static/lib/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- ChartJS -->
-    <script src="/static/lib/bower_components/chart.js/Chart.min.js"></script>
+
+    <script src="/static/lib/layer/layer.js"></script>
+    <script src="/static/lib/jstree/dist/jstree.min.js"></script>
+    <script src="/static/js/bootstrap-paginator.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="/static/lib/dist/js/adminlte.min.js"></script>
+    <script src="/static/js/app.js"></script>
+
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <!--
         <script src="dist/js/pages/dashboard2.js"></script>
     -->
-    <script src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
-    <script src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
-    <script src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
-    <script src="/static/lib/layer/layer.js"></script>
-    <script src="/static/lib/jstree/dist/jstree.min.js"></script>
 
-    <script src="/static/js/flipclock.js"></script>
-    <script src="/static/js/app.js"></script>
-    <script src="/static/js/bootstrap-paginator.js"></script>
+    <!-- flatpickr -->
+    <link href="/static/lib/flatpickr4.5.2/flatpickr.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/static/lib/flatpickr4.5.2/flatpickr.min.js"></script>
+    <script type="text/javascript" src="/static/lib/flatpickr4.5.2/l10n/zh.js"></script>
+
+    <!-- mark down -->
+    <script src="/static/lib/showdown-1.8.6/dist/showdown.min.js"></script>
+
+    <!-- ChartJS -->
+    <script src="static/js/Chart.bundle.min.js"></script>
+    <script src="static/js/chart_utils.js"></script>
 
     <script type="text/javascript">
         //$(function(){/*...*/});是$(document).ready(function(){/*...*/})的简写形式，是在DOM加载完成后执行的回调函数，并且只会执行一次。

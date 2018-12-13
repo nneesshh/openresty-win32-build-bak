@@ -562,37 +562,34 @@ DROP PROCEDURE IF EXISTS `__oss_do_stats_all`;
 
 CREATE PROCEDURE `__oss_do_stats_all`()
 BEGIN
-	DECLARE p_today datetime DEFAULT 0;
-	DECLARE p_yesterday datetime DEFAULT 0;
+	DECLARE p_begin datetime DEFAULT 0;
+	DECLARE p_end datetime DEFAULT 0;
 
-	SET p_today = CURDATE();
-	-- SET p_today = '2018-06-25';
-	SET p_yesterday = DATE_SUB(p_today,INTERVAL 1 DAY);
+	DECLARE i INT DEFAULT 0;
+	DECLARE day_num int DEFAULT 0;
+	DECLARE the_day datetime DEFAULT 0;
 
-	--
-	CALL __oss_do_stats_online(p_today);
-	CALL __oss_do_stats_online(p_yesterday);
+	SET p_end = CURDATE();
+	SET p_begin = DATE_SUB(p_end,INTERVAL 1 DAY);
+	-- SET p_begin = '2018-11-17';
 
-	--
-	CALL __oss_do_stats_online_hour(p_today);
-	CALL __oss_do_stats_online_hour(p_yesterday);
+	SELECT (TO_DAYS(p_end) - TO_DAYS(p_begin)) INTO day_num;
+	WHILE i<=day_num
+	DO
+		-- 
+		SET the_day = DATE_ADD(p_begin,INTERVAL i DAY);
 
-	--
-	CALL __oss_do_stats_charge(p_today);
-	CALL __oss_do_stats_charge(p_yesterday);
+		--
+		CALL __oss_do_stats_online(the_day);
+		CALL __oss_do_stats_online_hour(the_day);
+		CALL __oss_do_stats_charge(the_day);
+		CALL __oss_do_stats_diamond(the_day);
+		CALL __oss_do_stats_diamond2(the_day);
+		CALL __oss_do_stats_retention(the_day);
 
-	--
-	CALL __oss_do_stats_diamond(p_today);
-	CALL __oss_do_stats_diamond(p_yesterday);
-
-	--
-	CALL __oss_do_stats_diamond2(p_today);
-	CALL __oss_do_stats_diamond2(p_yesterday);
-
-	--
-	CALL __oss_do_stats_retention(p_today);
-	CALL __oss_do_stats_retention(p_yesterday);
-
+		--
+		SET i=i+1;
+	END WHILE;
 END;
 
 

@@ -201,7 +201,7 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_event_connect_peerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c->log, "\nngx_event_connect_peerex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
 
@@ -254,11 +254,9 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
 
     /* use rev to wait for connectex result */
     rev->evovlp.connectex_flag = 1;
-    rev->evovlp.recv_mem_lock_flag = 1; /* always 1 when connectex */
     rev->ready = 0;
 
     wev->evovlp.connectex_flag = 1;
-    wev->evovlp.recv_mem_lock_flag = 0; /* always 0 because wev ingnore this flag */
 
     return NGX_OK;
 

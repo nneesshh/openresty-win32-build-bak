@@ -65,11 +65,12 @@ ngx_create_listening(ngx_conf_t *cf, struct sockaddr *sockaddr,
         break;
     }
 
-    ls->addr_text.data = ngx_pnalloc(cf->pool, len);
+    ls->addr_text.data = ngx_pnalloc(cf->pool, ls->addr_text_max_len);
     if (ls->addr_text.data == NULL) {
         return NULL;
     }
 
+    ls->addr_text.data[len] = '\0';
     ngx_memcpy(ls->addr_text.data, text, len);
 
 #if !(NGX_WIN32)
@@ -1177,6 +1178,10 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
 
     wev->write = 1;
 
+#if (NGX_DEBUG)
+    // debug
+    output_malloc_stats(log);
+#endif
     return c;
 }
 
@@ -1282,7 +1287,7 @@ ngx_close_connection(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c->log, "\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         fd,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif

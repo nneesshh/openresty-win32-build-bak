@@ -103,6 +103,18 @@
 </div>
 <!-- /.row -->
 
+<style type="text/css">
+    .line-legend li span{
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .line-legend {
+        list-style: none;
+    }
+</style>
+
 @section Scripts {
     <!-- page script -->
     <script>

@@ -193,7 +193,7 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
+        output_debug_string(c->log, "\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
             c->id, c->fd, c->destroyed, ls->fd, s);
 #endif
 
@@ -215,12 +215,10 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         /* acceptex event posted, wait acceptex flag to be cleared, 
            and don't post again before response */
         rev->evovlp.acceptex_flag = 1;
-        rev->evovlp.recv_mem_lock_flag = 1; /* always 1 when accpetex */
         rev->ready = 0;
 
         /* io disabled before acceptex is ready */
         wev->evovlp.acceptex_flag = 1;
-        wev->evovlp.recv_mem_lock_flag = 0; /* always 0 because wev ingnore this flag */
     }
 
     return NGX_OK;

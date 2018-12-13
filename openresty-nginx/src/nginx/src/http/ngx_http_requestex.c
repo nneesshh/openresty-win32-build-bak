@@ -364,7 +364,7 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_http_set_keepaliveex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c->log, "\nngx_http_set_keepaliveex(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -513,7 +513,7 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_http_keepalive_handlerex(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c->log, "\nngx_http_keepalive_handlerex(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -637,7 +637,7 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_http_keepalive_handlerex(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c->log, "\nngx_http_keepalive_handlerex(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -718,9 +718,9 @@ ngx_http_lingering_close_handlerex(ngx_event_t *rev)
     }
 
     /* loop to drop client data in buffer */
-    size = b->end - b->start;
+    size = b->end - b->last;
     do {
-        n = ngx_recv(c, b->start, size);
+        n = ngx_recv(c, b->last, size);
 
         ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "lingering read: %z", n);
 

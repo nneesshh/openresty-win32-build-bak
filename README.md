@@ -9,6 +9,8 @@
     - WSARecv memory recycle in ngx_overlapped_wsarecv: ngx_get_connection() --> WSARecv lock memory --> ngx_getqueuedcompletionstatusex free memory --> ngx_get_connection() again ...
     - MUST NOT import "jquery.form.min.js" before "jquery.min.js", because it will raise "Uncaught TypeError: $(...).ajaxSubmit is not a function" error.
     - JQuery form doesn't submit button value, we must do it "MANUALLY".
+    - Don't reimport "jquery.form.min.js" in ajax pages, because reimport it would clear "$.AdminLTE" and make "$.AdminLTE.options" undefined.
+    - Remove code like "<script src="/scripts/script.js"></script>" from ajax page, because it will raise "Synchronous XMLHttpRequest on the main thread is deprecated" warning.
     - ...
 
 - Missing modules:

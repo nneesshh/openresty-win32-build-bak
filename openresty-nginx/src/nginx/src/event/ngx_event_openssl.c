@@ -1313,7 +1313,7 @@ ngx_ssl_create_connection(ngx_ssl_t *ssl, ngx_connection_t *c, ngx_uint_t flags)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_ssl_create_connection(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... ssl_flags(%d)\n",
+    output_debug_string(c->log, "\nngx_ssl_create_connection(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... ssl_flags(%d)\n",
         (uintptr_t)sc->connection, (uintptr_t)sc->connection->rbio, (uintptr_t)sc->connection->wbio, (uintptr_t)sc->connection->bbio,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, flags);
 #endif
@@ -1376,7 +1376,7 @@ ngx_ssl_handshake(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_ssl_handshake(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c->log, "\nngx_ssl_handshake(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
@@ -1421,7 +1421,7 @@ ngx_ssl_handshake(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_ssl_handshake(): handshake ok, ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+        output_debug_string(c->log, "\nngx_ssl_handshake(): handshake ok, ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
             (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
             c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
@@ -1835,15 +1835,15 @@ ngx_ssl_recv(ngx_connection_t *c, u_char *buf, size_t size)
         size_t len = ngx_min(sizeof(data) - 1, bytes);
         char *p;
         memcpy(data, ssl_buf, len);
-        output_debug_string(c, "\n\t>>>> SSL_read begin\n");
-        output_debug_string(c, "\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d/%d) -- data: \n\n%s\n",
+        output_debug_string(c->log, "\n\t>>>> SSL_read begin\n");
+        output_debug_string(c->log, "\t     c(%d)fd(%d)destroyed(%d)\n\t     bytes(%d/%d) -- data: \n\n%s\n",
             c->id, c->fd, c->destroyed,
             len, bytes,
             data);
         p = ngx_hex_dump((u_char *)data, (u_char *)ssl_buf, len);
         *p = '\0';
-        output_debug_string(c, "\tdata_hex: \n\n%s\n", data);
-        output_debug_string(c, "\n\t<<<< SSL_read end\n\n");
+        output_debug_string(c->log, "\tdata_hex: \n\n%s\n", data);
+        output_debug_string(c->log, "\n\t<<<< SSL_read end\n\n");
     }
 #endif
             return bytes;
@@ -2507,7 +2507,7 @@ ngx_ssl_shutdown(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_ssl_shutdownx(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c->log, "\nngx_ssl_shutdownx(): ssl(0x%08x)rbio(0x%08x)wbio(0x%08x)bbio(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
         (uintptr_t)c->ssl->connection, (uintptr_t)c->ssl->connection->rbio, (uintptr_t)c->ssl->connection->wbio, (uintptr_t)c->ssl->connection->bbio,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif
