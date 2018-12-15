@@ -150,7 +150,7 @@ ngx_event_accept(ngx_event_t *ev)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c->log, "\nngx_event_accept(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
+        output_debug_string(c, "\nngx_event_accept(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
             c->id, c->fd, c->destroyed, ls->fd, s);
 #endif
 

@@ -193,7 +193,7 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c->log, "\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
+        output_debug_string(c, "\nngx_event_post_acceptex(): c(%d)fd(%d)destroyed(%d)_ls(%d) -- add s(%d)\n",
             c->id, c->fd, c->destroyed, ls->fd, s);
 #endif
 

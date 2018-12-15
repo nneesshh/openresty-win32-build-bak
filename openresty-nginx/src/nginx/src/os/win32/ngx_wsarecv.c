@@ -133,15 +133,15 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 #if (NGX_DEBUG)
     // debug
     if (size < 1000) {
-        output_debug_string(c->log, "\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) maybe too small!!!\n",
+        output_debug_string(c, "\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) maybe too small!!!\n",
             (int)size);
     } else if (size > 8000) {
-        output_debug_string(c->log, "\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) maybe too big!!!\n",
+        output_debug_string(c, "\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) maybe too big!!!\n",
             (int)size);
     }
 
     // debug
-    output_debug_string(c->log, "\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08x)(%d)_bytes(%ld)ovlp(0x%08x) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)\n",
+    output_debug_string(c, "\nngx_overlapped_wsarecv(): post event WSARecv() with buffer(0x%08xd)(%d)_bytes(%ld)ovlp(0x%08xd) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
         (uintptr_t)buf, (int)size, bytes, (uintptr_t)ovlp,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, rev->write);
 
@@ -170,7 +170,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c->log, "\nngx_overlapped_wsarecv(): errno=(%llu)!!!!\n",
+        output_debug_string(c, "\nngx_overlapped_wsarecv(): errno=(%llu)!!!!\n",
             (uint64_t)err);
 #endif
 

@@ -48,9 +48,9 @@ output_malloc_stats(ngx_log_t *log)
 }
 
 void
-output_debug_string(ngx_log_t *log, const char *format, ...)
+output_debug_string(ngx_connection_t *c, const char *format, ...)
 {
-    static char buf[OUTPUT_DEBUG_BUFSIZE];
+    /*static char buf[OUTPUT_DEBUG_BUFSIZE];
 
     va_list args;
     u_char *p;
@@ -66,10 +66,10 @@ output_debug_string(ngx_log_t *log, const char *format, ...)
         *--p = '\0';
     }
 
-    if (NULL == log->data) {
-        log->data = buf;
+    if (NULL == c->log->data) {
+        c->log->data = c;
     }
-    ngx_log_error(NGX_LOG_INFO, log, 0, "________________________________\n%s\n", buf);
+    ngx_log_error(NGX_LOG_INFO, c->log, 0, "________________________________\n%s\n", buf);*/
 }
 
 
@@ -363,7 +363,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
 
         if (err != WAIT_TIMEOUT) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
-                            "GetQueuedCompletionStatus() failed");
+                          "GetQueuedCompletionStatus() failed");
 
             return NGX_ERROR;
         }
@@ -411,7 +411,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     {
                         if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
                             if (0 == bytes) {
-                                output_debug_string(c->log, "\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- bytes(%d)\n",
+                                output_debug_string(c, "\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
                                     c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, 
                                     ev->write, key,
                                     bytes);
@@ -419,14 +419,14 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                         }
 
                         if (0 == ev->write) {
-                            output_debug_string(c->log, "\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- with buffer(0x%08x)(%d)_bytes(%d)\n",
+                            output_debug_string(c, "\n[READ(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- with buffer(0x%08xd)(%d)_bytes(%d)\n",
                                 key,
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
                                 ev->write, key,
                                 (uintptr_t)c->buffer_ref.last, (int)(c->buffer_ref.end - c->buffer_ref.last), bytes);
                         }
                         else {
-                            output_debug_string(c->log, "\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- bytes(%d)\n",
+                            output_debug_string(c, "\n[SEND(%d)] c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
                                 key,
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
                                 ev->write, key,
@@ -434,7 +434,7 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                         }
 
                         if (0 == ev->write && 0 != ev->ready) {
-                            output_debug_string(c->log, "\nread event crashed(invalid ready flag)!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... w(%d)key(%d) -- bytes(%d)\n",
+                            output_debug_string(c, "\nread event crashed(invalid ready flag)!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
                                 c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
                                 ev->write, key,
                                 bytes);
@@ -478,27 +478,27 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                             char *p;
 
                             memcpy(data, c->buffer_ref.pos, len);
-                            output_debug_string(c->log, "\n\t>>>> server read begin\n");
+                            output_debug_string(c, "\n\t>>>> server read begin\n");
 
                             if (c->buffer) {
-                                output_debug_string(c->log, "\t     c->buffer(0x%08x) -- start(0x%08x)end(0x%08x)size(%d), pos(0x%08x)last(0x%08x)size(%d)\n",
+                                output_debug_string(c, "\t     c->buffer(0x%08xd) -- start(0x%08xd)end(0x%08xd)size(%d), pos(0x%08xd)last(0x%08xd)size(%d)\n",
                                     (uintptr_t)c->buffer,
                                     (uintptr_t)c->buffer->start, (uintptr_t)c->buffer->end, (int)(c->buffer->end - c->buffer->start),
                                     (uintptr_t)c->buffer->pos, (uintptr_t)c->buffer->last, (int)(c->buffer->last - c->buffer->pos));
                             }
-                            output_debug_string(c->log, "\t     c->buffer_ref(0x%08x) -- start(0x%08x)end(0x%08x)size(%d), pos(0x%08x)last(0x%08x)size(%d)\n",
+                            output_debug_string(c, "\t     c->buffer_ref(0x%08xd) -- start(0x%08xd)end(0x%08xd)size(%d), pos(0x%08xd)last(0x%08xd)size(%d)\n",
                                 (uintptr_t)&c->buffer_ref,
                                 (uintptr_t)c->buffer_ref.start, (uintptr_t)c->buffer_ref.end, (int)(c->buffer_ref.end - c->buffer_ref.start),
                                 (uintptr_t)c->buffer_ref.pos, (uintptr_t)c->buffer_ref.last, (int)(c->buffer_ref.last - c->buffer_ref.pos));
 
-                            output_debug_string(c->log, "\t     c(%d)fd(%d)destroyed(%d)\n\t     key(%d) bytes(%d/%d) -- data: \n\n%s\n",
+                            output_debug_string(c, "\t     c(%d)fd(%d)destroyed(%d)\n\t     key(%d) bytes(%d/%d) -- data: \n\n%s\n",
                                 c->id, c->fd, c->destroyed,
                                 key, (int)len, bytes,
                                 data);
                             p = ngx_hex_dump((u_char *)data, (u_char *)c->buffer_ref.pos, len);
                             *p = '\0';
-                            output_debug_string(c->log, "\tdata_hex: \n\n%s\n", data);
-                            output_debug_string(c->log, "\n\t<<<< server read end\n\n");
+                            output_debug_string(c, "\tdata_hex: \n\n%s\n", data);
+                            output_debug_string(c, "\n\t<<<< server read end\n\n");
                         }
                     }
 #endif

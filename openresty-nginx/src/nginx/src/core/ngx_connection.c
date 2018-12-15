@@ -65,12 +65,11 @@ ngx_create_listening(ngx_conf_t *cf, struct sockaddr *sockaddr,
         break;
     }
 
-    ls->addr_text.data = ngx_pnalloc(cf->pool, ls->addr_text_max_len);
+    ls->addr_text.data = ngx_pnalloc(cf->pool, len);
     if (ls->addr_text.data == NULL) {
         return NULL;
     }
 
-    ls->addr_text.data[len] = '\0';
     ngx_memcpy(ls->addr_text.data, text, len);
 
 #if !(NGX_WIN32)
@@ -1097,7 +1096,6 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
     ngx_event_t       *rev, *wev;
     ngx_connection_t  *c;
     int                id; /* for debug */
-    ngx_connection_t  *c_prev, *c_reuse; /* connection ready for reuse */
 
     /* disable warning: Win32 SOCKET is u_int while UNIX socket is int */
 
@@ -1109,24 +1107,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
         return NULL;
     }
 
-    c = NULL;
-    c_prev = NULL;
-    c_reuse = ngx_cycle->free_connections;
-
-    while (c_reuse) {
-        /* check if the memory posted to recv was freed correctly */
-        if (c_reuse->read->evovlp.recv_mem_lock_flag == 0) {
-            if (c_prev) {
-                c_prev->data = c_reuse->data;
-                c_reuse->data = ngx_cycle->free_connections;
-            }
-            c = c_reuse;
-            break;
-        }
-
-        c_prev = c_reuse;
-        c_reuse = c_reuse->data;
-    }
+    c = ngx_cycle->free_connections;
 
     if (c == NULL) {
         ngx_drain_connections((ngx_cycle_t *) ngx_cycle);
@@ -1287,7 +1268,7 @@ ngx_close_connection(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c->log, "\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c, "\nngx_close_connection(): oldfd(%d) --> c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd)\n",
         fd,
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
 #endif

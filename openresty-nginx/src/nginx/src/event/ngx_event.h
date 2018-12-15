@@ -25,7 +25,7 @@ typedef struct {
     /* int              error; */
     unsigned int     acceptex_flag : 1; /* 1 = acceptex event posted, 0 = event process over */
     unsigned int     connectex_flag : 1; /* 1 = connectex event posted, 0 = event process over */
-    unsigned int     recv_mem_lock_flag : 1; /* 1= memory is locked by iocp, 0 = memory is free */
+    unsigned int     disconnectex_flag : 1; /* 1= disconnectex is not completed yet, socket can't be reused, 0 = socket is reuseable */
 } ngx_event_ovlp_t;
 
 #endif

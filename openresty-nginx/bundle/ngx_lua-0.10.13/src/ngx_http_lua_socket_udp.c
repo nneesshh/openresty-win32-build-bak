@@ -771,7 +771,7 @@ ngx_http_lua_socket_error_retval_handler(ngx_http_request_t *r,
         } else {
 #if (NGX_DEBUG)
             // debug
-            output_debug_string(r->connection->log, "\n\tngx_http_lua_socket_error_retval_handler(): ft_type=%d", u->ft_type);
+            output_debug_string(r->connection, "\n\tngx_http_lua_socket_error_retval_handler(): ft_type=%d", u->ft_type);
 #endif
             lua_pushliteral(L, "error");
         }

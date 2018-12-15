@@ -3149,7 +3149,7 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c->log, "\nngx_http_keepalive_handler(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c, "\nngx_http_keepalive_handler(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -3275,7 +3275,7 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c->log, "\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
+    output_debug_string(c, "\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -3594,9 +3594,15 @@ ngx_http_free_request(ngx_http_request_t *r, ngx_int_t rc)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(r->connection->log, "\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x) ... sockaddr(0x%08x)sa_family(%d).\n",
-        r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection,
-        (uintptr_t)r->connection->sockaddr, r->connection->sockaddr->sa_family);
+    if (r->connection->sockaddr) {
+        output_debug_string(r->connection, "\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
+            r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection,
+            (uintptr_t)r->connection->sockaddr, r->connection->sockaddr->sa_family);
+    }
+    else {
+        output_debug_string(r->connection, "\nngx_http_free_request(): c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(NULL).\n",
+            r->connection->id, r->connection->fd, r->connection->destroyed, (uintptr_t)r->connection->read, (uintptr_t)r->connection->write, (uintptr_t)r->connection);
+    }
 #endif
 
     /*
@@ -3671,7 +3677,7 @@ ngx_http_close_connection(ngx_connection_t *c)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c->log, "\nngx_http_close_connection(): c(%d)fd(%d)destroyed(%d)_r(0x%08x)w(0x%08x)c(0x%08x)\n",
+    output_debug_string(c, "\nngx_http_close_connection(): c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd)\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c);
     
     // debug
