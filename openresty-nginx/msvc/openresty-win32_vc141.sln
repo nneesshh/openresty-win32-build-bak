@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nginx-win32_vc141", "nginx-win32_vc141.vcxproj", "{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua51dll", "..\bundle\lua-5.1.5\build\lua51dll\lua51dll.vcxproj", "{A5B908B9-BDF5-417A-A705-DA5E8E4688E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit", "..\bundle\LuaJIT-2.0.5\BUILD\luajit.vcxproj", "{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Debug|x86.Build.0 = Debug|Win32
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Release|x86.ActiveCfg = Release|Win32
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Release|x86.Build.0 = Release|Win32
-		{A5B908B9-BDF5-417A-A705-DA5E8E4688E4}.Debug|x86.ActiveCfg = Debug|Win32
-		{A5B908B9-BDF5-417A-A705-DA5E8E4688E4}.Debug|x86.Build.0 = Debug|Win32
-		{A5B908B9-BDF5-417A-A705-DA5E8E4688E4}.Release|x86.ActiveCfg = Release|Win32
-		{A5B908B9-BDF5-417A-A705-DA5E8E4688E4}.Release|x86.Build.0 = Release|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Debug|x86.Build.0 = Debug|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Release|x86.ActiveCfg = Release|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
