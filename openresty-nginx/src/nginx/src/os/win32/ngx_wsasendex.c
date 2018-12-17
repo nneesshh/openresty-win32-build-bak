@@ -174,9 +174,10 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
         remain = size;
 
         /* create the WSABUF and coalesce the neighbouring bufs */
-        while (vec.nelts < ngx_max_wsabufs && remain > 0)
-        {
-            if ((*tail) == NULL) {
+        while (vec.nelts < ngx_max_wsabufs && remain > 0) {
+
+            if ((*tail) == NULL
+                || (*tail)->buf->end - (*tail)->buf->last == 0) {
                 /* alloc new chunk, and fill chunk data */
                 drain = ngx_min(remain, NGX_WSABUF_SIZE_MAX);
 
@@ -199,24 +200,16 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
                 wsabuf->buf = (char *)(*tail)->buf->pos;
                 wsabuf->len = drain;
-
             }
             else {
 
                 drain = ngx_min(remain, (u_long)((*tail)->buf->end - (*tail)->buf->last));
 
-                if (drain > 0) {
-                    /* fill chunk data */
-                    ngx_copy((*tail)->buf->last, buf + (size - remain), drain);
-                    (*tail)->buf->last += drain;
+                /* fill chunk data */
+                ngx_copy((*tail)->buf->last, buf + (size - remain), drain);
+                (*tail)->buf->last += drain;
 
-                    wsabuf->len += drain;
-                }
-                else {
-                    /* chunk is full */
-                    tail = &(*tail)->next;
-                    continue;
-                }
+                wsabuf->len += drain;
             }
 
             /* drain buf */
@@ -243,13 +236,13 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_overlapped_wsasend(): post event WSASend() of sent(%ld)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
-            sent, vec.nelts,
+        output_debug_string(c, "\nngx_overlapped_wsasend(): post event WSASend() of sent(%d)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
+            (int)sent, vec.nelts,
             c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
 
         if (sent > 65535 || size != sent) {
-            output_debug_string(c, "error of size(%ld)/sent(%ld) -- fd(%d)!!!!\n",
-                size, sent, c->fd);
+            output_debug_string(c, "error of size(%d)/sent(%d) -- fd(%d)!!!!\n",
+                (int)size, (int)sent, c->fd);
         }
 
 #endif

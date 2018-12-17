@@ -5,7 +5,7 @@ local types = schema.types
 local lapis = require("lapis")
 local db = require("lapis.db")
 
-local jituuid = require("resty.jit-uuid")
+local uuid = require("uuid")
 
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."

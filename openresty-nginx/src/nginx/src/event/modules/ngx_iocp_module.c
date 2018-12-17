@@ -50,7 +50,7 @@ output_malloc_stats(ngx_log_t *log)
 void
 output_debug_string(ngx_connection_t *c, const char *format, ...)
 {
-    /*static char buf[OUTPUT_DEBUG_BUFSIZE];
+    static char buf[OUTPUT_DEBUG_BUFSIZE];
 
     va_list args;
     u_char *p;
@@ -69,7 +69,7 @@ output_debug_string(ngx_connection_t *c, const char *format, ...)
     if (NULL == c->log->data) {
         c->log->data = c;
     }
-    ngx_log_error(NGX_LOG_INFO, c->log, 0, "________________________________\n%s\n", buf);*/
+    ngx_log_error(NGX_LOG_INFO, c->log, 0, "________________________________\n%s\n", buf);
 }
 
 

@@ -24,7 +24,6 @@ package.path = package.path .. ";./lua/proto_pb/?.lua"
 
 --
 require = require("utils.require").require
-require("utils.functions")
 
-local jituuid = require("resty.jit-uuid")
-jituuid.seed()
+require("utils.functions")
+require("uuid")

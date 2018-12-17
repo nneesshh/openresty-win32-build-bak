@@ -4,7 +4,7 @@ local types = schema.types
 
 local split = require("utils.split")
 
-local jituuid = require("resty.jit-uuid")
+local uuid = require("uuid")
 
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."
@@ -19,7 +19,7 @@ local _M = {
 
 function _M.create() 
   local res, err = _M._db_entity:create({
-    Id  = jituuid.generate_v4(),
+    Id  = uuid.generate(),
   })
   assert(res, err)
   return res

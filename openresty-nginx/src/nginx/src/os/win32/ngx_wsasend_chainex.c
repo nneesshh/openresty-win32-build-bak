@@ -132,8 +132,7 @@ ngx_chain_t *
 ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 {
     int               rc;
-
-    u_long            drain, size, send, sent;
+    u_long            remain, drain, size, send, sent;
     ngx_err_t         err;
     ngx_event_t      *wev;
     ngx_array_t       vec;
@@ -231,82 +230,74 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
         }
 
         /* create the WSABUF and coalesce the neighbouring bufs */
+        cl = in;
 
-        for (cl = in;
-             cl && vec.nelts < ngx_max_wsabufs && send < (u_long)limit;
-             cl = cl->next)
-        {
+        while (cl && vec.nelts < ngx_max_wsabufs && send < (u_long)limit) {
+
             if (ngx_buf_special(cl->buf)) {
+                /* cl->buf is special, skip it and continue to process next */
+                cl = cl->next;
                 continue;
             }
 
-            drain = cl->buf->last - cl->buf->pos;
+            remain = cl->buf->last - cl->buf->pos;
 
-            if (0 == drain) {
-                /* cl->buf is empty */
-                continue;
-            }
+            while (remain > 0) {
+                /* drain data from cl->buf and copy into c->out_pending */
+                drain = ngx_min(remain, (u_long)(limit - send));
 
-            size = ngx_min(drain, (u_long)(limit - send));
+                if ((*tail) == NULL
+                    || (*tail)->buf->end - (*tail)->buf->last == 0) {
+                    /* alloc new chunk, and fill chunk data */
+                    size = ngx_min(drain, NGX_WSABUF_SIZE_MAX);
 
-            if ((*tail) == NULL) {
-                /* alloc new chunk, and fill chunk data */
-                size = ngx_min(size, NGX_WSABUF_SIZE_MAX);
+                    ln = ngx_alloc_chain_link(c->pool);
+                    if (ln == NULL) {
+                        return NGX_CHAIN_ERROR;
+                    }
 
-                ln = ngx_alloc_chain_link(c->pool);
-                if (ln == NULL) {
-                    return NGX_CHAIN_ERROR;
+                    ln->buf = ngx_create_temp_buf(c->pool, NGX_WSABUF_SIZE_MAX);
+                    ngx_copy(ln->buf->last, cl->buf->pos, size);
+                    ln->buf->last += size;
+                    ln->next = NULL;
+
+                    (*tail) = ln;
+
+                    wsabuf = ngx_array_push(&vec);
+                    if (wsabuf == NULL) {
+                        return NGX_CHAIN_ERROR;
+                    }
+
+                    wsabuf->buf = (char *)(*tail)->buf->pos;
+                    wsabuf->len = size;
                 }
+                else {
+                    size = ngx_min(drain, (u_long)((*tail)->buf->end - (*tail)->buf->last));
 
-                ln->buf = ngx_create_temp_buf(c->pool, NGX_WSABUF_SIZE_MAX);
-                ngx_copy(ln->buf->last, cl->buf->pos, size);
-                ln->buf->last += size;
-                ln->next = NULL;
-
-                (*tail) = ln;
-
-                wsabuf = ngx_array_push(&vec);
-                if (wsabuf == NULL) {
-                    return NGX_CHAIN_ERROR;
-                }
-
-                wsabuf->buf = (char *)(*tail)->buf->pos;
-                wsabuf->len = size;
-
-            }
-            else {
-
-                size = ngx_min(size, (u_long)((*tail)->buf->end - (*tail)->buf->last));
-
-                if (size > 0) {
                     /* fill chunk data */
                     ngx_copy((*tail)->buf->last, cl->buf->pos, size);
                     (*tail)->buf->last += size;
 
                     wsabuf->len += size;
                 }
-                else {
-                    /* chunk is full */
-                    tail = &(*tail)->next;
-                    continue;
+
+                send += size;
+
+                /* drain cl->buf */
+                if (ngx_buf_in_memory(cl->buf)) {
+                    cl->buf->pos += size;
                 }
+
+                if (cl->buf->in_file) {
+                    cl->buf->file_pos += size;
+                }
+
+                remain -= size;
             }
 
-            send += size;
 
-            /* drain cl buf */
-            if (ngx_buf_in_memory(cl->buf)) {
-                cl->buf->pos += size;
-            }
-
-            if (cl->buf->in_file) {
-                cl->buf->file_pos += size;
-            }
-
-            if (size == drain) {
-                /* cl->buf is empty */
-                 continue;
-            }
+            /* cl->buf is empty, continue to process next */
+            cl = cl->next;
         }
 
         ovlp = (LPWSAOVERLAPPED) &c->write->evovlp;
@@ -318,13 +309,13 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%ld)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
-            sent, vec.nelts,
+        output_debug_string(c, "\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%d)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
+            (int)sent, vec.nelts,
             c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
 
         if (sent > 65535 || send != sent) {
-            output_debug_string(c, "error of send(%ld)/sent(%ld) -- fd(%d)!!!!\n",
-                send, sent, c->fd);
+            output_debug_string(c, "error of send(%d)/sent(%d) -- fd(%d)!!!!\n",
+                (int)send, (int)sent, c->fd);
         }
 
 #endif

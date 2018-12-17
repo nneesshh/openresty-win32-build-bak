@@ -2,10 +2,10 @@ local Model = require("lapis.db.model").Model
 local schema = require("lapis.db.schema")
 local types = schema.types
 
-local jituuid = require("resty.jit-uuid")
-
 local lapis = require("lapis")
 local db = require("lapis.db")
+
+local uuid = require("uuid")
 
 -- Localize
 local cwd = (...):gsub('%.[^%.]+$', '') .. "."

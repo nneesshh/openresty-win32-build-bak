@@ -87,7 +87,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;NGX_LUA_USE_ASSERT=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BGDWIN32;NONDLL;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=0;_CONSOLE;NGX_LUA_USE_ASSERT=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
