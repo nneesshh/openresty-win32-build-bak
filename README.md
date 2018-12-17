@@ -11,6 +11,8 @@
     - JQuery form doesn't submit button value, we must do it "MANUALLY".
     - Don't reimport "jquery.form.min.js" in ajax pages, because reimport it would clear "$.AdminLTE" and make "$.AdminLTE.options" undefined.
     - Remove code like "<script src="/scripts/script.js"></script>" from ajax page, because it will raise "Synchronous XMLHttpRequest on the main thread is deprecated" warning.
+    - "package.path = package.path .. xxxx" MUST BE in "init_site.lua" because every coroutine will create a new state thread and it will be memory overflow if it is in "web_main.lua".
+    - official "lua51" won't work because "attempt to yield across metamethod/C-call boundary" error.
     - ...
 
 - Missing modules:
