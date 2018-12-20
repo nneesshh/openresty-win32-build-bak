@@ -132,10 +132,10 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
     // debug
-    if (size < 1000) {
+    if (size < 1024) {
         output_debug_string(c, "\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) maybe too small!!!\n",
             (int)size);
-    } else if (size > 8000) {
+    } else if (size > 16384) {
         output_debug_string(c, "\nngx_overlapped_wsarecv(): WARNING!!!WARNING!!!WARNING!!! buffer_size(%d) maybe too big!!!\n",
             (int)size);
     }
@@ -191,10 +191,17 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
          * despite that WSARecv() was already complete
          */
 
-        rev->ready = 0; /* read event just posted or bytes already arrived, don't post again before response */
+        if (bytes == 0) {
+            rev->ready = 0; /* read event just posted or bytes already arrived, don't post again before response */
+            rev->active = 1; /* 1=active means "c->buffer should never be freed", for iocp recv event, always "rev->active==1" */
+            return NGX_AGAIN;
+        }
+        
+        rev->complete = 1; /* data in buffer */
+        rev->ready = 1; /* for pipeline */
         rev->active = 1; /* 1=active means "c->buffer should never be freed", for iocp recv event, always "rev->active==1" */
 
-        return NGX_AGAIN;
+        return bytes;
     }
 
     if (bytes == 0) {

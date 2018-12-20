@@ -107,6 +107,9 @@ ngx_stream_lua_content_by_chunk(lua_State *L, ngx_stream_lua_request_t *r)
         r->read_event_handler = ngx_stream_lua_block_reading;
     }
 
+    /* add write event handler for IOCP */
+    r->write_event_handler = ngx_stream_lua_request_empty_handler;
+
     rc = ngx_stream_lua_run_thread(L, r, ctx, 0);
 
     if (rc == NGX_ERROR || rc >= NGX_OK) {

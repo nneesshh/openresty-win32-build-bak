@@ -409,10 +409,16 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
  #if (NGX_DEBUG)
                     // debug
                     {
-                        if (NGX_IOCP_ACCEPT == key || NGX_IOCP_IO == key) {
-                            if (0 == bytes) {
+                        if (0 == bytes) {
+                            if (NGX_IOCP_IO == key) {
+                                output_debug_string(c, "\nzero bytes found, link broken!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
+                                    c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
+                                    ev->write, key,
+                                    bytes);
+                            }
+                            else {
                                 output_debug_string(c, "\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
-                                    c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, 
+                                    c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
                                     ev->write, key,
                                     bytes);
                             }
@@ -447,23 +453,28 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     case NGX_IOCP_ACCEPT:
                         /* lpCompletionKey is the key of listen iocp port, but ev->evovlp is ovlp of normal iocp port */
                         evovlp->acceptex_flag = 0;
+
+                        /* acceptex iocp port */
                         if (bytes) {
-                            ev->ready = 1;
+                            ev->complete = 1; /* 1 means data in buffer */
                         }
+                        ev->ready = 1; /* always ready even zero bytes */
                         break;
 
                     case NGX_IOCP_IO:
                         /* normal iocp port */
-                        ev->complete = 1;
-                        ev->ready = 1;
+                        if (bytes) {
+                            ev->complete = 1; /* 1 means data in buffer */
+                            ev->ready = 1; /* only ready for non-zero bytes */
+                        }
                         break;
 
                     case NGX_IOCP_CONNECT:
-                        /* normal iocp port */
+                        /* normal iocp port of connectex */
                         if (bytes) {
-                            ev->complete = 1;
+                            ev->complete = 1; /* 1 means data in buffer */
                         }
-                        ev->ready = 1;
+                        ev->ready = 1; /* always ready */
                         break;
                     }
 
@@ -540,7 +551,7 @@ ngx_iocp_init_conf(ngx_cycle_t *cycle, void *conf)
     ngx_iocp_conf_t *cf = conf;
 
     ngx_conf_init_value(cf->threads, 0);
-    ngx_conf_init_value(cf->post_acceptex, 1024);
+    ngx_conf_init_value(cf->post_acceptex, 128);
     ngx_conf_init_value(cf->acceptex_read, 1);
 
     return NGX_CONF_OK;

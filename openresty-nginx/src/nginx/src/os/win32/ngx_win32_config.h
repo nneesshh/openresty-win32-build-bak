@@ -66,7 +66,9 @@
 
 /* win32 toolchains */
 #ifdef NGX_WIN32
-/*#include <vld.h>*/
+#ifdef _DEBUG
+#include <vld.h>
+#endif
 #include <stdint.h>
 #include <stdbool.h>
 #include <assert.h>

@@ -312,6 +312,10 @@ ngx_mail_auth_http_read_handler(ngx_event_t *rev)
     c = rev->data;
     s = c->data;
 
+    if (!c->read->ready) {
+        return;
+    }
+
     ngx_log_debug0(NGX_LOG_DEBUG_MAIL, rev->log, 0,
                    "mail auth http read handler");
 

@@ -1149,7 +1149,7 @@ ngx_ssl_ocsp_read_handler(ngx_event_t *rev)
         }
     }
 
-    for ( ;; ) {
+    while (rev->ready) {
 
         size = ctx->response->end - ctx->response->last;
 

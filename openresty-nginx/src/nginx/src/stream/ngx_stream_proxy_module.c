@@ -722,7 +722,12 @@ ngx_stream_proxy_connect(ngx_stream_session_t *s)
     u->state->first_byte_time = (ngx_msec_t) -1;
     u->state->response_time = (ngx_msec_t) -1;
 
-    rc = ngx_event_connect_peer(&u->peer);
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        rc = ngx_event_connect_peerex(&u->peer);
+    }
+    else {
+        rc = ngx_event_connect_peer(&u->peer);
+    }
 
     ngx_log_debug1(NGX_LOG_DEBUG_STREAM, c->log, 0, "proxy connect: %i", rc);
 
@@ -1345,6 +1350,13 @@ ngx_stream_proxy_process_connection(ngx_event_t *ev, ngx_uint_t from_upstream)
 
     if (c->close) {
         ngx_log_error(NGX_LOG_INFO, c->log, 0, "shutdown timeout");
+        ngx_stream_proxy_finalize(s, NGX_STREAM_OK);
+        return;
+    }
+
+    if (ev->complete == 0 && ev->ready == 0) {
+        /* zero bytes for NGX_IOCP_IO */
+        ngx_log_error(NGX_LOG_INFO, c->log, 0, "shutdown io zero bytes");
         ngx_stream_proxy_finalize(s, NGX_STREAM_OK);
         return;
     }

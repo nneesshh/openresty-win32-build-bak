@@ -126,7 +126,7 @@ ngx_http_wait_request_handlerex(ngx_event_t *rev)
 
         if (n == 0) {
             ngx_log_error(NGX_LOG_INFO, c->log, 0,
-                "client closed connection");
+                          "client closed connection");
             ngx_http_close_connection(c);
             return;
         }
@@ -494,10 +494,10 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
 
     ngx_add_timer(rev, clcf->keepalive_timeout);
 
-    /* IOCP read event already posted, no need to post again
+    /* post again for pipeline */
     if (rev->ready) {
         ngx_post_event(rev, &ngx_posted_events);
-    }*/
+    }
 }
 
 
@@ -663,6 +663,12 @@ ngx_http_lingering_close_handlerex(ngx_event_t *rev)
         "http lingering close handler");
 
     if (rev->timedout) {
+        ngx_http_close_request(r, 0);
+        return;
+    }
+
+    if (rev->complete == 0 && rev->ready == 0) {
+        /* zero bytes for NGX_IOCP_IO */
         ngx_http_close_request(r, 0);
         return;
     }

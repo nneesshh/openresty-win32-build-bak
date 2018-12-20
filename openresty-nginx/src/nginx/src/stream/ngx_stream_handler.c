@@ -343,9 +343,16 @@ ngx_stream_close_connection(ngx_connection_t *c)
 #if (NGX_STREAM_SSL)
 
     if (c->ssl) {
-        if (ngx_ssl_shutdown(c) == NGX_AGAIN) {
-            c->ssl->handler = ngx_stream_close_connection;
-            return;
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+            if (ngx_ssl_shutdownex(c) == NGX_AGAIN) {
+                c->ssl->handler = ngx_stream_close_connection;
+                return;
+            }
+        } else {
+            if (ngx_ssl_shutdownex(c) == NGX_AGAIN) {
+                c->ssl->handler = ngx_stream_close_connection;
+                return;
+            }
         }
     }
 

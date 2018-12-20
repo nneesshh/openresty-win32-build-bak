@@ -1,0 +1,38 @@
+v1.0.x - YYYY-MMM-DD (To be released)
+-------------------------------------
+
+ - Module configuration refactoring
+   [Issue #139 - @defanator]
+ - Restore r->write_event_handler after reading request body
+   [Issue #131 - @defanator]
+ - Increase log level for disruptive actions to "error"
+   [Issue #112 - @victorhora]
+ - Support for generating transaction ID in nginx
+   [Issue #126 - @defanator]
+ - Extend request body tests with ARGS_POST case
+   [Issue #124 - @defanator]
+ - Fix tests after 42a472a change in library
+   [Issue #122 - @defanator]
+ - Fix processing of response body when gzip compression is enabled
+   [Issue #107 - @turchanov]
+ - Fixed processing of response body chunks in
+   ngx_http_modsecurity_body_filter.
+   [Issue #105 - @turchanov, @defanator]
+ - Fix incorrect handling of request/response body data chain of ngx_buf_t
+   buffers
+   [Issue #104 - @turchanov, @defanator]
+ - Pool pointer is now handled in ngx_http_modsecurity_config_cleanup
+   [Issue #87 - @AirisX, @defanator, @zimmerle]
+ - Fix memory leak in intervention processing
+   [Issue #100 - @defanator]
+ - Emit connector version in error log
+   [Issue #88 - @defanator]
+ - Fixed memory leak on config cleanup.
+   [Issue #80 - @AirisX, @defanator]
+
+
+v1.0.0 - 2017-Dec-20
+--------------------
+
+ - First version of ModSecurity-nginx connector
+

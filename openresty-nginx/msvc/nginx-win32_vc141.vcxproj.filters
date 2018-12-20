@@ -121,6 +121,9 @@
     <Filter Include="bundle\stream\echo">
       <UniqueIdentifier>{c2dc3ac8-5605-4e8c-9bcc-a93ba8021a72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bundle\http\upstream">
+      <UniqueIdentifier>{c9eb73a8-b429-46b9-b3c5-c6bb2d02a595}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\nginx\src\event\modules\ngx_iocp_module.c">
@@ -993,9 +996,6 @@
     <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_worker.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua_upstream-0.07\src\ngx_http_lua_upstream_module.c">
-      <Filter>bundle\lua\upstream</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_geo_module.c">
       <Filter>src\stream</Filter>
     </ClCompile>
@@ -1148,6 +1148,9 @@
     </ClCompile>
     <ClCompile Include="..\src\nginx\src\event\ngx_event_connectex_win32.c">
       <Filter>src\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\ngx_lua_upstream-0.07\src\ngx_http_lua_upstream_module.c">
+      <Filter>bundle\http\upstream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

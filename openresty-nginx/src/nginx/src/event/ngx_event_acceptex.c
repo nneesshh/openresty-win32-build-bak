@@ -58,6 +58,7 @@ ngx_event_acceptex(ngx_event_t *rev)
 
     /* data read by ngx_acceptex() */
     c->buffer->last += rev->available;
+    rev->complete = 0;
 
     /* NOTICE: ngx_getacceptexsockaddrs() will return local_sockaddr pointer and sockaddr pointer on the
      *         "c->buffer->pos" memory, but the data they point to may be erased when recv data into "c->buffer"

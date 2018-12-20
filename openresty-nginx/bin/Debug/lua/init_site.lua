@@ -15,11 +15,12 @@ package.path = package.path .. ";./lualibs/loadkit-1.1.0/?.lua"
 package.path = package.path .. ";./lualibs/etlua-1.3.0/?.lua"
 package.path = package.path .. ";./lualibs/lapis-redis/?.lua"
 
--- resty: mysql, jit-uuid, redis, string
+-- resty: mysql, jit-uuid, redis, string, limit-traffic
 package.path = package.path .. ";./lualibs/lua-resty-mysql-0.21/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-jit-uuid-0.0.7/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-redis-0.26/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-string-0.11/lib/?.lua"
+package.path = package.path .. ";./lualibs/lua-resty-limit-traffic-0.06rc1/lib/?.lua"
 
 -- date
 package.path = package.path .. ";./lualibs/luadate-2.1/?.lua"

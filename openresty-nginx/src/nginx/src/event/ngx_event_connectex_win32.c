@@ -241,12 +241,18 @@ ngx_event_connect_peerex(ngx_peer_connection_t *pc)
     {
         err = ngx_socket_errno;
         if (err != WSA_IO_PENDING) {
-
-            ngx_log_error(NGX_LOG_ERR, c->log, err, "connect() to %V failed",
-                pc->name);
-
             goto failed;
         }
+        
+        ngx_log_debug0(NGX_LOG_DEBUG_EVENT, c->log, err,
+                       "ngx_connectex() posted");
+
+        /* use rev to wait for connectex result */
+        rev->evovlp.connectex_flag = 1;
+        rev->ready = 0;
+
+        wev->evovlp.connectex_flag = 1;
+        return NGX_AGAIN;
     }
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, pc->log, ngx_socket_errno,
