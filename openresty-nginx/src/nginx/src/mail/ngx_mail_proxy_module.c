@@ -744,6 +744,12 @@ ngx_mail_proxy_read_response(ngx_mail_session_t *s, ngx_uint_t state)
 
     b->last += n;
 
+    /* data is consumed */
+    {
+        s->proxy->upstream.connection->read->complete = 0;
+        s->proxy->upstream.connection->read->available = 0;
+    }
+
     if (b->last - b->pos < 4) {
         return NGX_AGAIN;
     }
@@ -987,6 +993,12 @@ ngx_mail_proxy_handler(ngx_event_t *ev)
             if (n > 0) {
                 do_write = 1;
                 b->last += n;
+
+                /* data is consumed */
+                {
+                    src->read->complete = 0;
+                    src->read->available = 0;
+                }
 
                 continue;
             }

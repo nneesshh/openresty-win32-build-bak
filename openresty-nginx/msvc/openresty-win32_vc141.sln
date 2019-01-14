@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nginx-win32_vc141", "nginx-win32_vc141.vcxproj", "{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit", "..\bundle\LuaJIT-2.0.5\BUILD\luajit.vcxproj", "{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit", "..\bundle\LuaJIT-2.1.0-beta3\BUILD\luajit.vcxproj", "{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

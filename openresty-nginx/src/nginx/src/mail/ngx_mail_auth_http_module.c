@@ -347,6 +347,12 @@ ngx_mail_auth_http_read_handler(ngx_event_t *rev)
     if (n > 0) {
         ctx->response->last += n;
 
+        /* data is consumed */
+        {
+            rev->complete = 0;
+            rev->available = 0;
+        }
+
         ctx->handler(s, ctx);
         return;
     }

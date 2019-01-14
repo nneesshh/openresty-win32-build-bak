@@ -1354,8 +1354,9 @@ ngx_stream_proxy_process_connection(ngx_event_t *ev, ngx_uint_t from_upstream)
         return;
     }
 
-    if (ev->complete == 0 && ev->ready == 0) {
-        /* zero bytes for NGX_IOCP_IO */
+    if (ev->eof) {
+    /*if (ev->complete == 0 && ev->ready == 0) {*/
+        /* zero bytes found */
         ngx_log_error(NGX_LOG_INFO, c->log, 0, "shutdown io zero bytes");
         ngx_stream_proxy_finalize(s, NGX_STREAM_OK);
         return;
@@ -1693,6 +1694,12 @@ ngx_stream_proxy_process(ngx_stream_session_t *s, ngx_uint_t from_upstream,
                 *received += n;
                 b->last += n;
                 do_write = 1;
+
+                /* data is consumed */
+                {
+                    src->read->complete = 0;
+                    src->read->available = 0;
+                }
 
                 continue;
             }

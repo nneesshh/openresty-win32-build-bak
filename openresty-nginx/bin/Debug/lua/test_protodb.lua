@@ -11,12 +11,12 @@ local db_opts = {
     ssl_verify = nil,
     charset = "utf8",
     host = "127.0.0.1",
-    port = 3306,
+    port = 3306
 }
 
 local r_opts = {
     host = "127.0.0.1",
-    port = 6379,
+    port = 6379
 }
 
 local function _createMessage(row, msgname)
@@ -28,32 +28,43 @@ local function _createMessage(row, msgname)
 end
 
 local function _getSubId(msg, subidKey)
-  local ret
-  if not subidKey then
-    ret = "1"
-  else
-    ret = tostring(msg[subidKey])
-  end
-  return ret
+    local ret
+    if not subidKey then
+        ret = "1"
+    else
+        ret = tostring(msg[subidKey])
+    end
+    return ret
 end
 
 local function _createIdHash(moduleName, mainId, msg, subkey)
-  local subid = _getSubId(msg, subkey)
-  return moduleName .. ":" .. mainId .. ":" .. subid .. ":H"
+    local subid = _getSubId(msg, subkey)
+    return moduleName .. ":" .. mainId .. ":" .. subid .. ":H"
 end
 
-local db_entity = Model:extend(db_opts, "config_achievement", {
-    primary_key = "id"
-})
+local db_entity =
+    Model:extend(
+    db_opts,
+    "config_achievement",
+    {
+        primary_key = "id"
+    }
+)
 
-local result = db_entity:select("WHERE 1=1", { fields = "*" })
+local result =
+    db_entity:select(
+    "WHERE 1=1",
+    {
+        fields = "*"
+    }
+)
 if result then
     local row = result[1]
     local msg = _createMessage(row, "ConfigAchievement")
     local meta = getmetatable(msg)
     local mainId = string.sub(meta._descriptor.full_name, 2)
     local rkey = _createIdHash("{sandbox}", mainId, msg, subkey)
-                    
+
     dump("rkey=" .. rkey)
     local redis = lapis_redis.get_redis(r_opts)
     local bytes = msg:SerializeToString()

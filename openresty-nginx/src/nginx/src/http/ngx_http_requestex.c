@@ -391,41 +391,6 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
         b->last = b->start;
     }
 
-    /*
-     * NOTICE: we must reborn the c->buffer at here becasue SSL_read maybe not complete yet, and
-     *          we MUST reset buf to ensure enough space to contain output data from SSL_read.
-     */
-    if (b->pos == NULL) {
-
-        /*
-         * The c->buffer's memory was freed by ngx_http_set_keepaliveex().
-         * However, the c->buffer->start and c->buffer->end were not changed
-         * to keep the buffer size.
-         */
-
-#define NGX_KEEPALIVE_REBORN_BUFFER_SIZE  4096
-
-        b->pos = ngx_palloc(c->pool, NGX_KEEPALIVE_REBORN_BUFFER_SIZE);
-        if (b->pos == NULL) {
-            ngx_http_close_connection(c);
-            return;
-        }
-
-        b->start = b->pos;
-        b->last = b->pos;
-        b->end = b->pos + NGX_KEEPALIVE_REBORN_BUFFER_SIZE;
-    }
-
-    /*
-     * MUST post an IOCP read event again because rev->ready maybe 1
-     */
-    if (rev->ready) {
-        if (ngx_recv(c, b->last, b->end - b->last) == NGX_ERROR) {
-            ngx_http_close_connection(c);
-            return;
-        }
-    }
-
     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, c->log, 0, "hc free: %p",
                    hc->free);
 
@@ -494,9 +459,38 @@ ngx_http_set_keepaliveex(ngx_http_request_t *r)
 
     ngx_add_timer(rev, clcf->keepalive_timeout);
 
-    /* post again for pipeline */
-    if (rev->ready) {
+    /* IOCP should disable the pipeline flow, see below MEMORY REBORN */
+    /*if (rev->ready) {
         ngx_post_event(rev, &ngx_posted_events);
+    }*/
+    if (rev->ready) {
+        /*
+         * NOTICE: MEMORY REBORN
+         *         we reassign a new reborn size for the c->buffer at here becasue SSL_read maybe not complete
+         *         yet, and we SHOULD ensure IOCP read event posted and buf space is enough to contain output
+         *         data from SSL_read.
+         */
+        if (b->pos == NULL) {
+#define NGX_KEEPALIVE_REBORN_BUFFER_SIZE  4096
+
+            b->pos = ngx_palloc(c->pool, NGX_KEEPALIVE_REBORN_BUFFER_SIZE);
+            if (b->pos == NULL) {
+                ngx_http_close_connection(c);
+                return;
+            }
+
+            b->start = b->pos;
+            b->last = b->pos;
+            b->end = b->pos + NGX_KEEPALIVE_REBORN_BUFFER_SIZE;
+        }
+
+        /*
+         * MUST post an IOCP read event again because "rev->ready==1"
+         */
+        if (ngx_recv(c, b->last, b->end - b->last) == NGX_ERROR) {
+            ngx_http_close_connection(c);
+            return;
+        }
     }
 }
 
@@ -513,7 +507,7 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_http_keepalive_handlerex(): begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
+    output_debug_string(c, "\nngx_http_keepalive_handlerex(): ++++++++++++++++ begin -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif
@@ -615,6 +609,12 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
     /* data completed by ngx_overlapped_wsarecv() */
     b->last += n;
 
+    /* data is consumed */
+    {
+        rev->complete = 0;
+        rev->available = 0;
+    }
+
     c->log->handler = ngx_http_log_error;
     c->log->action = "reading client request line";
 
@@ -637,7 +637,7 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
 
 #if (NGX_DEBUG)
     // debug
-    output_debug_string(c, "\nngx_http_keepalive_handlerex(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
+    output_debug_string(c, "\nngx_http_keepalive_handlerex(): @@@@@@@@@@@@@@@@ end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif

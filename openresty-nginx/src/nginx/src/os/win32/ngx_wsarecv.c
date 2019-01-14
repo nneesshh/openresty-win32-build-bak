@@ -85,6 +85,12 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
                    "rev->complete: %d", rev->complete);
 
     if (rev->complete) {
+
+        if (rev->available <= 0) {
+            ngx_connection_error(c, 0,
+                                 "!!!!ngx_overlapped_wsarecv(): error -- complete with zero bytes available, it SHOULD NEVER HAPPEN!!!");
+        }
+
         rev->complete = 0;
 
         if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
@@ -105,7 +111,7 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
             == 0)
         {
             ngx_connection_error(c, ngx_socket_errno,
-                               "WSARecv() or WSAGetOverlappedResult() failed");
+                                 "WSARecv() or WSAGetOverlappedResult() failed");
             return NGX_ERROR;
         }
 
@@ -170,8 +176,8 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_overlapped_wsarecv(): errno=(%llu)!!!!\n",
-            (uint64_t)err);
+        output_debug_string(c, "\nngx_overlapped_wsarecv(): errno=(%d)!!!!\n",
+            (int)err);
 #endif
 
         n = ngx_connection_error(c, err, "WSARecv() failed");
@@ -197,11 +203,14 @@ ngx_overlapped_wsarecv(ngx_connection_t *c, u_char *buf, size_t size)
             return NGX_AGAIN;
         }
         
-        rev->complete = 1; /* data in buffer */
-        rev->ready = 1; /* for pipeline */
-        rev->active = 1; /* 1=active means "c->buffer should never be freed", for iocp recv event, always "rev->active==1" */
-
-        return bytes;
+        /* NOTICE: bytes should be ignored, it is just same as "0==bytes" */
+        /*rev->complete = 1; / * data in buffer */
+        /*rev->ready = 1; / * for pipeline */
+        /*rev->active = 1;*/
+        /*return bytes;*/
+        rev->ready = 0;
+        rev->active = 1;
+        return NGX_AGAIN;
     }
 
     if (bytes == 0) {

@@ -183,11 +183,17 @@ ngx_http_lua_req_body_post_read(ngx_http_request_t *r)
 
         llcf = ngx_http_get_module_loc_conf(r, ngx_http_lua_module);
 
-        if (llcf->check_client_abort) {
-            r->read_event_handler = ngx_http_lua_rd_check_broken_connection;
-
-        } else {
+        /* IOCP DOES NOT SUPPORT check_client_abort */
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
             r->read_event_handler = ngx_http_block_reading;
+        } else {
+            if (llcf->check_client_abort) {
+                r->read_event_handler = ngx_http_lua_rd_check_broken_connection;
+
+            }
+            else {
+                r->read_event_handler = ngx_http_block_reading;
+            }
         }
 
         if (ctx->entered_content_phase) {

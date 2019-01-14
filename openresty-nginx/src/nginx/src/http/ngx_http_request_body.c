@@ -355,6 +355,12 @@ ngx_http_do_read_client_request_body(ngx_http_request_t *r)
             rb->buf->last += n;
             r->request_length += n;
 
+            /* data is consumed */
+            {
+                c->read->complete = 0;
+                c->read->available = 0;
+            }
+
             if (n == rest) {
                 /* pass buffer to request body filter chain */
 

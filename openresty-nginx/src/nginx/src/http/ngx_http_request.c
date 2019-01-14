@@ -479,6 +479,12 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
 
     b->last += n;
 
+    /* data is consumed */
+    {
+        rev->complete = 0;
+        rev->available = 0;
+    }
+
     if (hc->proxy_protocol) {
         hc->proxy_protocol = 0;
 
@@ -1477,6 +1483,12 @@ ngx_http_read_request_header(ngx_http_request_t *r)
     }
 
     r->header_in->last += n;
+
+    /* data is consumed */
+    {
+        rev->complete = 0;
+        rev->available = 0;
+    }
 
     return n;
 }
@@ -3252,6 +3264,12 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
     }
 
     b->last += n;
+
+    /* data is consumed */
+    {
+        rev->complete = 0;
+        rev->available = 0;
+    }
 
     c->log->handler = ngx_http_log_error;
     c->log->action = "reading client request line";

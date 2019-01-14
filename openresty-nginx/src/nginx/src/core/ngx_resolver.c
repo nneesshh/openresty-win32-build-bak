@@ -1895,6 +1895,12 @@ ngx_resolver_tcp_read(ngx_event_t *rev)
 
         b->last += n;
 
+        /* data is consumed */
+        {
+            rev->complete = 0;
+            rev->available = 0;
+        }
+
         for ( ;; ) {
             p = b->pos;
             size = b->last - p;

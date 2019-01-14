@@ -48,7 +48,7 @@ ngx_stream_lua_content_by_chunk(lua_State *L, ngx_stream_lua_request_t *r)
 
     if (co == NULL) {
         ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-                      "lua: failed to create new coroutine to handle request");
+            "lua: failed to create new coroutine to handle request");
 
         return NGX_ERROR;
     }
@@ -90,21 +90,24 @@ ngx_stream_lua_content_by_chunk(lua_State *L, ngx_stream_lua_request_t *r)
     r->connection->read->handler = ngx_stream_lua_request_handler;
     r->connection->write->handler = ngx_stream_lua_request_handler;
 
-    if (llcf->check_client_abort) {
-        r->read_event_handler = ngx_stream_lua_rd_check_broken_connection;
+    /* IOCP DOES NOT SUPPORT check_client_abort */
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
+        r->read_event_handler = ngx_stream_lua_block_reading;
+    } else {
+        if (llcf->check_client_abort) {
+            r->read_event_handler = ngx_stream_lua_rd_check_broken_connection;
 
+            rev = r->connection->read;
 
-        rev = r->connection->read;
-
-        if (!rev->active) {
-            if (ngx_add_event(rev, NGX_READ_EVENT, 0) != NGX_OK) {
-                return NGX_ERROR;
+            if (!rev->active) {
+                if (ngx_add_event(rev, NGX_READ_EVENT, 0) != NGX_OK) {
+                    return NGX_ERROR;
+                }
             }
         }
-
-
-    } else {
-        r->read_event_handler = ngx_stream_lua_block_reading;
+        else {
+            r->read_event_handler = ngx_stream_lua_block_reading;
+        }
     }
 
     /* add write event handler for IOCP */

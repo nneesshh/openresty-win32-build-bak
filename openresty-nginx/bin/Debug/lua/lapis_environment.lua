@@ -1,1 +1,1 @@
-return require("appconfig").getConfigName()
+return require("lapis_appconfig").getConfigName()

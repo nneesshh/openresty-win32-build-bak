@@ -17,6 +17,9 @@ _M.E_GAMESERVICE_CMD_MAX = 1
 
 localTable.GAMESERVICE_REQ_FIELD = protobuf.FieldDescriptor()
 localTable.GAMESERVICE_RESP_FIELD = protobuf.FieldDescriptor()
+_M.GAMEANNOUNCEMENTNOTIFY_META = protobuf.Descriptor()
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD = protobuf.FieldDescriptor()
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD = protobuf.FieldDescriptor()
 
 
 localTable.GAMESERVICE_GAMEREQUEST_CMD_FIELD.name = "cmd"
@@ -91,7 +94,35 @@ _M.GAMESERVICE_META.enum_types = {localTable.GAMESERVICE_CMD}
 _M.GAMESERVICE_META.fields = {localTable.GAMESERVICE_REQ_FIELD, localTable.GAMESERVICE_RESP_FIELD}
 _M.GAMESERVICE_META.is_extendable = false
 _M.GAMESERVICE_META.extensions = {}
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.name = "type"
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.full_name = ".sg.GameAnnouncementNotify.type"
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.number = 1
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.index = 0
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.label = 2
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.has_default_value = false
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.default_value = 0
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.type = 5
+localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD.cpp_type = 1
 
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.name = "data"
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.full_name = ".sg.GameAnnouncementNotify.data"
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.number = 2
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.index = 1
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.label = 2
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.has_default_value = false
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.default_value = ""
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.type = 12
+localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD.cpp_type = 9
+
+_M.GAMEANNOUNCEMENTNOTIFY_META.name = "GameAnnouncementNotify"
+_M.GAMEANNOUNCEMENTNOTIFY_META.full_name = ".sg.GameAnnouncementNotify"
+_M.GAMEANNOUNCEMENTNOTIFY_META.nested_types = {}
+_M.GAMEANNOUNCEMENTNOTIFY_META.enum_types = {}
+_M.GAMEANNOUNCEMENTNOTIFY_META.fields = {localTable.GAMEANNOUNCEMENTNOTIFY_TYPE_FIELD, localTable.GAMEANNOUNCEMENTNOTIFY_DATA_FIELD}
+_M.GAMEANNOUNCEMENTNOTIFY_META.is_extendable = false
+_M.GAMEANNOUNCEMENTNOTIFY_META.extensions = {}
+
+_M.GameAnnouncementNotify = protobuf.Message(_M.GAMEANNOUNCEMENTNOTIFY_META)
 _M.GameService = protobuf.Message(_M.GAMESERVICE_META)
 _M.GameService.GameRequest = protobuf.Message(_M.GAMESERVICE_GAMEREQUEST_META)
 _M.GameService.GameResponse = protobuf.Message(_M.GAMESERVICE_GAMERESPONSE_META)

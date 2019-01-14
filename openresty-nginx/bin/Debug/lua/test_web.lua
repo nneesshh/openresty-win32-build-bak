@@ -1,19 +1,20 @@
---[[ ]]
+--
 local ok, res, err, errcode, sqlstate
 local db
 local mysql = require("resty.mysql")
-    
+
 db, err = assert(mysql:new())
 db:set_timeout(1110000)
 
-ok, err, errcode, sqlstate = db:connect{
+ok, err, errcode, sqlstate =
+    db:connect {
     host = "127.0.0.1",
     port = 3306,
     database = "my_umb_web",
     user = "root",
     password = "123123",
     charset = "utf8",
-    max_packet_size = 1024 * 1024 * 10,
+    max_packet_size = 1024 * 1024 * 10
 }
 
 if not ok then

@@ -2133,6 +2133,12 @@ ngx_stream_lua_socket_tcp_read(ngx_stream_lua_request_t *r,
     b = &u->buffer;
     read = 0;
 
+    if (rev->eof) {
+    /*if (rev->complete == 0 && rev->ready == 0) {*/
+        /* zero bytes found */
+        u->eof = 1;
+    }
+
     for ( ;; ) {
 
         size = b->last - b->pos;
@@ -2251,11 +2257,16 @@ ngx_stream_lua_socket_tcp_read(ngx_stream_lua_request_t *r,
                 llcf = ngx_stream_lua_get_module_loc_conf(r,
                                                          ngx_stream_lua_module);
 
-                if (llcf->check_client_abort) {
+                /* IOCP DOES NOT SUPPORT check_client_abort */
+                if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
 
-                    ngx_stream_lua_socket_handle_read_error(r, u,
-                                          NGX_STREAM_LUA_SOCKET_FT_CLIENTABORT);
-                    return NGX_ERROR;
+                } else {
+                    if (llcf->check_client_abort) {
+
+                        ngx_stream_lua_socket_handle_read_error(r, u,
+                            NGX_STREAM_LUA_SOCKET_FT_CLIENTABORT);
+                        return NGX_ERROR;
+                    }
                 }
 
                 /* llcf->check_client_abort == 0 */
@@ -2279,6 +2290,11 @@ ngx_stream_lua_socket_tcp_read(ngx_stream_lua_request_t *r,
 
         b->last += n;
 
+        /* data is consumed */
+        {
+            rev->complete = 0;
+            rev->available = 0;
+        }
     }
 
 #if 1
@@ -2541,25 +2557,31 @@ ngx_stream_lua_socket_tcp_receive_retval_handler(ngx_stream_lua_request_t *r,
     if (u->raw_downstream || u->body_downstream) {
         llcf = ngx_stream_lua_get_module_loc_conf(r, ngx_stream_lua_module);
 
-        if (llcf->check_client_abort) {
-
-            r->read_event_handler = ngx_stream_lua_rd_check_broken_connection;
-
-            ev = r->connection->read;
-
-            dd("rev active: %d", ev->active);
-
-            if ((ngx_event_flags & NGX_USE_LEVEL_EVENT) && !ev->active) {
-                if (ngx_add_event(ev, NGX_READ_EVENT, 0) != NGX_OK) {
-                    lua_pushnil(L);
-                    lua_pushliteral(L, "failed to add event");
-                    return 2;
-                }
-            }
-
-        } else {
-            /* llcf->check_client_abort == 0 */
+        /* IOCP DOES NOT SUPPORT check_client_abort */
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
             r->read_event_handler = ngx_stream_lua_block_reading;
+        } else {
+            if (llcf->check_client_abort) {
+
+                r->read_event_handler = ngx_stream_lua_rd_check_broken_connection;
+
+                ev = r->connection->read;
+
+                dd("rev active: %d", ev->active);
+
+                if ((ngx_event_flags & NGX_USE_LEVEL_EVENT) && !ev->active) {
+                    if (ngx_add_event(ev, NGX_READ_EVENT, 0) != NGX_OK) {
+                        lua_pushnil(L);
+                        lua_pushliteral(L, "failed to add event");
+                        return 2;
+                    }
+                }
+
+            }
+            else {
+                /* llcf->check_client_abort == 0 */
+                r->read_event_handler = ngx_stream_lua_block_reading;
+            }
         }
     }
 #endif
@@ -2878,9 +2900,6 @@ ngx_stream_lua_socket_tcp_handler(ngx_event_t *ev)
     ngx_stream_lua_socket_tcp_upstream_t           *u;
     ngx_connection_t                               *c;
 
-    int         seconds, bytes, i_result;
-    ngx_err_t   err;
-
     c = ev->data;
     u = c->data;
     r = u->request;
@@ -2893,59 +2912,6 @@ ngx_stream_lua_socket_tcp_handler(ngx_event_t *ev)
         u->write_event_handler(r, u);
 
     } else {
-
-        /* check connectex */
-        if (ngx_event_flags & NGX_USE_IOCP_EVENT
-            && 1 == ev->evovlp.connectex_flag) {
-
-            ev->evovlp.connectex_flag = 0;
-
-            i_result = setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_CONNECT_CONTEXT, NULL, 0);
-            if (i_result != NO_ERROR) {
-
-                err = ngx_socket_errno;
-
-                ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
-                              "ngx_http_lua_socket_tcp_handler(): setsockopt(SO_UPDATE_CONNECT_CONTEXT) failed");
-
-                ngx_stream_lua_socket_handle_read_error(r, u,
-                                                        NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
-                return;
-            }
-
-            bytes = sizeof(seconds);
-            i_result = getsockopt(c->fd, SOL_SOCKET, SO_CONNECT_TIME,
-                (char *)&seconds, (PINT)&bytes);
-            if (i_result != NO_ERROR) {
-
-                err = ngx_socket_errno;
-
-                ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
-                              "ngx_http_lua_socket_tcp_handler(): getsockopt(SO_CONNECT_TIME) failed");
-
-                ngx_stream_lua_socket_handle_read_error(r, u,
-                                                        NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
-                return;
-            }
-            else {
-                if (seconds == 0xFFFFFFFF) {
-
-                    ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-                                  "ngx_http_lua_socket_tcp_handler(): connection not established yet!!!");
-
-                    ngx_stream_lua_socket_handle_read_error(r, u,
-                                                            NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED);
-                    return;
-                }
-                else {
-                    ngx_log_debug1(NGX_LOG_INFO, r->connection->log, 0,
-                                   "ngx_http_lua_socket_tcp_handler(): connection has been established %d seconds",
-                        seconds);
-
-                }
-            }
-        }
-
         u->read_event_handler(r, u);
     }
 
@@ -3374,9 +3340,24 @@ ngx_stream_lua_socket_connected_handler(ngx_stream_lua_request_t *r,
     ngx_int_t                    rc;
     ngx_connection_t            *c;
 
-    ngx_stream_lua_loc_conf_t           *llcf;
+    ngx_stream_lua_loc_conf_t   *llcf;
 
     c = u->peer.connection;
+
+    if (c->read->eof) {
+    /*if (rev->complete == 0 && rev->ready == 0) {*/
+        /* zero bytes found */
+        u->eof = 1;
+
+        ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
+                      "stream lua tcp socket connect failed,"
+                      " when connecting to %V:%ud",
+                      &c->addr_text, ngx_inet_get_port(u->peer.sockaddr));
+
+        ngx_stream_lua_socket_handle_conn_error(r, u,
+            NGX_STREAM_LUA_SOCKET_FT_TIMEOUT);
+        return;
+    }
 
     if (c->write->timedout) {
 

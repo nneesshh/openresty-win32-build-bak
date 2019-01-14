@@ -367,6 +367,8 @@ ngx_stream_close_connection(ngx_connection_t *c)
     ngx_close_connection(c);
 
     ngx_destroy_pool(pool);
+
+    c->pool = NULL;
 }
 
 

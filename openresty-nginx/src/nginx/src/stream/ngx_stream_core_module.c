@@ -265,6 +265,12 @@ ngx_stream_core_preread_phase(ngx_stream_session_t *s,
 
         c->buffer->last += n;
 
+        /* data is consumed */
+        {
+            c->read->complete = 0;
+            c->read->available = 0;
+        }
+
         rc = ph->handler(s);
     }
 

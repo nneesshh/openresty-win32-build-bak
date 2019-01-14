@@ -2159,23 +2159,29 @@ ngx_http_lua_socket_tcp_read(ngx_http_request_t *r,
 
                     llcf = ngx_http_get_module_loc_conf(r, ngx_http_lua_module);
 
-                    if (llcf->check_client_abort) {
-                        rc = ngx_http_lua_check_broken_connection(r, rev);
+                    /* IOCP DOES NOT SUPPORT check_client_abort */
+                    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
 
-                        if (rc == NGX_OK) {
-                            goto success;
+                    } else {
+                        if (llcf->check_client_abort) {
+                            rc = ngx_http_lua_check_broken_connection(r, rev);
+
+                            if (rc == NGX_OK) {
+                                goto success;
+                            }
+
+                            if (rc == NGX_HTTP_CLIENT_CLOSED_REQUEST) {
+                                ngx_http_lua_socket_handle_read_error(r, u,
+                                    NGX_HTTP_LUA_SOCKET_FT_CLIENTABORT);
+
+                            }
+                            else {
+                                ngx_http_lua_socket_handle_read_error(r, u,
+                                    NGX_HTTP_LUA_SOCKET_FT_ERROR);
+                            }
+
+                            return NGX_ERROR;
                         }
-
-                        if (rc == NGX_HTTP_CLIENT_CLOSED_REQUEST) {
-                            ngx_http_lua_socket_handle_read_error(r, u,
-                                          NGX_HTTP_LUA_SOCKET_FT_CLIENTABORT);
-
-                        } else {
-                            ngx_http_lua_socket_handle_read_error(r, u,
-                                             NGX_HTTP_LUA_SOCKET_FT_ERROR);
-                        }
-
-                        return NGX_ERROR;
                     }
                 }
 
@@ -2336,14 +2342,19 @@ success:
 
                 llcf = ngx_http_get_module_loc_conf(r, ngx_http_lua_module);
 
-                if (llcf->check_client_abort) {
+                /* IOCP DOES NOT SUPPORT check_client_abort */
+                if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
 
-                    ngx_http_lua_socket_handle_read_error(r, u,
-                                          NGX_HTTP_LUA_SOCKET_FT_CLIENTABORT);
-                    return NGX_ERROR;
+                } else {
+                    if (llcf->check_client_abort) {
+
+                        ngx_http_lua_socket_handle_read_error(r, u,
+                            NGX_HTTP_LUA_SOCKET_FT_CLIENTABORT);
+                        return NGX_ERROR;
+                    }
+
+                    /* llcf->check_client_abort == 0 */
                 }
-
-                /* llcf->check_client_abort == 0 */
 
                 if (u->body_downstream && r->request_body->rest) {
                     ngx_http_lua_socket_handle_read_error(r, u,
@@ -2368,6 +2379,12 @@ success:
         }
 
         b->last += n;
+
+        /* data is consumed */
+        {
+            rev->complete = 0;
+            rev->available = 0;
+        }
 
         if (u->body_downstream) {
             r->request_length += n;
@@ -2669,25 +2686,31 @@ ngx_http_lua_socket_tcp_receive_retval_handler(ngx_http_request_t *r,
     if (u->raw_downstream || u->body_downstream) {
         llcf = ngx_http_get_module_loc_conf(r, ngx_http_lua_module);
 
-        if (llcf->check_client_abort) {
-
-            r->read_event_handler = ngx_http_lua_rd_check_broken_connection;
-
-            ev = r->connection->read;
-
-            dd("rev active: %d", ev->active);
-
-            if ((ngx_event_flags & NGX_USE_LEVEL_EVENT) && !ev->active) {
-                if (ngx_add_event(ev, NGX_READ_EVENT, 0) != NGX_OK) {
-                    lua_pushnil(L);
-                    lua_pushliteral(L, "failed to add event");
-                    return 2;
-                }
-            }
-
-        } else {
-            /* llcf->check_client_abort == 0 */
+        /* IOCP DOES NOT SUPPORT check_client_abort */
+        if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
             r->read_event_handler = ngx_http_block_reading;
+        } else {
+            if (llcf->check_client_abort) {
+
+                r->read_event_handler = ngx_http_lua_rd_check_broken_connection;
+
+                ev = r->connection->read;
+
+                dd("rev active: %d", ev->active);
+
+                if ((ngx_event_flags & NGX_USE_LEVEL_EVENT) && !ev->active) {
+                    if (ngx_add_event(ev, NGX_READ_EVENT, 0) != NGX_OK) {
+                        lua_pushnil(L);
+                        lua_pushliteral(L, "failed to add event");
+                        return 2;
+                    }
+                }
+
+            }
+            else {
+                /* llcf->check_client_abort == 0 */
+                r->read_event_handler = ngx_http_block_reading;
+            }
         }
     }
 #endif
@@ -2911,9 +2934,6 @@ ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
 
     ngx_http_lua_socket_tcp_upstream_t  *u;
 
-    int         seconds, bytes, i_result;
-    ngx_err_t   err;
-
     c = ev->data;
     u = c->data;
     r = u->request;
@@ -2932,60 +2952,6 @@ ngx_http_lua_socket_tcp_handler(ngx_event_t *ev)
         u->write_event_handler(r, u);
 
     } else {
-
-        /* check connectex */
-        if (ngx_event_flags & NGX_USE_IOCP_EVENT
-            && 1 == ev->evovlp.connectex_flag) {
-
-            ev->evovlp.connectex_flag = 0;
-            c->write->evovlp.connectex_flag = 0;
-
-            i_result = setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_CONNECT_CONTEXT, NULL, 0);
-            if (i_result != NO_ERROR) {
-
-                err = ngx_socket_errno;
-
-                ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
-                    "ngx_http_lua_socket_tcp_handler(): setsockopt(SO_UPDATE_CONNECT_CONTEXT) failed");
-
-                ngx_http_lua_socket_handle_read_error(r, u,
-                    NGX_HTTP_LUA_SOCKET_FT_CONNECTFAILED);
-                return;
-            }
-
-            bytes = sizeof(seconds);
-            i_result = getsockopt(c->fd, SOL_SOCKET, SO_CONNECT_TIME,
-                (char *)&seconds, (PINT)&bytes);
-            if (i_result != NO_ERROR) {
-
-                err = ngx_socket_errno;
-
-                ngx_log_error(NGX_LOG_ERR, r->connection->log, err,
-                    "ngx_http_lua_socket_tcp_handler(): getsockopt(SO_CONNECT_TIME) failed");
-
-                ngx_http_lua_socket_handle_read_error(r, u,
-                                                      NGX_HTTP_LUA_SOCKET_FT_CONNECTFAILED);
-                return;
-            }
-            else {
-                if (seconds == 0xFFFFFFFF) {
-
-                    ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-                        "ngx_http_lua_socket_tcp_handler(): connection not established yet!!!");
-
-                    ngx_http_lua_socket_handle_conn_error(r, u,
-                                                          NGX_HTTP_LUA_SOCKET_FT_CONNECTFAILED);
-                    return;
-                }
-                else {
-                    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
-                        "ngx_http_lua_socket_tcp_handler(): connection has been established %d seconds",
-                        seconds);
-
-                }
-            }
-        }
-
         u->read_event_handler(r, u);
     }
 

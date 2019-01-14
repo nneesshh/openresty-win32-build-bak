@@ -1,8 +1,10 @@
---require("test_web")
---require("test_protodb")
+--[[]]
+require("mobdebug_start")
+--[[]]
+-- require("test_web")
 
---]]
+-- ]]
 local lapis = require("lapis")
 local lapis_serve = lapis.serve
-lapis_serve("app")
+lapis_serve("web.lapis_app")
 --[[]]

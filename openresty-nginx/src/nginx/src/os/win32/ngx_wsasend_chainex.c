@@ -309,8 +309,8 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_overlapped_wsasend_chain(): post event WSASend() of sent(%d)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
-            (int)sent, vec.nelts,
+        output_debug_string(c, "\nngx_overlapped_wsasend_chain(): post event WSASend() of send(%d)/sent(%d)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
+            (int)send, (int)sent, vec.nelts,
             c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
 
         if (sent > 65535 || send != sent) {
@@ -332,8 +332,8 @@ ngx_overlapped_wsasend_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             } else {
 #if (NGX_DEBUG)
                 // debug
-                output_debug_string(c, "\nngx_overlapped_wsasend_chain(): errno=(%llu)!!!!\n",
-                    (uint64_t)err);
+                output_debug_string(c, "\nngx_overlapped_wsasend_chain(): errno=(%d)!!!!\n",
+                    (int)err);
 #endif
                 wev->error = 1;
                 ngx_connection_error(c, err, "WSASend() failed");

@@ -1158,6 +1158,12 @@ ngx_ssl_ocsp_read_handler(ngx_event_t *rev)
         if (n > 0) {
             ctx->response->last += n;
 
+            /* data is consumed */
+            {
+                c->read->complete = 0;
+                c->read->available = 0;
+            }
+
             rc = ctx->process(ctx);
 
             if (rc == NGX_ERROR) {

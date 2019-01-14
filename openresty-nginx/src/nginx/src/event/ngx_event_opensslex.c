@@ -211,6 +211,12 @@ ngx_ssl_handshakeex(ngx_connection_t *c)
 
         /* data completed by ngx_overlapped_wsarecv() */
         b->last += n;
+
+        /* data is consumed */
+        {
+            c->read->complete = 0;
+            c->read->available = 0;
+        }
     }
 
     /* handle rbio_mem(SSL_read) */

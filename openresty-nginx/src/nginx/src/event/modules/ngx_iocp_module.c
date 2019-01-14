@@ -326,6 +326,8 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
 
     ngx_connection_t  *c;
 
+    int                i_seconds, i_bytes, i_result;
+
     if (timer == NGX_TIMER_INFINITE) {
         timer = INFINITE;
     }
@@ -411,17 +413,16 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                     {
                         if (0 == bytes) {
                             if (NGX_IOCP_IO == key) {
-                                output_debug_string(c, "\nzero bytes found, link broken!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
+                                output_debug_string(c, "\nzero bytes found, io link broken!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
                                     c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
                                     ev->write, key,
                                     bytes);
-                            }
-                            else {
-                                output_debug_string(c, "\nzero bytes found!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
+                            } else if (NGX_IOCP_CONNECT == key && 0 == ev->evovlp.connectex_flag) {
+                                output_debug_string(c, "\nzero bytes found, connectex link broken!!!! -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)key(%d) -- bytes(%d)\n",
                                     c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
                                     ev->write, key,
                                     bytes);
-                            }
+                            } 
                         }
 
                         if (0 == ev->write) {
@@ -457,6 +458,8 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                         /* acceptex iocp port */
                         if (bytes) {
                             ev->complete = 1; /* 1 means data in buffer */
+                        } else {
+                            ev->active = 0; /* 0 means memory could be freed */
                         }
                         ev->ready = 1; /* always ready even zero bytes */
                         break;
@@ -466,6 +469,9 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                         if (bytes) {
                             ev->complete = 1; /* 1 means data in buffer */
                             ev->ready = 1; /* only ready for non-zero bytes */
+                        } else {
+                            ev->active = 0; /* 0 means memory could be freed */
+                            ev->eof = 1; /* zero bytes found, io link broken!!!! */
                         }
                         break;
 
@@ -473,8 +479,59 @@ ngx_int_t ngx_iocp_process_events(ngx_cycle_t *cycle, ngx_msec_t timer,
                         /* normal iocp port of connectex */
                         if (bytes) {
                             ev->complete = 1; /* 1 means data in buffer */
+                        } else {
+                            ev->active = 0; /* 0 means memory could be freed */
+
+                            if (0 == ev->evovlp.connectex_flag) {
+                                ev->eof = 1; /* zero bytes found, connectex link broken!!!! */
+                            }
                         }
-                        ev->ready = 1; /* always ready */
+
+                        if (ev->write) {
+                            ev->ready = 1; /* write always ready */
+                        }
+                        else {
+                            /* check connectex */
+                            if (1 == ev->evovlp.connectex_flag) {
+                                /* get SO_CONNECT_TIME */
+                                i_result = setsockopt(c->fd, SOL_SOCKET, SO_UPDATE_CONNECT_CONTEXT, NULL, 0);
+                                if (i_result != NO_ERROR) {
+                                    err = ngx_socket_errno;
+
+                                    ngx_log_error(NGX_LOG_ERR, cycle->log, err,
+                                                  "ngx_iocp_process_events(): setsockopt(SO_UPDATE_CONNECT_CONTEXT) failed");
+                                    ev->eof = 1; /* just like zero bytes found, connectex link broken!!!! */
+                                } else {
+                                    i_bytes = sizeof(i_seconds);
+                                    i_result = getsockopt(c->fd, SOL_SOCKET, SO_CONNECT_TIME,
+                                        (char *)&i_seconds, (PINT)&i_bytes);
+                                    if (i_result != NO_ERROR) {
+                                        err = ngx_socket_errno;
+
+                                        ngx_log_error(NGX_LOG_ERR, cycle->log, err,
+                                                      "ngx_iocp_process_events(): getsockopt(SO_CONNECT_TIME) failed");
+                                        ev->eof = 1; /* just like zero bytes found, connectex link broken!!!! */
+                                    } else {
+                                        if (i_seconds == 0xFFFFFFFF) {
+                                            ngx_log_debug(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                                                          "ngx_iocp_process_events(): connection not established yet!!!");
+                                        } else {
+                                            ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                                                           "ngx_iocp_process_events(): connection has been established %d seconds",
+                                                           i_seconds);
+
+                                            ev->evovlp.connectex_flag = 0;
+                                            ev->ready = 1; /* connectex ready now */
+                                        }
+                                    }
+                                }
+                            } else {
+                                /* connectex io read */
+                                if (bytes) {
+                                    ev->ready = 1; /* only ready for non-zero bytes */
+                                }
+                            }
+                        }
                         break;
                     }
 

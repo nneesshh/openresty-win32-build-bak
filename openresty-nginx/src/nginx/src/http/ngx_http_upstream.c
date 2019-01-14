@@ -2394,6 +2394,12 @@ ngx_http_upstream_process_header(ngx_http_request_t *r, ngx_http_upstream_t *u)
 
         u->buffer.last += n;
 
+        /* data is consumed */
+        {
+            c->read->complete = 0;
+            c->read->available = 0;
+        }
+
 #if 0
         u->valid_header_in = 0;
 
@@ -3445,6 +3451,12 @@ ngx_http_upstream_process_upgraded(ngx_http_request_t *r,
             if (n > 0) {
                 do_write = 1;
                 b->last += n;
+
+                /* data is consumed */
+                {
+                    src->read->complete = 0;
+                    src->read->available = 0;
+                }
 
                 if (from_upstream) {
                     u->state->bytes_received += n;

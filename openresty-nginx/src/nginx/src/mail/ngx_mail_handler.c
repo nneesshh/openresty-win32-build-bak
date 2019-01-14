@@ -719,6 +719,12 @@ ngx_mail_read_command(ngx_mail_session_t *s, ngx_connection_t *c)
 
     if (n > 0) {
         s->buffer->last += n;
+
+        /* data is consumed */
+        {
+            c->read->complete = 0;
+            c->read->available = 0;
+        }
     }
 
     if (n == NGX_AGAIN) {

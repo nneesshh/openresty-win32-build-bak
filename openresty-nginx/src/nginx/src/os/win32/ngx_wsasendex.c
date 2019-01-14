@@ -236,8 +236,8 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_overlapped_wsasend(): post event WSASend() of sent(%d)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
-            (int)sent, vec.nelts,
+        output_debug_string(c, "\nngx_overlapped_wsasend(): post event WSASend() of size(%d)/sent(%d)nelts(%d) on -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... w(%d)\n",
+            (int)size, (int)sent, vec.nelts,
             c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c, wev->write);
 
         if (sent > 65535 || size != sent) {
@@ -282,8 +282,8 @@ ngx_overlapped_wsasend(ngx_connection_t *c, u_char *buf, size_t size)
 
 #if (NGX_DEBUG)
         // debug
-        output_debug_string(c, "\nngx_overlapped_wsasend(): errno=(%llu)!!!!\n",
-            (uint64_t)err);
+        output_debug_string(c, "\nngx_overlapped_wsasend(): errno=(%d)!!!!\n",
+            (int)err);
 #endif
 
         wev->error = 1;

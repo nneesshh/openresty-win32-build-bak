@@ -64,7 +64,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../thirdparty/gperftools-master/src;../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/perl5-5.29.6/win32/include;../thirdparty/perl5-5.29.6/win32;../thirdparty/pcre-8.42;../thirdparty/pcre-8.42/build;../thirdparty/perl5-5.29.6;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../thirdparty/gperftools-master/src;../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/perl5-5.29.6/win32/include;../thirdparty/perl5-5.29.6/win32;../thirdparty/pcre-8.42;../thirdparty/pcre-8.42/build;../thirdparty/perl5-5.29.6;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.1.0-beta3/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointExceptions>
       </FloatingPointExceptions>
     </ClCompile>
@@ -72,7 +72,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>../thirdparty/gperftools-master/$(Configuration);../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/perl5-5.29.6;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib/$(Configuration);../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/bin/$(Configuration);../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../thirdparty/gperftools-master/$(Configuration);../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/perl5-5.29.6;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib/$(Configuration);../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.1.0-beta3/bin/$(Configuration);../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vld.lib;Ws2_32.lib;libtcmalloc_minimal.lib;jemalloc-v141-$(Configuration)-static.lib;perl529.lib;libpcre_a.lib;libgd_a.lib;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.LIB;LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
@@ -93,7 +93,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../thirdparty/gperftools-master/src;../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/perl5-5.29.6/win32/include;../thirdparty/perl5-5.29.6/win32;../thirdparty/pcre-8.42;../thirdparty/pcre-8.42/build;../thirdparty/perl5-5.29.6;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.0.5/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../thirdparty/gperftools-master/src;../thirdparty/jemalloc-5.1.0/include/msvc_compat;../thirdparty/jemalloc-5.1.0/include;../thirdparty/perl5-5.29.6/win32/include;../thirdparty/perl5-5.29.6/win32;../thirdparty/pcre-8.42;../thirdparty/pcre-8.42/build;../thirdparty/perl5-5.29.6;../thirdparty/libgd-gd-2.2.5/src;../thirdparty/libuv-1.x/include;../thirdparty/x86/pgsql/include;../config;../src/nginx;../src/nginx/src/core;../src/nginx/src/os/win32;../src/nginx/src/event;../src/nginx/src/event/modules;../src/nginx/src/http;../src/nginx/src/http/v2;../src/nginx/src/http/modules;../src/nginx/src/http/modules/perl;../src/nginx/src/stream;../src/nginx/src/mail;../bundle/ngx_postgres-1.0/include;../bundle/ngx_devel_kit-0.3.0/src;../bundle/ngx_devel_kit-0.3.0/objs;../bundle/ngx_lua/src/api;../bundle/LuaJIT-2.1.0-beta3/src;../bundle/ngx_lua-0.10.13/src/api;../bundle/ngx_stream_lua-0.0.5/src/api;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointExceptions>
       </FloatingPointExceptions>
     </ClCompile>
@@ -103,7 +103,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>../thirdparty/gperftools-master/$(Configuration);../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/perl5-5.29.6;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib/$(Configuration);../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.0.5/bin/$(Configuration);../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../thirdparty/gperftools-master/$(Configuration);../thirdparty/jemalloc-5.1.0/msvc/lib;../thirdparty/perl5-5.29.6;../thirdparty/x86/libgd-2.2.5-vc15-x86/lib/$(Configuration);../thirdparty/x86/libpcre-8.4.2-vc15-x86/lib;../thirdparty/x86/pgsql/lib;../bundle/ngx_postgres-1.0/lib;../bundle/LuaJIT-2.1.0-beta3/bin/$(Configuration);../thirdparty/libuv-1.x/lib/$(Configuration);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vld.lib;Ws2_32.lib;libtcmalloc_minimal.lib;jemalloc-v141-$(Configuration)-static.lib;perl529.lib;libpcre_a.lib;libgd_a.lib;libpq.lib;libeay32.lib;ssleay32.lib;libecpg.lib;libpgport.lib;postgres.lib;lua51.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
@@ -276,6 +276,7 @@
     <ClCompile Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_secure_random.c" />
     <ClCompile Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_unescape_uri.c" />
     <ClCompile Include="..\bundle\stream-echo-nginx-module-master\src\ngx_stream_echo_module.c" />
+    <ClCompile Include="..\bundle\stream-gate-nginx-module\src\ngx_stream_gate_module.c" />
     <ClCompile Include="..\config\ngx_modules.c" />
     <ClCompile Include="..\src\nginx\src\core\nginx.c" />
     <ClCompile Include="..\src\nginx\src\core\ngx_array.c" />
@@ -651,6 +652,7 @@
     <ClInclude Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_secure_random.h" />
     <ClInclude Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_unescape_uri.h" />
     <ClInclude Include="..\bundle\stream-echo-nginx-module-master\src\ddebug.h" />
+    <ClInclude Include="..\bundle\stream-gate-nginx-module\src\ddebug.h" />
     <ClInclude Include="..\config\ngx_auto_config.h" />
     <ClInclude Include="..\config\ngx_auto_headers.h" />
     <ClInclude Include="..\src\nginx\src\core\nginx.h" />

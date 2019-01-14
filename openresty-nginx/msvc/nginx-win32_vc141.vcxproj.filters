@@ -124,6 +124,9 @@
     <Filter Include="bundle\http\upstream">
       <UniqueIdentifier>{c9eb73a8-b429-46b9-b3c5-c6bb2d02a595}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bundle\stream\gate">
+      <UniqueIdentifier>{f500567f-fb19-4017-a6d8-48c4c4d42a70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\nginx\src\event\modules\ngx_iocp_module.c">
@@ -1152,6 +1155,9 @@
     <ClCompile Include="..\bundle\ngx_lua_upstream-0.07\src\ngx_http_lua_upstream_module.c">
       <Filter>bundle\http\upstream</Filter>
     </ClCompile>
+    <ClCompile Include="..\bundle\stream-gate-nginx-module\src\ngx_stream_gate_module.c">
+      <Filter>bundle\stream\gate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\nginx\src\event\modules\ngx_iocp_module.h">
@@ -1998,6 +2004,9 @@
       <Filter>src\os\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\src\nginx\src\os\win32\resource.h" />
+    <ClInclude Include="..\bundle\stream-gate-nginx-module\src\ddebug.h">
+      <Filter>bundle\stream\gate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\nginx\src\dtrace\nginx.stp">

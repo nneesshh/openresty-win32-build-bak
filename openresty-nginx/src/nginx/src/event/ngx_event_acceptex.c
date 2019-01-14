@@ -58,7 +58,12 @@ ngx_event_acceptex(ngx_event_t *rev)
 
     /* data read by ngx_acceptex() */
     c->buffer->last += rev->available;
-    rev->complete = 0;
+    
+    /* data is consumed */
+    {
+        rev->complete = 0;
+        rev->available = 0;
+    }
 
     /* NOTICE: ngx_getacceptexsockaddrs() will return local_sockaddr pointer and sockaddr pointer on the
      *         "c->buffer->pos" memory, but the data they point to may be erased when recv data into "c->buffer"
@@ -134,6 +139,8 @@ ngx_event_post_acceptex(ngx_listening_t *ls, ngx_uint_t n)
         if (c == NULL) {
             return NGX_ERROR;
         }
+
+        c->type = ls->type;
 
         c->pool = ngx_create_pool(ls->pool_size, &ls->log);
         if (c->pool == NULL) {

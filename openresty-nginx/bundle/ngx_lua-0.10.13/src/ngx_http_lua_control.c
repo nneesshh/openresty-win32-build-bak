@@ -424,10 +424,18 @@ ngx_http_lua_on_abort(lua_State *L)
     }
 
     llcf = ngx_http_get_module_loc_conf(r, ngx_http_lua_module);
-    if (!llcf->check_client_abort) {
+
+    /* IOCP DOES NOT SUPPORT check_client_abort */
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
         lua_pushnil(L);
-        lua_pushliteral(L, "lua_check_client_abort is off");
+        lua_pushliteral(L, "IOCP DOES NOT SUPPORT check_client_abort");
         return 2;
+    } else {
+        if (!llcf->check_client_abort) {
+            lua_pushnil(L);
+            lua_pushliteral(L, "lua_check_client_abort is off");
+            return 2;
+        }
     }
 
     ngx_http_lua_coroutine_create_helper(L, r, ctx, &coctx);

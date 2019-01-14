@@ -94,27 +94,33 @@ ngx_http_lua_content_by_chunk(lua_State *L, ngx_http_request_t *r)
 
     llcf = ngx_http_get_module_loc_conf(r, ngx_http_lua_module);
 
-    if (llcf->check_client_abort) {
-        r->read_event_handler = ngx_http_lua_rd_check_broken_connection;
-
-#if (NGX_HTTP_V2)
-        if (!r->stream) {
-#endif
-
-        rev = r->connection->read;
-
-        if (!rev->active) {
-            if (ngx_add_event(rev, NGX_READ_EVENT, 0) != NGX_OK) {
-                return NGX_ERROR;
-            }
-        }
-
-#if (NGX_HTTP_V2)
-        }
-#endif
-
-    } else {
+    /* IOCP DOES NOT SUPPORT check_client_abort */
+    if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
         r->read_event_handler = ngx_http_block_reading;
+    } else {
+        if (llcf->check_client_abort) {
+            r->read_event_handler = ngx_http_lua_rd_check_broken_connection;
+
+#if (NGX_HTTP_V2)
+            if (!r->stream) {
+#endif
+
+                rev = r->connection->read;
+
+                if (!rev->active) {
+                    if (ngx_add_event(rev, NGX_READ_EVENT, 0) != NGX_OK) {
+                        return NGX_ERROR;
+                    }
+                }
+
+#if (NGX_HTTP_V2)
+            }
+#endif
+
+        }
+        else {
+            r->read_event_handler = ngx_http_block_reading;
+        }
     }
 
     rc = ngx_http_lua_run_thread(L, r, ctx, 0);
