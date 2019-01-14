@@ -828,175 +828,175 @@
     <ClCompile Include="..\bundle\headers-more-nginx-module-0.33\src\ngx_http_headers_more_filter_module.c">
       <Filter>bundle\http\headers-more</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_accessby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_accessby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_api.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_api.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_args.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_args.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_balancer.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_balancer.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_bodyfilterby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_bodyfilterby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_cache.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_cache.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_capturefilter.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_capturefilter.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_clfactory.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_clfactory.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_config.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_config.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_consts.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_consts.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_contentby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_contentby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_control.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_control.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_coroutine.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_coroutine.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ctx.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ctx.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_directive.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_directive.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_exception.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_exception.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headerfilterby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headerfilterby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headers.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headers.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headers_in.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headers_in.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headers_out.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headers_out.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_initby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_initby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_initworkerby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_initworkerby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_lex.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_lex.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_log.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_log.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_log_ringbuf.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_log_ringbuf.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_logby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_logby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_misc.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_misc.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_module.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_module.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ndk.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ndk.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_output.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_output.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_pcrefix.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_pcrefix.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_phase.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_phase.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_regex.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_regex.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_req_body.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_req_body.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_req_method.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_req_method.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_rewriteby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_rewriteby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_script.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_script.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_semaphore.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_semaphore.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_setby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_setby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_shdict.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_shdict.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_sleep.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_sleep.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_socket_tcp.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_socket_tcp.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_socket_udp.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_socket_udp.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_certby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_certby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_ocsp.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_ocsp.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_session_fetchby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_session_fetchby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_session_storeby.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_session_storeby.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_string.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_string.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_subrequest.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_subrequest.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_time.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_time.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_timer.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_timer.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_uri.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_uri.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_uthread.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_uthread.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_util.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_util.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_variable.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_variable.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_worker.c">
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_worker.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_geo_module.c">
@@ -1005,121 +1005,121 @@
     <ClCompile Include="..\src\nginx\src\http\modules\ngx_http_geo_module.c">
       <Filter>src\http\modules</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_config.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_config.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_consts.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_consts.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_contentby.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_contentby.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_control.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_control.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_coroutine.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_coroutine.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ctx.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_ctx.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_directive.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_directive.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_exception.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_exception.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initby.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_initby.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initworkerby.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_initworkerby.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_lex.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_lex.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_log.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_log.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_logby.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_logby.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_misc.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_misc.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_module.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_module.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_output.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_output.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_pcrefix.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_pcrefix.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_phase.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_phase.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_prereadby.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_prereadby.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_regex.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_regex.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_request.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_request.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_script.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_script.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_shdict.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_shdict.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_sleep.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_sleep.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_tcp.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_socket_tcp.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_udp.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_socket_udp.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ssl.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_ssl.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_string.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_string.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_time.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_time.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_timer.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_timer.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_uthread.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_uthread.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_util.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_util.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_variable.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_variable.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_worker.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_worker.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_api.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_api.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_args.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_args.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_balancer.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_balancer.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_cache.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_cache.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_clfactory.c">
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_clfactory.c">
       <Filter>bundle\lua\stream</Filter>
     </ClCompile>
     <ClCompile Include="..\bundle\stream-echo-nginx-module-master\src\ngx_stream_echo_module.c">
@@ -1697,304 +1697,304 @@
     <ClInclude Include="..\bundle\headers-more-nginx-module-0.33\src\ngx_http_headers_more_filter_module.h">
       <Filter>bundle\http\headers-more</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_accessby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_accessby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_args.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_args.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_balancer.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_balancer.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_bodyfilterby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_bodyfilterby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_cache.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_cache.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_capturefilter.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_capturefilter.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_clfactory.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_clfactory.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_common.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_common.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_config.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_config.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_consts.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_consts.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_contentby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_contentby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_control.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_control.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_coroutine.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_coroutine.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ctx.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ctx.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_directive.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_directive.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_exception.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_exception.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headerfilterby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headerfilterby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headers.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headers.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headers_in.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headers_in.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_headers_out.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_headers_out.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_initby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_initby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_initworkerby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_initworkerby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_lex.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_lex.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_log.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_log.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_log_ringbuf.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_log_ringbuf.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_logby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_logby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_misc.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_misc.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ndk.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ndk.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_output.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_output.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_pcrefix.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_pcrefix.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_phase.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_phase.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_probe.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_probe.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_regex.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_regex.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_req_body.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_req_body.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_req_method.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_req_method.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_rewriteby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_rewriteby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_script.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_script.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_semaphore.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_semaphore.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_setby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_setby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_shdict.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_shdict.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_sleep.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_sleep.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_socket_tcp.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_socket_tcp.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_socket_udp.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_socket_udp.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_certby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_certby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_session_fetchby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_session_fetchby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_ssl_session_storeby.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_ssl_session_storeby.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_string.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_string.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_subrequest.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_subrequest.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_time.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_time.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_timer.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_timer.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_uri.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_uri.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_uthread.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_uthread.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_util.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_util.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_variable.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_variable.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ngx_http_lua_worker.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_worker.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\ddebug.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ddebug.h">
       <Filter>bundle\luacore</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_lua-0.10.13\src\api\ngx_http_lua_api.h">
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\api\ngx_http_lua_api.h">
       <Filter>bundle\luacore\api</Filter>
     </ClInclude>
     <ClInclude Include="..\bundle\ngx_lua_upstream-0.07\src\ddebug.h">
       <Filter>bundle\lua\upstream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_common.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_common.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_config.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_config.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_consts.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_consts.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_contentby.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_contentby.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_control.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_control.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_coroutine.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_coroutine.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ctx.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_ctx.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_directive.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_directive.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_exception.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_exception.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initby.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_initby.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_initworkerby.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_initworkerby.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_lex.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_lex.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_log.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_log.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_logby.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_logby.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_misc.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_misc.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_output.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_output.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_pcrefix.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_pcrefix.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_phase.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_phase.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_prereadby.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_prereadby.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_probe.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_probe.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_regex.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_regex.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_request.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_request.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_script.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_script.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_shdict.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_shdict.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_sleep.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_sleep.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_tcp.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_socket_tcp.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_socket_udp.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_socket_udp.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_ssl.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_ssl.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_string.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_string.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_time.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_time.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_timer.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_timer.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_uthread.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_uthread.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_util.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_util.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_variable.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_variable.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_worker.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_worker.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ddebug.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ddebug.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_args.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_args.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_balancer.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_balancer.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_cache.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_cache.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\ngx_stream_lua_clfactory.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_clfactory.h">
       <Filter>bundle\lua\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\bundle\ngx_stream_lua-0.0.5\src\api\ngx_stream_lua_api.h">
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\api\ngx_stream_lua_api.h">
       <Filter>bundle\lua\stream\api</Filter>
     </ClInclude>
     <ClInclude Include="..\bundle\stream-echo-nginx-module-master\src\ddebug.h">

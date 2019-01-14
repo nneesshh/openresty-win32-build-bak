@@ -25,7 +25,9 @@ package.path = package.path .. ";./lualibs/loadkit-1.1.0/?.lua"
 package.path = package.path .. ";./lualibs/etlua-1.3.0/?.lua"
 package.path = package.path .. ";./lualibs/lapis-redis/?.lua"
 
--- resty: mysql, jit-uuid, redis, string, limit-traffic
+-- resty: core, lrucache, mysql, jit-uuid, redis, string, limit-traffic
+package.path = package.path .. ";./lualibs/lua-resty-core-0.1.16rc3/lib/?.lua"
+package.path = package.path .. ";./lualibs/lua-resty-lrucache-0.09rc1/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-mysql-0.21/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-jit-uuid-0.0.7/lib/?.lua"
 package.path = package.path .. ";./lualibs/lua-resty-redis-0.26/lib/?.lua"
