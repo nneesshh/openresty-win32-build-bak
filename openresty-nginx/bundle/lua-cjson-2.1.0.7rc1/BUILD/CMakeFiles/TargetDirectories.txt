@@ -1,0 +1,4 @@
+D:/www/_nneesshh_git/openresty-win32-build/openresty-nginx/bundle/lua-cjson-2.1.0.7rc1/build/CMakeFiles/cjson.dir
+D:/www/_nneesshh_git/openresty-win32-build/openresty-nginx/bundle/lua-cjson-2.1.0.7rc1/build/CMakeFiles/INSTALL.dir
+D:/www/_nneesshh_git/openresty-win32-build/openresty-nginx/bundle/lua-cjson-2.1.0.7rc1/build/CMakeFiles/ALL_BUILD.dir
+D:/www/_nneesshh_git/openresty-win32-build/openresty-nginx/bundle/lua-cjson-2.1.0.7rc1/build/CMakeFiles/ZERO_CHECK.dir

@@ -141,7 +141,7 @@ typedef struct {
 
 
 #define ngx_http_lua_lightudata_mask(ludata)                                 \
-    ((void *) ((uintptr_t) (&ngx_http_lua_##ludata) & ((1UL << 47) - 1)))
+    ((void *) ((uintptr_t) (&ngx_http_lua_##ludata) & (((uint64_t)1 << 47) - 1)))
 
 
 typedef struct ngx_http_lua_main_conf_s  ngx_http_lua_main_conf_t;

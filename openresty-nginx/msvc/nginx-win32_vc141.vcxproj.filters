@@ -666,15 +666,6 @@
     <ClCompile Include="..\src\nginx\src\stream\ngx_stream_proxy_module.c">
       <Filter>src\stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_variables.c">
-      <Filter>bundle\coolkit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_handlers.c">
-      <Filter>bundle\coolkit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_module.c">
-      <Filter>bundle\coolkit</Filter>
-    </ClCompile>
     <ClCompile Include="..\bundle\form-input-nginx-module-0.12\src\ngx_http_form_input_module.c">
       <Filter>bundle\http\form-input</Filter>
     </ClCompile>
@@ -1158,6 +1149,18 @@
     <ClCompile Include="..\bundle\stream-gate-nginx-module\src\ngx_stream_gate_module.c">
       <Filter>bundle\stream\gate</Filter>
     </ClCompile>
+    <ClCompile Include="..\bundle\ngx_coolkit-0.2\src\ngx_coolkit_module.c">
+      <Filter>bundle\coolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\ngx_coolkit-0.2\src\ngx_coolkit_variables.c">
+      <Filter>bundle\coolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\ngx_coolkit-0.2\src\ngx_coolkit_handlers.c">
+      <Filter>bundle\coolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_input_filters.c">
+      <Filter>bundle\luacore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\nginx\src\event\modules\ngx_iocp_module.h">
@@ -1456,15 +1459,6 @@
     </ClInclude>
     <ClInclude Include="..\src\nginx\src\stream\ngx_stream.h">
       <Filter>src\stream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_module.h">
-      <Filter>bundle\coolkit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_variables.h">
-      <Filter>bundle\coolkit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_coolkit-0.2rc3\src\ngx_coolkit_handlers.h">
-      <Filter>bundle\coolkit</Filter>
     </ClInclude>
     <ClInclude Include="..\bundle\form-input-nginx-module-0.12\src\ddebug.h">
       <Filter>bundle\http\form-input</Filter>
@@ -2006,6 +2000,18 @@
     <ClInclude Include="..\src\nginx\src\os\win32\resource.h" />
     <ClInclude Include="..\bundle\stream-gate-nginx-module\src\ddebug.h">
       <Filter>bundle\stream\gate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\ngx_coolkit-0.2\src\ngx_coolkit_module.h">
+      <Filter>bundle\coolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\ngx_coolkit-0.2\src\ngx_coolkit_variables.h">
+      <Filter>bundle\coolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\ngx_coolkit-0.2\src\ngx_coolkit_handlers.h">
+      <Filter>bundle\coolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_input_filters.h">
+      <Filter>bundle\luacore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

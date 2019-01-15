@@ -5,22 +5,42 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nginx-win32_vc141", "nginx-win32_vc141.vcxproj", "{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit", "..\bundle\LuaJIT-2.1.0-beta3\BUILD\luajit.vcxproj", "{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luajit", "..\bundle\LuaJIT-2.1-20181029\BUILD\luajit.vcxproj", "{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cjson", "..\bundle\lua-cjson-2.1.0.7rc1\BUILD\cjson.vcxproj", "{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
+		MinSizeRel|x86 = MinSizeRel|x86
 		Release|x86 = Release|x86
+		RelWithDebInfo|x86 = RelWithDebInfo|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Debug|x86.ActiveCfg = Debug|Win32
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Debug|x86.Build.0 = Debug|Win32
+		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.MinSizeRel|x86.ActiveCfg = Release|Win32
+		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.MinSizeRel|x86.Build.0 = Release|Win32
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Release|x86.ActiveCfg = Release|Win32
 		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.Release|x86.Build.0 = Release|Win32
+		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{1C469FB4-7E6E-4AB3-8440-FB6E4C9B510A}.RelWithDebInfo|x86.Build.0 = Release|Win32
 		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Debug|x86.ActiveCfg = Debug|Win32
 		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Debug|x86.Build.0 = Debug|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.MinSizeRel|x86.ActiveCfg = Release|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.MinSizeRel|x86.Build.0 = Release|Win32
 		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Release|x86.ActiveCfg = Release|Win32
 		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.Release|x86.Build.0 = Release|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{8C0F0B9E-6C66-304B-9351-4C3BBD03FE0F}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.Debug|x86.ActiveCfg = Debug|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.Debug|x86.Build.0 = Debug|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.MinSizeRel|x86.ActiveCfg = MinSizeRel|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.MinSizeRel|x86.Build.0 = MinSizeRel|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.Release|x86.ActiveCfg = Release|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.Release|x86.Build.0 = Release|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|Win32
+		{44DFA78A-BE69-3F6D-812B-5736BB6AF9F0}.RelWithDebInfo|x86.Build.0 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
