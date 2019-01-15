@@ -35,6 +35,7 @@ struct ngx_stream_lua_request_s {
 };
 
 
+void ngx_stream_lua_request_empty_handler(ngx_stream_lua_request_t *r);
 void ngx_stream_lua_empty_handler(ngx_event_t *wev);
 void ngx_stream_lua_request_handler(ngx_event_t *ev);
 void ngx_stream_lua_block_reading(ngx_stream_lua_request_t *r);

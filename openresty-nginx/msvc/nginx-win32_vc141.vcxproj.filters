@@ -669,18 +669,6 @@
     <ClCompile Include="..\bundle\form-input-nginx-module-0.12\src\ngx_http_form_input_module.c">
       <Filter>bundle\http\form-input</Filter>
     </ClCompile>
-    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_hash.c">
-      <Filter>bundle\ndk\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_log.c">
-      <Filter>bundle\ndk\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk.c">
-      <Filter>bundle\ndk\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.0\src\hash\murmurhash2.c">
-      <Filter>bundle\ndk\src\hash</Filter>
-    </ClCompile>
     <ClCompile Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_escape_uri.c">
       <Filter>bundle\http\set-misc</Filter>
     </ClCompile>
@@ -1161,6 +1149,21 @@
     <ClCompile Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_input_filters.c">
       <Filter>bundle\luacore</Filter>
     </ClCompile>
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_semaphore.c">
+      <Filter>bundle\lua\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_log_ringbuf.c">
+      <Filter>bundle\lua\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_ssl_certby.c">
+      <Filter>bundle\lua\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\ndk.c">
+      <Filter>bundle\ndk\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\hash\murmurhash2.c">
+      <Filter>bundle\ndk\src\hash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\nginx\src\event\modules\ngx_iocp_module.h">
@@ -1462,75 +1465,6 @@
     </ClInclude>
     <ClInclude Include="..\bundle\form-input-nginx-module-0.12\src\ddebug.h">
       <Filter>bundle\http\form-input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_complex_path.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_complex_value.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_conf_file.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_debug.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_encoding.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_hash.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_http.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_http_headers.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_log.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_parse.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_path.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_process.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_regex.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_rewrite.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_set_var.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_string.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_string_util.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_upstream_list.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_uri.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\ndk_buf.h">
-      <Filter>bundle\ndk\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\hash\sha.h">
-      <Filter>bundle\ndk\src\hash</Filter>
-    </ClInclude>
-    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.0\src\hash\md5.h">
-      <Filter>bundle\ndk\src\hash</Filter>
     </ClInclude>
     <ClInclude Include="..\bundle\set-misc-nginx-module-0.32\src\ngx_http_set_escape_uri.h">
       <Filter>bundle\http\set-misc</Filter>
@@ -2012,6 +1946,24 @@
     </ClInclude>
     <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_input_filters.h">
       <Filter>bundle\luacore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_log_ringbuf.h">
+      <Filter>bundle\lua\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_semaphore.h">
+      <Filter>bundle\lua\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\stream-lua-nginx-module-0.0.6\src\ngx_stream_lua_ssl_certby.h">
+      <Filter>bundle\lua\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\ndk.h">
+      <Filter>bundle\ndk\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\hash\sha.h">
+      <Filter>bundle\ndk\src\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\hash\md5.h">
+      <Filter>bundle\ndk\src\hash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

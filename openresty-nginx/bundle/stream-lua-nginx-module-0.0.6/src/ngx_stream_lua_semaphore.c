@@ -368,15 +368,17 @@ ngx_stream_lua_ffi_sema_wait(ngx_stream_lua_request_t *r,
     ngx_stream_lua_co_ctx_t              *wait_co_ctx;
     ngx_int_t                             rc;
 
+#if (nginx_version >= 1007005)
+    int posted = sem->sem_event.posted;
+#else
+    int posted = sem->sem_event.prev ? 1 : 0;
+#endif
+
     ngx_log_debug4(NGX_LOG_DEBUG_STREAM, ngx_cycle->log, 0,
                    "stream lua semaphore wait: %p, timeout: %d, "
                    "resources: %d, event posted: %d",
                    sem, wait_ms, sem->resource_count,
-#if (nginx_version >= 1007005)
-                   (int) sem->sem_event.posted
-#else
-                   sem->sem_event.prev ? 1 : 0
-#endif
+                   posted
                    );
 
     ctx = ngx_stream_lua_get_module_ctx(r, ngx_stream_lua_module);
