@@ -49,7 +49,7 @@ env:
     - TEST_NGINX_SLEEP=0.006
   matrix:
     - NGINX_VERSION=1.13.6 OPENSSL_VER=1.0.2n OPENSSL_OPT="" OPENSSL_PATCH_VER=1.0.2h
-    - NGINX_VERSION=1.13.6 OPENSSL_VER=1.1.0g OPENSSL_OPT="" OPENSSL_PATCH_VER=1.1.0d
+    - NGINX_VERSION=1.13.6 OPENSSL_VER=1.1.0h OPENSSL_OPT="" OPENSSL_PATCH_VER=1.1.0d
     # TODO: when adding an OpenSSL version >= 1.1.1, please add "enable-tls1_3"
     # to $OPENSSL_OPT.
 
@@ -72,7 +72,7 @@ install:
   - git clone https://github.com/openresty/no-pool-nginx.git ../no-pool-nginx
   - git clone https://github.com/openresty/openresty-devel-utils.git
   - git clone https://github.com/openresty/mockeagain.git
-  - git clone https://github.com/openresty/lua-cjson.git
+  - git clone https://github.com/openresty/lua-cjson.git lua-cjson
   - git clone https://github.com/openresty/lua-upstream-nginx-module.git ../lua-upstream-nginx-module
   - git clone https://github.com/openresty/echo-nginx-module.git ../echo-nginx-module
   - git clone https://github.com/openresty/nginx-eval-module.git ../nginx-eval-module
@@ -89,7 +89,7 @@ install:
   - git clone https://github.com/openresty/lua-resty-lrucache.git ../lua-resty-lrucache
   - git clone https://github.com/openresty/lua-resty-mysql.git ../lua-resty-mysql
   - git clone https://github.com/openresty/stream-lua-nginx-module.git ../stream-lua-nginx-module
-  - git clone -b v2.1-agentzh https://github.com/openresty/luajit2.git
+  - git clone -b v2.1-agentzh https://github.com/openresty/luajit2.git luajit2
 
 before_script:
   - mysql -uroot -e 'create database ngx_test; grant all on ngx_test.* to "ngx_test"@"%" identified by "ngx_test"; flush privileges;'
