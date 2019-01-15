@@ -100,8 +100,10 @@ ndk_vcatstrf (ngx_pool_t *pool, ngx_str_t *dest, const char *fmt, va_list args)
     argc = strlen (fmt);
 
     ngx_str_t      *s;
-    ndk_estr_t     *sp, *sp2, ss [argc];
-    u_char        cs [argc];
+    /*ndk_estr_t     *sp, *sp2, ss [argc];*/
+    ndk_estr_t     *sp, *sp2, ss[1024];
+	/*u_char        cs [argc];*/
+    u_char        cs[1024];
 
     sp = sp2 = ss;
     cp = cs;

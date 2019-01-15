@@ -13,7 +13,7 @@
 
 /* include all optional modules */
 
-#ifdef NDK_ALL
+/*#ifdef NDK_ALL*/
 
 #ifndef NDK_BUF
 #define NDK_BUF 1
@@ -39,9 +39,9 @@
 #ifndef NDK_PATH
 #define NDK_PATH 1
 #endif
-#ifndef NDK_PROCESS
+/*#ifndef NDK_PROCESS
 #define NDK_PROCESS 1
-#endif
+#endif*/
 #ifndef NDK_REGEX
 #define NDK_REGEX 1
 #endif
@@ -61,7 +61,7 @@
 #define NDK_URI 1
 #endif
 
-#endif
+/*#endif*/
 
 
 /* module dependencies */

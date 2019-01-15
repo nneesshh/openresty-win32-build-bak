@@ -33,6 +33,12 @@ ndk_conf_set_encoding_slot (ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
     }
 
 
+#ifdef _MSC_VER
+#define strcasecmp _stricmp
+#define strncasecmp  _strnicmp 
+#endif
+
+
     if (len == value[1].len && !strncasecmp (ep->to, ep->from, len)) {
 
         ngx_log_error (NGX_LOG_WARN, cf->log, 0, 

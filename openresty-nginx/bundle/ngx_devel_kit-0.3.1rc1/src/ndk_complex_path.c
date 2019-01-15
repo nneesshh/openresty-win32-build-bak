@@ -99,7 +99,6 @@ ndk_conf_set_http_complex_path_slot (ngx_conf_t *cf, ngx_command_t *cmd, void *c
     char  *p = conf;
 
     ngx_str_t                   *path;
-    ngx_array_t                 *a;
     ngx_conf_post_t             *post;
     ndk_http_complex_path_t     *cp;
 
@@ -119,7 +118,7 @@ ndk_conf_set_http_complex_path_slot (ngx_conf_t *cf, ngx_command_t *cmd, void *c
 
     if (cmd->post) {
         post = cmd->post;
-        return  post->post_handler (cf, post, a);
+        return  post->post_handler (cf, post, cp->a);
     }
 
     return  NGX_CONF_OK;

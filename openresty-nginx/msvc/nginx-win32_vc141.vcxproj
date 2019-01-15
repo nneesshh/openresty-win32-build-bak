@@ -546,6 +546,7 @@
     <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_util.h" />
     <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_variable.h" />
     <ClInclude Include="..\bundle\lua-nginx-module-0.10.14\src\ngx_http_lua_worker.h" />
+    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\objs\ndk_config.h" />
     <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\hash\md5.h" />
     <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\hash\sha.h" />
     <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\ndk.h" />

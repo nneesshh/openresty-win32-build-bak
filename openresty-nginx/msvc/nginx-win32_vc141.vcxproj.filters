@@ -1965,6 +1965,9 @@
     <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\src\hash\md5.h">
       <Filter>bundle\ndk\src\hash</Filter>
     </ClInclude>
+    <ClInclude Include="..\bundle\ngx_devel_kit-0.3.1rc1\objs\ndk_config.h">
+      <Filter>bundle\ndk\src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\nginx\src\dtrace\nginx.stp">
