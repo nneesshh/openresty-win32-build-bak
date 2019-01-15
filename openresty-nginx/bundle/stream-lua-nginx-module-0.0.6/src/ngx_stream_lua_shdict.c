@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_shdict.c.tt2
+ */
+
+
+/*
  * Copyright (C) Yichun Zhang (agentzh)
  */
 
@@ -332,6 +340,7 @@ ngx_stream_lua_inject_shdict_api(ngx_stream_lua_main_conf_t *lmcf, lua_State *L)
 
     ngx_uint_t                   i;
     ngx_shm_zone_t             **zone;
+    ngx_shm_zone_t             **zone_udata;
 
     if (lmcf->shdict_zones != NULL) {
         lua_createtable(L, 0, lmcf->shdict_zones->nelts /* nrec */);
@@ -403,7 +412,9 @@ ngx_stream_lua_inject_shdict_api(ngx_stream_lua_main_conf_t *lmcf, lua_State *L)
 
             lua_createtable(L, 1 /* narr */, 0 /* nrec */);
                 /* table of zone[i] */
-            lua_pushlightuserdata(L, zone[i]); /* shared mt key ud */
+            zone_udata = lua_newuserdata(L, sizeof(ngx_shm_zone_t *));
+                /* shared mt key ud */
+            *zone_udata = zone[i];
             lua_rawseti(L, -2, SHDICT_USERDATA_INDEX); /* {zone[i]} */
             lua_pushvalue(L, -3); /* shared mt key ud mt */
             lua_setmetatable(L, -2); /* shared mt key ud */
@@ -438,11 +449,17 @@ static ngx_inline ngx_shm_zone_t *
 ngx_stream_lua_shdict_get_zone(lua_State *L, int index)
 {
     ngx_shm_zone_t      *zone;
+    ngx_shm_zone_t     **zone_udata;
 
     lua_rawgeti(L, index, SHDICT_USERDATA_INDEX);
-    zone = lua_touserdata(L, -1);
+    zone_udata = lua_touserdata(L, -1);
     lua_pop(L, 1);
 
+    if (zone_udata == NULL) {
+        return NULL;
+    }
+
+    zone = *zone_udata;
     return zone;
 }
 
@@ -2230,11 +2247,21 @@ ngx_stream_lua_find_zone(u_char *name_data, size_t name_len)
 }
 
 
-#ifndef NGX_LUA_NO_FFI_API
+ngx_shm_zone_t *
+ngx_stream_lua_ffi_shdict_udata_to_zone(void *zone_udata)
+{
+    if (zone_udata == NULL) {
+        return NULL;
+    }
+
+    return *(ngx_shm_zone_t **) zone_udata;
+}
+
+
 int
 ngx_stream_lua_ffi_shdict_store(ngx_shm_zone_t *zone, int op, u_char *key,
     size_t key_len, int value_type, u_char *str_value_buf,
-    size_t str_value_len, double num_value, int exptime, int user_flags,
+    size_t str_value_len, double num_value, long exptime, int user_flags,
     char **errmsg, int *forcible)
 {
     int                          i, n;
@@ -2248,11 +2275,7 @@ ngx_stream_lua_ffi_shdict_store(ngx_shm_zone_t *zone, int op, u_char *key,
     ngx_stream_lua_shdict_ctx_t         *ctx;
     ngx_stream_lua_shdict_node_t        *sd;
 
-    if (zone == NULL) {
-        return NGX_ERROR;
-    }
-
-    dd("exptime: %d", exptime);
+    dd("exptime: %ld", exptime);
 
     ctx = zone->data;
 
@@ -2514,10 +2537,6 @@ ngx_stream_lua_ffi_shdict_get(ngx_shm_zone_t *zone, u_char *key,
     ngx_stream_lua_shdict_ctx_t         *ctx;
     ngx_stream_lua_shdict_node_t        *sd;
 
-    if (zone == NULL) {
-        return NGX_ERROR;
-    }
-
     *err = NULL;
 
     ctx = zone->data;
@@ -2660,10 +2679,6 @@ ngx_stream_lua_ffi_shdict_incr(ngx_shm_zone_t *zone, u_char *key,
 
     ngx_stream_lua_shdict_ctx_t         *ctx;
     ngx_stream_lua_shdict_node_t        *sd;
-
-    if (zone == NULL) {
-        return NGX_ERROR;
-    }
 
     if (init_ttl > 0) {
         tp = ngx_timeofday();
@@ -2930,7 +2945,7 @@ ngx_stream_lua_shdict_peek(ngx_shm_zone_t *shm_zone, ngx_uint_t hash,
 }
 
 
-int
+long
 ngx_stream_lua_ffi_shdict_get_ttl(ngx_shm_zone_t *zone, u_char *key,
     size_t key_len)
 {
@@ -2942,10 +2957,6 @@ ngx_stream_lua_ffi_shdict_get_ttl(ngx_shm_zone_t *zone, u_char *key,
 
     ngx_stream_lua_shdict_ctx_t         *ctx;
     ngx_stream_lua_shdict_node_t        *sd;
-
-    if (zone == NULL) {
-        return NGX_ERROR;
-    }
 
     ctx = zone->data;
     hash = ngx_crc32_short(key, key_len);
@@ -2979,7 +2990,7 @@ ngx_stream_lua_ffi_shdict_get_ttl(ngx_shm_zone_t *zone, u_char *key,
 
 int
 ngx_stream_lua_ffi_shdict_set_expire(ngx_shm_zone_t *zone, u_char *key,
-    size_t key_len, int exptime)
+    size_t key_len, long exptime)
 {
     uint32_t                     hash;
     ngx_int_t                    rc;
@@ -2987,10 +2998,6 @@ ngx_stream_lua_ffi_shdict_set_expire(ngx_shm_zone_t *zone, u_char *key,
 
     ngx_stream_lua_shdict_ctx_t         *ctx;
     ngx_stream_lua_shdict_node_t        *sd;
-
-    if (zone == NULL) {
-        return NGX_ERROR;
-    }
 
     if (exptime > 0) {
         tp = ngx_timeofday();
@@ -3049,9 +3056,6 @@ ngx_stream_lua_ffi_shdict_free_space(ngx_shm_zone_t *zone)
     return bytes;
 }
 #    endif /* nginx_version >= 1011007 */
-
-
-#endif /* NGX_LUA_NO_FFI_API */
 
 
 /* vi:set ft=c ts=4 sw=4 et fdm=marker: */

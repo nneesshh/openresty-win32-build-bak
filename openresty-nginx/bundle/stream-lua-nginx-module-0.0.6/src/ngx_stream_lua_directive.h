@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_directive.h.tt2
+ */
+
+
+/*
  * Copyright (C) Xiaozhe Wang (chaoslawful)
  * Copyright (C) Yichun Zhang (agentzh)
  */
@@ -52,6 +60,8 @@ char *ngx_stream_lua_conf_lua_block_parse(ngx_conf_t *cf,
     ngx_command_t *cmd);
 
 
+char *ngx_stream_lua_capture_error_log(ngx_conf_t *cf, ngx_command_t *cmd,
+    void *conf);
 
 #endif /* _NGX_STREAM_LUA_DIRECTIVE_H_INCLUDED_ */
 

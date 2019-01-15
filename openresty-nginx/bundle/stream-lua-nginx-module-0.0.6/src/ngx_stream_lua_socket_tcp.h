@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_socket_tcp.h.tt2
+ */
+
+
+/*
  * Copyright (C) Yichun Zhang (agentzh)
  */
 
@@ -20,8 +28,6 @@
 #define NGX_STREAM_LUA_SOCKET_FT_PARTIALWRITE  0x0040
 #define NGX_STREAM_LUA_SOCKET_FT_CLIENTABORT   0x0080
 #define NGX_STREAM_LUA_SOCKET_FT_SSL           0x0100
-
-#define NGX_STREAM_LUA_SOCKET_FT_CONNECTFAILED 0x1000
 
 
 typedef struct ngx_stream_lua_socket_tcp_upstream_s

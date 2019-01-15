@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_util.h.tt2
+ */
+
+
+/*
  * Copyright (C) Xiaozhe Wang (chaoslawful)
  * Copyright (C) Yichun Zhang (agentzh)
  */
@@ -10,6 +18,7 @@
 
 
 #include "ngx_stream_lua_common.h"
+#include "ngx_stream_lua_api.h"
 
 
 #ifndef NGX_UNESCAPE_URI_COMPONENT
@@ -79,6 +88,7 @@ extern char ngx_stream_lua_headers_metatable_key;
      : (c) == NGX_STREAM_LUA_CONTEXT_INIT_WORKER ? "init_worker_by_lua*"     \
      : (c) == NGX_STREAM_LUA_CONTEXT_BALANCER ? "balancer_by_lua*"           \
      : (c) == NGX_STREAM_LUA_CONTEXT_PREREAD ? "preread_by_lua*"             \
+     : (c) == NGX_STREAM_LUA_CONTEXT_SSL_CERT ? "ssl_certificate_by_lua*"    \
      : "(unknown)")
 
 
@@ -89,7 +99,6 @@ extern char ngx_stream_lua_headers_metatable_key;
     }
 
 
-#ifndef NGX_LUA_NO_FFI_API
 static ngx_inline ngx_int_t
 ngx_stream_lua_ffi_check_context(ngx_stream_lua_ctx_t *ctx,
     unsigned flags, u_char *err, size_t *errlen)
@@ -105,7 +114,6 @@ ngx_stream_lua_ffi_check_context(ngx_stream_lua_ctx_t *ctx,
 
     return NGX_OK;
 }
-#endif
 
 
 #define ngx_stream_lua_check_fake_request(L, r)                              \
@@ -183,7 +191,9 @@ ngx_int_t ngx_stream_lua_open_and_stat_file(u_char *name,
 ngx_chain_t *ngx_stream_lua_chain_get_free_buf(ngx_log_t *log, ngx_pool_t *p,
     ngx_chain_t **free, size_t len);
 
+#ifndef OPENRESTY_LUAJIT
 void ngx_stream_lua_create_new_globals_table(lua_State *L, int narr, int nrec);
+#endif
 
 int ngx_stream_lua_traceback(lua_State *L);
 
@@ -240,6 +250,9 @@ int ngx_stream_lua_do_call(ngx_log_t *log, lua_State *L);
 void ngx_stream_lua_cleanup_free(ngx_stream_lua_request_t *r,
     ngx_stream_lua_cleanup_pt *cleanup);
 
+#if (NGX_STREAM_LUA_HAVE_SA_RESTART)
+void ngx_stream_lua_set_sa_restart(ngx_log_t *log);
+#endif
 
 #define ngx_stream_lua_check_if_abortable(L, ctx)                            \
     if ((ctx)->no_abort) {                                                   \
@@ -360,6 +373,9 @@ ngx_stream_lua_get_lua_vm(ngx_stream_lua_request_t *r,
 static ngx_inline ngx_stream_lua_request_t *
 ngx_stream_lua_get_req(lua_State *L)
 {
+#ifdef OPENRESTY_LUAJIT
+    return lua_getexdata(L);
+#else
     ngx_stream_lua_request_t    *r;
 
     lua_getglobal(L, ngx_stream_lua_req_key);
@@ -367,14 +383,19 @@ ngx_stream_lua_get_req(lua_State *L)
     lua_pop(L, 1);
 
     return r;
+#endif
 }
 
 
 static ngx_inline void
 ngx_stream_lua_set_req(lua_State *L, ngx_stream_lua_request_t *r)
 {
+#ifdef OPENRESTY_LUAJIT
+    lua_setexdata(L, (void *) r);
+#else
     lua_pushlightuserdata(L, r);
     lua_setglobal(L, ngx_stream_lua_req_key);
+#endif
 }
 
 

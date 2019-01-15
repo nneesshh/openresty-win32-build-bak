@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_module.c.tt2
+ */
+
+
+/*
  * Copyright (C) Xiaozhe Wang (chaoslawful)
  * Copyright (C) Yichun Zhang (agentzh)
  */
@@ -19,6 +27,8 @@
 #include "ngx_stream_lua_probe.h"
 #include "ngx_stream_lua_balancer.h"
 #include "ngx_stream_lua_logby.h"
+#include "ngx_stream_lua_semaphore.h"
+#include "ngx_stream_lua_ssl_certby.h"
 
 
 #include "ngx_stream_lua_prereadby.h"
@@ -91,6 +101,19 @@ static ngx_command_t ngx_stream_lua_cmds[] = {
       0,
       NULL },
 
+    { ngx_string("lua_capture_error_log"),
+      NGX_STREAM_MAIN_CONF|NGX_CONF_TAKE1,
+      ngx_stream_lua_capture_error_log,
+      0,
+      0,
+      NULL },
+
+    { ngx_string("lua_sa_restart"),
+      NGX_STREAM_MAIN_CONF|NGX_CONF_FLAG,
+      ngx_conf_set_flag_slot,
+      NGX_STREAM_MAIN_CONF_OFFSET,
+      offsetof(ngx_stream_lua_main_conf_t, set_sa_restart),
+      NULL },
 
 #if (NGX_PCRE)
     { ngx_string("lua_regex_cache_max_entries"),
@@ -350,6 +373,20 @@ static ngx_command_t ngx_stream_lua_cmds[] = {
       offsetof(ngx_stream_lua_srv_conf_t, ssl_ciphers),
       NULL },
 
+    { ngx_string("ssl_certificate_by_lua_block"),
+      NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS,
+      ngx_stream_lua_ssl_cert_by_lua_block,
+      NGX_STREAM_SRV_CONF_OFFSET,
+      0,
+      (void *) ngx_stream_lua_ssl_cert_handler_inline },
+
+    { ngx_string("ssl_certificate_by_lua_file"),
+      NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1,
+      ngx_stream_lua_ssl_cert_by_lua,
+      NGX_STREAM_SRV_CONF_OFFSET,
+      0,
+      (void *) ngx_stream_lua_ssl_cert_handler_file },
+
 
     { ngx_string("lua_ssl_verify_depth"),
       NGX_STREAM_MAIN_CONF|NGX_STREAM_SRV_CONF|NGX_CONF_TAKE1,
@@ -431,6 +468,7 @@ ngx_stream_lua_init(ngx_conf_t *cf)
     ngx_stream_handler_pt              *h;
     ngx_stream_core_main_conf_t        *cmcf;
 
+    ngx_pool_cleanup_t         *cln;
 
     lmcf = ngx_stream_conf_get_module_main_conf(cf,
                                                 ngx_stream_lua_module);
@@ -476,7 +514,6 @@ ngx_stream_lua_init(ngx_conf_t *cf)
     }
 
 
-#ifndef NGX_LUA_NO_FFI_API
     /* add the cleanup of semaphores after the lua_close */
     cln = ngx_pool_cleanup_add(cf->pool, 0);
     if (cln == NULL) {
@@ -485,11 +522,23 @@ ngx_stream_lua_init(ngx_conf_t *cf)
 
     cln->data = lmcf;
     cln->handler = ngx_stream_lua_sema_mm_cleanup;
-#endif
 
 
     if (lmcf->lua == NULL) {
         dd("initializing lua vm");
+
+#ifndef OPENRESTY_LUAJIT
+        if (ngx_process != NGX_PROCESS_SIGNALLER && !ngx_test_config) {
+            ngx_log_error(NGX_LOG_ALERT, cf->log, 0,
+                          "detected a LuaJIT version which is not OpenResty's"
+                          "; many optimizations will be disabled and "
+                          "performance will be compromised (see "
+                          "https://github.com/openresty/luajit2 for "
+                          "OpenResty's LuaJIT or, even better, consider using "
+                          "the OpenResty releases from https://openresty.org/"
+                          "en/download.html)");
+        }
+#endif
 
 
         lmcf->lua = ngx_stream_lua_init_vm(NULL, cf->cycle, cf->pool, lmcf,
@@ -553,9 +602,7 @@ ngx_stream_lua_lowat_check(ngx_conf_t *cf, void *post, void *data)
 static void *
 ngx_stream_lua_create_main_conf(ngx_conf_t *cf)
 {
-#ifndef NGX_LUA_NO_FFI_API
     ngx_int_t       rc;
-#endif
 
     ngx_stream_lua_main_conf_t          *lmcf;
 
@@ -598,18 +645,18 @@ ngx_stream_lua_create_main_conf(ngx_conf_t *cf)
 
     lmcf->postponed_to_preread_phase_end = NGX_CONF_UNSET;
 
+    lmcf->set_sa_restart = NGX_CONF_UNSET;
+
 #if (NGX_STREAM_LUA_HAVE_MALLOC_TRIM)
     lmcf->malloc_trim_cycle = NGX_CONF_UNSET_UINT;
 #endif
 
-#ifndef NGX_LUA_NO_FFI_API
     rc = ngx_stream_lua_sema_mm_init(cf, lmcf);
     if (rc != NGX_OK) {
         return NULL;
     }
 
     dd("nginx Lua module main config structure initialized!");
-#endif
 
     return lmcf;
 }
@@ -637,6 +684,12 @@ ngx_stream_lua_init_main_conf(ngx_conf_t *cf, void *conf)
     if (lmcf->max_running_timers == NGX_CONF_UNSET) {
         lmcf->max_running_timers = 256;
     }
+
+#if (NGX_STREAM_LUA_HAVE_SA_RESTART)
+    if (lmcf->set_sa_restart == NGX_CONF_UNSET) {
+        lmcf->set_sa_restart = 1;
+    }
+#endif
 
 #if (NGX_STREAM_LUA_HAVE_MALLOC_TRIM)
     if (lmcf->malloc_trim_cycle == NGX_CONF_UNSET_UINT) {
@@ -708,6 +761,51 @@ ngx_stream_lua_merge_srv_conf(ngx_conf_t *cf, void *parent, void *child)
 {
     ngx_stream_lua_srv_conf_t       *prev = parent;
     ngx_stream_lua_srv_conf_t       *conf = child;
+#if (NGX_STREAM_SSL)
+    ngx_stream_ssl_conf_t           *sscf;
+
+    dd("merge srv conf");
+
+    if (conf->srv.ssl_cert_src.len == 0) {
+        conf->srv.ssl_cert_src = prev->srv.ssl_cert_src;
+        conf->srv.ssl_cert_src_key = prev->srv.ssl_cert_src_key;
+        conf->srv.ssl_cert_handler = prev->srv.ssl_cert_handler;
+    }
+
+    if (conf->srv.ssl_cert_src.len) {
+        sscf = ngx_stream_conf_get_module_srv_conf(cf, ngx_stream_ssl_module);
+        if (sscf == NULL || sscf->ssl.ctx == NULL) {
+            ngx_log_error(NGX_LOG_EMERG, cf->log, 0,
+                          "no ssl configured for the server");
+
+            return NGX_CONF_ERROR;
+        }
+
+#ifdef LIBRESSL_VERSION_NUMBER
+
+        ngx_log_error(NGX_LOG_EMERG, cf->log, 0,
+                      "LibreSSL is not supported by ssl_certificate_by_lua*");
+        return NGX_CONF_ERROR;
+
+#else
+
+#   if OPENSSL_VERSION_NUMBER >= 0x1000205fL
+
+        SSL_CTX_set_cert_cb(sscf->ssl.ctx, ngx_stream_lua_ssl_cert_handler, NULL);
+
+#   else
+
+        ngx_log_error(NGX_LOG_EMERG, cf->log, 0,
+                      "OpenSSL too old to support ssl_certificate_by_lua*");
+        return NGX_CONF_ERROR;
+
+#   endif
+
+#endif
+    }
+
+
+#endif  /* NGX_STREAM_SSL */
 
 #if (NGX_STREAM_SSL)
 
@@ -777,18 +875,18 @@ ngx_stream_lua_merge_srv_conf(ngx_conf_t *cf, void *parent, void *child)
 #if (NGX_STREAM_SSL)
 
 static ngx_int_t
-ngx_stream_lua_set_ssl(ngx_conf_t *cf, ngx_stream_lua_srv_conf_t *lxcf)
+ngx_stream_lua_set_ssl(ngx_conf_t *cf, ngx_stream_lua_srv_conf_t *lscf)
 {
     ngx_pool_cleanup_t  *cln;
 
-    lxcf->ssl = ngx_pcalloc(cf->pool, sizeof(ngx_ssl_t));
-    if (lxcf->ssl == NULL) {
+    lscf->ssl = ngx_pcalloc(cf->pool, sizeof(ngx_ssl_t));
+    if (lscf->ssl == NULL) {
         return NGX_ERROR;
     }
 
-    lxcf->ssl->log = cf->log;
+    lscf->ssl->log = cf->log;
 
-    if (ngx_ssl_create(lxcf->ssl, lxcf->ssl_protocols, NULL) != NGX_OK) {
+    if (ngx_ssl_create(lscf->ssl, lscf->ssl_protocols, NULL) != NGX_OK) {
         return NGX_ERROR;
     }
 
@@ -798,25 +896,25 @@ ngx_stream_lua_set_ssl(ngx_conf_t *cf, ngx_stream_lua_srv_conf_t *lxcf)
     }
 
     cln->handler = ngx_ssl_cleanup_ctx;
-    cln->data = lxcf->ssl;
+    cln->data = lscf->ssl;
 
-    if (SSL_CTX_set_cipher_list(lxcf->ssl->ctx,
-                                (const char *) lxcf->ssl_ciphers.data)
+    if (SSL_CTX_set_cipher_list(lscf->ssl->ctx,
+                                (const char *) lscf->ssl_ciphers.data)
         == 0)
     {
         ngx_ssl_error(NGX_LOG_EMERG, cf->log, 0,
                       "SSL_CTX_set_cipher_list(\"%V\") failed",
-                      &lxcf->ssl_ciphers);
+                      &lscf->ssl_ciphers);
         return NGX_ERROR;
     }
 
-    if (lxcf->ssl_trusted_certificate.len) {
+    if (lscf->ssl_trusted_certificate.len) {
 
 #if defined(nginx_version) && nginx_version >= 1003007
 
-        if (ngx_ssl_trusted_certificate(cf, lxcf->ssl,
-                                        &lxcf->ssl_trusted_certificate,
-                                        lxcf->ssl_verify_depth)
+        if (ngx_ssl_trusted_certificate(cf, lscf->ssl,
+                                        &lscf->ssl_trusted_certificate,
+                                        lscf->ssl_verify_depth)
             != NGX_OK)
         {
             return NGX_ERROR;
@@ -832,9 +930,9 @@ ngx_stream_lua_set_ssl(ngx_conf_t *cf, ngx_stream_lua_srv_conf_t *lxcf)
 #endif
     }
 
-    dd("ssl crl: %.*s", (int) lxcf->ssl_crl.len, lxcf->ssl_crl.data);
+    dd("ssl crl: %.*s", (int) lscf->ssl_crl.len, lscf->ssl_crl.data);
 
-    if (ngx_ssl_crl(cf, lxcf->ssl, &lxcf->ssl_crl) != NGX_OK) {
+    if (ngx_ssl_crl(cf, lscf->ssl, &lscf->ssl_crl) != NGX_OK) {
         return NGX_ERROR;
     }
 

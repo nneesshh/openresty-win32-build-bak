@@ -1,5 +1,13 @@
 
 /*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_initworkerby.c.tt2
+ */
+
+
+/*
  * Copyright (C) Yichun Zhang (agentzh)
  */
 
@@ -32,7 +40,6 @@ ngx_stream_lua_init_worker(ngx_cycle_t *cycle)
     ngx_open_file_t                 *file, *ofile;
     ngx_list_part_t                 *part;
     ngx_connection_t                *c = NULL;
-    ngx_conf_file_t                 *conf_file;
     ngx_stream_module_t             *module;
     ngx_stream_lua_request_t        *r = NULL;
     ngx_stream_lua_ctx_t            *ctx;
@@ -40,6 +47,7 @@ ngx_stream_lua_init_worker(ngx_cycle_t *cycle)
 
     ngx_stream_lua_main_conf_t          *lmcf;
 
+    ngx_conf_file_t         *conf_file;
     ngx_stream_session_t    *s;
 
     ngx_stream_core_srv_conf_t    *clcf, *top_clcf;
@@ -54,12 +62,11 @@ ngx_stream_lua_init_worker(ngx_cycle_t *cycle)
     /* lmcf != NULL && lmcf->lua != NULL */
 
 #if !(NGX_WIN32)
-    /* disable init_worker_by_lua* and destroy lua VM in cache processes */
     if (ngx_process == NGX_PROCESS_HELPER
 #   ifdef HAVE_PRIVILEGED_PROCESS_PATCH
         && !ngx_is_privileged_agent
 #   endif
-        )
+       )
     {
         ngx_log_debug2(NGX_LOG_DEBUG_STREAM, ngx_cycle->log, 0,
                        "lua close the global Lua VM %p in the "
@@ -71,6 +78,12 @@ ngx_stream_lua_init_worker(ngx_cycle_t *cycle)
         return NGX_OK;
     }
 #endif  /* NGX_WIN32 */
+
+#if NGX_STREAM_LUA_HAVE_SA_RESTART
+    if (lmcf->set_sa_restart) {
+        ngx_stream_lua_set_sa_restart(ngx_cycle->log);
+    }
+#endif
 
     if (lmcf->init_worker_handler == NULL) {
         return NGX_OK;
@@ -177,12 +190,12 @@ ngx_stream_lua_init_worker(ngx_cycle_t *cycle)
     conf_file->file.name.data = (u_char *) "dummy";
     conf_file->file.name.len = sizeof("dummy") - 1;
     conf_file->line = 1;
+    conf.conf_file = conf_file;
 
     conf.ctx = &stream_ctx;
     conf.cycle = fake_cycle;
     conf.pool = fake_cycle->pool;
     conf.log = cycle->log;
-    conf.conf_file = conf_file;
 
 
     stream_ctx.srv_conf = ngx_pcalloc(conf.pool,

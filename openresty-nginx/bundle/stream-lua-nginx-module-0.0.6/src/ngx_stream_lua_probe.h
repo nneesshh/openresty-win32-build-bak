@@ -1,3 +1,11 @@
+
+/*
+ * !!! DO NOT EDIT DIRECTLY !!!
+ * This file was automatically generated from the following template:
+ *
+ * src/subsys/ngx_subsys_lua_probe.h.tt2
+ */
+
 /*
  * automatically generated from the file dtrace/ngx_lua_provider.d by the
  *  gen-dtrace-probe-header tool in the nginx-devel-utils project:
@@ -46,7 +54,8 @@
     NGINX_LUA_HTTP_LUA_SOCKET_TCP_RECEIVE_DONE(r, u, data, len)
 
 #define ngx_stream_lua_probe_socket_tcp_setkeepalive_buf_unread(r, u,        \
-                                                                 data, len)  \
+                                                                data,        \
+                                                                len)         \
     NGINX_LUA_HTTP_LUA_SOCKET_TCP_SETKEEPALIVE_BUF_UNREAD(r, u, data, len)
 
 #define ngx_stream_lua_probe_user_thread_spawn(r, creator, newthread)        \
