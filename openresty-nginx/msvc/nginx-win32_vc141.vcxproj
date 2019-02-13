@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>OPENRESTY_LUAJIT;WIN32;BGDWIN32;NONDLL;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=1;_CONSOLE;NGX_LUA_USE_ASSERT=1;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPENRESTY_LUAJIT;WIN32;_CONSOLE;BGDWIN32;NONDLL;NGX_HAVE_ATOMIC_OPS;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_DEBUG=1;NGX_LUA_USE_ASSERT=1;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -78,6 +78,7 @@
       <ShowProgress>NotSet</ShowProgress>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
+      <ModuleDefinitionFile>openresty_ffi.def</ModuleDefinitionFile>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../src/nginx</AdditionalIncludeDirectories>
@@ -87,7 +88,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>OPENRESTY_LUAJIT;WIN32;BGDWIN32;NONDLL;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_HAVE_ATOMIC_OPS;NGX_DEBUG=0;_CONSOLE;NGX_LUA_USE_ASSERT=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPENRESTY_LUAJIT;WIN32;_CONSOLE;BGDWIN32;NONDLL;NGX_HAVE_ATOMIC_OPS;JEMALLOC_MANGLE;JEMALLOC_EXPORT=;JEMALLOC_STATIC;NGX_DEBUG=0;NGX_LUA_USE_ASSERT=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
@@ -108,6 +109,7 @@
       <IgnoreSpecificDefaultLibraries>LIBCMT.LIB;</IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
       <ForceSymbolReferences>__tcmalloc;%(ForceSymbolReferences)</ForceSymbolReferences>
+      <ModuleDefinitionFile>openresty_ffi.def</ModuleDefinitionFile>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>../src/nginx</AdditionalIncludeDirectories>
@@ -747,6 +749,7 @@
     <None Include="..\src\nginx\src\os\win32\nginx_icon16.xpm" />
     <None Include="..\src\nginx\src\os\win32\nginx_icon32.xpm" />
     <None Include="..\src\nginx\src\os\win32\nginx_icon48.xpm" />
+    <None Include="openresty_ffi.def" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\src\nginx\src\os\win32\nginx.ico" />

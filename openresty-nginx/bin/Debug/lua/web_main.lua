@@ -1,5 +1,6 @@
+local b = require "bootstrap"
 --[[]]
-require("mobdebug_start")
+--require("mobdebug_start")
 --[[]]
 -- require("test_web")
 

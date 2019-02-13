@@ -25,6 +25,13 @@ ngx_http_wait_request_handlerex(ngx_event_t *rev)
 
     c = rev->data;
 
+	if (rev->eof) {
+    /*if (rev->complete == 0 && rev->ready == 0) {*/
+        ngx_log_error(NGX_LOG_INFO, c->log, 0, "client io zero bytes");
+        ngx_http_close_connection(c);
+        return;
+    }
+
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http wait request handler");
 
     if (rev->timedout) {
@@ -636,8 +643,8 @@ ngx_http_keepalive_handlerex(ngx_event_t *rev)
     ngx_http_process_request_line(rev);
 
 #if (NGX_DEBUG)
-    // debug
-    output_debug_string(c, "\nngx_http_keepalive_handlerex(): @@@@@@@@@@@@@@@@ end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
+    // debug, c->log maybe NULL because connection may be closed
+    output_debug_string(NULL, "\nngx_http_keepalive_handlerex(): @@@@@@@@@@@@@@@@ end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif

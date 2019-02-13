@@ -443,4 +443,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="luajit.def" />
+  </ItemGroup>
 </Project>

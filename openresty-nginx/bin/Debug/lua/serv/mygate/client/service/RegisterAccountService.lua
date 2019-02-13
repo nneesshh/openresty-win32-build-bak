@@ -25,24 +25,14 @@ function _M.onResponse(msg, msgSn)
     local email = msg.req.email
     local sponsor = msg.req.sponsor_uid
 
-    -- ensure account exist
-    if ngx.account then
-        account = ngx.account
-    else
-        if 0 == msg.resp.result then
-            print("register account ok.")
-            robot_manager.eventHandler:onRegisterAccount(robot, ROBOT_STATE_REGISTER_ACCOUNT)
-        else
-            print("onError: register account failed, result=", msg.resp.result)
-            robot_manager.eventHandler:onError(robot, ROBOT_STATE_ERROR)
-        end
-    end
+    msg.resp.result = 0
 
     --
-    robot.lastActionState = RobotBrain.ACTION_STATE.ACTION_OVER
+     _M.sendResponse(msg, msgSn)
 end
 
-function _M.sendRequest(robot, args)
+--
+function _M.sendResponse(msg, msgSn)
     print("sendRegisterAccountService")
 
     local msg = Gate_pb.RegisterAccountService()
@@ -52,9 +42,10 @@ function _M.sendRequest(robot, args)
     msg.req.email = "test@ab.com"
     msg.req.sponsor_uid = "sponsor"
 
-    robot_manager.sendMessage(robot, "gate.RegisterAccountService", msg)
+    client_helper.send(msg, 0)
 end
 
+-- make service callable
 return setmetatable(
     _M,
     {

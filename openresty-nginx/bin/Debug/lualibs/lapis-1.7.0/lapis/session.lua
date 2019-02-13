@@ -1,4 +1,4 @@
-local json = require("rapidjson")
+local json = require("cjson")
 local encode_base64, decode_base64, encode_with_secret, decode_with_secret
 do
   local _obj_0 = require("lapis.util.encoding")

@@ -256,7 +256,7 @@ mock_request = function(app_cls, url, opts)
     do
       local error_blob = out_headers.x_lapis_error
       if error_blob then
-        local json = require("rapidjson")
+        local json = require("cjson")
         local summary, err, trace
         do
           local _obj_0 = json.decode(error_blob)
@@ -267,7 +267,7 @@ mock_request = function(app_cls, url, opts)
     end
   end
   if opts.expect == "json" then
-    local json = require("rapidjson")
+    local json = require("cjson")
     if not (pcall(function()
       body = json.decode(body)
     end)) then

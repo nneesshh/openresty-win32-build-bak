@@ -24,6 +24,8 @@ local _M = {}
     }
 ]]
 -- Localize
+local client_helper = require("serv.network.client_helper")
+
 local pdir = (...):gsub("%.[^%.]+%.[^%.]+$", "") .. "."
 local ppdir = (...):gsub('%.[^%.]+%.[^%.]+%.[^%.]+$', '') .. "."
 local model = require(ppdir .. "models.GateAccount")
@@ -67,6 +69,7 @@ function _M.onResponse(msg, msgSn)
     _M.sendResponse(msg, msgSn)
 end
 
+--
 function _M.sendResponse(msg, msgSn)
     print("sendAccountLoginService")
 
@@ -75,10 +78,10 @@ function _M.sendResponse(msg, msgSn)
         msg.resp.result = 0
     end
 
-    local msgDispatcher = require(pdir .. "MessageDispatcher")
-    msgDispatcher.sendMessage(msg, msgSn)
+    client_helper.send(msg, msgSn)
 end
 
+-- make service callable
 return setmetatable(
     _M,
     {

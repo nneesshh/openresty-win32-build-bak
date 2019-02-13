@@ -2,7 +2,7 @@ local TEST_ENV = "test"
 local normalize_headers
 normalize_headers = require("lapis.spec.request").normalize_headers
 local ltn12 = require("ltn12")
-local json = require("rapidjson")
+local json = require("cjson")
 local parse_query_string, encode_query_string
 do
   local _obj_0 = require("lapis.util")
@@ -111,7 +111,7 @@ do
       do
         local error_blob = headers.x_lapis_error
         if error_blob then
-          json = require("rapidjson")
+          json = require("cjson")
           local summary, err, trace
           do
             local _obj_0 = json.decode(error_blob)
@@ -121,7 +121,7 @@ do
         end
       end
       if opts.expect == "json" then
-        json = require("rapidjson")
+        json = require("cjson")
         if not (pcall(function()
           body = json.decode(body)
         end)) then

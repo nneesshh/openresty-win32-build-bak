@@ -2018,6 +2018,7 @@
     <None Include="..\bundle\redis2-nginx-module-0.15\src\multi_bulk_reply.rl">
       <Filter>bundle\http\redis2</Filter>
     </None>
+    <None Include="openresty_ffi.def" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\src\nginx\src\os\win32\nginx.ico" />

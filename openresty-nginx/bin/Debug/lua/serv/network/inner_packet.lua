@@ -4,6 +4,10 @@ local sizeof = ffi.sizeof
 local offsetof = ffi.offsetof
 local C = ffi.C
 
+local tbl_insert = table.insert
+local tbl_concat = table.concat
+local str_sub = string.sub
+
 ffi.cdef [[
 #pragma pack(1)
 
@@ -74,7 +78,7 @@ function _P:read(s)
             return nil, "failed to read packet data" .. pderr
         end
 
-        table.insert(self.pkt_r.data, pddata)
+        tbl_insert(self.pkt_r.data, pddata)
         self.pkt_r.data_size = self.pkt_r.data_size + #pddata
 
         if self.frm_l_r.page_end > 0 then
@@ -107,18 +111,18 @@ function _P:write(s, msgname, msgdata, msgSn)
     self.frm_l_w.data_size = pl_size + name_len + send_size
     self.frm_l_w.page_end = (remain_size <= 0) and 1 or 0
 
-    table.insert(pkt_w, ffi.string(self.frm_l_w, SIZE_OF_FRAME_PAGE_LEADING))
+    tbl_insert(pkt_w, ffi.string(self.frm_l_w, SIZE_OF_FRAME_PAGE_LEADING))
 
     -- packet leading init
     self.pkt_l_w.name_len = name_len
     self.pkt_l_w.serial_no = msgSn
 
-    table.insert(pkt_w, ffi.string(self.pkt_l_w, pl_size))
+    tbl_insert(pkt_w, ffi.string(self.pkt_l_w, pl_size))
 
-    table.insert(pkt_w, msgname)
-    table.insert(pkt_w, str_sub(msgdata, 1, send_size))
+    tbl_insert(pkt_w, msgname)
+    tbl_insert(pkt_w, str_sub(msgdata, 1, send_size))
 
-    s:send(table.concat(pkt_w))
+    s:send(tbl_concat(pkt_w))
     sent = sent + send_size
 
     -- more frame pages?
@@ -135,11 +139,11 @@ function _P:write(s, msgname, msgdata, msgSn)
         self.frm_l_w.data_size = send_size
         self.frm_l_w.page_end = (remain_size <= 0) and 1 or 0
 
-        table.insert(pkt_w, ffi.string(self.frm_l_w, SIZE_OF_FRAME_PAGE_LEADING))
+        tbl_insert(pkt_w, ffi.string(self.frm_l_w, SIZE_OF_FRAME_PAGE_LEADING))
 
-        table.insert(pkt_w, str_sub(msgdata, sent + 1, sent + send_size))
+        tbl_insert(pkt_w, str_sub(msgdata, sent + 1, sent + send_size))
 
-        s:send(table.concat(pkt_w))
+        s:send(tbl_concat(pkt_w))
         sent = sent + send_size
     end
 

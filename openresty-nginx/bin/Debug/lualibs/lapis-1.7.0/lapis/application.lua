@@ -4,7 +4,7 @@ local Router
 Router = require("lapis.router").Router
 local insert
 insert = table.insert
-local json = require("rapidjson")
+local json = require("cjson")
 local capture_errors, capture_errors_json, respond_to
 local run_before_filter
 run_before_filter = function(filter, r)

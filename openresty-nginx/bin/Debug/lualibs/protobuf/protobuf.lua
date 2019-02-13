@@ -276,7 +276,7 @@ local function _DefaultValueConstructorForField(field)
     if field.cpp_type == FieldDescriptor.CPPTYPE_MESSAGE then
         local message_type = field.message_type
         return function (message)
-            result = message_type._concrete_class()
+            local result = message_type._concrete_class()
             result._SetListener(message._listener_for_children)
             return result
         end
@@ -387,7 +387,7 @@ local function _AddPropertiesForNonRepeatedScalarField(field, message)
 end
 
 local function _AddPropertiesForField(field, message_meta)
-    constant_name = field.name:upper() .. "_FIELD_NUMBER"
+    local constant_name = field.name:upper() .. "_FIELD_NUMBER"
     message_meta._member[constant_name] = field.number
 
     if field.label == FieldDescriptor.LABEL_REPEATED then

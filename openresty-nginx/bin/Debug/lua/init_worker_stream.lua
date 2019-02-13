@@ -1,5 +1,4 @@
 local delay = 60 -- in seconds
-local log = ngx.log
 local STDERR = ngx.STDERR
 local EMERG = ngx.EMERG
 local ALERT = ngx.ALERT
@@ -14,9 +13,9 @@ local DEBUG = ngx.DEBUG
 require = require("utils.require").require
 
 -- common
-package.path =
-    package.path ..
-    ";./?.lua;./lua/?.lua;./lua/?/init.lua;./lualibs/?.lua;./lualibs/?/init.lua;./src/?.lua;./src/?/init.lua"
+package.path = package.path .. ";./?.lua;./lua/?.lua;./lua/?/init.lua"
+package.path = package.path .. ";./lualibs/?.lua;./lualibs/?/init.lua"
+package.path = package.path .. ";./src/?.lua;./src/?/init.lua"
 package.cpath = package.cpath .. ";./?.dll;./clibs/?.dll"
 
 -- lapis
@@ -42,50 +41,48 @@ package.path = package.path .. ";./lualibs/protobuf/?.lua"
 package.path = package.path .. ";./lua/proto_pb/?.lua"
 
 --
-local iredis = require("utils.redis_iresty")
-require("utils.functions")
 require("uuid")
 
+--[[]]
 local func_check_per_min = function(premature)
     -- do some routine job in Lua just like a cron job
     if premature then
-       return
+        return
     end
 
     -- do the health check or other routine work
-    log(ERR, "do the health check or other routine work")
-    
+    ngx.log(NOTICE, "do the health check or other routine work")
+
     --
 end
 
 if 0 == ngx.worker.id() then
     local ok, err
-    log(INFO, "[init_worker_stream] start heartbeat timer at worker -- ", ngx.worker.id())
+    ngx.log(NOTICE, "[init_worker_stream] start heartbeat timer at worker -- ", ngx.worker.id())
 
     -- 0.0s
-    ok, err = ngx.timer.at(0, function(premature)
-        -- do some routine job in Lua just like a cron job
-        if premature then
-             return
+    ok, err =
+        ngx.timer.at(
+        0,
+        function(premature)
+            -- do some routine job in Lua just like a cron job
+            if premature then
+                return
+            end
+
+            --require("init_worker_stream_lazy")
         end
-        
-        --
-        log(ERR, "start upconn.Forward ...")
-        local mygate_forward = require("serv.mygate.upconn.Forward")
-        mygate_forward.start()
-        --[[]]
-    end)
+    )
     if not ok then
-        log(ERR, "failed to create timer: ", err)
+        ngx.log(ERR, "failed to create timer: ", err)
         return
     end
 
     -- check
     ok, err = ngx.timer.every(delay, func_check_per_min)
     if not ok then
-        log(ERR, "failed to create timer: ", err)
+        ngx.log(ERR, "failed to create timer: ", err)
         return
     end
-   
-
 end
+--[[]]

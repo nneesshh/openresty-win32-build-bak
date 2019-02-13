@@ -13,7 +13,7 @@ do
   local _obj_0 = _G
   require, type, setmetatable, rawget, assert, pairs, unpack, error, next = _obj_0.require, _obj_0.type, _obj_0.setmetatable, _obj_0.rawget, _obj_0.assert, _obj_0.pairs, _obj_0.unpack, _obj_0.error, _obj_0.next
 end
-local libjson = require("rapidjson")
+local libjson = require("cjson")
 local OffsetPaginator
 OffsetPaginator = require("lapis.db.pagination").OffsetPaginator
 local add_relations, mark_loaded_relations

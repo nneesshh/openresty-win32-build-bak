@@ -45,7 +45,7 @@ encode_with_secret = function(object, secret, sep)
   if sep == nil then
     sep = "."
   end
-  local json = require("rapidjson")
+  local json = require("cjson")
   local msg = encode_base64(json.encode(object))
   local signature = encode_base64(default_hmac(secret, msg))
   return msg .. sep .. signature
@@ -58,7 +58,7 @@ decode_with_secret = function(msg_and_sig, secret, sep)
   if sep == nil then
     sep = "%."
   end
-  local json = require("rapidjson")
+  local json = require("cjson")
   local msg, sig = msg_and_sig:match("^(.*)" .. tostring(sep) .. "(.*)$")
   if not (msg) then
     return nil, "invalid format"

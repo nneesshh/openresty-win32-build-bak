@@ -1,5 +1,4 @@
 require("appsettings")
-require("utils.functions")
 
 local tasks = {
     --

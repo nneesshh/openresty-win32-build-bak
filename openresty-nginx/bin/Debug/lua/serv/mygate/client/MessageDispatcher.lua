@@ -53,14 +53,8 @@ end
 
 -- send message
 function _M.sendMessage(msg, msgSn)
-    local meta = getmetatable(msg)
-    local msgname = tfl(meta._descriptor.full_name)
-    local msgdata = msg:SerializeToString()
-
-    local curr_conn = ngx.ctx.curr_conn
-    local s = curr_conn.downstream
-    local packet_obj = curr_conn.packet_obj
-    packet_obj:write(s, msgname, msgdata, msgSn)
+    local sMgr = require("serv.network.SessionManager")
+    sMgr.send(msg, msgSn)
 end
 
 return _M.init()

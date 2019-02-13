@@ -1,5 +1,5 @@
 local url = require("socket.url")
-local json = require("rapidjson")
+local json = require("cjson")
 local concat, insert
 do
   local _obj_0 = table

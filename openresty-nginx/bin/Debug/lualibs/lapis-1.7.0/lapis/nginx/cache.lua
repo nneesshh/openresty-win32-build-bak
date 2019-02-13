@@ -1,4 +1,4 @@
-local json = require("rapidjson")
+local json = require("cjson")
 local sort, concat
 do
   local _obj_0 = table

@@ -3,18 +3,11 @@ require "bootstrap"
 
 --local int64 = require "int64"
 local pb = require "pb"
-local json = require "rapidjson"
-
-local randseed = math.randomseed
-local rand = math.random
-local rand_init = function()
-  math.randomseed(os.time())
-  math.random(1, 10000)
-end
-rand_init()
+local libjson = require "cjson"
 
 --[[]]
 require "Gate_pb"
+--[[
 require "Game_pb"
 require "Guild_pb"
 require "UserItem_pb"

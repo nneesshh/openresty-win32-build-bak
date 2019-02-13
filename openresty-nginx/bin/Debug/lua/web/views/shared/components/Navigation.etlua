@@ -26,6 +26,8 @@
                         $("#_ajax_call_result").html(data);
                     },
                     error: function(xmlhr, textStatus, errorThrown) {
+                        alert(xmlhr.responseText);
+                        $("#_ajax_call_result").html(xmlhr.responseText);
                         alert("[Navigation::_do_ajax_call_<%= v.Code %>()] failed!!!" +
                             "  xmlhr.status=" + xmlhr.status + 
                             ", xmlhr.readyState=" + xmlhr.readyState + 

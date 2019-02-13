@@ -3292,8 +3292,8 @@ ngx_http_keepalive_handler(ngx_event_t *rev)
     ngx_http_process_request_line(rev);
 
 #if (NGX_DEBUG)
-    // debug
-    output_debug_string(c, "\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
+    // debug, c->log maybe NULL because connection may be closed
+    output_debug_string(NULL, "\nngx_http_keepalive_handler(): end -- c(%d)fd(%d)destroyed(%d)_r(0x%08xd)w(0x%08xd)c(0x%08xd) ... sockaddr(0x%08xd)sa_family(%d).\n",
         c->id, c->fd, c->destroyed, (uintptr_t)c->read, (uintptr_t)c->write, (uintptr_t)c,
         (uintptr_t)c->sockaddr, c->sockaddr->sa_family);
 #endif

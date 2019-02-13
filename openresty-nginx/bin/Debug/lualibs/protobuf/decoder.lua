@@ -106,7 +106,7 @@ end
 local function _StructPackDecoder(wire_type, value_size, format)
     local struct_unpack = pb.struct_unpack
 
-    function InnerDecode(buffer, pos)
+    local function InnerDecode(buffer, pos)
         local new_pos = pos + value_size
         local result = struct_unpack(format, buffer, pos)
         return result, new_pos
@@ -321,7 +321,7 @@ local function _RaiseInvalidWireType(buffer, pos, pend)
 end
 
 local function _FieldSkipper()
-    WIRETYPE_TO_SKIPPER = {
+    local WIRETYPE_TO_SKIPPER = {
         _SkipVarint,
         _SkipFixed64,
         _SkipLengthDelimited,
