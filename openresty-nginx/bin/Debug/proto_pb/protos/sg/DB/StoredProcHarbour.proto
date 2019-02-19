@@ -1,0 +1,250 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+//
+message ConfigFood {
+	required int32		id = 1; // 序列号
+	required bytes		name = 2; // 名称
+	required int32		type = 3; // 类型
+	required int32		food_group = 4; // 分组类型
+	required int32		quality = 5; // 品质
+	required int32		fit = 6; // 相性
+  
+	required int32		color = 11; // 属性1
+	required int32		smell = 12; // 属性2
+	required int32		taste = 13; // 属性3
+	required int32		bellyful = 14; // 属性4
+  
+	required int32		detoxifcation = 21; // 解毒
+	required int32		sober = 22; // 解酒
+	required int32		exorcism = 23; // 驱邪
+	required int32		poison = 24; // 毒性
+	required int32		alcohol = 25; // 醉酒
+	required int32		evil = 26; // 邪气  
+  
+	required int32		sour = 31; // 酸
+	required int32		sweet = 32; // 甜
+	required int32		bitter = 33; // 苦
+	required int32		hot = 34; // 辣
+	required int32		salty = 35; // 咸
+
+}
+
+message ConfigFoodList {
+	repeated ConfigFood list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message ConfigFoodRecipe {
+	required int32		id = 1; // 序列号
+	required bytes		name = 2; // 名称
+	required int32		type = 3; // 类型, 1=菜类，2=酒类
+	required bytes		constitute = 4; // 组成公式 -- "food cfgid : num | ..."
+	required int32		add_val = 5; // 功能增加值，如酒类增加醉酒值
+	required int32		ship_exp = 6; // 船增加经验
+	required int32		cooker_exp = 7; // 厨师增加经验
+	required int32		gold = 8; // 金钱价值
+
+	required int32		cook_time = 11; // 烹饪时间/秒
+	required int32		eat_time = 12; // 就餐时间/秒
+	required int32		way = 13; // 烹饪方式
+	required bytes		attribute = 14; //
+	required int32		star = 15; // 星级
+	required int32		satisfaction = 16; // 满意度
+}
+
+message ConfigFoodRecipeList {
+	repeated ConfigFoodRecipe list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message ConfigFoodFilter {
+	required int32		id = 1; // 序列号
+	required bytes		name = 2; // 名称
+	required int32		type = 3; // 筛选器类型, 1 = 限定食谱，2 = 自由风格
+	required bytes		parameter_need = 4; // 参数字符串1 -- "recipe | ..."
+	required bytes		parameter_hate = 5; // 参数字符串2 -- "id:val1:val2 | ..."
+	
+	required bytes		color = 11; // 属性字符串1 -- "val1:val2"
+	required bytes		smell = 12; // 属性字符串2 -- "val1:val2"
+	required bytes		taste = 13; // 属性字符串3 -- "val1:val2"
+	required bytes		bellyful = 14; // 属性字符串4 -- "val1:val2"
+	required bytes		flavor = 15; // 调味 -- "val1:val2 | val1:val2"
+	required bytes		stuff = 16; // 食材 -- "val1:val2 | val1:val2"
+
+}
+
+message ConfigFoodFilterList {
+	repeated ConfigFoodFilter list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigCustomer {
+	required int32		id = 1; // 序列号
+	required bytes		name = 2; // npc名称
+	required bytes		desc = 3; // 简介
+	required int32		occupationid = 4; // npc职业类型
+	required int32		wealth_grade = 5; // 财富等级，1~6
+	required int32		gold = 6; // 携带金钱
+	required int32		is_unlock = 7; // 缺省解锁
+	required int32		unlock_group = 8; // 解锁分组
+  
+	required bytes		food_filter = 11; // 点餐筛选器格式 -- "filter1 | filter2 | ..."
+	required float		service_ratio = 12; // 服务加成系数
+	required bytes		food_filter2 = 13; // 点餐筛选器格式2 -- "filter1 | filter2 | ..."
+	required float		service_ratio2 = 14; // 服务加成系数2
+	required bytes		food_filter3 = 15; // 点餐筛选器格式3 -- "filter1 | filter2 | ..."
+	required float		service_ratio3 = 16; // 服务加成系数3
+   
+	required bytes		quality_tip = 21; // 品质小费格式 -- "quality:type:ratio | ..."
+	required bytes		special_cond = 22; // 特殊条件奖励格式 -- "bonus item id : award type : award num : item1 : item2 : item3 : ... | ..."
+	required bytes		satisfaction_cond = 23; // 满意度条件奖励格式 -- "satisfaction 进度值: bonus item id : award type : award num | ... "
+	required int32		hungry_timeout = 24; // 饥饿超时
+
+}
+
+message ConfigCustomerList {
+	repeated ConfigCustomer list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigCustomerOccupation {
+	required int32		id = 1; // 职业id
+	required bytes		name = 2; // 职业名称
+	required int32		type = 3; // 职业类型，0=common, 1=eater, 2=vendor, 3=drinker
+	required bytes		func = 4; // 功能字符串
+
+	required bytes		question_status = 11; // 问题状态字符串 -- "status : ratio | ... "
+	required float		answer_bonus_ratio = 12; // 问题解答加成比率
+		
+}
+
+message ConfigCustomerOccupationList {
+	repeated ConfigCustomerOccupation list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigCustomerWealthGrade {
+	required int32		grade = 1; // 等级
+	required int32		gold = 2; // 金币上限
+	required int32		comfort = 3; // 舒适度上限
+}
+
+message ConfigCustomerWealthGradeList {
+	repeated ConfigCustomerWealthGrade list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigPlaceGrade {
+	required int32		id = 1; // 序列号
+	required int32		place_id = 2; // 港口id
+	required bytes		name = 3; // 港口名称
+	required int32		level = 4; // 等级
+	required int32		levelup_unlock = 5; // 升级解锁顾客
+	required int32		leveldown_unlock = 6; // 降级解锁顾客
+	required int32		boom = 7; // 升级需要繁荣度
+	
+	required bytes		customer_group = 11; // 顾客随机组(npcid：刷新概率）
+	required int32		customer_max = 12; // 顾客人数上限
+	required float		customer_add_number = 13; // 每小时顾客增长人数
+
+}
+
+message ConfigPlaceGradeList {
+	repeated ConfigPlaceGrade list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigHarborFoodOrder {
+	required int32		level = 1; // 等级
+	required int32		hungry_timeout = 2; // 饥饿超时时间
+	required int32		goaboard_interval = 3; // 登船间隔时间
+	required int32		goaboard_flucuation = 4; // 登船间隔时间波动值
+	required int32		queueing_num_max = 5; // 最大排队数
+}
+
+message ConfigHarborFoodOrderList {
+	repeated ConfigHarborFoodOrder list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message UserHarbor {
+	required bytes		userid = 1;
+	required int32		harborid = 2; //港口id
+	required int32		state = 3;
+	required int32		grade = 4; // 级别
+	required int32		boom = 5; // 繁荣度
+	required sfixed64	growtime = 6; // 人口增长时间
+}
+
+message UserHarborNpc {
+	required bytes				userid = 1;
+	required int32				harborid = 2; //所在港口id
+	required int32				sn = 3;
+	required int32				npc_type = 4; // npc type, 1=居民, 2=乘客
+	required uint64				cfgid = 5; // npc 配置类型id
+	required int32				state = 6; // npc 状态
+	required int32				seconds = 7; // 倒计时
+	
+	required int32				seqno = 11; // 顺序值
+	required int32				wealth_grade = 12; // 财富等级
+	required int32				gold = 13; // 剩余金币
+	required int32				satisfaction = 14; // 满意度
+	required int32				seatid = 15; // 座位id
+
+	required int32				occupation_val = 21; // 职业数值，饥饿度，商店值，醉酒度等
+	required sfixed64			occupation_event_starttime = 22; // 职业事件倒计时起始时间
+	required int32				question_status = 23; // 问题状态
+	required int32				special_cond_bonus = 24; // 特殊奖励
+	required int32				satisfaction_accepted = 25; // 已经领取过奖励的满意度阀值
+	
+	required int32				task_need_idx1 = 31; // 需求道具配置索引 1
+	required int32				task_reward_idx1 = 32; // 奖励道具配置索引 1
+	required int32				task_reward_accept1 = 33; // 奖励道具领取 1
+	required int32				task_need_idx2 = 34; // 
+	required int32				task_reward_idx2 = 35; //
+	required int32				task_reward_accept2 = 36; // 奖励道具领取 2
+	required int32				task_need_idx3 = 37; //
+	required int32				task_reward_idx3 = 38; //
+	required int32				task_reward_accept3 = 39; // 奖励道具领取 3
+	
+	required sfixed64    	optime = 41; // 操作时间
+}
+
+message UserFoodOrderSlot {
+	required bytes			userid = 1;
+	required int32			slotid = 2;
+	required int32			slot_type = 3; // 槽位类型
+	required int32			slot_state = 4;	// 槽位状态，0=空闲, 1=生产中, 2=已成熟，等待收获, 3=收获完成
+	
+	required int32			workshopid = 11;	// 工作台id
+	required int32			workerid = 12;	// 值守人物状态, 0=(empty)
+	required int32			foodfilterid = 13; // 筛选器id	
+	required int32			formulaid = 14;	// 公式id, 0 == diy
+	required uint64			productid = 15;	// 产品道具id
+	required int32			seconds = 16; // 限定时间
+
+	required int32			star = 21;
+	required int32			gather_gold_num = 22;
+	required int32			gather_satisfaction_num = 23;
+	required int32			tip_gold_num = 24;
+	required int32			tip_diamond_num = 25;
+	required float			answer_bonus_ratio = 26;
+	
+	required sfixed64		starttime = 31;
+}
+
+////////////////////////////////////////////////////////////////
+message UserCustomerUnlock {
+	required bytes				userid = 1;
+	required int32				sn = 2; // 序列号(唯一id)
+	required uint64				cfgid = 3; // cfg typeid
+	required int32				state = 4;
+
+	required sfixed64			optime = 11; // 操作时间
+}

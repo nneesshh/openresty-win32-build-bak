@@ -1,0 +1,93 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package chat;
+
+
+enum  CHAT_MESSAGE_TYPE {
+	CHAT_MESSAGE_TYPE_WORLD = 1;
+	CHAT_MESSAGE_TYPE_PERSONAL = 2;
+	CHAT_MESSAGE_TYPE_SOCIATY = 3;
+}
+
+message UserBaseData{
+	required uint64     uuid= 1;
+	required int32      level = 2;
+	required bytes      nick = 3;
+	required int32      portrait = 4;
+    required bytes      signature = 5;
+    required int32      state = 6;
+}
+
+message  ChatMessage {
+	required bytes     userid = 1;  //用户id
+	required uint64     uuid = 2; 
+	required bytes     nick = 3;  //昵称s
+	required int32     level = 4; //等级
+	required int32     portrait = 5; //肖像
+	required CHAT_MESSAGE_TYPE     type = 6;  //类型
+	required bytes     content = 7; //内容
+	required sfixed64  timestamp = 8; //时间
+	required int32     error_code = 9; //错误代码
+}
+
+
+message  ChatMessageNotify {
+	repeated  ChatMessage  chats = 1;
+}
+
+message  ClientChatService{
+    message  ClientChatRequest{
+    	optional CHAT_MESSAGE_TYPE        type = 1; 
+	    optional bytes                    content = 2; //内容
+	    optional uint64                   target_uuid = 3; //目标
+    }
+
+    message  ClientChatResponse{
+	    required int32    result = 1;
+    }	
+
+    optional ClientChatRequest    req = 1;
+    optional ClientChatResponse   resp = 2;
+}
+
+
+
+message  ChatChannel {
+	required int32     id = 1;
+	required int32     type = 2;
+	optional int32     state = 3; // 1 = 正常  2 = 繁忙  3 =  爆满 
+}
+
+
+
+message  ChatChannelService {
+	enum  CMD {
+        QUERY =  1;
+        QUERY_PERSON = 2;
+        QUERY_BLACKLIST = 3;
+        CHANGE_CHANNEL = 4;
+        ADD_TO_BLACKLIST = 5;
+        REMOVE_FROM_BLACKLIST = 6;
+        ADD_GUILD_CHANNEL = 7;
+        LEAVE_GUILD_CHANNEL = 8;
+	}
+
+	message  ChatChannelRequest {
+	   required  CMD       cmd = 1;
+       optional  int32     choice_channel_id = 2;
+       repeated  uint64     query_uuid = 3;
+       optional  uint64    choice_uuid = 4;
+	}
+
+	message  ChatChannelResponse {
+       required  int32     result = 1;
+       repeated  ChatChannel   channel_list =2;
+       optional  int32     user_channel_id = 3;
+       repeated  UserBaseData     query_result = 4;
+       repeated  UserBaseData    blacklist = 5;
+	}
+
+	optional    ChatChannelRequest  req = 1;
+	optional    ChatChannelResponse   resp = 2;
+}

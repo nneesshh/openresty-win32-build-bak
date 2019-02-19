@@ -1,0 +1,51 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+//
+message PvpStage {
+	required int32				serverid = 1; // 服务器id
+	required int32				stageid = 2; // 地图编号，等于用户ticketid
+	required bytes				name = 3; // 地图名称，等于用户nick
+	required bytes				desc = 4; // 地图描述，等于用户签名
+	optional bytes				data_bytes = 5; // 地图基础数据二进制字符串
+	optional int32				gold = 6; //
+	optional int32				state = 7; //
+	
+	required sfixed64			optime = 11;	// 操作时间戳
+}
+
+////////////////////////////////////////////////////////////////
+// 全局交互事件类型
+enum GLOBAL_PVP_EVENT_TYPE {
+	GLOBAL_PVP_EVENT_TYPE_LOOT_START = 1; // 劫掠开始
+	GLOBAL_PVP_EVENT_TYPE_LOOT_OVER = 2; // 劫掠结束
+}
+
+message GlobalPvpEvent {
+	required GLOBAL_PVP_EVENT_TYPE	type = 1; // 事件类型
+	required bytes					source_nick = 2; // 劫掠者昵称
+	required bytes					source_data_bytes = 3; // 劫掠者卡片列表字符串
+	required int32					gold_lock = 4; // 锁定金币
+	required int32					gold_refund = 5; // 返还金币
+	
+	required sfixed64				optime = 11;	// 事件操作时间戳
+}
+
+////////////////////////////////////////////////////////////////
+//
+message UserPvpEventLog {
+	required bytes					userid = 1;
+	required int32					sn = 2;
+	required int32					event_type = 3; // 事件类型，1=LOOT
+	required int32					event_state = 4; // 事件状态
+	required int32					defend_state = 5; // 防守状态
+	required bytes					source_nick = 6; // 劫掠者
+	required bytes					source_data_bytes = 7; // 劫掠者卡片列表
+	required int32					gold_lock = 8; // 锁定金币
+	required int32					gold_refund = 9; // 返还金币
+	
+	optional sfixed64				optime = 11; // 潜入操作时间
+}

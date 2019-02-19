@@ -1,0 +1,71 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+import "PVE.proto";
+
+package sg;
+
+message GhostStage {
+    required  int32  id = 1;
+    required  int32  state = 2;
+    required  int32  type = 3;
+    optional  bytes  name = 4;
+    optional  int32  level = 5;
+}
+
+message GhostStageBattleData {
+  optional  bytes        map_data = 1;
+  repeated  Enemy        enemys = 2;
+  repeated  pb_pair_int_float   buff = 3;
+
+}
+
+
+
+message  UserInformationInGhostShip {
+    required  int32               reset_times = 1;
+    required  int32               state = 2;
+    repeated  pb_pair_int_float   buff = 3;
+    repeated  SailorInDungeon    my_team = 4;
+     
+    optional  int32           rank = 5;
+    optional  int32           max_reset_times = 6;
+    optional  int32           reset_cost = 7;
+	
+}
+
+message GhostShipService {
+    enum CMD {
+       QUERY = 1;
+       READY = 2;
+       ATTACK= 3;
+       OVER = 4;
+       RESET = 5;
+       PREVIEW = 6;
+       GET_REWARD = 7;
+    }
+	message GhostShipRequest {  
+        required CMD                  cmd = 1; 
+        optional int32               stage_id = 2;
+        repeated int32                choice_sailors = 3;
+        repeated SailorInDungeon      my_team = 4;
+        repeated Enemy                enemys = 5;
+	}
+	
+	//
+	message GhostShipResponse { 
+	    required int32             result = 1; //
+   
+		optional UserInformationInGhostShip user_info = 2;
+        repeated GhostStage        stages = 3;
+
+        optional GhostStageBattleData  battle_data = 4;
+        optional pb_pair_int_float  get_buff = 5;
+		optional Reward            reward = 6;
+		optional int32             battle_result = 7;
+	}
+
+	optional GhostShipRequest req = 1;
+	optional GhostShipResponse resp = 2;
+}

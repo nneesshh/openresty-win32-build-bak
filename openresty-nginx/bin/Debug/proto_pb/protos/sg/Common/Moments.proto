@@ -1,0 +1,75 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+// 
+enum COMMENT_SUBJECT_CATEGORY {
+	COMMENT_SUBJECT_UNKNOWN = 0;
+	COMMENT_SUBJECT_SHIP = 1; // 舰船主题
+	COMMENT_SUBJECT_EQUIP = 2;// 装备主题
+	COMMENT_SUBJECT_SCENE = 3;// 关卡主题
+}
+
+message CommentContent {
+	required int32		id = 1; // postid
+	required bytes		nick = 2;
+	required bytes		content = 3;
+	required int32		like_num = 4; // 点赞次数
+	required bool		self_like = 5; // 当前用户已经点赞
+
+	required sfixed64	createtime = 11;  
+}
+
+enum COMMENT_ERROR {
+	COMMENT_ERROR_SUBJECTID_IS_INVALID = -1; // 主题id 不合法
+	COMMENT_ERROR_CONTENT_LENGTH_IS_INVALID = -2; // 内容长度不合法
+	COMMENT_ERROR_ROLE_LEVEL_IS_TOO_LOW = -3; // 提督等级太低
+	COMMENT_ERROR_COMMENT_NUM_OVERFLOW = -4; // 超过单用户每日评论次数
+	COMMENT_ERROR_COMMENT_IS_TOO_HOT = -5; // 超过所有用户每日评论次数
+	COMMENT_ERROR_ = -6; //
+}
+
+
+message CommentContentList {
+	repeated CommentContent list = 1;
+}
+
+// 评论数据
+message CommentData {
+	required uint64							subject_typeid = 1; // 主题对象的tyepid
+	required COMMENT_SUBJECT_CATEGORY		subject_category = 2; // 主题类别
+	optional int32							subject_day_hot = 3; // 主题每日热度
+	optional int32							self_postid = 4; // 自己发表的评论id，0=无评论
+	
+	optional CommentContentList				content_list = 11;
+}
+
+message CommentDataList {
+	repeated CommentData list = 1;
+}
+
+// 评论列表
+message CommentService {
+	enum COMMENT_COMMAND {
+		QUERY = 1; // 查询
+		ADD = 2; // 添加
+		LIKE = 3; // 点赞
+	}
+		
+	message CommentRequest {
+		required COMMENT_COMMAND			cmd = 1;
+		optional int64						subject_typeid = 2; // 指定主题，为0时代表全部主题
+		optional int32						content_id = 3; // 添加评论时为 0，点赞指定帖子序号
+		optional bytes						comment_content = 4; // 添加评论内容
+	}
+	
+	message CommentResponse {
+		required int32						result = 1;	// 0 = success, -1 = failed
+		optional CommentData				data = 2;
+	}
+	
+	optional CommentRequest		req = 1;
+	optional CommentResponse	resp = 2;
+}

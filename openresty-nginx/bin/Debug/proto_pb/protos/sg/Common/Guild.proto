@@ -1,0 +1,279 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+//
+enum GUILD_STATE  {
+	GUILD_PREPARE = 1; // 筹建
+	GUILD_READY = 2; // 建成
+	GUILD_DISBANDED = 3; // 解散
+}
+
+// 公会接收类型
+enum GUILD_ACCEPT_TYPE {
+	GUILD_ACCEPT_TYPE_DISABLE = 0;
+	GUILD_ACCEPT_TYPE_AUTO_ACCEPT = 1; // 自动
+	GUILD_ACCEPT_TYPE_MANUAL = 2; // 手动
+}
+
+//
+enum GUILD_USER_TITLE  {
+	GUILD_USER_TITLE_NONE = 0; // 
+	GUILD_USER_TITLE_APPRENTICE = 1; // 帮众，学徒
+	GUILD_USER_TITLE_ELITE = 2; // 精英
+	GUILD_USER_TITLE_EXPERT = 3; // 专家
+	GUILD_USER_TITLE_MASTER = 4; // 大师
+	GUILD_USER_TITLE_GRAND_MASTER = 5; // 宗师
+	
+	GUILD_USER_TITLE_VICE_LEADER = 11; // 副帮主
+	GUILD_USER_TITLE_LEADER = 12; // 帮主
+}
+
+////////////////////////////////////////////////////////////////
+//
+enum GUILD_USER_STATE {
+	GUILD_USER_STATE_TO_DELETE = -1; // 删除，服务器专用
+	GUILD_USER_STATE_FREEMAN = 0; // 自由人，未加入任何公会
+	GUILD_USER_STATE_JOINNING = 1; // 正在向我申请加入公会的人
+	GUILD_USER_STATE_OK = 2; // 公会正式会员
+}
+
+// 公会仓库
+message GuildStoreItem {
+	required uint64					item_typeid = 1; // uuid
+	required int32					item_num = 2; // nick
+}
+
+message GuildStoreItemList {
+	repeated GuildStoreItem list = 1;
+}
+
+// 公会建筑
+message GuildBuilding {
+	// 公会建设类型
+	enum BUILDING_TYPE {
+		TECH = 1; // 科技大厅
+		SQUARE = 2; // 生活区广场
+		SHOP = 3; // 商店区
+	}
+
+	enum BUILDING_STATE {
+		IDLE = 0;
+		BUSY = 1; // 建设中
+		READY = 2; // 建设完成
+	}
+	
+	required int32					building_type = 1; //
+	required int32					level = 2; //
+	required BUILDING_STATE			state = 3; //
+	required int32					seconds = 4; // 冷却倒计时
+	required sfixed64				starttime = 5; //
+}
+
+message GuildBuildingList {
+	repeated GuildBuilding list = 1;
+}
+
+// 会员数据
+message GuildUserData {
+	required uint64				uuid = 1;
+	required bytes				role_nick = 2;
+	required int32				role_level = 3;
+	required int32				role_exp = 4;
+	required int32				role_rank = 5;
+	required int32				role_portrait = 6; // 角色头像	
+	required int32				role_portrait_frame = 7; // 角色头像	
+	required int32				role_force = 8; // 角色头像	
+	required GUILD_USER_STATE	state = 9;
+
+	required sfixed64			optime = 11; // 登录时间
+	required bool				is_online = 12; // 是否在线	
+
+	required GUILD_USER_TITLE	title = 21;
+	required int32				donation = 22;
+	optional int32				donation_today = 23; // 当日贡献值
+
+}
+
+//
+message GuildUserDataList {
+	repeated GuildUserData list = 1;
+}
+
+// 公会数据
+message GuildData {
+	required int32				id = 1;
+	required bytes				name = 2; // 公会名称
+	required int32				level = 3; // 公会等级
+	required int32				population = 4; // 人口
+	required uint64				fund = 5; // 资金
+	required bytes				announcement = 6; // 公告
+	required GUILD_STATE		state = 7; // 公会状态
+	required bytes				badge = 8; // 公会徽章字符串
+
+	optional GUILD_ACCEPT_TYPE	accept_type = 11; // 公会自动收人开关，0 = 禁用，1 = 自动收人, 2 = 需要手动接收
+	optional int32				join_level = 12; // 申请等级限制
+	optional int32				join_force = 13; // 申请战力限制
+	optional bool				shopping = 14; // 开放购物开关
+	optional bool				chat = 15; // 开发聊天开关
+	
+	optional GuildUserDataList	member_list = 21;
+	optional GuildUserDataList	join_list = 22;
+}
+
+message GuildDataList {
+	repeated GuildData list = 1;
+}
+
+// 签到类型
+enum GUILD_SIGNIN_TYPE {
+	GUILD_SIGNIN_TYPE_GOLD = 1; // 金币
+	GUILD_SIGNIN_TYPE_DIAMOND = 2; // 钻石
+	GUILD_SIGNIN_TYPE_LUXURY = 3; // 豪华
+}
+
+message GuildSignin {
+	enum STATE {
+		NOT_SIGNIN = 0; //
+		SIGNIN = 1; // 已签到
+		ACCEPT = 2; // 礼包已领取
+	}
+	
+	required int32 type = 1; // 签到类型
+	required STATE state = 2; // 签到状态
+	optional bytes drop_str = 3;
+}
+
+message GuildSigninList {
+	repeated GuildSignin list = 1;
+}
+
+// 公会日志
+message GuildTrack {
+	enum TRACK_ACTION_TYPE {
+		JOIN = 1; // 加入
+		QUIT = 2; // 退出
+		DONATE = 3; // 捐献
+		
+		ACCEPT = 11; // 公会管理 -- 收人
+		REJECT = 12; // 公会管理 -- 拒收
+		KICK = 13; // 公会管理 -- 踢人
+		APPOINT = 14; // 公会管理 -- 委任职位
+		SELECT_NEW_LEADER = 15; // 会长更换
+
+		BUILDING_UPGRADE_START = 21; // 建筑升级开始
+		BUILDING_UPGRADE_OVER = 22; // 建筑升级结束
+	}
+
+	required uint64					uuid = 1; // uuid
+	required bytes					nick = 2; // nick
+	required int32					action_type = 3; // 
+	
+	optional int32					guildid = 11;
+	optional bytes					name = 12; // 公会名称
+	optional bytes					announcement = 13; // 公会公告
+	optional uint64					target_uuid = 14; // 目标用户uuid
+	optional bytes					target_nick = 15; // 目标用户nick
+	optional int32					target_title = 16; // 目标用户职位头衔
+	optional int32					donation = 17; // 贡献值
+	optional int32					building_type = 18; // 建筑类型
+	optional int32					building_level = 19; // 建筑等级
+	
+	optional sfixed64				optime = 21; // 操作时间
+}
+
+message GuildTrackList {
+	repeated GuildTrack list = 1;
+}
+
+
+message DonateItem {
+	required int32 id = 1;
+	required int32 num = 2;
+}
+
+message DonateItemList {
+	repeated DonateItem list = 1;
+}
+
+// 公会列表
+message GuildService {
+	enum GUILD_COMMAND {
+		CREATE = 1; // 创建公会
+		UPGRADE = 2; // 升级公会
+		MODIFY = 3; // 修改公会资料 -- name, announcement, accept_type, join_level, join_force...
+		DISBAND = 4; // 解散公会
+		REFRESH_CANDIDATES = 5; // 刷新推荐公会
+		
+		JOIN = 11; // 申请加入公会
+		QUIT = 12; // 退出公会
+		DONATE = 13; // 捐献
+		
+		MANAGE_ACCEPT = 21; // 公会管理 -- 收人
+		MANAGE_REJECT = 22; // 公会管理 -- 拒收
+		MANAGE_KICK = 23; // 公会管理 -- 踢人
+		MANAGE_APPOINT = 24; // 公会管理 -- 委任职位
+
+		QUERY_ALL = 31; // 查询全部公会，不包含用户数据
+		QUERY_ONE = 32; // 查询指定公会，包含用户数据，guildid = 0 查询自己所在公会
+		QUERY_TRACK = 33; // 查询公会日志
+
+		QUERY_SIGNIN = 41;	//查询签到信息 
+		ACCEPT_SIGNIN = 42;	// 领取签到礼包
+
+		QUERY_STORE = 51;	//查询公会仓库
+
+		QUERY_BUILDING = 61;	// 查询建筑
+		BUILD_ONCE = 62;	// 进行一次建设升级
+	}
+	
+	message GuildRequest {
+		required GUILD_COMMAND			cmd = 1;
+		optional int32					guildid = 2;
+		optional bytes					name = 3; // 公会名称
+		optional bytes					announcement = 4; // 公会公告
+		optional uint64					user_uuid = 5; // 用户uuid
+		optional int32					user_title = 6; // 职位头衔
+		optional DonateItemList			donate_list = 7; // 捐献列表
+		optional bytes					badge = 8; // 徽章字符串
+		
+		optional GUILD_ACCEPT_TYPE		accept_type = 11; // 自动收人，0 = 禁用，需手动操作，1 = 自动接受
+		optional int32					join_level = 12; // 申请等级限制
+		optional int32					join_force = 13; // 申请战力限制
+	
+		optional int32					signin_type = 21; // 公会签到类型
+
+		optional int32					building_type = 31; // 公会建筑类型
+	}
+	
+	message GuildResponse {
+		required int32					result = 1;	// 0 = success, -1 = failed
+		optional GuildDataList			guild_list = 2; // 公会
+		optional GuildTrackList			track_list = 3; // 公会日志
+		repeated int32					self_joinning_list = 4; // 用户自己正在申请中的公会
+
+		optional GuildSigninList		signin_list = 11;
+		optional Reward					signin_drop = 12;
+		
+		optional sfixed64				last_quit_optime = 13; // 最近一次退会时间
+		optional int32					quit_join_cd = 14; // 退出公会后，再次加入所需等待的冷却时间
+
+		optional GuildStoreItemList		store_item_list = 15;
+		optional Reward					donate_drop = 16;
+
+		optional GuildBuildingList		building_list = 17;
+	}
+	
+	optional GuildRequest	req = 1;
+	optional GuildResponse	resp = 2;
+}
+
+//
+message GameGuildTrackNotify {
+	required GuildTrack	track = 1; // 公会日志
+	optional GuildData	guild = 2; // 公会数据	
+}

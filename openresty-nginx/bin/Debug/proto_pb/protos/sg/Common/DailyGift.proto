@@ -1,0 +1,53 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+enum DAILY_GIFT_STATE {
+    DAILY_GIFT_STATE_LOCKED = 0;
+    DAILY_GIFT_STATE_OPEN = 1;
+    DAILY_GIFT_STATE_CLOSE = 2;
+}
+
+message  DailyGift {
+	required int32                 id = 1;
+	required int32                 state = 2;
+    required int32                 be_received =3;
+    required sfixed64              starttimes = 4;
+    required sfixed64              deadline = 5;
+}
+
+message  DailyGiftService {
+    enum  CMD{
+        QUERY  =  1;
+        RECEIVE = 2;
+    }
+     
+    message  DailyGiftRequest {
+        required  CMD  cmd = 1;
+
+        optional  int32   target = 2;
+    }
+
+    message  DailyGiftResponse{
+        required  int32  result = 1;
+        repeated  DailyGift   gift_list = 2;
+
+        optional  Reward    reward = 3;
+    }
+
+    optional DailyGiftRequest req = 1;
+    optional DailyGiftResponse resp = 2;
+}
+
+
+message DailyGiftOpenNotify {
+	required  DailyGift      gift = 1;
+}
+
+message DailyGiftCloseNotify {
+    required  DailyGift      gift = 1;
+}

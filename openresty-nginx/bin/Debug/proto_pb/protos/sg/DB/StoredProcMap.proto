@@ -1,0 +1,242 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+// config map
+////////////////////////////////////////////////////////////////
+message ConfigMap {
+	required int32       	level = 1;
+	required int32       	group_island_total_num = 2; // 组岛屿总量
+	required int32       	group_island_user_capacity = 3; // 单个组岛屿用户容量
+	required int32       	group_island_user_capacity_add = 4; // 单个组岛屿用户容量扩容递增值
+	required int32       	group_island_occupy_protect_time = 5; // 组岛屿占领后获得的保护时间
+	required int32       	group_island_occupy_num_max = 6; // 组岛屿可占领数量上限
+	
+	required int32			gather_period = 11; // 采集最小间隔
+	required int32			gather_aggregate_period = 12; // 采集累积间隔
+	required int32			harvest_interval = 13; // 收获间隔
+	required int32			farm_skill_exp_period = 14; // 生活技能经验值周期
+	
+	required int32			pvp_loot_num_max = 21; // pvp劫掠次数上限
+	required int32			pvp_loot_timeout = 22; // pvp劫掠超时秒数
+	required float			pvp_loot_ratio = 23; // pvp劫掠比率
+
+	required int32			player_ship_refresh_timeout = 31; // 跨服玩家船刷新超时秒数
+	required int32			player_ship_navigate_timeout = 32; // 跨服玩家船航行超时秒数
+}
+
+message ConfigMapList {
+	repeated ConfigMap list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// config map area
+////////////////////////////////////////////////////////////////
+message ConfigMapArea {
+	required int32       	areaid = 1;
+	required bytes       	name = 2;
+	required int32       	tile_blockid = 3; // 对应的格子区块id
+	required int32       	is_lock = 4; // 缺省是否锁定
+	required bytes       	cond = 5; // 条件判断字符串 -- " type : val "
+	required int32       	unlock_type = 6; // 解锁类型，1=金币，2=钻石
+	required int32       	unlock_cost = 7; // 解锁消耗数值
+	required bytes       	unlock_entries = 8; // 解锁入口字符串 -- "entryid | ..."
+	required bytes       	front_lock = 9; // 前置解锁字符串 -- "areaid | ..."
+}
+
+message ConfigMapAreaList {
+	repeated ConfigMapArea list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// config map entry
+////////////////////////////////////////////////////////////////
+message ConfigMapEntry {
+	required uint64     	entryid = 1;
+	required bytes       	name = 2;
+	required bytes       	desc = 3;
+	required int32       	island_type = 4; // 岛屿类型，1=新手村，2=港口，3=野外资源岛
+	required int32       	island_id = 5; // 岛屿id
+	required int32       	need_key = 6; // 缺省是否需要道具解锁, 0 = 无需道具解锁, 1 = 需要道具解锁
+	required int32       	pos_x = 7; // x坐标
+	required int32       	pos_y = 8; // y坐标
+	required bytes          easter_egg = 9;//彩蛋
+	required int32          first_easter_egg = 10;
+}
+
+message ConfigMapEntryList {
+	repeated ConfigMapEntry list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// config pirate ship
+////////////////////////////////////////////////////////////////
+message ConfigPirateShip {
+	required int32       	type = 1;
+	required bytes			refreshtime = 2; // 海盗船刷新时间字符串 -- " 00:00 | 00:01 | ... "
+	required int32			fight_num = 3; // 海盗船战斗次数上限
+
+	required bytes			entries = 11; // 关联入口字符串(航线)
+	required int32          vitality_cost = 12; //战斗消耗
+}
+
+message ConfigPirateShipList {
+	repeated ConfigPirateShip list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// config wild island
+////////////////////////////////////////////////////////////////
+message ConfigWildIsland {
+	required int32	     	islandid = 1;
+	required bytes       	name = 2;
+	required bytes       	desc = 3;
+	required int32       	type = 4; // 岛屿类型，1=私人资源岛，2=海盗资源岛，3=公共资源岛(group)
+	required int32       	level = 5; // 公共资源岛刷新等级，私人岛和海盗岛不分等级，统一为0级
+	required int32       	gather_type = 6; // 岛屿采集类型, 1=木材，2=石材，3=铜币，4=铁，
+	
+	required bytes       	workshop = 11; // 作坊缺省值字符串 -- "enable drop : drop ratio"
+	required int32       	workshop_store_num = 12; // 总储量
+	required int32      	workshop_gather_num = 13; // 每小时采集量
+	
+	required bytes       	monster = 21; // 缺省怪物级别字符串 -- "monster grade : drop ratio | ..."
+	required bytes       	statue = 22; // 缺省雕像级别字符串 -- "statue grade : drop ratio | ..."
+}
+
+message ConfigWildIslandList {
+	repeated ConfigWildIsland list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// 用户地图区域
+message UserMapArea {
+	required bytes			userid = 1;
+	required int32			areaid = 2;	
+	required int32			area_state = 3; // 区域状态, 0=未解锁， 1=已经解锁
+		
+  	required sfixed64		optime = 11;
+}
+
+////////////////////////////////////////////////////////////////	
+// 用户地图入口
+message UserMapEntry {
+	required bytes			userid = 1;
+	required uint64			entryid = 2;	
+	required int32			discover_flag = 3; // 用户是否已经发现此入口, 0 = 未发现, 1 = 已经发现
+	required int32			block_flag = 4; // 用户是否被禁止入内, 0 = 无阻止(允许进入), 1 = 阻止(禁止进入)
+	required uint64			groupid = 5; // 组id, 仅针对组岛有效
+  
+	required int32			stage_hint = 11; // 战斗关卡指引值, 0 = disable
+	required int32			stage_hint2 = 12; // 战斗关卡指引值2, pvp 战斗中用于存储 serverid
+	required uint64			stage_monsterid = 13; // 战斗关卡怪物id
+	required sfixed64		stage_refreshtime = 14; // 战斗关卡重置时间	
+	
+	required int32			ownership_flag = 21; // 入口所有权, 0 = 无所有权, 1 = 拥有所有权
+	required float			ownership_storage = 22; // 所有权有效期间的总储量	
+	required float			ownership_gather_per_min = 23; // 所有权有效期间的每分钟采集量
+	required float			ownership_gather_add_ratio = 24; // 所有权有效期间的采集加成比率
+	required sfixed64		ownership_gather_time = 25; // 所有权有效期采集时间
+	required sfixed64		ownership_deadline = 26; // 所有权有效期截止时间, 0 = 永久
+	required sfixed64		ownership_farm_skill_exp_time = 27; // 所有权有效期获取生活技能经验值的时间		
+  required sfixed64		optime = 31;
+
+    optional int32          type = 40;
+    optional int64          ownerid = 41;
+    optional sfixed64          refresh_time = 42;
+    optional bytes          data = 43;
+}
+
+////////////////////////////////////////////////////////////////
+message UserFarmSkillExpGen {
+	required bytes				userid = 1;
+	required int32				cardid = 2; // 卡片id
+	required uint64				entryid = 3; // 入口id
+	required float				exp = 4; // 累积经验值
+}
+
+////////////////////////////////////////////////////////////////	
+// 用户stats -- 地图入口
+message UserStatsMapEntry {
+	required bytes			userid = 1;
+	
+	required sfixed64		wild_island_gather_time = 11; // 统一采集时间
+	required sfixed64		wild_island_harvest_time1 = 12;
+	required sfixed64		wild_island_harvest_time2 = 13;
+	required sfixed64		wild_island_harvest_time3 = 14;
+	required sfixed64		wild_island_harvest_time4 = 15;
+
+	required sfixed64		group_island_refreshtime = 21;
+
+	required uint64			player_ship_entryid = 31;
+	required sfixed64		player_ship_refresh_time = 32;
+	required sfixed64		player_ship_navigate_time = 33;
+
+}
+
+////////////////////////////////////////////////////////////////	
+// 海盗船状态
+message UserPirateShip {
+	required bytes			userid = 1;
+	required int32			type = 2;
+	
+	required uint64			entryid = 11;	
+	required sfixed64		refreshtime = 12;
+	required int32			fight_num = 13;
+
+}
+
+////////////////////////////////////////////////////////////////	
+// 野外资源岛 detail
+message WildIslandDetail {
+	required uint64			entryid = 1;	
+	required int32			island_state = 2; // 资源岛屿状态, 0=未知，1=允许进攻，2=保护中，不允许进攻，3=关闭
+	required int32			occupier_ticketid = 3; // 资源岛占领者ticketid
+	required sfixed64		occupy_time = 4; // 占领时间
+	required sfixed64		refreshtime = 5; // 重置时间
+	
+	required int32			workshop_grade = 11; // 工作台等级，0 = 无工作台
+	required int32			workshop_state = 12; // 工作台状态	
+	required float			workshop_base_ratio = 13; // 工作台基础系数
+	required float			workshop_storage = 14; // 工作台剩余储量	
+	required float			workshop_gather_per_min = 15; // 工作台每分钟采集量
+	required float			workshop_gather_add_ratio = 16; // 工作台采集加成比率
+	required sfixed64		workshop_gather_time = 17; // 工作台采集时间
+		
+  required sfixed64		optime = 21;
+}
+
+// 分组野外资源岛
+message GameGroupWildIsland {
+	required uint64						groupid = 1;	
+	required WildIslandDetail	detail = 2;
+}
+
+// 分组成员
+message GameGroupMember {
+	required uint64						groupid = 1;
+	required int32						memberid = 2;
+	required int32						state = 3; // 分组状态，-1=待删除，0=正常
+	required sfixed64					optime = 4;
+}
+
+// 用户野外资源岛
+message UserWildIsland {
+	required bytes						userid = 1;
+	required WildIslandDetail	detail = 2;
+}
+
+////////////////////////////////////////////////////////////////	
+// 用户stats -- 岛屿资源采集
+message UserStatsWildIslandGather {
+	required bytes			userid = 1;
+	required uint64			gatherid = 2;
+	required int32			gather_type = 3; // 采集资源类型，1 = wood, 2 = stone, 3 = copper, 4 = iron
+	required uint64			gather_resid = 4;
+	required float			gather_resnum = 5;
+	required int32			gather_state = 6; // 采集状态, 0 = 空闲, 1 = 采集累积中, 2 = 采集累积完成，但未收取, 3 = 收取完成
+	required sfixed64		gather_starttime = 7; // 采集开始时间
+	
+	required sfixed64		optime = 11;
+}

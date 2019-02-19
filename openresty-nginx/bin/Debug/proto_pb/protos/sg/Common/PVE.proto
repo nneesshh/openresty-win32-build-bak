@@ -1,0 +1,367 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message SailorInDungeon {
+	 required int32  id = 1;
+	 required int32  typeid = 2;
+	 required int32  state = 3;  // 2 活着上场 1 活着不上场  0 死亡
+	 required int32  index = 4;
+	 required int32  level = 5;
+	 required int32  star = 6;
+     repeated pb_pair_int_float attribute = 7;//基础
+     repeated pb_pair_int_int  buff = 8;
+     repeated pb_pair_int_float fight_attribute = 9;//总值
+     repeated pb_pair_string_int special_attribute = 10;
+     repeated pb_pair_int64_int skill = 11;
+     
+     optional SailorTalent  talent = 12;
+     optional float hp_remain = 13;
+     optional int32 place = 14;
+     optional int32 hunger = 15;
+}
+
+message MonsterInDungeon {
+	 required int32  id = 1;
+	 required int32  typeid = 2;
+	 required int32  state = 3;  //1 活着  0 死亡
+	 required int32  level = 4;
+     repeated pb_pair_int_float attribute = 7;//基础
+     repeated pb_pair_int_int  buff = 8;
+     repeated pb_pair_int64_int skill = 11;
+     
+     optional float hp_remain = 13;
+}
+
+message  Enemy {
+	required  int32  id = 1;
+	required  int32  type = 2;
+	optional  int32  seat = 3;
+	optional  SailorInDungeon   sailor_data = 4;
+	optional  MonsterInDungeon  monster_data = 5;
+	repeated  int32  contain_elements = 6;
+}
+
+enum  DUNGEON_SPECIAL_EVENT {
+	DSE_CLEAR_ITEM_ON_THE_GROUND = 1;
+	DSE_CHANGE_MODEL = 2;
+	DSE_LAYER_CHANGE = 3;
+	DSE_ENTER_SECRET_ROOM = 4;
+	DSE_UNLOCK_ROOM = 5;
+	DSE_EVENT_TRIGGER = 6;
+}
+
+enum  PVE_BATTLE_RESULT {
+	BATTLE_SUCCESS = 1;
+	BATTLE_FAILED = 2;
+}
+
+message DungeonAltar {
+	required int32  typeid = 1;
+	required int32  state = 2;
+	message Relic {
+	    required int32  typeid = 1;
+	    repeated pb_pair_int_int skills = 2; 
+	}
+
+	optional  Relic relic = 3;
+	optional  MonsterInDungeon monster = 4;
+}
+
+message ElementProperty {
+    optional  int32     index = 1;
+	optional  int32     num = 2;
+	optional  int32     exp = 3;
+	optional  int32     pos_x = 4;
+	optional  int32     pos_y = 5;
+	optional  int32     lock_id = 6;
+	optional  int32     room_id = 7;
+	optional  int32     change_model = 8;
+	optional  int32     trigger_id = 9;
+	optional  int32     clean_up_reward_tag = 10; //  1  为全清奖励
+	optional  int32     belong_facility = 11;
+	optional  bytes     map_data = 12;
+	optional  int32     unlock_room = 13;
+	repeated  int32     locked_room = 14;
+	optional  int64     trigger_event = 15;
+    
+    message  RoomData {
+       
+        message RoomEffect {
+            optional int32   enter_effect = 1;
+            optional int32   effect_id = 2;
+            optional int32   effect_value = 3;
+            optional float   effect_value_ratio = 4;
+            repeated Item    contain = 5;
+            repeated Equip   equips = 6;           
+        }
+
+
+       required int32   roomid = 1;
+       optional int32   type = 2;
+       optional int32   state = 3;  // 0 代表未占领  1代表占领
+       repeated RoomEffect effects = 4;
+    }
+ 
+    optional RoomData   room_data = 16;
+    optional  int32     state = 17; // 0 为未开启 1 为已开启
+}
+
+message   FightManual {
+	required   int32     type = 1;
+	repeated   int32     typeid = 2;
+}
+
+message DungeonElement{
+    message   Exchange {
+        required int32  id = 1;
+        required int32  typeid = 2;
+        required int32  index = 3;
+
+        message  Exchange_Item {
+           required   int32   item_type = 1;
+           optional   int32   id  = 2;
+           optional   int32   type = 3;
+           optional   uint64  typeid = 4;
+           optional   uint64  value = 5;
+        }
+
+       repeated Exchange_Item  cost = 4;
+       repeated Exchange_Item  get = 5;
+    }
+
+	required  int32   id = 1;
+	required  int32   owner_id = 2;
+	required  int32   type = 3;
+	required  int64   typeid_ = 4;
+    optional  ElementProperty   property = 5;//对道具是数量 对怪是经验值  对机器来说 为 坐标 x*1000 + y  对密室来说 是 lock_id  ,对于特殊事件2 来说 是变身后的模型id
+    repeated  Exchange   exchange_list = 6;
+    repeated  int32   elements = 7;
+}
+
+message DungeonContent {
+    message PathBranch {
+        required int32  id = 1;
+        repeated pb_pair_int_int layer_change = 2;
+    }
+
+	required  int32    now_layer = 1;
+	required  int32    style = 2;
+	required  int32    monster_level = 3;
+	repeated  DungeonElement  elements = 4;
+	repeated  PathBranch    path_choice = 5;
+
+	optional  int32    real_layer = 6;
+	optional  int32    model_id = 7;
+
+	repeated  Enemy    enemys = 8;
+}
+
+message UserTeamData {
+  required  int32   user_level = 1;
+	repeated  SailorInDungeon         team = 2;
+	repeated  pb_pair_int_int  talents = 3;
+}
+
+message UserDungeonInformation {
+    message  ElementCount {
+        required int32  type = 1;
+        required int32  typeid = 2;
+        required int32  num = 3;
+    }
+
+  optional  int32           revive_times = 1;
+	repeated  pb_pair_int_int  talents = 3;
+	repeated  pb_pair_int_int  packages = 4;
+	repeated  int64            saved_npc = 5;
+	repeated  int64            saved_customers = 6;
+	repeated  int64            triggered_event = 7;
+	optional  int32            occupation = 8;
+    
+    repeated  pb_pair_int_int  secret_room_distribute = 9;
+    repeated  pb_pair_int_int  layer_change = 10;
+    
+    repeated  MonsterInDungeon friendly_monsters = 11;
+    repeated  DungeonAltar   altars = 12;
+    repeated  ElementCount   element_count = 13;
+}   
+
+message UserDungeonOperation {
+	required   int32   operation_type = 1;
+	optional   int32   target_element = 2;
+	optional   int32   operation_param = 3;
+  optional   bytes   data = 4;
+}
+
+message  DungeonEvent {
+	required  int32     id = 1;
+	required  int32     state = 2;
+	required  int32     finish_value = 3;
+	optional  int32     require_value = 4;
+}
+
+message ShipData {
+    required bytes             userid = 1;
+	required int32             ship_model = 2;
+	optional bytes             rooms = 3;
+	optional bytes             ship_tiles = 4;      
+	required bytes             facilitys = 5;
+	repeated Sailor            sailors = 6;
+}
+
+message PveFacility {
+	required int32             id = 1;
+	required int32             typeid = 2;
+	optional int32             x = 3;
+	optional int32             y = 4;
+	repeated Item              contain = 5;
+}
+
+message PveMapData {
+    required int32             model_id = 2;
+    required int32             width = 3;
+    required int32             height = 4;
+	optional bytes             rooms = 5;
+	optional bytes             map_tiles = 6;      
+	repeated PveFacility       facilitys = 7;
+}
+
+message  PvePlayerMapData {
+	required ShipData      shipdata = 1;
+	repeated PveFacility             facilitys = 2;
+}
+
+message PveDefenderData {
+    required bytes             userid = 1;
+    repeated Sailor            defend_team = 2;
+}
+
+
+
+
+message PVEBattleService {
+    enum PVE_CMD {
+       START= 1;
+       TO_NEXT = 2;
+       OVER = 3;
+       RESTORE = 4;
+       ATTACK_ENTRY = 5;
+       ATTACK_OVER = 6;
+       CHECK_CAN_FIGHT = 7;
+       HUNT_START = 8;
+       HUNT_OVER = 9;
+       TREASURE_BATTLE_START = 10;
+       TREASURE_BATTLE_OVER = 11;
+       QUERY_FIGHT_MANUAL = 12;
+       REVIVE = 13;
+       ATTACK_MODEL_START = 14;
+       ATTACK_MODEL_OVER = 15;
+       SHIP_EVENT_START = 16;
+       SHIP_EVENT_OVER = 17;
+       NAVIGATION_EVENT_START = 18;
+       NAVIGATION_EVENT_DOING = 19;
+       NAVIGATION_EVENT_OVER = 20;
+       MAELSTROM_EVENT_START = 21;
+       MAELSTROM_EVENT_DOING = 22;
+       MAELSTROM_EVENT_OVER = 23;
+       OPEN_CHEST = 24;
+       INVADE_START = 25;
+       REVENGE_START = 26;
+    }
+	message PVEBattleRequest {  
+        required PVE_CMD             cmd = 1; 
+        optional uint64               target_id = 3;
+        repeated int32               used_sailor = 4;
+        repeated UserDungeonOperation       operation_list = 5;
+        repeated SailorInDungeon         team_state = 6;
+     
+        optional int32               battle_result = 7; // 1 = 成功  0 = 失败
+        repeated int32               destory_facilitys =8;
+        optional int32               path_choice = 9;
+        optional int32               hunt_animal = 10;
+        optional int32               enemy_typeid = 11;
+        optional int32               treasure_id = 12;
+        optional int32               pve_model_id = 13;
+        repeated FightManual         new_manual = 14;
+
+        optional bool                debug_tag = 15;
+        repeated MonsterInDungeon    monsters = 16;
+        repeated Enemy               enemys = 17;
+        repeated DungeonAltar        altars = 18;
+        repeated pb_pair_int_int          take_items = 19;
+	}
+	
+	//
+	message PVEBattleResponse { 
+	    required int32             result = 1; //
+		optional DungeonContent      content = 2; // 
+		optional int32             cost_viality = 3;    
+		optional UserDungeonInformation user_info = 4;
+		optional Reward            reward = 5;
+        
+        optional int32        dungeon_id = 6;
+        optional int32        pve_map_type = 7;
+        optional bytes        map_data = 8;
+        repeated FightManual        found_manual = 9;
+        repeated int64        saved_npc = 10;
+        repeated int64        saved_customer = 11;
+
+        optional  Reward     lose = 12;
+        optional Reward      finish_reward = 13;
+        optional UserTeamData  user_team = 14;
+	}
+
+	optional PVEBattleRequest req = 1;
+	optional PVEBattleResponse resp = 2;
+}
+
+
+enum  DUNGEON_STATE {
+	DUNGEON_STATE_LOCKED = 1;
+	DUNGEON_STATE_UNLOCKED = 2;
+	DUNGEON_STATE_NO_REWARD = 3;
+	DUNGEON_STATE_FINISHED = 4;
+};
+
+message   DungeonInfo {
+	required   int32    id = 1;
+	required   int32    state = 2;
+	optional   int32    clear_times = 3;
+	optional   int32    max_layer = 4;
+	repeated   int32    reward_received = 5;
+	optional   int32    daily_times = 6;
+	repeated   int32    open_chest = 7;
+}
+
+message   UserDungeonService {
+    enum DUNGEON_CMD {
+       QUERY_EVENT = 1;
+       QUERY_DUNGEON = 2;
+       FAST_FINISH = 3;
+       GET_EVENT_REWARD = 4;
+       GET_FINAL_REWARD = 5;
+       UNLOCK_DUNGEON = 6;
+       GET_LAYER_REWARD = 7;
+    }
+
+	message UserDungeonRequest {
+    	required DUNGEON_CMD             cmd = 1;  
+	    optional int32               dungeon_id = 2;
+	    optional int32               event_id = 3;
+	    optional int32               layer = 4;
+	}
+	message UserDungeonResponse { 
+	    required int32             result = 1; //
+	    repeated DungeonEvent      events = 2;
+	    repeated DungeonInfo       dungeons = 3;
+	    optional Reward            reward = 4;
+	    optional int32             cost_viality = 5;
+	    repeated pb_pair_int_int   saved_customer = 6;
+	}
+
+	optional UserDungeonRequest req = 1;
+	optional UserDungeonResponse resp = 2;
+}

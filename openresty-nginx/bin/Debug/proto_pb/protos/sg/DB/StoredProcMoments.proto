@@ -1,0 +1,60 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+// moments 配置
+message ConfigMoments {
+	required int32 level = 1;
+	required int32 comment_num_max = 2;
+	required int32 comment_day_hot_max = 3;
+	required int32 comment_role_level = 4;
+}
+
+message ConfigMomentsList {
+	repeated ConfigMoments list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+message MomentsComment {
+	required uint64			subject_typeid = 1;
+	required int32			sn = 2;
+	required bytes			nick = 3;
+	required bytes			content = 4;
+	required int32			like_num = 5;
+	required int32			state = 6;
+	
+	optional sfixed64		createtime = 11;
+}
+
+////////////////////////////////////////////////////////////////	
+message UserStatsMomentsComment {
+	required bytes			userid = 1;
+	required uint64			subject_typeid = 2;
+	required int32			sn = 3;
+	required int32			author_ticketid = 4;
+	required int32			like_num = 5;
+
+	required sfixed64		createtime = 11;
+}
+
+//
+message UserStatsMomentsCommentList {
+	repeated UserStatsMomentsComment	list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+message UserStatsMomentsDay {
+	required bytes			userid = 1;
+	required sfixed64		day = 2;
+	required int32			continuous_online_days = 3;
+	
+	required int32			moments_comment_num = 11;
+
+}
+
+//
+message UserStatsMomentsDayList {
+	repeated UserStatsMomentsDay	list = 1;
+}

@@ -1,0 +1,61 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+import "PVE.proto";
+
+package sg;
+
+message ControllerInformation {
+	required int32          index = 1; //控制者序号
+	repeated Sailor         sailors = 2;
+}
+
+message UserPVPState {
+	optional int32     remain_times = 1;
+    optional int32     combo = 2;
+    optional sfixed64  timestamp = 3;
+    optional sfixed64  round_start = 4;
+}
+
+message PVPMatchService {
+    enum MATCH_CMD {
+        QUERY = 1;// 查询
+        NEW_ROUND = 2; //新回合
+        SINGLE_MATCH = 3; //加入单人匹配
+        MULTIPLE_MATCH = 4; //加入多人匹配
+        CANCEL = 5; //退出匹配
+    }
+	message PVPMatchRequest {  
+        required MATCH_CMD             cmd = 1; //命令
+        repeated int32                 team = 2;
+	}
+	
+	//
+	message PVPMatchResponse {
+		required int32 result = 1; //结果
+        repeated SailorInDungeon  self_team = 2;
+        optional UserPVPState  state = 3;
+	}
+	
+	optional PVPMatchRequest req = 1;
+	optional PVPMatchResponse resp = 2;
+}
+
+message  NewTicketNotify{
+	optional Item  ticket = 1;
+}
+
+message  RoundOverNotify{
+	optional int32  sign = 1;
+}
+
+message SingleMatchedNotify {
+    required   uint64  field_id = 1;
+	required   int32   level = 2;
+	required   bytes   nick = 3;
+	required   int32   portrait = 4;
+    required   bytes   signature = 5;
+    optional   int32   ranking_score = 6;
+	repeated   SailorInDungeon  team = 7;
+}

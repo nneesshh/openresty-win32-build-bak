@@ -1,0 +1,20 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package pay;
+
+//
+message PayNotify {
+	required bytes			accountid = 1; // 用户帐号
+	required float			chargecash = 2; // 充值金额(现金单位: 元)
+	required int32			chargetype = 3; // 充值类型
+	required int32			goodsid = 4; // 商品id
+	
+	required int32			serverid = 11; // 服务器id
+	required bytes			platid = 12; // 平台id
+	required bytes			ordernum = 13; // 
+	required bytes			receipt = 14;
+	required bytes			notifytime = 15;
+	required bytes			createtime = 16;
+
+}

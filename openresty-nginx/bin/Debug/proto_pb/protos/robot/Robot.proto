@@ -1,0 +1,24 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package robot;
+
+message  RobotJoinService {
+    enum  ROBOT_CMD {
+        JOIN = 1;
+        SET_SCORE = 2;
+    }
+     
+    message  RobotJoinRequest{
+        required  ROBOT_CMD  cmd = 1;
+        optional  int32      init_level = 2;
+    }
+
+    message  RobotJoinResponse{
+        required  int32  result = 1;
+    }
+
+    optional RobotJoinRequest req = 1;
+    optional RobotJoinResponse resp = 2;
+}
+

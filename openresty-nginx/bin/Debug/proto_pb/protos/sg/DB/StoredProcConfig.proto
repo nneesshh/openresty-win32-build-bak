@@ -1,0 +1,1175 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+// role 配置
+message ConfigFacility {
+	required int32        id = 1;   
+	required bytes        name = 2;
+	required int32        maintype = 3;
+	required int32        func_type = 4;
+	required int32        style_id = 5;
+	required int32        build_type = 6;
+	required bytes        property = 7;
+	required int32        price = 8;
+	required int32        seize_row = 9;
+	required int32        seize_col = 10;
+	required int32        seconds = 11;
+	required int32        float = 12;
+	required int32        node = 13;
+	required int32        room_must = 14;
+	required int32        base_device_id = 15;
+	required bytes        level_up_require = 16;
+	required int32        level_up_grade = 17;
+	required int32        level_up_id = 18;
+	required int32        facility_level = 19;
+	required int32        people_node = 20;
+	required int32        level_up_ship_level = 21;
+	required bytes        formula_unlock = 22;
+	required int32        level_up_captain_level = 23;
+	required bytes        level_up_need_device = 24;
+	required bytes        level_up_need_facility = 25;
+	required bytes        special_property = 26;
+	required int32        machine_id_in_fight = 27;
+	required bytes        slot_unlock_condition = 28;
+	required int32        machine_capacity = 29;
+	required int32        level_up_need_time = 30;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigItem {
+	required int32        id = 1;   
+	required bytes        name = 2;
+	required int32        type = 3;
+	required int32        star = 4;
+	required int32        quality = 5;
+	required bytes        property = 6;
+	required int32        price = 7;
+	required int64        max_num = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCard {
+	required int32        id = 1;   
+	required bytes        name = 2;
+	required int32        profession = 4;
+    required int32        star = 5;
+    required int32        attack_range = 6;
+    required int32        attack_mode = 7;
+    required int32        energy_cost = 8;
+    required float        attack_time = 9;
+  	required float        wait_time = 10;
+	required float        move_time = 11;
+    required int32        move_distance = 12;
+    required int32        run_distance = 13;
+	required int32        can_move = 14;
+	required int32        action_mode = 15;
+    required int32        width = 16;
+    required int32        height = 17;
+    required bytes        initial_equip = 18;
+    required uint64       talent = 19;
+    required int32        practice_group = 20;
+    required bytes        farm_skill = 21;
+    required bytes        skill = 22;
+    required int32        chip_id = 23;
+    required int32        chip_cost = 24;
+    required int32        chip_convert = 25;
+    required bytes        chip_exchange = 26;
+    required float        gather_add_ratio = 27;
+    required bytes        penetration_args = 28;
+    required int64        init_fall_skill = 29;
+    required int32        quality = 30;
+    required float        init_hunger = 31;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardStrengthen {
+	required int32        typeid = 1;
+	required int32        star = 2;
+	required bytes        initial_attribute = 3;
+	required bytes        aptitude = 4;
+	required int32        level_max = 5;
+	required bytes        item_cost = 6;
+	required bytes        chip_cost = 7;
+	required bytes        rising_star_cost = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigLevel {
+	required int32        level = 1;
+	required int32        need_exp = 2;
+	required bytes        add_facility = 3;
+	required bytes        add_item = 4;
+	required int32        add_exp = 5;
+	required int32        max_sailor_level = 6;
+	required int32        max_vitality = 7;
+	required int32        max_take_items = 8;
+	required bytes        fail_reward = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigModel {
+	required int32        id = 1;
+	required int32        style = 2;
+	required int32        level = 3;
+	required bytes        room_open = 4;
+	required bytes        map_size = 5;
+	required bytes        ship_template = 6;
+	required bytes        null_template = 7;
+	required bytes        ship_facility = 8;
+	required int32        need_level = 9;
+	required int32        pre_model = 10;
+	required bytes        unlock_cost = 11;
+	required int32        capacity = 12;
+	required bytes        unlock_reward = 13;
+	required float        machine_param = 14;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigPlace {
+	required int32        id = 1;
+    required bytes        name = 2;
+    required bytes        time =  3;
+    required int32        location = 4;
+    required bytes        start_pos = 5;
+    required int32        width = 6;
+    required int32        height = 7;
+    required bytes        tiled_map = 8;
+    required int32        boom = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigSceneInfo {
+	required int32        sceneid = 1;
+    required bytes        scene_name = 2;
+    required int32        type = 3;
+    required int32        belong_to =  4;
+    required int32        checkpoint_num = 5;
+    required bytes        pos = 6;
+    required bytes        drop_item = 7;
+    required bytes        formula_unlock = 8;
+    required int32        add_exp = 9;
+    required bytes        end_condition = 10;
+    required int32        consume_num = 11;
+    required bytes        star_condition = 12;
+    required bytes        fight_map = 13;
+    required int32        max_layer = 14;
+    required bytes        content = 16;
+    required bytes        port_unlock = 17;
+    required bytes        pre_task = 18;
+    required bytes        secret_room = 19;
+    required bytes        start_res = 20;
+    required bytes        fight_machine = 21;
+    required bytes        enter_condition = 22;
+    required bytes        dungeon_event = 23;
+    required bytes        final_reward = 24;
+    required int32        need_point = 25;
+    required bytes        first_reward = 26;
+    required bytes        clear_reward = 27;
+    required bytes        boss_info = 28;
+    required bytes        layer_reward = 29;
+    required int32        can_repeat = 30;
+    required int32        daily_times_limit = 31;
+    required bytes        saved_customer = 32;
+}
+ 
+////////////////////////////////////////////////////////////////
+
+message ConfigExploreEvent {
+	required int32        id = 1;
+    required int32        type = 2;
+    required int32        trigger_type =  3;
+    required bytes        condition = 4;
+    required bytes        landform_condition = 5;
+    required bytes        content = 6;
+    required bytes        pos = 7;
+    required float        probability = 8;
+    required int32        cd = 9;
+    required int32        time = 10;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigBaseRoom {
+	required int32        id = 1;
+	required bytes        name = 2;
+    required int32        room_type = 3;
+    required int32        room_num_min = 4;
+    required int32        attribute = 5;
+    required int32        efficiency = 6;
+    required int32        pre_room = 7;
+    required int32        need_level = 8;
+    required bytes        need_material = 9;
+    required int32        farm_skill = 10;
+    required bytes        machine_param = 11;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFormula {
+	required int32        id = 1;
+	required int32        level = 2;
+	required bytes        product_id = 3;
+	required bytes        formula_name = 4;
+	required int32        type = 5;
+	required bytes        material = 6;
+	required int32        seconds = 7;
+	required int32        belong_to = 8;
+	required int32        add_exp = 9;
+	required bytes        speed_up_cost = 10;
+	required int32        output = 11;
+}
+
+////////////////////////////////////////////////////////////////
+
+// shopping 配置
+message ConfigShopping {
+	required int32 id = 1;
+	required int32 groupid = 2;
+	required int32 category = 3; // 商品类别，1=购买钻石，2=购买资源，3=购买功能
+	required int32 belong_store = 4;
+	required bytes goods = 5; // 商品字符串
+	required bytes price = 6; // 商品价格字符串，1=RMB, 2=Diamond
+	required bytes date = 7;
+	required int32 limit_num = 8;
+	required int32 double = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardAttribute {
+	required int32 id = 1;
+	required int32 type = 2;
+	required bytes name = 3;
+	required bytes influence = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardEquip {
+	required int32 id = 1;
+	required bytes name = 2;
+	required int32 star = 3;
+	required int32 quality = 4;
+	required int32 part = 5;
+	required int32 need_level = 6;
+	required int32 occupation = 7;
+	required int32 farm_skill = 8;
+	required int32 type = 9;
+	required int32 initial_slot = 10;
+	required bytes attribute = 11;
+	required bytes special_attr = 12;
+	required bytes advanced_attr = 13;
+	required bytes forge_cost = 14;
+	required int32 price = 15;
+	required bytes base_attribute_add = 16;
+	required int32 quality_refine_times = 17;
+	required bytes skill = 18;
+	required bytes quality_up_cost = 19;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardEquipStrengthen {
+	required int32 id = 1;
+	required int32 level = 2;
+	required int32 quality = 3;
+	required int32 part = 4;
+	required int32 strengthen_level_max = 5;
+	required bytes cost = 6;
+	required bytes gold = 7;
+	required bytes attribute_add = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardLevel {
+	required int32 level = 1;
+	required int32 exp_max = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigWanted {
+	required int32 id = 1;
+	required int32 type = 2;
+	required bytes content = 3;
+	required bytes place = 4;
+	required bytes event = 5;
+	required bytes reward = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigTask {
+	required int32 id = 1;
+	required bytes name = 2;
+	required int32 type = 3;
+	required int32 need_level = 4;
+	required int32 pre_task = 5;
+	required bytes npc_state = 8;
+	required bytes reward = 9;
+	required int32 add_exp = 10;
+	required bytes harbor_flush = 11;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigTaskStep {
+	required int32 taskid = 1;
+    required int32 step = 2;
+    required bytes npc_state = 3;
+    required bytes content = 4;
+    required bytes harbor_flush = 5;
+    required bytes ship_event = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigNpc {
+	required int32 id = 1;
+    required int32 type = 2;
+    required int32 state = 3;
+    required int32 place = 4;
+    required int32 pos_type = 5;
+    required bytes pos = 6;
+
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigAchievement {
+	required int32 id = 1;
+	required int32 phase = 2;
+    required int32 type = 3;
+    required int32 action = 4;
+    required int32 target = 5;
+    required int32 param = 6;
+    required int32 require = 7;
+    required int32 get_point = 8;
+    required bytes reward = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigAchievementTask {
+	required int32 id = 1;
+    required int32 dungeon_id = 2;
+    required int32 require = 3;
+    required bytes reward = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigSystemTask {
+	required int32 id = 1;
+    required int32 type = 2;
+    required int32 condition_type = 3;
+    required bytes condition = 4;
+    required int32 require = 5;
+    required bytes reward = 6;
+    required int32 exp = 7;
+    required bytes refresh_date_weekly = 8;
+    required bytes need_level = 9;
+    required bytes pre_task = 10;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigRandomGift {
+	required int32 id = 1;
+    required int32 type = 2;
+    required int32 probability = 3;
+    required bytes price = 4;
+    required bytes goods = 5;
+    required int32 limit_num = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonEvent {
+	required int32 id = 1;
+    required int32 action = 2;
+    required bytes condition = 3;
+    required int32 require = 4;
+    required int32 get_point = 5;
+    required int32 dungeon_id = 6;
+    required bytes reward = 7;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonContentGroup {
+	required int32 id = 1;
+    required bytes base_element = 2;
+    required bytes random_element = 3;
+    required bytes spider_info = 4;
+    required bytes stairs_enemy = 5;
+    required bytes npc = 6;
+    required bytes path_choice = 7;
+    required bytes altar = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEnemy {
+	required int32 id = 1;
+	required bytes name = 2;
+	required int32 profession =3;
+	required int32 enemy_model = 4;
+	required int32 camp = 5;
+	required int32 hp = 6;
+	required float physical_attack = 7;
+	required float magic_attack = 8;
+	required float physical_defense = 9;
+	required float magic_defense = 10;
+	required int32 summon = 11;
+	required float width = 12;
+	required float height = 13;
+	required int32 wait_time = 14;
+	required int32 attack_mode = 15;
+	required int32 move_distance = 16;
+	required int32 run_distance = 17;
+	required int32 can_move = 18;
+	required int32 enemy_type = 19;
+	required int32 action_mode = 20;
+	required bytes skill = 21;
+	required bytes drop_item = 22;
+	required bytes drop_element = 23;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEnemyEvent {
+	required int32 id = 1;
+	required bytes trigger_info = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEnemyGroup {
+	required int32 id = 1;
+	required int32 eventid = 2;
+	required bytes group_info = 3;
+	required bytes random_enemy = 4;
+	required bytes random_event = 5;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFightItem {
+	required int32 id = 1;
+	required bytes name = 2;
+	required int32 type = 3;
+	required int32 use_type = 4;
+	required bytes effect = 5;
+	required int32 package_max = 6;
+	required int32 exchange_num = 7;
+	required bytes exchange = 8;
+	required bytes price = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFightMachine {
+	required int32 id = 1;
+	required int32 condition_type = 2;
+	required int32 condition_param = 3;
+	required int32 machine_type = 4;
+	required bytes trigger_effect = 5;
+	required int32 machine_time = 6;
+	required bytes trigger_element = 7;
+	required int32 special_type = 8;
+	required int32 exist_times = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonTalent {
+	required int32 talent_group = 1;
+	required int32 level = 2;
+	required int32 level_max = 3;
+	required bytes get_props = 4;
+	required bytes next_floor_item = 5;
+	required bytes next_floor_machine = 6;
+	required bytes incentives = 7;
+	required bytes machine_incentives = 8;
+	required bytes reduce_cost = 9;
+	required bytes cost = 10;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonTalentTree {
+	required int32 id = 1;
+	required int32 type = 2;
+	required bytes cost = 3;
+	required bytes unlock_require = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonStoreGroup {
+	required int32 id = 1;
+	required bytes base_items = 2;
+	required bytes random_items = 3;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigMachineExchange {
+	required int32 id = 1;
+	required bytes cost = 2;
+	required bytes get = 3;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigMachineExchangeGroup {
+	required int32 id = 1;
+	required bytes group_info = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigPveMapModel {
+	required int32 id = 1;
+	required bytes name = 2;
+	required int32 type = 3;
+	required int32 subtype = 4;
+	required bytes level = 5;
+	required int32 map_type = 6;
+	required bytes map_tiles = 7;
+	required bytes map_size = 8;
+
+	required bytes random_room_one = 11;
+	required bytes random_room_two = 12;
+	required bytes random_room_three = 13;
+	required bytes random_room_four = 14;
+	required bytes random_room_five = 15;
+	required bytes random_enemy_two = 16;
+	required bytes random_enemy_three = 17;
+	required bytes random_enemy_four = 18;
+	required bytes random_enemy_five = 19;
+
+	required bytes facilitys = 21;
+	required bytes confirm_room = 22;
+	required bytes confirm_element = 23;
+	required bytes locked_room = 24;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigPveRoomModel {
+	required int32 id = 1;
+	required int32 groupid = 2;
+	required int32 type = 3;
+	required bytes facilitys = 4;
+	required bytes drops = 5;
+	required bytes machine = 6;
+	required bytes random_machine = 7;
+	required bytes altar = 8;
+	required bytes room_size = 9;
+	required int32 exist_enemy = 10;
+	required bytes chest = 11;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigChest {
+	required int32 id = 1;
+	required int32 phase = 2;
+	required bytes level = 3;
+	required bytes drop_item = 4;
+	required bytes drop_group = 5;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDropItemGroup {
+	required int32 id = 1;
+	required int32 groupid = 2;
+	required int32 type = 3;
+	required int32 index = 4;
+	required int32 typeid = 5;
+	required int32 num_min = 6;
+	required int32 num_max = 7;
+	required float probability = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigLottery {
+	required int32 id = 1;
+	required int32 type = 2;
+	required bytes cost = 3;
+	required int32 limit_num = 4;
+	required bytes random_groups = 5;
+	required bytes lowest_groups = 6;
+	required int32 activity_id = 7;
+	required bytes activity_reward = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigSecretRoom {
+	required int32 id = 1;
+	required int32 model_id = 2;
+	required bytes lock_info = 3;
+	required bytes trigger_element = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigSecretRoomGroup {
+	required int32 id = 1;
+	required bytes group_info = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFarmSkillLevel {
+	required uint64 id = 1;
+	required int32 level = 2;
+	required int32 exp_max = 3;
+	required bytes level_up_cost = 4;
+	required bytes attribute = 5;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigSkill {
+	required uint64 id = 1;
+	required int32  skill_level = 2;
+	required uint64 groupid = 3;
+	required bytes  skill_name = 4;
+	required bytes  description = 5;
+	required int32  need_star = 6;
+	required int32  need_level = 7;
+	required bytes  level_up_base_cost = 8;
+	required bytes  level_up_cost = 9;
+	required int32  chip_cost = 10;
+	required bytes  target = 11;
+	required int32  type = 12;
+	required int32  priority = 13;
+	required int32  attack_attr = 14;
+	required bytes  attack = 15;
+	required bytes  attack_mode = 16;
+	required bytes  trigger_self_buff = 17;
+	required bytes  trigger_enemy_buff = 18;
+	required bytes  buff_mode = 19;
+	required int32  cd = 20;
+	required int32  product = 21;
+	required int32  attack_range = 22;
+	required int32  special_effect = 23;
+	required bytes  item_add = 24;
+	required bytes  attribute_add = 25;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFightRandomGroup {
+	required int32 id = 1;
+	required int32 groupid = 2;
+	required int32 type = 3;
+	required int32 index = 4;
+	required int32 typeid = 5;
+	required float probability = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigNpcFight {
+	required uint64 id = 1;
+	required uint64 model_id = 2;
+	required int32 move_speed = 3;
+	required bytes effect = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigPvePlayerDrop {
+	required uint64 id = 1;
+	required uint64 facility = 2;
+	required bytes drop = 3;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardTalent {
+	required uint64    id = 1;
+	required int32    level = 2;
+	required bytes    name = 3;
+	required uint64   skill_id = 4;
+	required uint64   farm_skill_id = 5;
+	required bytes    effect = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigShoppingVitality {
+	required int32   id = 1;
+	required int32   price = 2;
+	required int32   get_vitality = 3;
+
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigRankingReward {
+	required int32   id = 1;
+	required bytes   ranking = 2;
+	required int32   division = 3;
+	required bytes   daily_reward = 4;
+	required bytes   weekly_reward = 5;
+	required bytes   monthly_reward = 6;
+
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFightElementConnect {
+	required int32   id = 1;
+	required int32   type = 2;
+	required bytes   connect_element = 3;
+
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigWildIslandLevel {
+	required int64   id = 1;
+	required int64   islandid = 2;
+	required bytes   name = 3;
+	required int32   rank = 4;
+    required int32   level = 5;
+    required int32   condition = 6;
+    required int32   vitality_cost = 7;
+    required int32   worker_max = 8;
+    required int32   produce_add = 9;
+    required bytes   repair_cost = 10;
+    required int32   model_id = 11;
+    required int32   map_model = 12;
+    required bytes   reward = 13;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigBusinessman {
+	required int64   id = 1;
+	required bytes   name = 2;
+	required int32   type = 3;
+	
+	required bytes   exchange_need1 = 11;
+	required bytes   exchange_reward1 = 12;
+	required bytes   exchange_need2 = 13;
+	required bytes   exchange_reward2 = 14;
+	required bytes   exchange_need3 = 15;
+	required bytes   exchange_reward3 = 16;
+	
+	required bytes   goods_num = 21;
+	required bytes   goods = 22;
+	required float   discount_probability = 23;
+	required bytes   discount_num = 24;
+	required bytes   price_fluctuation = 25;
+	required bytes   bargain = 26;
+	required int32   duration = 27;
+	required int64   groupid = 28;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigSkillRandom {
+	required int64   id = 1;
+	required int32   type = 2;
+	required bytes   profession = 3;
+	required float   probability = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEquipAttributeWord {
+	required int32   id = 1;
+	required int32   type = 2;
+	required int32   attr_id = 3;
+	required bytes   interval = 4;
+	required bytes   float = 5;
+	required float   perfect_value = 6;
+	required int32   unlock_level = 7;   
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEquipRefineCost {
+	required int32   star = 1;
+	required bytes   cost = 2;
+	required float   success_probability = 3;
+	required int32   diamond_cost = 4;
+	required float   diamond_success_probability = 5;
+	required int32   limit = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEquipDecompose {
+	required int32   star = 1;
+	required int32   quality = 2;
+	required bytes   decompose_get = 3;
+	required bytes   skill_influence = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEquipDecomposeCost {
+	required int32   id = 1;
+	required bytes   cost = 2;
+	required float   success_probability = 3;
+	required float   add_ratio = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigSpecialEvent {
+	required int64   id = 1;
+    required int32   trigger = 2;
+    required bytes   trigger_param = 3;
+    required int32   condition = 4;
+    required int32   condition_param = 5;
+    required int32   trigger_times = 6;
+    required bytes   reward = 7;
+    required bytes   first_reward = 8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigCardPractice {
+	required int32   id = 1;
+    required int32   level = 2;
+    required bytes   cost = 3;
+    required int32   need_star = 4;
+    required int32   need_level = 5;
+    required bytes   attribute_add = 6;
+    required int32   talent_level = 7;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigGhostShip {
+	required int32   id = 1;
+    required int32   type = 2;
+    required int32   initial_state = 3;
+    required bytes   unlock_stage = 4;
+    required bytes   match = 5;
+    required bytes   boss_group = 6;
+    required bytes   reward = 7;
+    required bytes   buff_get = 8;
+    required bytes   monster_buff = 9;
+    required int32   map_model = 10;
+    required bytes   special_reward = 11;
+    required int32   rank = 12;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFacilityGroup {
+	required int32   id = 1;
+    required bytes   contain = 2;
+    required int32   effect = 3;
+    required bytes   param = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigRankingScore {
+	required int32   id = 1;
+    required bytes   score = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigRankingBattleReward {
+	required int32   id = 1;
+    required int32   combo = 2;
+    required int32   score_up = 3;
+    required int32   score_down = 4;
+    required bytes   reward = 5;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigEasterEgg {
+	required int32   id = 1;
+    required int32   type = 2;
+    required bytes   name = 3;
+    required bytes   choice = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigShipEvent {
+	required int32 id = 1;
+	required int32 type = 2;
+	required bytes need_seconds = 3;
+	required bytes need_level = 4;
+	required int32 need_model = 5;
+	required bytes need_room = 6;
+	required bytes need_facility = 7;
+	required bytes pre_task = 8;
+	required int32 region = 9;
+	required float probability = 10;
+	required int32 limit_num = 11;
+	required bytes enemy = 12;
+	required int32 exculde = 13;
+	required bytes choice = 14;
+	required bytes untreated_cost = 15;
+	required bytes effect = 16;
+	required int32 duration = 17;
+	required int32 happen_limit = 18;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDailyGift {
+	required int32   id = 1;
+    required bytes   reward = 2;
+    required bytes   time_interval = 3;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigNavigationEvent {
+	required int32   id = 1;
+    required int32   type = 2;
+    required bytes   level = 3;
+    required bytes   deal_cost = 4;
+    required bytes   ignore_cost = 5;
+    required bytes   enemy = 6;
+    required int32   model_id = 7;
+    required bytes   drop = 8;
+    required bytes   room_effect = 9;
+    required float   probability = 10;
+    required int32   duration = 11;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonAltar {
+	required int32   id = 1;
+    required bytes   name = 2;
+    required bytes   repair_cost = 3;
+    required bytes   destory_cost = 4;
+    required bytes   drop = 5;
+    required int32   adjunct = 6;
+    required int32   adjunct_type = 7;
+    required bytes   adjunct_skill = 8;
+    required bytes   adjunct_level_up_cost = 9;
+    required bytes   adjunct_skill_up_cost = 10;
+    required bytes   adjunct_revive_cost = 11;
+    required bytes   adjunct_cure_cost = 12;
+    required bytes   special_skill = 13;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigRobot {
+	required int32   level = 1;
+	required int32   num = 2;
+	required bytes   score = 3;
+	required bytes   captain_level = 4;
+	required bytes   sailor_num_in_jjc = 5;
+	required bytes   sailor_in_jjc = 6;
+	required bytes   sailor_level = 7;
+	required bytes   sailor_star = 8;
+	required bytes   ship_model = 9;
+	required bytes   sailor_practice = 10;
+	required bytes   sailor_num_in_ship = 11;
+	required bytes   sailor_in_ship = 12;
+	required bytes   equip_quality = 13;
+	required bytes   items = 14;
+	required bytes   invade_score = 15;
+}
+
+////////////////////////////////////////////////////////////////
+
+
+message ConfigBeacon {
+	required int32   level = 1;
+	required bytes   level_up_cost = 2;
+	required int32   level_up_time = 3;
+	required bytes   explore_scope = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+
+message ConfigMaelstromTile {
+	required int32   id = 1;
+	required bytes   event = 2;
+	required int32   oil_cost = 3;
+	required int32   event_num = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+
+message ConfigMaelstrom {
+	required int32   id = 1;
+	required bytes   map_size = 2;
+	required bytes   map = 3;
+    required bytes   guild_island_pos = 4;
+    required bytes   guild_island_size = 5;
+    required bytes   oil_well_pos = 6;
+    required bytes   oil_well_size = 7;
+    required int32   oil_id = 8;
+    required int32   oil_output = 9;
+    required int32   oil_reserves = 10;
+    required int32   ship_oil_reserves = 11;
+    required int32   repair_seconds = 12;
+    required bytes   event_refresh_time = 13;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigMaelstromEvent {
+	required int32   id = 1;
+	required int32   type = 2;
+	required bytes   need_level = 3;
+    required bytes   contant = 4;
+    required bytes   reward = 5;
+    required int32   trigger_times = 6;
+    required bytes   trigger_event = 7;
+    required bytes   explore_point = 8;
+    required int32   explore_level_up = 9;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigProfession {
+	required int32   id = 1;
+	required int32   main_attr = 2;
+	required bytes   pro_args = 3;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigBeaconTalent {
+	required int32   id = 1;
+	required int32   level = 2;
+	required int32   max_level = 3;
+	required int32   cost = 4;
+	required bytes   pre_talent = 5;
+	required bytes   get_item = 6;
+	required bytes   event_reward_add = 7;
+	required bytes   point_cost_down = 8;
+	required bytes   point_get_up = 9;
+	required bytes   adjunct = 10;
+	required bytes   attribute_add = 11;
+	required bytes   enemy_weaken = 12;
+	required bytes   event_weaken = 13;
+}
+
+
+////////////////////////////////////////////////////////////////
+
+message ConfigBeaconTalentGroup {
+	required int32   id = 1;
+	required bytes   content = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigDungeonChest {
+	required int32   id = 1;
+	required int32   type = 2;
+	required int32   max_times = 3;
+	required float   probability = 4;
+	required float   add_probability = 5;
+	required bytes   cost = 6;
+	required bytes   cost_in_dungeon = 7;
+	required bytes   get = 8;
+	required bytes   get_in_dungeon = 9;
+	required bytes   need_level = 10;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigGuildStore {
+	required int32   level = 1;
+	required int32   extra_goods_num = 2;
+	required bytes   normal_goods = 3;
+	required bytes   extra_goods = 4;
+	required bytes   refresh_times = 5;
+	required bytes   discount = 6;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigGameExchange {
+	required int32   id = 1;
+	required bytes   cost = 2;
+	required bytes   get = 3;
+}
+
+////////////////////////////////////////////////////////////////
+
+
+message ConfigName {
+	required int32   id = 1;
+	required bytes   name = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigFirstname {
+	required int32   id = 1;
+	required int32   type = 2;
+	required bytes   name = 3;
+    required int32   order = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigLastname {
+	required int32   id = 1;
+	required int32   type = 2;
+	required bytes   name = 3;
+    required int32   order = 4;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigPlayerInvade {
+	required bytes   match_score = 1;
+	required int32   match_remain = 2;
+	required bytes   refresh_times = 3;
+	required bytes   entrys = 4;
+	required bytes   defend_time = 5;
+	required bytes   win_room = 6;
+    required int32   revenge_time = 7;
+    required bytes   reward_ratio = 8;
+    required float   extra_reward_ratio = 9;
+    required bytes   invade_cost = 10;
+    required int32   record_remain_time = 11;
+    required bytes   room_effect = 12;
+    required bytes   drop_limit = 13;
+    required bytes   drop_limit_once = 14;
+}
+
+////////////////////////////////////////////////////////////////
+
+message ConfigRoomModel {
+	required int32   id = 1;
+	required int32   type = 2;
+	required bytes   size = 3;
+	required bytes   shape = 4;
+	required bytes   unlock_cost = 5;
+}
+
+////////////////////////////////////////////////////////////////

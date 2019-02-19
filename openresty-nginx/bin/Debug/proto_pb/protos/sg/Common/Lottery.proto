@@ -1,0 +1,53 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message LotteryMachine { 
+    required int32                      id = 1;
+    required int32                      type = 2;
+    required int32                      cost_item = 3;
+	required int32                      once_cost = 4;
+	required int32                      ten_times_cost = 5;
+	required int32                      remain_times = 6;
+	required int32                      activity_id = 7;
+
+	optional int32                      cost_add = 8;
+}
+
+message LotteryNotify {
+	required  uint64  uuid = 1;
+	required  bytes   nick = 2;
+	required  int32   get_type = 3;
+    required  int32   get_typeid = 4;
+    required  sfixed64    timestamp  = 5;
+}
+
+
+message LotteryService {
+	enum LOTTERY_CMD {
+		QUERY = 1;	// 查询商品
+		QUERY_NOTIFY = 2; //查询通告栏
+		LOTTERY_ONCE = 3; // 购买1次
+		LOTTERY_TEN_TIMES = 4; //购买10次
+	}
+	
+	message LotteryRequest {
+		required LOTTERY_CMD      cmd = 1;
+		optional int32            machine_id = 2; // 机器编号
+		
+	}
+	
+	message LotteryResponse {
+		required int32 result = 1;	// 0 = success, -1 = failed
+		
+        repeated LotteryMachine  machine_list = 2;
+        repeated LotteryNotify   notifys = 3;
+		optional Reward          reward = 11;
+	}
+	
+	optional LotteryRequest req = 1;
+	optional LotteryResponse resp = 2;
+}

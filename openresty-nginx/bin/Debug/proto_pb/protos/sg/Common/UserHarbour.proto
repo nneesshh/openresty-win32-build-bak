@@ -1,0 +1,291 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+// 港口Npc列表
+
+enum HARBOR_STATE {
+		HARBOR_STATE_IDLE = 0; // 
+		HARBOR_STATE_OPEN = 1; // 开业状态
+		HARBOR_STATE_CLOSE = 2; // 休业状态
+}
+
+enum HARBOR_NPC_TYPE {
+	HARBOR_NPC_TYPE_UNKNOWN = 0;
+	HARBOR_NPC_TYPE_RESIDENT = 1; // 居民型, 呆在码头上
+	HARBOR_NPC_TYPE_PASSENGER = 2; // 乘客型, 人物进入船内进餐
+
+}
+
+enum RESIDENT_TYPE {
+	RESIDENT_TYPE_BEGGAR = 1; // 乞丐
+	RESIDENT_TYPE_SHOP = 2; // 商店
+
+}
+
+// 港口信息
+message HarborInfo {
+	optional HARBOR_STATE				state = 1;
+	optional int32						boom = 2; // 港口繁荣度
+	optional sfixed64					growtime = 3; // 人口增长时间
+}
+
+// 港口Npc
+message HarborNpc {
+	enum NPC_STATE {
+		TO_DELETE = -1; // 删除，服务器专用
+		IDLE = 0; // 空闲
+		GO_ABOARD = 1; // 登船
+		IN_QUEUEING = 2; // 排队中
+		TAKE_SEAT = 3; // 入座
+		ORDER_SUCCESS = 4; // 点单完成
+		EATING_FOOD = 5; // 进餐
+		DISMISS = 6; // 解散，消失不见
+		WORKING = 7; // 居民工作中
+	}
+	
+	// 居民任务菜单
+	message resident_task {
+		required int32			id = 1;
+		optional int32			need_idx = 2; // 需求道具配置索引, 0 表示无效，> 1 有效
+		optional int32			reward_idx = 3; // 奖励道具配置索引, 0 表示无效，> 1 有效
+		optional bool			reward_accept = 4; // 是否已经领取
+	}
+	
+	required int32				npcid = 1; // npc 序列号
+	optional HARBOR_NPC_TYPE	npc_type = 2;
+	optional uint64				cfgid = 3; // npc config id
+	optional NPC_STATE			state = 4;  // npc 状态
+	optional int32				seconds = 5; // npc 入座后饥饿倒计时
+
+	optional int32				wealth_grade = 11; // 财富等级
+	optional int32				gold = 12; // 携带金钱值
+	optional int32				satisfaction = 13; // 满意度
+	optional int32				seatid = 14; // 座位号
+	
+	optional int32				occupation_val = 21; // npc 职业数值，饥饿度，商店值，醉酒度等
+	optional sfixed64			occupation_event_starttime = 22; // 职业事件倒计时起始时间
+	optional int32				question_status = 23; // 问题状态
+	optional int32				special_cond_bonus = 24; // 特殊奖励
+	optional int32				satisfaction_accepted = 25; // 已经领取的满意度阀值
+	
+	optional resident_task		task_menu1 = 31; // 居民任务菜单 1
+	optional resident_task		task_menu2 = 32; // 居民任务菜单 2
+	optional resident_task		task_menu3 = 33; // 居民任务菜单 3
+	
+	optional sfixed64			optime = 41; // 操作时间
+}
+
+message HarborNpcList {
+	repeated HarborNpc list = 1;
+}
+
+// 港口人口
+message HarborPopulation {
+	required int32				harborid = 1; // 港口编号
+	required int32				population_num = 2; // 港口人口数量
+	required int32				population_num_max = 3; // 港口人口数量上限
+}
+
+message HarborPopulationList {
+	repeated HarborPopulation list = 1;
+}
+
+// 港口 npc info
+message HarborNpcInfo {
+	required int32				harborid = 1; // 港口编号
+	optional HarborNpcList		npc_list = 2;
+	optional HarborInfo			harbor_info = 3;
+}
+
+message HarborNpcInfoList {
+	repeated HarborNpcInfo		list = 1;
+}
+
+// 港口Npc列表
+message UserHarborNpcService {
+	enum NPC_COMMAND {
+		QUERY = 1;	// 查询港口npc
+		OPEN = 2;	// 开始营业
+		CLOSE = 3;	// 结束营业
+		START_QUEUEING = 4; // 开始排队
+		COMPLETE_TASK = 5; // 提交物品交换任务，仅对居民型npc有效
+		
+		QUERY_POPULATION = 11; // 查询港口人口
+		QUERY_HARBOR_NPC_INFO = 12; // 查询港口人口信息
+	}
+	
+	message HarborNpcRequest {
+		required NPC_COMMAND		cmd = 1;
+		repeated int32				start_queueing_list = 2;
+		optional int32				residentid = 3; // 居民的 npcid
+		optional int32				select_task_menuid = 4; // 选中的 task menuid, 1~3, 0 表示全部拒绝
+		optional int32				harborid = 5; // 港口编号, 0 == 查询全部港口
+	}
+	
+	message HarborNpcResponse {
+		required int32					result = 1;	// 0 = success, -1 = failed
+		optional HarborNpcList			npc_list = 2;
+		optional HarborInfo				harbor_info = 3;
+		optional Reward					resident_drop = 4;
+		
+		optional HarborPopulationList	population_list = 11;
+		optional HarborNpcInfoList		npc_info_list = 12;
+	}
+	
+	optional HarborNpcRequest req = 1;
+	optional HarborNpcResponse resp = 2;
+	
+}
+
+//
+message HarborStateNotify {
+	required HarborInfo 		harbor_info = 1;
+}
+
+//
+message HarborNpcStateNotify {
+	required HarborNpcList	npc_list = 1;
+	required int32			harborid = 2; // 港口编号
+}
+
+// 顾客职业
+enum CUSTOMER_OCCUPATION {
+	CUSTOMER_OCCUPATION_COMMON = 0; // 普通
+	CUSTOMER_OCCUPATION_EATER = 1; // 
+	CUSTOMER_OCCUPATION_VENDOR = 2; // 
+	CUSTOMER_OCCUPATION_DRINKER = 3; // 
+}
+
+// 菜谱类型
+enum FOOD_RECIPE_TYPE {
+		FOOD_RECIPE_TYPE_STAPLE = 1; // 主食
+		FOOD_RECIPE_TYPE_WINE = 2; // 酒水
+}
+
+// 订单类型
+enum FOOD_ORDER_TYPE {
+		FOOD_ORDER_TYPE_DISABLE = 0; // 禁止点单
+		FOOD_ORDER_TYPE_RECIPE = 1; // 限定菜谱
+		FOOD_ORDER_TYPE_DIY = 2; // 不限菜谱
+}
+
+//
+enum FOOD_ORDER_STATE {
+	FOOD_ORDER_STATE_TO_DELETE = -1; // 删除，服务器专用
+	FOOD_ORDER_STATE_IDLE = 0; // 空闲
+	FOOD_ORDER_STATE_ORDERING = 1; // 点单中
+	FOOD_ORDER_STATE_COOKING = 2; // 烹饪中
+	FOOD_ORDER_STATE_EATING = 3; // 用餐中
+	FOOD_ORDER_STATE_EATING_OVER = 4; // 用餐结束，等待结帐
+	FOOD_ORDER_STATE_PAY = 5; // 已经结帐
+	FOOD_ORDER_STATE_REJECT = 6; // 订单已拒绝
+	FOOD_ORDER_STATE_SUSPEND = 7; // 逃单
+
+}
+
+// 食物风味提示
+message FoodStyle {
+	enum FOOD_ATTR_ID {
+		COLOR = 1;
+		SMELL = 2;
+		TASTE = 3;
+		BELLYFUL = 4;
+		DETOXIFCATION = 5; // 解毒
+		SOBER = 6; // 解酒
+		EXORCISM = 7; // 驱邪
+		POISON = 8; // 毒性
+		ALCOHOL = 9; // 醉酒
+		EVIL = 10; // 邪气	 	
+		SOUR = 11; // 酸
+		SWEET = 12; // 甜
+		BITTER = 13; // 苦
+		HOT = 14; // 辣
+		SALTY = 15; // 咸
+	  
+	}
+
+	required FOOD_ATTR_ID	attrid = 1; // 属性id
+	required int32			minval = 2; // 属性区间下限值
+	required int32			maxval = 3; // 属性区间上限值
+}
+
+message FoodStyleList {
+	repeated FoodStyle list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+// 订单
+message SeatFoodOrder {
+	required int32 				seatid = 1;
+	required int32				posid = 2; // 位置id，1，2， 3
+	required int32				orderid = 3; // 唯一订单id
+	required FOOD_ORDER_TYPE	order_type = 4;
+	required FOOD_ORDER_STATE	order_state = 5; //
+	required int32				npcid = 6;
+
+	optional int32				foodfilterid = 11; // 筛选器id				
+	optional int32				recipeid = 12; // 食谱id, >0 为固定菜单, 0 == diy	
+	optional int32				itemid = 13; // 菜品道具id
+	
+	optional int32				star = 21; // 星级
+	optional int32				gather_gold = 22; // 帐单金币
+	optional int32				gather_satisfaction = 23; // 帐单满意度
+	optional int32				tip_gold = 24; // 小费金币
+	optional int32				tip_diamond = 25; // 小费钻石
+	
+}
+
+message SeatFoodOrderList {
+	repeated SeatFoodOrder list = 1;
+}
+
+// 座位菜单菜品内容
+message SeatMenuFood {
+	required int32				posid = 1; // 位置id，1，2， 3
+	optional int32				itemid = 2; // 菜品道具id, 0 为无道具
+}
+
+// 座位点菜单
+message SeatMenu {
+	required int32				seatid = 1;
+	repeated SeatMenuFood		menu_food_list = 2;	
+}
+
+//
+message UserFoodOrderService {
+	enum ORDER_COMMAND {
+		QUERY = 1;	// 查询用户订单
+		ACCEPT = 2; // 提交订单（含品质菜，推荐菜等道具）
+		REJECT = 3; // 拒绝用户
+		ACCEPT_REWARD = 4; // 领取订单奖励
+	}
+	
+	message FoodOrderRequest {
+		required ORDER_COMMAND			cmd = 1;
+		optional SeatMenu				menu = 2; // 用户提交菜单
+	}
+	
+	message FoodOrderResponse {
+		required int32					result = 1;	// 0 = success, -1 = failed
+		optional SeatFoodOrderList		order_list = 2;
+		optional Reward					out_drop = 3;
+		optional int32					star = 4; // 星级
+		
+		optional int32					diy_recipeid = 11; // DIY 菜谱Id
+
+	}
+	
+	optional FoodOrderRequest req = 1;
+	optional FoodOrderResponse resp = 2;
+	
+}
+
+//
+message SeatFoodOrderStateNotify {
+	required SeatFoodOrderList	order_list = 1;
+}

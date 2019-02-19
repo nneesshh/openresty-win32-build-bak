@@ -1,0 +1,155 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+message LogGameResource {
+	enum ACTION_TYPE {
+		DUMP = 0;
+	
+		COST_SUPPLY = 1;
+		COST_STAGE = 2;
+		COST_BUILD = 3;
+		COST_REPAIR = 4;
+		COST_REFORM = 5;
+		COST_EXTEND = 6;
+		COST_DISCARD = 7;
+		COST_SHOP = 8;
+		COST_ENGAGE = 9;
+
+		// some game
+		NEWBIE = 11;
+		AUTOMATIC_FARMER = 12;
+		EXPEDITION = 13;
+		BATTLE = 14;
+		DRILL = 15;
+		STRIKE = 16;
+		STRIKE_JUNK = 17;
+		QUEST= 18;
+		DATING = 19;
+		
+		// other
+		STAGE_GATHER = 21;
+		STAGE_STORAGE_GATHER = 22;
+		ITEM_GATHER = 23;
+		SHOP_GATHER = 24;
+		GAME_INVITE_GATHER = 25;
+		MAILBOX_GATHER = 26;
+		GM_GATHER = 27;
+
+		// giftbag
+		CHARGE_POINT_GATHER = 31;
+		GIFTBAG_ROLE_LEVELUP_GATHER = 32;
+		GIFTBAG_ROLE_SIGNIN_GATHER = 33;
+				
+		RECYCLE_SHIP = 41;
+		RECYCLE_EQUIP = 42;
+	}
+	
+	required uint64				subid = 1;
+	required sfixed64			action_time = 2;
+	required ACTION_TYPE	action_type = 3;
+	required int32				entry_id = 4;
+	required bytes				userid = 5;
+	required bytes				nick = 6;
+	
+	optional uint64				diamond = 11;
+	
+	optional int32				fuel = 21;
+	optional int32				ammo = 22;
+	optional int32				metal = 23;
+	optional int32				titanium = 24;
+		
+	optional uint64				res_typeid = 31;
+	optional int32				res_num = 32;
+	optional int32				res_num_add = 33;
+
+}
+
+//
+message proc_log_game_resource {
+	message Parameter {
+		required LogGameResource		p_log = 1;
+	}
+	
+	message ReturnRecord {
+
+	}
+
+	//
+	optional Parameter						param	= 1;							//
+	repeated ReturnRecord					return_record_list = 2;
+}
+
+////////////////////////////////////////////////////////////////	
+message LogGameShip {
+	enum ACTION_TYPE {
+		DUMP = 0;
+	
+		CREATE_NEWBIE = 1;
+		CREATE_DROP = 2;
+		CREATE_BUILD = 3;
+		RECYCLE = 4;
+
+		BATTLE = 11;
+		DRILL = 12;
+		STRIKE = 13;
+		SUPPLY = 14;
+		REPAIR = 15;
+		EXPEDITION = 16;
+		STRENGTHEN = 17;
+		REFORM = 18;
+				
+		EXP = 21;
+		AFFINITY = 22;
+		ENGAGEMENT = 23;
+		HP = 24;
+		WORK_PLACE = 25;
+		PROTECT = 26;
+		ENGAGE = 27;
+	}
+	
+	required uint64				subid = 1;
+	required sfixed64			action_time = 2;
+	required ACTION_TYPE	action_type = 3;
+	required int32				entry_id = 4;
+	required bytes				userid = 5;
+	required bytes				nick = 6;
+	
+	required int32				sn = 11;	
+	required uint64				typeid = 12;
+	required int32				level = 13;
+	required int32				exp = 14;
+	required int32				affinity = 15;
+	required int32				affinity_exp = 16;
+	required int32				engagement = 17;
+	
+	optional int32				laser_add = 21; // 激光附加值
+	optional int32				livefire_add = 22; // 实弹附加值
+	optional int32				defense_add = 23; // 防御附加值
+	optional int32				intercept_add = 24; // 拦截附加值
+
+	optional int32				hp = 31;
+	optional float				fuel_ratio = 32;
+	optional float				ammo_ratio = 33;
+	
+	optional int32				workplace = 41;	// -1 = 永久删除， 0 = 空闲, 1 = 远征，2 = 修理， 3 = 销毁
+	optional int32				protect = 42;
+
+}
+
+//
+message proc_log_game_ship {
+	message Parameter {
+		required LogGameShip		p_log = 1;
+	}
+	
+	message ReturnRecord {
+
+	}
+
+	//
+	optional Parameter						param	= 1;							//
+	repeated ReturnRecord					return_record_list = 2	;
+}

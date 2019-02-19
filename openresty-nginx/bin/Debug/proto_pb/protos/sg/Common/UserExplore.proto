@@ -1,0 +1,142 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum EXPLORE_RECORD_TYPE {
+    EXPLORE_RECORD_TYPE_NORMAL_BATTLE = 1;  //正常关卡
+    EXPLORE_RECORD_TYPE_EVENT = 2; //特殊事件
+}
+
+enum EXPLORE_EVENT_STATE {
+    EXPLORE_EVENT_STATE_ALIVE = 1;   //有效
+    EXPLORE_EVENT_STATE_INVAILD = 2; //无效
+}
+
+enum EXPLORE_LOCALE_TYPE {
+    EXPLORE_LOCALE_TYPE_LAND = 1;  //陆地
+    EXPLORE_LOCALE_TYPE_OCEAN = 2; //海洋
+}
+
+enum MOVE_DIRECTION {
+     MOVE_DIRECTION_UP = 1; //上
+     MOVE_DIRECTION_DOWN = 2; //下
+     MOVE_DIRECTION_LEFT = 3; //左
+     MOVE_DIRECTION_RIGHT = 4; //右
+     MOVE_DIRECTION_LEFT_UP = 5; //左上
+     MOVE_DIRECTION_LEFT_DOWN = 6; //左下
+     MOVE_DIRECTION_RIGHT_UP = 7; //右上
+     MOVE_DIRECTION_RIGHT_DOWN = 8; //右下
+     MOVE_DIRECTION_UP_DOWN = 9; //上下
+     MOVE_DIRECTION_LEFT_RIGHT = 10; //左右
+}
+
+message ExploreState {
+    required int32       location = 1; //所在地点id
+    required int32       step = 2; 
+    required int32       pos_x = 3; 
+    required int32       pos_y = 4;
+}
+
+message ExploreStage {
+    required int32       id = 1; //地点id
+    required bytes       fog = 2; //迷雾
+}
+
+message ExploreRecord {
+    required int32       id = 1; 
+    required EXPLORE_RECORD_TYPE       type = 2; //记录类型
+    required int32       object = 3; //目标
+    required bytes       content = 4; //内容
+    required sfixed64    timestamp = 5; //发生时间
+}
+
+message ExploreEvent {
+    required int32       id = 1; 
+    required EXPLORE_EVENT_STATE       state = 2;  //状态
+    required int32       type = 3; //类型
+    required int32       typeid = 4; //类型id
+    required int32       locale_type = 5; //地点类型
+    required int32       locale = 6; //地点id
+    required int32       pos_x = 7; //
+    required int32       pos_y = 8; //
+    required bytes       content = 9; //
+    required sfixed64    timestamp = 10; //发生时间
+    required sfixed64    deadline = 11; // 最后期限
+}
+
+
+
+
+message ActionResult {
+	optional ExploreEvent  event = 1; //强制触发事件
+	optional Reward reward = 2; //事件奖励
+	optional ExploreRecord record = 3; //事件记录
+}
+
+message UserExploreService {
+	enum EXPLORE_CMD {
+		QUERY = 1; // 查询信息
+	}
+	
+	//
+	message UserExploreRequest {
+		required EXPLORE_CMD			cmd = 1;
+
+		optional int32                  eventid = 2; //进行事件 
+        optional int32                  action = 3; //行为
+		optional MOVE_DIRECTION         direction = 4; //移动方向
+	    optional int32                  distance = 5; //移动距离
+	}
+	
+	//
+	message UserExploreResponse {
+		required int32			result = 1;
+        optional ExploreState   state = 2; //探索状态
+	    repeated ExploreRecord  records = 4; //探索记录
+	    repeated ExploreEvent   events = 5; //当前事件 
+	}
+	optional UserExploreRequest req = 1;
+	optional UserExploreResponse resp = 2;
+}
+
+
+message UserExploreActionService {
+	enum EXPLORE_CMD {
+		ENTER = 1; // 进入
+		MOVE = 2; // 移动
+		ATTEND_TO_EVENT = 3; //参与事件
+	}
+	//
+	message UserExploreRequest {
+		required EXPLORE_CMD			cmd = 1;
+		optional int32                  eventid = 2; //进行事件 
+        optional int32                  action = 3; //行为
+		optional MOVE_DIRECTION         direction = 4; //移动方向
+	    optional int32                  distance = 5; //移动距离
+	    optional int32                  stageid = 6; //进入场景
+	}
+	
+	//
+	message UserExploreResponse {
+		required int32			result = 1;
+        
+        optional ExploreState   state = 2; //探索状态
+        optional ExploreStage   stage = 3; 
+	    optional ActionResult   action_result = 6; //行为结果
+	}
+	
+	optional UserExploreRequest req = 1;
+	optional UserExploreResponse resp = 2;
+}
+
+message NewEventExist {
+	required  ExploreEvent   event = 1;  //触发事件
+	required  ExploreRecord  record = 3; //事件记录
+}
+
+message EventChangeNotify {
+	required  ExploreEvent   event = 1;  //事件
+}

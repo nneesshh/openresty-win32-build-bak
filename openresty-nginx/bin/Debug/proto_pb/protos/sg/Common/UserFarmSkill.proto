@@ -1,0 +1,32 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+// 
+enum FARM_SKILL_TYPE {
+	FARM_SKILL_TYPE_UNKNOWN = 0; //
+	FARM_SKILL_TYPE_MINER = 1; // 采矿工
+	FARM_SKILL_TYPE_WOODCUTTER = 2; // 伐木工
+	FARM_SKILL_TYPE_FISHER = 3; // 捕鱼
+	FARM_SKILL_TYPE_HUNTER = 4; // 狩猎
+	FARM_SKILL_TYPE_FARMER = 5; // 种植
+	FARM_SKILL_TYPE_FEEDER = 6; // 养殖
+		
+	FARM_SKILL_TYPE_CARPENTER = 11; // 木匠
+	FARM_SKILL_TYPE_STONEMASON = 12; // 石匠
+	FARM_SKILL_TYPE_BLACKSMITH = 13; // 铁匠
+	FARM_SKILL_TYPE_COOKER = 14; // 厨师
+	FARM_SKILL_TYPE_BREWER = 15; // 酿造师
+}
+
+enum FARM_SKILL_TRIGGER_TYPE {
+	FARM_SKILL_TRIGGER_TYPE_GATHER = 1; // 资源点
+	FARM_SKILL_TRIGGER_TYPE_FORMULA = 2; // 按配方生产物资
+	FARM_SKILL_TRIGGER_TYPE_EQUIP = 3; // 打造装备
+	FARM_SKILL_TRIGGER_TYPE_HUNT = 4; // 狩猎
+	FARM_SKILL_TRIGGER_TYPE_FISH = 5; // 捕鱼
+	FARM_SKILL_TRIGGER_TYPE_PLANT = 6; // 种植
+	FARM_SKILL_TRIGGER_TYPE_BREED = 7; // 养殖
+}

@@ -1,0 +1,182 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package gate;
+
+////////////////////////////////////////////////////////////////
+// 错误号
+message ErrorNo {
+	enum ERROR_NO {
+		RELOGIN = -9000; // 账号重新登录
+		IP_IS_BANNED = -9001; // IP 被屏蔽
+		UID_IS_BANNED = -9002; // UID 被屏蔽
+		
+	}
+	
+	required int32 error_no = 1;		
+	required bytes desc = 2;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message RegisterAccountService {
+	enum RESULT {
+		OK = 0;
+		UID_OR_PWD_TOO_SHORT = -1; // 账号或者密码长度少于6
+		UID_ALREADY_EXISTS = -2; // 账号已经存在
+		UID_MUST_START_WITH_A_LETTER = -3; // 账号首字符不是字母
+		EMAIL_INVALID = -4; // 无效的email
+		DB_ERROR = -8888; // 数据库故障
+		ASYNC_WAIT = -9999; // 异步等待
+	}
+		
+	message RegisterRequest {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+		required bytes			nick = 3;  // 用户昵称，可为空
+		required bytes			email = 4; // 用户邮箱，必须包含@和.字符，不能为空
+		
+		optional bytes			sponsor_uid = 11; // 运营商uid	
+	}
+	
+	//
+	message RegisterResponse {
+		required int32			result = 1; // 0 = ok, 负数 = error no
+	}
+	
+	optional RegisterRequest req = 1;
+	optional RegisterResponse resp = 2;
+}
+
+message FastRegisterAccountService {
+	message RegisterRequest {
+
+	}
+	
+	//
+	message RegisterResponse {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+		required bytes			nick = 3;  // 用户昵称，可为空
+		required bytes			email = 4; // 用户邮箱，必须包含@和.字符，不能为空
+		
+		optional bytes			sponsor_uid = 11; // 运营商uid	
+	}
+	
+	optional RegisterRequest req = 1;
+	optional RegisterResponse resp = 2;
+}
+
+////////////////////////////////////////////////////////////////
+//
+enum GATE_ACCOUNT_STATUS {
+	GATE_ACCOUNT_STATUS_LOCKED = -1; // 锁定
+	GATE_ACCOUNT_STATUS_NORMAL = 0; // 正常
+	GATE_ACCOUNT_STATUS_ACTIVATED = 1; // 已经激活
+}
+
+// 登录协议
+message AccountLoginService {
+	enum RESULT {
+		OK = 0;
+		UID_OR_PWD_IS_NOT_VALID = -1; // 账号或者密码错误
+		USER_ASSETS_LOAD_FAILED = -2; // 用户资料加载失败 
+		TOO_MANY_REQUEST = -3; // 账号繁忙
+		GAME_SERVER_NOT_READY = -4; // 服务器未就绪
+		NEED_ACTIVATE = -5; // 账户尚未激活
+	}
+	
+	//
+	message LoginRequest {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+		
+		optional int32			ws_entryid = 11; // 运营商入口id, 1 = any sdk
+		optional bytes			channel_platid = 12; // 渠道平台id
+		optional bytes			channel_gameid = 13; // 渠道游戏id
+	}
+	
+	//
+	message LoginResponse {
+		required RESULT			result = 1;
+		optional uint64			uuid = 2;
+	}
+	
+	optional LoginRequest req = 1;
+	optional LoginResponse resp = 2;
+}
+
+// 重新登录协议
+message AccountReloginService {
+	enum RESULT {
+		OK = 0;
+		FAILED = 1;
+	}
+	
+	//
+	message ReloginRequest {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+	}
+	
+	//
+	message ReloginResponse {
+		required RESULT			result = 1;
+		optional uint64			uuid = 2;
+	}
+	
+	optional ReloginRequest req = 1;
+	optional ReloginResponse resp = 2;
+}
+
+////////////////////////////////////////////////////////////////
+// 游戏服务器列表
+message GameServer {
+	required int32 id = 1;
+	required bytes name = 2;
+}
+
+message GameServerList {
+	repeated GameServer list = 1;
+}
+
+// 游戏服务器协议
+message GameServerService {
+	enum GAME_SERVER_COMMAND {
+		QUERY = 1;		// 查询列表
+		SELECT_SERVER = 2;		// 选择服务器
+	}
+
+	//
+	message GameServerRequest {
+		required GAME_SERVER_COMMAND	cmd = 1;
+		optional int32								serverid = 2;
+	}
+	
+	//
+	message GameServerResponse {
+		required int32								result = 1;
+		optional GameServerList				server_list = 2;
+		optional int32								last_serverid = 3;
+	}
+	
+	optional GameServerRequest req = 1;
+	optional GameServerResponse resp = 2;
+}
+
+////////////////////////////////////////////////////////////////
+// ActiveCodeService 列表
+message ActiveCodeService {
+	
+	message ActiveRequest {
+		required bytes	active_code = 1; // 激活码
+		required bytes	uid = 2; // userid		
+	}
+	
+	message ActiveResponse {
+		optional int32	result = 1;
+	}
+	
+	optional ActiveRequest req = 1;
+	optional ActiveResponse resp = 2;
+}

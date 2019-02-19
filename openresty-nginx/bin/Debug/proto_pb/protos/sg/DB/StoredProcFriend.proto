@@ -1,0 +1,256 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+//
+message TopNRole {
+	required bytes role_userid = 1;
+	required int32 role_ticketid = 2;
+	required int64 role_state = 3;
+	required sfixed64 role_logintime = 4;	
+	
+	required bytes role_nick = 11;
+	required int32 role_level = 12;
+	required int32 role_exp = 13;
+	required int32 role_rank = 14;
+
+	required int32 role_portrait = 21; // 肖像编号
+	required int32 role_portrait_frame = 22; // 肖像编号
+	required bytes role_signature = 23; // 心情签名文字
+	required int32 role_force = 24;
+
+	required int32 role_guildid = 31;
+	required bytes role_guild_name= 32;
+	required bytes role_guild_badge= 33;
+	required int32 role_guild_title = 34;
+}
+
+message TopNRoleList {
+	repeated TopNRole list = 1;
+}
+
+//
+message proc_i_load_top_n_roles {
+	message Parameter {
+
+	}
+	
+	message ReturnRecord {
+		required TopNRole					item = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+////////////////////////////////////////////////////////////////	
+//
+message TopNRoleTeamMember {
+	required int32 ticketid = 1;
+	required int32 posid = 2;
+	required int32 memberid = 3;
+	required uint64 member_typeid = 4; // 队员类型id
+	required int32 member_level = 5; // 队员等级
+	required int32 member_star = 6; // 队员星级
+}
+
+message TopNRoleTeamMemberList {
+	repeated TopNRoleTeamMember list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// friending 配置
+message ConfigFriending {
+	required int32 level = 1; //
+	required int32 candidate_num_max = 2; //
+	required int32 adding_num_max = 3; //
+	required int32 confirming_num_max = 4; //
+	required int32 ok_num_max = 5; //
+}
+
+message ConfigFriendingList {
+	repeated ConfigFriending list = 1;
+}
+
+// game invite 配置
+message ConfigGameInvite {
+	required int32 id = 1; // id
+	required bytes reward = 2; // 邀请进度奖励字符串
+	
+	optional int32 cond_game_invite_ok_role_level = 11; // 邀请彻底完成条件：提督等级
+}
+
+message ConfigGameInviteList {
+	repeated ConfigGameInvite list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message proc_load_config_friending {
+	message Parameter {
+
+	}
+
+	message ReturnRecord {
+		required ConfigFriending cfg = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+////////////////////////////////////////////////////////////////
+message proc_load_config_game_invite {
+	message Parameter {
+
+	}
+
+	message ReturnRecord {
+		required ConfigGameInvite cfg = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+////////////////////////////////////////////////////////////////	
+//
+message UserFriend {
+	required int32			owner_ticketid = 1;
+	required int32			friend_ticketid = 2;
+	required int32			state = 3; // 状态
+	optional sfixed64		optime = 4;
+}
+
+message UserFriendList {
+	repeated UserFriend list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+//
+message GameStatsUserFriend {
+	required int32			owner_ticketid = 1;
+	required int32			friend_ticketid = 2;
+	
+	optional sfixed64		challenge_time = 11; // 挑战时间
+	optional int32			challenge_score = 12; // 挑战分数
+
+	optional int32			gift_state = 21; // 礼物状态，0=无礼物，1=有礼物但未领取，2=已经领取
+	optional uint64			gift_item_typeid = 22; // 道具typeid
+	optional int32			gift_item_num = 23; // 道具数量
+	optional sfixed64		gift_create_time = 24; // 礼物创建时间
+	optional sfixed64		gift_accept_time = 25; // 礼物领取时间
+}
+
+message GameStatsUserFriendList {
+	repeated GameStatsUserFriend list = 1;
+}
+
+//
+message UserGameInvite {
+	required int32			owner_ticketid = 1;
+	required int32			invitee_ticketid = 2; // 被邀请人
+	required int32			invitee_level = 3; // 被邀请人等级
+	required int32			state = 4; // 状态
+	optional sfixed64		optime = 5;
+	
+}
+
+message UserGameInviteList {
+	repeated UserGameInvite list = 1;
+}
+
+//
+message UserGameInviteReward {
+	required int32			owner_ticketid = 1;
+	required int32			slotid = 2;
+	required int32			reward_state = 3; // 领奖状态， 1= 可领取， 2=已经领取， 3= 过期
+	required int32			reward_reason = 4; // 被招募奖励 ，或者 招募奖励
+	
+	required int32			item_type = 11; // 道具type
+	required uint64			item_typeid = 12; // 道具typeid
+	required int32			item_num = 13; // 道具num
+}
+
+message UserGameInviteRewardList {
+	repeated UserGameInviteReward list = 1;
+}
+
+//
+message proc_i_load_user_friends {
+	message Parameter {
+		
+	}
+	
+	message ReturnRecord {
+		required UserFriend				item = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+//
+message proc_i_save_user_friend {
+	message Parameter {
+		required UserFriend				p_friend = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+}
+
+//
+message proc_i_load_user_game_invites {
+	message Parameter {
+
+	}
+	
+	message ReturnRecord {
+		required UserGameInvite		game_invite = 1;
+	}
+
+	//
+	optional Parameter						param	= 1;							//
+	repeated ReturnRecord					return_record_list = 2;
+}
+
+//
+message proc_i_load_user_game_invite_rewards {
+	message Parameter {
+
+	}
+	
+	message ReturnRecord {
+		required UserGameInviteReward		reward = 1;
+	}
+
+	//
+	optional Parameter						param	= 1;							//
+	repeated ReturnRecord					return_record_list = 2;
+}
+
+//
+message proc_i_save_user_game_invite {
+	message Parameter {
+		required UserGameInvite	p_invite = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+}
+
+//
+message proc_i_save_user_game_invite_reward {
+	message Parameter {
+		required UserGameInviteReward	p_reward = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+}

@@ -1,0 +1,223 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+// Guild 配置
+message ConfigGuild {
+	required int32 level = 1; // 公会等级
+	required bytes desc = 2; // 公会等级描述
+	required int32 size = 3; // 成员数量上限
+	required int32 vice_leader_num = 4; // 副会长数量上限
+	required int32 leader_offline_time = 5; // 会长离线时长最大值
+	required int32 quit_join_cd = 6; // 退出公会后，再次加入所需等待的冷却时间
+	required int32 donation_limit = 7; // 贡献值每日上限
+	
+	required int32 cond_leader_level = 11; // 创建或者升级所需领袖等级
+	required bytes cond_build_cost = 12; // 创建或者升级所需道具
+	required int32 cond_population = 13; // 创建或者升级所需人口
+
+	required bytes mail_text_accept = 21; // 被公会接收邮件格式
+	required bytes mail_text_kick = 22; // 被踢出公会邮件格式
+}
+
+message ConfigGuildList {
+	repeated ConfigGuild list = 1;
+}
+
+// Guild user title 配置
+message ConfigGuildUserTitle {
+	required int32 id = 1; //称号id
+	required bytes desc = 2; //称号描述
+
+	required int32 manage_shopping = 11; // 管理商店
+	required int32 manage_chat = 12; // 管理聊天
+	
+}
+
+message ConfigGuildUserTitleList {
+	repeated ConfigGuildUserTitle list = 1;
+}
+
+// Guild signin 配置
+message ConfigGuildSignin {
+	required int32 level = 1; // 公会等级
+	required int32 type = 2; // 签到类型
+	required bytes need = 3; // 需求字符串
+	required bytes award = 4; // 奖励字符串
+}
+
+message ConfigGuildSigninList {
+	repeated ConfigGuildSignin list = 1;
+}
+
+// Guild badge 配置
+message ConfigGuildBadge {
+	required int32 id = 1; // 组件id
+	required int32 type = 2; // badge 类型
+	required int32 order = 3; // badge 序号
+	required bytes param = 4; // 参数：flag类型id,或者color id
+}
+
+message ConfigGuildBadgeList {
+	repeated ConfigGuildBadge list = 1;
+}
+
+// Guild 捐献 配置
+message ConfigGuildDonation {
+	required int32 id = 1; // 公会等级
+	required bytes donates = 2; // 捐献字符串
+	required int32 award_donation = 3; // 奖励贡献值
+	required uint64 award_item_typeid = 4; // 附赠道具类型
+}
+
+message ConfigGuildDonationList {
+	repeated ConfigGuildDonation list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+// Guild building 配置
+message ConfigGuildBuilding {
+	required int32 building_type = 1; // 公会等级
+	required int32 level = 2; // 公会等级
+	required bytes cond_prebuild = 3; // 前置建筑等级
+	required bytes cond_build_cost = 4; // 建设所需道具
+	required int32 cond_building_time = 5; // 建设耗时	
+}
+
+message ConfigGuildBuildingList {
+	repeated ConfigGuildBuilding list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+//
+message GameGuild {
+	required int32					guildid = 1; // 公会id
+	required bytes					name = 2; // 名称
+	required int32					level = 3; // 等级
+	required int32					population = 4; // 人口
+	required uint64					fund = 5; // 资金
+	required bytes					announcement = 6; // 公告
+	required int32					state = 7; // 状态
+	required bytes					badge = 8; // 徽章字符串
+	
+	required int32					accept_type = 11; // 自动收人
+	required int32					join_level = 12; // 申请等级限制
+	required int32					join_force = 13; // 申请战力限制
+	required int32					shopping = 14; // 开放购物
+	required int32					chat = 15; // 开放聊天
+	
+	required sfixed64				optime = 21;
+}
+
+////////////////////////////////////////////////////////////////	
+//
+message GameGuildBuilding {
+	required int32					guildid = 1; // 公会id
+	required int32					building_type = 2; // 建筑类型
+	required int32					level = 3; // 建筑类型
+	required int32					state = 4; // 状态
+	required int32					seconds = 5; // 倒计时
+	required sfixed64				starttime = 6; // 起始时间
+
+	required sfixed64				optime = 21;
+}
+
+//
+message GameGuildStore {
+	required int32					guildid = 1; // 公会id
+	required uint64					item_typeid = 2; //
+	required int32					item_num = 3;
+
+	required sfixed64				optime = 11;
+}
+
+//
+message GameGuildUser {
+	required int32					guildid = 1; // 公会id
+	required int32					ticketid = 2; // 用户ticketid
+	required int32					title = 3; // 用户称号	
+	required int32					donation = 4; // 用户贡献值
+	required int32					state = 5; // 状态	
+
+	required sfixed64				optime = 11;
+}
+
+//
+message GameStatsGuildUser {
+	required int32					ticketid = 1; // 用户ticketid
+	required int32					guildid = 2; // 公会id
+	required int32					donation = 3; // 用户当日捐献值
+	required sfixed64				donation_refreshtime = 4;
+
+	required int32					signin_state1 = 11;
+	required sfixed64				signin_optime1 = 12;
+	required int32					signin_state2 = 13;
+	required sfixed64				signin_optime2 = 14;
+	required int32					signin_state3 = 15;
+	required sfixed64				signin_optime3 = 16;
+}
+
+//
+message UserStatsGuildCommon {
+	required bytes					userid = 1; //
+	required sfixed64				last_quit_guild_time = 2; // 日期
+}
+
+////////////////////////////////////////////////////////////////	
+//
+message GameGuildTrack {
+	required uint64					owner_uuid = 1; // 用户uuid
+	required bytes					owner_nick = 2; // 用户nick
+	required int32					owner_title = 3; // 用户level
+	required int32					action_type = 4; // 动作类型
+	required int32					action = 5; 
+	
+	required int32					guildid = 11;
+	required bytes					name = 12; // 公会名称
+	required bytes					announcement = 13; // 公会公告
+	required uint64					target_uuid = 14; // 目标用户uuid
+	required bytes					target_nick = 15; // 目标用户nick
+	required int32					target_title = 16; // 目标用户职位头衔
+	required int32					donation = 17; // 捐献金额
+	required int32					building_type = 18; // 建筑类型
+	required int32					building_level = 19; // 建筑等级
+	
+	required sfixed64				optime = 21; // 操作时间
+}
+
+//
+message proc_i_load_game_guild_tracks {
+	message Parameter {
+		
+	}
+	
+	message ReturnRecord {
+		required GameGuildTrack		item = 1;
+	}
+
+	//
+	optional Parameter				param	= 1;							//
+	repeated ReturnRecord			return_record_list = 2;
+}
+
+//
+message proc_i_save_game_guild_track {
+	message Parameter {
+		required GameGuildTrack		p_track = 1;
+	}
+	
+	//
+	optional Parameter				param	= 1;							//
+}
+
+//
+message proc_i_delete_game_guild_track {
+	message Parameter {
+		required int32				p_guildid = 1;
+	}
+	
+	//
+	optional Parameter				param	= 1;							//
+}

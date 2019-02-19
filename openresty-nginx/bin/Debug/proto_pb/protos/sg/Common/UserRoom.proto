@@ -1,0 +1,31 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message UserRoomService {
+	enum ROOM_CMD {
+		QUERY = 1; // 查询舰船信息
+		CHANGE = 2; //编辑舰船结构
+	}
+	
+	//
+	message UserRoomRequest {
+		required ROOM_CMD			cmd = 1;
+	    
+	    repeated UserRoom          rooms = 4;
+	}
+	
+	//
+	message UserRoomResponse {
+		required int32			result = 1;
+
+	    repeated UserRoom          rooms = 4;
+	}
+	
+	optional UserRoomRequest req = 1;
+	optional UserRoomResponse resp = 2;
+}

@@ -1,0 +1,63 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message UserFacilityService {
+	enum FACILITY_CMD {
+	    QUERY = 1;
+		PUTDOWN = 2; //
+		REMOVE = 3; //
+		CHANGE_STYLE = 4; //
+		REPLACE = 5;
+		CREATE_DEVICE = 6;
+		DEVICE_LEVEL_UP = 7;
+		GET_CONTAIN = 8;
+        USE_SPECIAL_PROPERTY = 9;
+        ADD_FOOD = 10;
+        QUERY_ONE = 11;
+        UNLOCK_SLOT = 12;
+        FAST_FINISH = 13;
+        CANCEL = 14;
+	}
+	//
+	message UserFacilityRequest {
+		required FACILITY_CMD			cmd = 1;
+		repeated Facility       facilitys = 2;
+	    optional int32          device_id = 3;
+	    optional int32          device_typeid = 4;
+	    optional int32          region = 5;
+	    optional int32          facility_id = 6;
+	    repeated pb_pair_int_int  food_list = 7;
+	    optional int32          slot_id = 8;
+	}
+	
+	//
+	message UserFacilityResponse {
+		required int32			result = 1;         
+
+		repeated Facility       facilitys = 2;
+		repeated int32          formula_unlock = 3;
+
+		optional RegionState          ship_state = 4;
+		optional Reward         reward = 5;
+		optional int32          cost_diamond = 6;
+	}
+	
+	optional UserFacilityRequest req = 1;
+	optional UserFacilityResponse resp = 2;
+}
+
+message FacilityContainAddNotify {
+	required int32  facility_id = 1;
+	repeated Item   items = 2;
+}
+
+message FacilityLevelUpNotify {
+	required Facility      facility = 1;
+	repeated int32         formula_unlock = 2;
+	optional RegionState          ship_state = 4;
+}

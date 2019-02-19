@@ -1,0 +1,72 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+//
+message GateCfgWebservice {
+	required int32						entryid = 1;
+	required bytes						sponsor_uid = 2; // 渠道运营商uid
+	required bytes						sponsor_desc = 3; // 渠道运营商描述
+	required bytes						platid = 4; // 游戏所在平台id
+	required bytes						gameid = 5; // 游戏id
+	required bytes						game_token = 6; // 游戏标识码
+	required bytes						auth_url = 7; //帐号验证地址
+
+}
+
+//
+message proc_load_gate_cfg_webservice {
+	message Parameter {
+
+	}
+
+	message ReturnRecord {
+		required GateCfgWebservice		cfg = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message GateCfgInnerServer {
+	required int32						id = 1;
+	required int32						type = 2; // inner server type : 1 = game, 2 = pvp arena
+	required bytes						name = 3; // 名称
+	required bytes						ip = 4; // ip
+	required int32						port = 5; // 端口
+	required int32						visibility = 6; // 可见性，1=正式服，2=测试服，3=审核服，(可见性规则: visibility = gate_account admin + 1)
+	required bytes						white_peerip = 7; // 白名单peer ip，服务器强制可见 -- "ip : mask | ..."
+	
+	optional int32						enable = 11; // 是否启用，0 = 禁用， 1 = 启用
+}
+
+////////////////////////////////////////////////////////////////
+//
+message GateBanEntry {
+	required int32					id = 1;
+	required bytes					userid = 2;
+	required bytes					ip = 3; // ip 地址
+	required bytes					ip_mask = 4; // ip 掩码
+
+	required sfixed64				deadline = 11; // 截止日期
+}
+
+//
+message proc_load_gate_ban_entry {
+	message Parameter {
+
+	}
+
+	message ReturnRecord {
+		required GateBanEntry			entry = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}

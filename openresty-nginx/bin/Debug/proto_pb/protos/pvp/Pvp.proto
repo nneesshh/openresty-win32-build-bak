@@ -1,0 +1,238 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package pvp;
+
+////////////////////////////////////////////////////////////////
+//
+message RandList {
+	repeated int32		list = 1; // 0 ~ 100 的随机数
+}
+
+// pvp 战斗类型
+enum COMBAT_TYPE {
+	COMBAT_NONE = 0; // 未定义关卡，用于上报数据
+	COMBAT_ARENA = 1; // 擂台匹配，对手必须在线
+}
+
+enum PVP_STAGE_STATE {
+		PVP_STAGE_STATE_TO_DELETE = -1; // 删除
+		PVP_STAGE_STATE_OFFLINE = 0; // 离线
+		PVP_STAGE_STATE_ONLINE = 1; // 上线
+}
+
+// 关卡数据
+message StageData {
+	required int32						serverid = 1; // 服务器id
+	required int32						stageid = 2; // 地图编号，等于用户ticketid
+	required bytes						name = 3; // 地图名称，等于用户nick
+	required bytes						desc = 4; // 地图描述，等于用户签名
+	required bytes						data_bytes = 5;
+	optional int32						gold = 6; //
+	optional PVP_STAGE_STATE	state = 7; //
+	
+	required sfixed64					optime = 11;	// 操作时间戳
+}
+
+message StageDataList {
+	repeated StageData					list = 1;
+}
+
+// 卡片数据
+message CardList {
+	repeated sg.Sailor					list = 1;
+}
+
+// 用户数据
+message PlayerData {
+	required int32							pid = 1; // 玩家位置id，"1, 2, ..."
+	required uint64							uuid = 2;
+	optional bytes							nick = 3;
+	optional int32							level = 4;
+	
+	optional CardList						card_list = 11; // 参战卡片数据
+}
+
+// user input
+message UserInput {
+	enum INPUT_OPCODE {
+		BATTLE_STATS = 1; // battle 结算
+		ADD_CARD = 2; // arena 加人
+	}
+	
+	required INPUT_OPCODE				code = 1;
+	optional int32							score = 2; // 分数
+	optional int32							star = 3; // 星级
+	
+	optional int32							playerid = 11;
+	optional int32							cardid = 12;
+	optional int32							pos_x = 13;
+	optional int32							pos_y = 14;
+}
+
+// combat frame
+message CombatFrame {
+	enum FRAME_STATE {
+		FRAME_HEAD = 1; // 头帧
+		FRAME_MIDDLE = 2; // 中间帧
+		FRAME_MIDDLE_WITH_INPUT = 3; // 中间帧，且用户输入
+		FRAME_TAIL = 4; // 尾帧
+	}
+	
+	required int64 						frameid = 1; // 同步帧id
+	required FRAME_STATE 			frame_state = 2; // 同步帧状态
+	optional UserInput				input = 3;
+}
+
+message CombatFrameList {
+	repeated CombatFrame list = 1;
+}
+
+// combat result
+message CombatResult {
+	optional int32							score = 2; // 分数
+	optional int32							star = 3; // 星级
+}
+
+
+////////////////////////////////////////////////////////////////
+// pvp 战斗信息描述
+message PvpCombat {
+	required int32							combatid = 1; // 战斗房间序号 = 0;
+	required COMBAT_TYPE				combat_type = 2; // NONE = 0;
+	optional StageData					stage_data = 3; // 关卡数据
+	optional RandList 					rand_list = 4; // 随机数列表
+}
+
+//
+message PvpService {
+	enum PVP_COMMAND {
+		QUERY = 1; // 查询，待定
+		UPLOAD = 2; // 每日上传自身数据，间隔1小时
+		
+		JOIN = 11; // 加入战斗
+		INPUT = 12; // 输入战斗指令
+		CANCEL = 13; // 主动结束战斗
+		ACCEP_REWARD = 14; // 领奖
+	}
+
+	message PvpRequest {
+		required PVP_COMMAND	cmd = 1;
+		optional COMBAT_TYPE	combat_type = 2;
+		optional StageData		stage_data = 3; // 上传关卡，服务器内部使用
+		optional CardList			card_list = 4; // 上传参战卡片列表，服务器内部使用
+
+		repeated int32				select_card_list = 11; // 玩家选中的卡片列表
+		optional UserInput		user_input = 12; // 用户输入
+	}
+	
+	//
+	message PvpResponse {
+		required int32					result = 1; // 0 = success, -1 = failed
+		optional PvpCombat			combat = 2;
+	}
+	
+	optional PvpRequest		req = 1;
+	optional PvpResponse	resp = 2;
+}
+
+// arena 战斗开始通知
+message PvpCombatStartNotify {
+	required PlayerData			player0 = 1;
+	required PlayerData			player1 = 2;
+}
+
+// frame 通知
+message PvpFrameNotify {
+	required CombatFrameList	frame_list = 1;
+	optional CombatResult			result = 2;
+}
+
+// reward 通知
+message PvpReward {
+	required uint64 typeid = 1;
+	required uint64 num = 2;
+}
+
+//
+message PvpRewardNotify {
+	required int32 combatid = 1;
+	repeated PvpReward reward_list = 2;
+}
+
+////////////////////////////////////////////////////////////////
+//
+enum PVP_EVENT_TYPE {
+	PVP_EVENT_TYPE_LOOT = 1;
+}
+
+// pvp日志
+message PvpEventLog {
+	//
+	enum LOOT_STATE {
+		IDLE = 0;
+		START = 1;
+		OVER = 2;
+		REFUND = 3;
+	}
+	
+	// 防守状态
+	enum DEFEND_STATE {
+		SUSPEND = 0; // 待定
+		WIN = 1; // 允许 refund
+		LOSE = 2; // 禁止 refund
+	}
+
+	//
+	required int32					id = 1;
+	required PVP_EVENT_TYPE	event_type = 2;
+	required int32					event_state = 3; //
+	required DEFEND_STATE		defend_state = 4; //
+	required bytes					source_nick = 5; // 劫掠者
+	required CardList				source_card_list = 6; // 劫掠者卡片列表
+	required int32					gold_lock = 7; // 锁定金币
+	required int32					gold_refund = 8; // 返还金币
+	
+	optional sfixed64				optime = 11; // 操作时间
+}
+	
+message PvpEventLogList {
+	repeated PvpEventLog		list = 1;
+}
+
+// pvp 事件日志列表
+message UserPvpEventLogService {
+	enum EVENT_LOG_COMMAND {
+		QUERY_LOG = 1; // 查询事件日志
+		REFUND_LOG = 2; // 回收事件日志中的财物
+
+	}
+	
+	message EventLogRequest {
+		required EVENT_LOG_COMMAND		cmd = 1;
+		optional int32								refund_id = 2; // 回收id
+	}
+	
+	message EventLogResponse {
+		required int32								result = 1;	// 0 = success, -1 = failed
+		
+		optional PvpEventLogList			log_list = 11; // 事件日志列表
+		optional int32								gold_refund = 12;
+	}
+	
+	optional EventLogRequest	 req = 1;
+	optional EventLogResponse 	resp = 2;
+	
+}
+
+//
+message PvpEventLogStateNotify {
+	required PvpEventLogList			log_list = 1;
+}
+
+//
+message PvpLootNotify {
+	required int32								win_gold = 1;
+}

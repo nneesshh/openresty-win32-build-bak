@@ -1,0 +1,98 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+message GateAccount {
+	required bytes			userid = 1;
+	required bytes			pwd = 2;
+	required bytes			nick = 3;
+	required bytes			email = 4;
+	required int32			level = 5;
+	required int32			admin = 6;	
+	required bytes			platid = 7; // 游戏所在平台id	
+	required bytes			gameid = 8; // 游戏id	
+	required int32			state = 9; // 用户账号状态，-1=锁定，0=正常，1=已经激活
+
+	required sfixed64		createtime = 11;
+
+	required int32			ticketid = 21;
+	required int32			serverid = 22;
+	required sfixed64		logintime = 23; // 最近一次登录时间
+	required sfixed64		first_logintime = 24; // 首次登录
+}
+
+////////////////////////////////////////////////////////////////
+message proc_register_account {
+	message Parameter {
+		required bytes					p_userid = 1;
+		required bytes					p_pwd = 2;
+		required bytes					p_nick = 3;
+		required bytes					p_email = 4;
+		required int32					p_level = 5;
+		required int32					p_admin = 6;	
+		required bytes					p_platid = 7; // 游戏所在平台id
+		required bytes					p_gameid = 8; // 游戏id	
+		required int32					p_state = 9; // 用户账号状态，用户账号状态，-1=锁定，0=正常，1=已经激活
+		required sfixed64				p_createtime = 10;	// sfixed64 as datetime
+	}
+	
+	message ReturnRecord {
+		required int32	result = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+//
+message proc_save_account_state {
+	message Parameter {
+		required bytes					p_userid = 1;
+		required int32					p_state = 2;
+	}
+	
+	//
+	optional Parameter					param	= 1;							//
+}
+
+////////////////////////////////////////////////////////////////
+message GateLogOnline {
+	required bytes			userid = 1;
+	required bytes			pwd = 2;
+	required bytes			nick = 3;
+	required bytes			email = 4;
+	required int32			level = 5;
+	required int32			admin = 6;	
+	required bytes			platid = 7; // 游戏所在平台id	
+	required bytes			gameid = 8; // 游戏id	
+	required int32			state = 9; // 用户账号状态，-1=锁定，0=正常，1=已经激活
+
+	required sfixed64		createtime = 11;
+
+	required int32			ticketid = 21;
+	required int32			serverid = 22;
+	required sfixed64		logintime = 23; // 最近一次登录时间
+	required sfixed64		first_logintime = 24; // 首次登录
+}
+
+////////////////////////////////////////////////////////////////
+// 账号激活码 配置
+message GateCfgActiveCode {
+	required bytes			code = 1; // 激活码
+	required bytes			desc = 2; // 
+	required sfixed64		begin_time = 3; // 有效期起始时间
+	required sfixed64		end_time = 4; // 有效期截止时间
+	required uint64			reward_typeid = 5; // 同一奖励typeid仅可领取一次
+
+}
+
+////////////////////////////////////////////////////////////////	
+message GateActiveCode {
+	required bytes			code = 1; // 激活码
+	required bytes			userid = 2; // 激活用户
+	optional sfixed64		active_time = 3; // 激活时间
+	
+}

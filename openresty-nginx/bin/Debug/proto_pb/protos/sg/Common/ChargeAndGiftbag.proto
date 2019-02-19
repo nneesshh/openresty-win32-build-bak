@@ -1,0 +1,223 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+//import "Mail.proto";
+import "BaseStruct.proto";
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+//
+enum ACTIVITY_TYPE {
+	ACTIVITY_TYPE_UNKNOWN = 0;
+	ACTIVITY_TYPE_SEVEN_DAY = 1; // 开服7日签到，
+	ACTIVITY_TYPE_FESTIVAL = 2; // 节日活动
+
+}
+
+////////////////////////////////////////////////////////////////
+//
+enum GAME_CHARGE_TYPE {
+	GAME_CHARGE_TYPE_DIAMOND = 1; // 充钻石
+	GAME_CHARGE_TYPE_MONTH_CARD = 2; // 充月卡
+	GAME_CHARGE_TYPE_GIFTBAG_LEVELUP = 3; // 升级礼包
+}
+
+//
+enum GAME_CHARGE_STATE {
+	GAME_CHARGE_STATE_INVALID = 0; // 无效
+	GAME_CHARGE_STATE_UNOPENED = 1;	// 未拆封
+	GAME_CHARGE_STATE_OPENED = 2; // 已拆封
+	GAME_CHARGE_STATE_CORRUPT = 3; // 错误格式
+}
+
+enum GIFTBAG_CODE_TYPE {
+	GIFTBAG_CODE_TYPE_ONE_USER = 1; // 有效次数不限，但每用户仅可使用一次
+	GIFTBAG_CODE_TYPE_ONE_TIME = 2; // 有效次数为1，仅可使用一次，被任意用户使用一次后立即作废
+}
+
+// ChargePoint 通知
+message ChargePointNotify {
+	
+	required bytes					ordernum = 1; // 订单号
+	required GAME_CHARGE_TYPE		charge_type = 2; // 充值类型
+	required int32					goods_id = 3; // 商品id
+
+	optional Reward					out_drop = 11;
+}
+
+//
+message MonthCardLeftDays {
+	required int32 id = 1;
+	optional int32 left_days = 2;
+}
+
+// 活动签到礼包
+message ActivityGiftbagData {
+	enum STATE {
+		NOT_READY = 0; //
+		READY = 1; // 累积成功
+		ACCEPT = 2; // 礼包已领取
+	}
+	
+	required int32 dayid = 1; // 签到日期
+	required STATE state = 2; // 签到状态
+	//optional ItemAnyList reward_list = 3;
+	optional bytes drop_str = 3;
+}
+
+// 活动签到礼包数据
+message ActivityGiftbag {
+	required int32 activityid = 1; // 活动id
+	required int32 today_signin = 2; // 当日签到标志，0 = 未签到， 1 = 已经签到
+	repeated ActivityGiftbagData data_list = 3;
+}
+
+message ActivityGiftbagList {
+	repeated ActivityGiftbag list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message GiftbagLevelup {
+	enum STATE {
+		NOT_ACCEPT = 0; // 未领取
+		ACCEPT = 1; // 已领取
+	}
+	
+	required int32 levelid = 1; // 礼包id
+	required STATE state = 2; // 礼包领取状态
+	//optional ItemAnyList reward_list = 3;
+	optional bytes drop_str = 3;
+}
+
+message GiftbagLevelupList {
+	repeated GiftbagLevelup list = 1;
+}
+
+message GiftbagSignin {
+	enum STATE {
+		NOT_SIGNIN = 0; //
+		SIGNIN = 1; // 已签到
+		ACCEPT = 2; // 礼包已领取
+	}
+	
+	required int32 dayid = 1; // 签到日期
+	required STATE state = 2; // 签到状态
+	//optional ItemAnyList reward_list = 3;
+	optional bytes drop_str = 3;
+}
+
+message GiftbagSigninList {
+	repeated GiftbagSignin list = 1;
+}
+
+// 累积签到
+message GiftbagSigninExtra {
+	enum STATE {
+		NOT_READY = 0; //
+		READY = 1; // 累积成功
+		ACCEPT = 2; // 礼包已领取
+	}
+	
+	required int32 dayid = 1; // 累积签到日期
+	required STATE state = 2; // 累积签到状态
+	//optional ItemAnyList reward_list = 3;
+	optional bytes extra_drop_str = 3;
+}
+
+message GiftbagSigninExtraList {
+	repeated GiftbagSigninExtra list = 1;
+}
+
+// 充值礼包
+message GiftbagCharge {
+	enum STATE {
+		NOT_ACCEPT = 0; // 未领取
+		ACCEPT = 1; // 已领取
+	}
+	
+	required int32 chargeid = 1; // 礼包id
+	required STATE state = 2; // 礼包领取状态
+	//optional ItemAnyList reward_list = 3;
+	optional bytes drop_str = 3;
+}
+
+message GiftbagChargeList {
+	repeated GiftbagCharge list = 1;
+}
+
+// 充值礼包通知
+message GiftbagChargeNotify {
+	optional GiftbagChargeList charge_list = 1;
+}
+
+// 7 日登录
+message GiftbagSevenDay {
+	enum STATE {
+		NOT_READY = 0; //
+		READY = 1; // 累积成功
+		ACCEPT = 2; // 礼包已领取
+	}
+	
+	required int32 dayid = 1; // 签到日期
+	required STATE state = 2; // 签到状态
+	//optional ItemAnyList reward_list = 3;
+	optional bytes drop_str = 3;
+}
+
+message GiftbagSevenDayList {
+	repeated GiftbagSevenDay list = 1;
+}
+
+// GiftbagService 列表
+message GiftbagService {
+	enum GIFTBAG_COMMAND {
+		GIFTBAG_QUERY_ROLE_LEVELUP = 1;	// 查询升级礼包领取
+		GIFTBAG_ACCEPT_ROLE_LEVELUP = 2;	// 领取升级礼包
+		
+		GIFTBAG_QUERY_ROLE_SIGNIN_EXTRA = 3;	//查询累积签到信息 
+		GIFTBAG_ACCEPT_ROLE_SIGNIN_EXTRA = 4;	// 领取累积签到礼包
+		
+		ACTIVE_GIFTBAG_CODE = 5; // 激活礼包码
+		
+		QUERY_MONTH_CARD = 6;  // 查询月卡剩余时间
+
+		GIFTBAG_QUERY_CHARGE = 11;	//查询充值礼包信息 
+		GIFTBAG_ACCEPT_CHARGE = 12;	// 领取充值礼包
+		GIFTBAG_QUERY_SEVEN_DAY = 13;	//查询7日礼包信息 
+		GIFTBAG_ACCEPT_SEVEN_DAY = 14;	// 领取7日礼包
+		
+		GIFTBAG_QUERY_ACTIVITY_SIGNIN_ALL = 15;	//查询全部节日签到礼包
+		GIFTBAG_ACCEPT_ACTIVITY_SIGNIN = 16;	// 领取某个节日签到礼包
+	}
+	
+	message GiftbagRequest {
+		required GIFTBAG_COMMAND cmd = 1;
+		optional int32 levelid = 2; // 升级礼包id
+		optional int32 dayid = 3; // 签到日期id 和 签到日期礼包id
+		optional bytes giftbag_code = 4; // 礼包码
+		optional int32 chargeid = 5; // 充值礼包id
+		optional int32 activityid = 6; // 活动id，仅领取节日签到礼包时有效
+	}
+	
+	message GiftbagResponse {
+		optional int32						result = 1;
+		optional int32						today_signin = 2; // 当日签到标志，0 = 未签到， 1 = 已经签到
+		
+		optional GiftbagLevelupList			levelup_list = 11;
+		optional GiftbagSigninList			singin_list = 12;
+		optional GiftbagSigninExtraList		singin_extra_list = 13;
+		
+		optional Reward						out_drop = 21;
+		
+		repeated MonthCardLeftDays			month_card_left_days_list = 31;
+
+		optional GiftbagChargeList			charge_list = 41;
+		optional GiftbagSevenDayList		seven_day_list = 42;
+
+		optional ActivityGiftbagList		activity_giftbag_list = 51; // 活动礼包列表
+	}
+	
+	optional GiftbagRequest req = 1;
+	optional GiftbagResponse resp = 2;
+}

@@ -1,0 +1,30 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message  UserNPCService {
+    enum  NPC_CMD{
+        QUERY  =  1;
+    }
+     
+    message  UserNPCRequest{
+        required  NPC_CMD  cmd = 1;
+    }
+
+    message  UserNPCResponse{
+        required  int32  result = 1;
+        repeated  NPC    npc_list = 2;
+    }
+
+    optional UserNPCRequest req = 1;
+    optional UserNPCResponse resp = 2;
+}
+
+
+message UserNPCStateNotify{
+	required NPC npc = 1;
+}

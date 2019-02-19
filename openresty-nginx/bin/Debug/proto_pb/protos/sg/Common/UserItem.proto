@@ -1,0 +1,36 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message UserItemService {
+	enum ITEM_CMD {
+		QUERY = 1; // 查询道具信息
+	    ADD = 2 ; // 添加道具
+	    SALE = 3; //出售道具
+	    USE = 4; //使用
+	}
+	//
+	message UserItemRequest {
+		required ITEM_CMD			cmd = 1;
+	    optional int32              typeid = 3;
+	    optional int32              num = 4;
+
+	    optional int32              target_type = 5; // 0 = 无目标 1 = 船员
+	    optional int32              target_id = 6; // 目标id
+	}
+	
+	//
+	message UserItemResponse {
+		required int32			result = 1;
+
+	    repeated Item           items = 2;  //   道具列表    
+	    optional Reward         reward = 3; //     
+	}
+	
+	optional UserItemRequest req = 1;
+	optional UserItemResponse resp = 2;
+}

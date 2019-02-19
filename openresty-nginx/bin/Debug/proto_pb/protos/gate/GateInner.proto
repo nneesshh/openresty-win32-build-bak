@@ -1,0 +1,108 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "Gate.proto";
+
+package gate;
+
+////////////////////////////////////////////////////////////////
+// inner server 类型
+enum INNER_SERVER_TYPE {
+	INNER_SERVER_TYPE_UNKNOWN = 0;
+	INNER_SERVER_TYPE_GAME = 1; // 游戏服务器
+	INNER_SERVER_TYPE_CHAT = 2; // 聊天服务器
+}
+
+// inner server 可见性
+enum INNER_SERVER_VISIBILITY {
+	INNER_SERVER_VISIBILITY_UNKNOWN = 0;
+	INNER_SERVER_VISIBILITY_NORMAL = 1;
+	INNER_SERVER_VISIBILITY_TEST = 2; // 测试服务器
+	INNER_SERVER_VISIBILITY_REVIEW = 3; // 审核服务器
+}
+
+////////////////////////////////////////////////////////////////
+// 握手通知
+message GateShakeHandNotify {
+	enum SHAKE_HAND_COMMAND {
+		INIT = 1;		// 初始化
+		CONFIRM = 2; // 确认
+	}
+	
+	//
+	required SHAKE_HAND_COMMAND		cmd = 1;
+	optional GameServer						server = 2;
+	
+	optional uint32								gateid = 11; // cityhash(gate_desc)
+	optional bytes								gate_desc = 12; // nodename + ip + port
+}
+
+////////////////////////////////////////////////////////////////
+// 用户登录
+message PlayerJoinService {
+	enum RESULT {
+		OK = 0;
+		FAILED = 1;
+	}
+	
+	//
+	message JoinRequest {
+		required bytes			uid = 1;
+		optional bytes			nick = 2;
+		
+		optional uint32			gateid = 11;
+		optional uint32			gameserverid = 12;
+	}
+	
+	//
+	message JoinResponse {
+		required RESULT			result = 1;
+	}
+	
+	optional JoinRequest req = 1;
+	optional JoinResponse resp = 2;
+}
+
+message PlayerQuitService {
+	enum RESULT {
+		OK = 0;
+		FAILED = 1;
+	}
+	
+	//
+	message QuitRequest {
+		required bytes			uid = 1;
+		optional bytes			nick = 2;
+	}
+	
+	//
+	message QuitResponse {
+		required RESULT			result = 1;
+	}
+	
+	optional QuitRequest 	req = 1;
+	optional QuitResponse	resp = 2;
+}
+
+////////////////////////////////////////////////////////////////
+// 注册client 
+message RegisterNativeClientService {
+	message RegisterRequest {
+		required int32			id = 1;
+		required bytes			name = 2;
+	}
+	
+	//
+	message RegisterResponse {
+		
+	}
+	
+	optional RegisterRequest req = 1;
+	optional RegisterResponse resp = 2;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message KeepAliveNotify {
+	optional int32				serverid = 1;
+}

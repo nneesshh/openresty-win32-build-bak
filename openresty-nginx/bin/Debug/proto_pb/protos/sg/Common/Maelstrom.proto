@@ -1,0 +1,102 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum MAELSTROM_MOVE_DIRECTION {
+	MAELSTROM_MOVE_DIRECTION_UP = 1;
+	MAELSTROM_MOVE_DIRECTION_DOWN = 2;
+	MAELSTROM_MOVE_DIRECTION_LEFT = 3;
+	MAELSTROM_MOVE_DIRECTION_RIGHT = 4;
+}
+
+enum MAELSTROM_BUILDING_TYPE {
+	MAELSTROM_BUILDING_TYPE_BEACON = 1;
+	MAELSTROM_BUILDING_TYPE_OIL_WELL = 2;
+}
+
+message MaelstromState {
+	required int32  explore_level = 1;
+	optional int32  pos_x = 2;
+	optional int32  pos_y = 3;
+	optional bytes  fog = 4;
+	optional int32  oil = 5;   
+	optional sfixed64 repair_timestamp = 6;
+	optional sfixed64 refresh_timestamp = 7;
+    optional int32  explore_point = 8;
+    repeated pb_pair_int_int  talent = 9;
+    repeated pb_pair_int_int  event_record = 10;
+}
+
+message MaelstromBuilding {
+	required int32  id = 1;
+	required int32  type = 2;
+	required int32  level = 3;
+	optional sfixed64 timestamp = 4;
+	optional sfixed64 level_up_timestamp = 5;
+}
+
+message MaelstromEvent {
+	required int32  id = 1;
+	required int32  typeid = 2;
+	required int32  level = 3;
+	optional int32  state = 4; // 1 = 可处理 2 = 已结束
+	optional int32  pos_x = 5;
+	optional int32  pos_y = 6;
+	optional UserInfo   player = 7;
+}
+
+message  MaelstromService {
+    enum  CMD {
+        ENTER  =  1;
+        MOVE = 2;
+        RESET = 3;
+        BUILDING_LEVEL_UP = 4;
+        SUPPLY = 5;
+        QUERY_EVENT = 6;
+        DEAL_WITH_EVENT = 7;
+        TALENT_LEVEL_UP = 8;
+    }
+     
+    message  MaelstromRequest{
+        required  CMD  cmd = 1;
+        repeated  int32    direction = 2;
+        optional  int32    building = 3;
+        optional  int32    event_id = 4;
+        optional  bool     success = 5;
+        optional  int32    talent_id = 6;
+    }
+
+    message  MaelstromResponse{
+        required  int32  result = 1;
+        optional  int32  step = 2;
+        repeated  MaelstromBuilding    building_list = 3;
+        optional  MaelstromState   state = 4;
+        optional  bool   ship_injured = 5;
+
+        repeated  MaelstromEvent event_list = 6;
+        optional  Reward  reward = 7;
+    }
+
+    optional MaelstromRequest req = 1;
+    optional MaelstromResponse resp = 2;
+}
+
+message  ShipRestoreNotify {
+}
+
+message  MaelstromBuildingLevelUpNotify {
+    required int32 id = 1;
+}
+
+message  ShipInjuredNotify {
+	optional int32  pos_x = 1;
+	optional int32  pos_y = 2;
+    optional sfixed64 repair_timestamp = 3;
+}
+
+message  OilOutputNotify {
+   required Item  output = 1;
+}

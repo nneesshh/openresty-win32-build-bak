@@ -1,0 +1,120 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+// 职业类型
+enum OCCUPATION_TYPE {
+	OCCUPATION_TYPE_COMMON = 1; // 平民
+	OCCUPATION_TYPE_BEGGAR = 2; // 乞丐
+	OCCUPATION_TYPE_VENDOR = 3; // 小贩
+	OCCUPATION_TYPE_THIEF = 4; // 小偷	
+	OCCUPATION_TYPE_DINE_AND_DASH = 5; // 霸王餐
+	OCCUPATION_TYPE_VIP_ = 6; // 贵宾
+	OCCUPATION_TYPE_KING = 7; // 王族
+
+	OCCUPATION_TYPE_HUNGRY_GHOST = 11; // 饿死鬼
+	OCCUPATION_TYPE_DRUNKARD = 12; // 酒鬼	
+	OCCUPATION_TYPE_TRANSFORMER = 13; // 变身者
+	OCCUPATION_TYPE_DRUGSTER = 14; // 瘾君子
+		
+	OCCUPATION_TYPE_CLOWN = 101; // 杂耍卖艺小丑，纯客户端表现
+	OCCUPATION_TYPE_DOUBLE_WALKER = 102; // 双人散步
+
+}
+
+// 职业场景限制
+enum OCCUPATION_STAGE {
+	OCCUPATION_STAGE_ANY = 0; // 不限制
+	OCCUPATION_STAGE_HARBOR = 1; // 港口
+	OCCUPATION_STAGE_SHIP_ENTERY = 2; // 进入入口
+	OCCUPATION_STAGE_MAKE_FOOD_ORDER = 3; // 用户点单
+	OCCUPATION_STAGE_EATING_OVER = 4; // 用餐结束
+	OCCUPATION_STAGE_PAY_OVER = 5; // 买单结束
+}
+
+//
+enum HARBOR_NPC_EVENT_TYPE {
+	HARBOR_NPC_EVENT_TYPE_STEALING = 1; // 行窃事件
+	HARBOR_NPC_EVENT_TYPE_DASHING = 2; // 逃跑事件
+	HARBOR_NPC_EVENT_TYPE_VIP = 3; // VIP进场
+	HARBOR_NPC_EVENT_TYPE_KING = 4; // King进场
+	HARBOR_NPC_EVENT_TYPE_STARVATION = 5; // 饿死
+	
+	HARBOR_NPC_EVENT_TYPE_FIGHT_TRANSFORMER = 11; // 变身者战斗
+	HARBOR_NPC_EVENT_TYPE_FIGHT_STAGE = 12; // 关卡战斗
+
+}
+
+// 事件状态
+enum HARBOR_NPC_EVENT_STATE {
+	HARBOR_NPC_EVENT_STATE_OPEN = 1; // 事件开启
+	HARBOR_NPC_EVENT_STATE_CLOSE = 2; // 事件关闭
+}
+
+message HarborNpcEvent {
+	required int32									eventid = 1;
+	required HARBOR_NPC_EVENT_TYPE	event_type = 2;
+	required int32									npcid = 3;
+	required int32									state = 4;
+
+	optional int32									step = 12; // 事件步骤，0 为立即完成事件，>0 为步骤数，如偷窃事件分2步，1为执行偷窃，2为执行逃跑
+	optional int32									param_roomid = 13; // 事件参数 -- 房间
+	optional int32									param_npcid = 14; // 事件参数 -- npc
+	optional int32									param_funitureid = 15; // 事件参数 -- 家具
+}
+
+message HarborNpcEventList {
+	repeated HarborNpcEvent list = 1;
+}
+
+//
+message UserHarborNpcEventService {
+	enum EVENT_COMMAND {
+		QUERY = 1; // 查询事件
+	}
+	
+	message EventRequest {
+		required EVENT_COMMAND				cmd = 1;
+	}
+	
+	message EventResponse {
+		required int32								result = 1;	// 0 = success, -1 = failed
+		optional HarborNpcEventList		event_list = 2;
+	}
+	
+	optional EventRequest req = 1;
+	optional EventResponse resp = 2;
+	
+}
+
+//
+message UserHarborNpcEventNotify {
+	required HarborNpcEventList	event_list = 1;
+}
+
+// 偷窃行为
+message UserHarborNpcStealActionService {
+	enum ACTION_COMMAND {
+		NPC_STEAL = 1; // Npc偷窃
+		PLAYER_CATCH = 2; // 玩家抓捕
+	}
+
+	message ActionRequest {
+		required ACTION_COMMAND				cmd = 1;
+		optional int32								npcid = 2; // 顾客id
+		repeated int32								sailorid_list = 3; // 船员id列表
+	}
+	
+	message ActionResponse {
+		required int32								result = 1;	// 0 = success, -1 = failed
+		repeated Item									reward_list = 2; // 奖励列表
+	}
+	
+	optional ActionRequest req = 1;
+	optional ActionResponse resp = 2;
+	
+}
+

@@ -1,0 +1,108 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+// 藏宝图列表
+
+// 藏宝图类型
+enum TREASURE_MAP_TYPE {
+	TREASURE_MAP_TYPE_UNKNOWN = 0;
+	TREASURE_MAP_TYPE_COMPASS = 1; // 罗盘
+	TREASURE_MAP_TYPE_MAP = 2; // 地图
+
+}
+
+// 地点类型
+enum TREASURE_LOCATION_TYPE {
+	TREASURE_LOCATION_TYPE_UNKNOWN = 0;
+	TREASURE_LOCATION_TYPE_SEA_AREA = 1; // 海域
+	TREASURE_LOCATION_TYPE_HARBOR = 2; // 港口
+
+}
+
+// 触发类型
+enum TREASURE_TRIGGER_TYPE {
+	TREASURE_TRIGGER_TYPE_NONE = 0; // 无
+	TREASURE_TRIGGER_TYPE_FIGHT = 1; // 战斗
+	TREASURE_TRIGGER_TYPE_TREASURE = 2; // 财宝
+	TREASURE_TRIGGER_TYPE_TRAP = 3; // 陷阱
+}
+
+// 寻宝状态
+enum TREASURE_HUNT_STATE {
+		TREASURE_HUNT_STATE_IDLE = 0; // 
+		TREASURE_HUNT_STATE_HUNT = 1; // 寻宝中
+		TREASURE_HUNT_STATE_FIGHT = 2; // 进入战斗
+		TREASURE_HUNT_STATE_HARVEST = 3; // 收获宝藏
+		TREASURE_HUNT_STATE_TRAPPED = 4; // 陷阱触发
+		TREASURE_HUNT_STATE_FIGHT_OVER = 5; // 战斗结束
+		TREASURE_HUNT_STATE_CANCELED = 6; // 用户取消，或者战斗超时
+}
+
+// 陷阱类型
+enum TREASURE_TRAP_TYPE {
+	TREASURE_TRAP_TYPE_NONE = 0; // 无
+	TREASURE_TRAP_TYPE_REEF = 1; // 木材损失
+	TREASURE_TRAP_TYPE_POISON = 2; // 金币损失
+
+}
+
+// 寻宝信息
+message TreasureHuntInfo {
+	required int32					huntid = 1; // 唯一id
+	required int32					toolid = 2; // 配置id
+	optional TREASURE_HUNT_STATE	state = 3; // 宝图状态, 0 = idle, 1 = busy, ...
+	optional int32					areaid = 4; // 区域id
+	optional int32					coord_x = 5; // 坐标 x
+	optional int32					coord_y = 6; // 坐标 y
+	
+	optional int32					monster_group = 11; // 怪物组
+	
+	optional TREASURE_TRAP_TYPE		trap_type = 21; // 陷阱类型, 0 = 无, 1 = 木材， 2 = 金币
+	optional int32					trap_lost_num = 22; // 损失数量
+	
+	optional sfixed64				optime = 31; // 操作时间
+	optional int32					left_num1 = 32; // 剩余寻宝次数1
+	optional int32					left_num2 = 33; // 剩余寻宝次数2
+}
+
+// 藏宝图列表
+message UserTreasureMapService {
+	enum HUNT_COMMAND {
+		QUERY = 1;	// 查询当前藏宝图
+		START = 2;	// 开始寻宝
+		COMPLETE = 3;	// 完成寻宝，仅对
+		CANCEL = 4; // 取消
+	}
+	
+	message TreasureMapRequest {
+		required HUNT_COMMAND				cmd = 1;
+		optional TREASURE_MAP_TYPE			map_type = 2; // 地图类型
+		optional int32						areaid = 3; // 区域id
+		optional int32						coord_x = 4; // 坐标 x
+		optional int32						coord_y = 5; // 坐标 y
+	
+	}
+	
+	message TreasureMapResponse {
+		required int32						result = 1;	// 0 = success, -1 = failed
+		optional TreasureHuntInfo			hunt_info = 2; // 寻宝信息
+
+		optional Reward						out_drop = 11; // 藏宝图掉落道具列表
+	}
+	
+	optional TreasureMapRequest req = 1;
+	optional TreasureMapResponse resp = 2;
+	
+}
+
+//
+message TreasureMapStateNotify {
+	required TreasureHuntInfo			hunt_info = 1;
+
+	optional Reward								out_drop = 11; // 藏宝图掉落道具列表
+}

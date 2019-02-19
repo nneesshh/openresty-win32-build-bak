@@ -1,45 +1,46 @@
 local tbl_insert = table.insert
 local getmetatable = getmetatable
-local ipairs = ipairs
+local pairs, ipairs = pairs, ipairs
 local str_sub = string.sub
 
-local semaphore = require("ngx.semaphore")
+local ngx_worker = ngx.worker
+local ngx_timer = ngx.timer
+local ngx_thread = ngx.thread
+local ngx_say = ngx.say
+
+local ngx_ctx = ngx.ctx
+local ngx_semaphore = require("ngx.semaphore")
 
 local _M = {}
-
-local tfl = function(str)
-    -- trim first letter
-    return str_sub(str, 2)
-end
 
 --
 function _M.init_sema(session)
     -- create sema
-    session.sema_send = semaphore.new()
-    session.sema_send_buffer = {}
+    session.sema_send = ngx_semaphore.new()
+    session.sema_send_packet_queue = {}
 
-    local function sema_send_handler()
+    local function _sema_send_handler()
         while true do
-            local ok, err = session.sema_send:wait(30) -- wait for 30s
+            local ok, err = session.sema_send:wait(10.0) -- wait for 10s
             if not ok then
                 if err ~= "timeout" then
                     return nil, "sema_send_handler: failed to wait on sema: " .. err
                 end
             else
-                local curr_conn = ngx.ctx.curr_conn
+                local curr_conn = ngx_ctx.curr_conn
                 local s = curr_conn.downstream
                 local packet_obj = curr_conn.packet_obj
 
-                for _, v in ipairs(session.sema_send_buffer) do
+                for _, v in ipairs(session.sema_send_packet_queue) do
                     packet_obj:write(s, v[1], v[2], 0)
                 end
-                session.sema_send_buffer = {}
+                session.sema_send_packet_queue = {}
             end
         end
     end
 
     --
-    return ngx.thread.spawn(sema_send_handler)
+    return ngx_thread.spawn(_sema_send_handler)
 end
 
 --
@@ -61,12 +62,24 @@ function _M.get_session_by_uuid(ssmgr_name, uuid)
 end
 
 --
-function _M.send(msg, msgsn)
+function _M.send_raw(data)
+    local curr_conn = ngx_ctx.curr_conn
+    local s = curr_conn.downstream
+    return s:send(data)
+end
+
+local tfl = function(str)
+    -- trim first letter
+    return str_sub(str, 2)
+end
+
+--
+function _M.send_msg(msg, msgsn)
     local meta = getmetatable(msg)
     local msgname = tfl(meta._descriptor.full_name)
     local msgdata = msg:SerializeToString()
 
-    local curr_conn = ngx.ctx.curr_conn
+    local curr_conn = ngx_ctx.curr_conn
     local s = curr_conn.downstream
     local packet_obj = curr_conn.packet_obj
     return packet_obj:write(s, msgname, msgdata, msgsn)
@@ -79,7 +92,7 @@ function _M.post_to_sema(session, msg)
     local msgdata = msg:SerializeToString()
     local to_send = {msgname, msgdata}
 
-    tbl_insert(session.sema_send_buffer, msg)
+    tbl_insert(session.sema_send_packet_queue, msg)
     return session.sema_send:post(1)
 end
 
@@ -95,7 +108,7 @@ function _M.broadcast_to_sema(ssmgr_name, msg)
 
         for k, v in pairs(ssmgr.session_map) do
             local session = v
-            tbl_insert(session.sema_send_buffer, to_send)
+            tbl_insert(session.sema_send_packet_queue, to_send)
             session.sema_send:post(1)
         end
     end

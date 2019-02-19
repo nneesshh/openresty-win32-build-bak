@@ -1,0 +1,28 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package sg;
+
+
+message GameService {
+	enum CMD {
+		QUERY = 1;
+	}
+	
+	message GameRequest {
+		required CMD				cmd = 1;
+
+	}
+	
+	message GameResponse {
+		optional sfixed64      server_time = 1;
+	}
+	
+	optional GameRequest req = 1;
+	optional GameResponse resp = 2;
+}
+
+message GameAnnouncementNotify{
+	required int32  type = 1;
+	required bytes  data = 2;
+}

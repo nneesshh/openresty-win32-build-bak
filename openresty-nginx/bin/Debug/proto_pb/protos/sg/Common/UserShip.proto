@@ -1,0 +1,86 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message Archive {
+	required int32                 id = 2;
+	required int32                 state = 3;   
+	required bytes                 name = 4;  
+	required int32                 ship_model = 5;  
+	required bytes                 ship_tiles = 6;  
+	required bytes                 facilitys = 7;  
+	required bytes                 devices = 8;     
+}
+
+message   Region {
+	required    int32    id = 1;
+	optional    int32    model_id = 2;
+	optional    int32    fast_finish_times = 3;
+	optional    int32    max_fast_finish_times = 4;
+	optional    RegionState      region_state = 6;
+	repeated    UserRoom       rooms = 7;
+	optional    bytes          id_str = 8;
+	optional    bytes          type_str = 9;
+	optional    sfixed64       first_reach_time = 10;
+
+}
+
+message UserRegionService {
+	enum SHIP_CMD {
+		QUERY = 1; // 查询舰船信息
+		CHANGE = 2; //编辑舰船结构
+		REBUILD = 3; 
+		QUERY_MODEL = 4;
+	 	QUERY_SAVED = 5;
+	    ARCHIVE = 6;
+	    UNLOCK_ROOM = 7;
+	    UNLOCK_MODEL = 8;
+	    QUERY_REACH_TIME = 9;
+	    SET_REACH_TIME = 10;
+	    BATCH_QUERY = 11;
+	    QUERY_ROOM_MODEL = 12;
+	    UNLOCK_ROOM_MODEL = 13;
+	}
+	
+	//
+	message UserRegionRequest {
+		required SHIP_CMD			cmd = 1;
+	    
+	    optional int32             region = 2;
+	    optional int32             ship_model = 3;
+	    optional bytes             tiles = 4;
+	    optional bytes             facility = 5;
+	    repeated Facility          devices = 9;
+
+	    optional int32             archive_id = 11;
+	    optional bytes             archive_name = 12;
+	    optional int32             unlock_room = 13;
+	    optional int32             unlock_model = 14;
+        repeated int32             regions = 15;
+	    optional bool              simple = 16;
+	    optional int32             unlock_room_model = 17;
+
+	}
+	
+	//
+	message UserRegionResponse {
+		required int32			result = 1;
+
+		optional bytes          facility = 6;
+		repeated Facility       devices = 9;
+
+		repeated int32          model_list = 10;
+		repeated Archive        archive_list = 11;
+	    optional Reward         reward = 13;
+	    repeated Region         regions = 14;
+	    repeated int32          unlock_room = 15;
+	    repeated pb_pair_int_time   reach_time_list = 16;
+	    repeated int32          unlock_room_model = 17;
+	}  
+	
+	optional UserRegionRequest req = 1;
+	optional UserRegionResponse resp = 2;
+}

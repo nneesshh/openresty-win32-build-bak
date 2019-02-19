@@ -1,0 +1,38 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message  Wanted {
+	required int32                 id = 2;
+	required int32                 typeid = 3;
+	required int32                 state = 4;
+	required Locale                locale = 5;
+    required sfixed64              optime = 8;
+}
+
+message  UserWantedService {
+    enum  WANTED_CMD{
+        QUERY  =  1;
+    }
+     
+    message  UserWantedRequest{
+        required  WANTED_CMD  cmd = 1;
+    }
+
+    message  UserWantedResponse{
+        required  int32  result = 1;
+        repeated  Wanted    wanted_list = 2;
+    }
+
+    optional UserWantedRequest req = 1;
+    optional UserWantedResponse resp = 2;
+}
+
+
+message UserWantedNotify {
+	required  Wanted      wanted = 1;
+}

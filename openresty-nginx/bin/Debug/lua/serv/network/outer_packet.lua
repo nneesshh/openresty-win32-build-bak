@@ -4,8 +4,9 @@ local sizeof = ffi.sizeof
 local offsetof = ffi.offsetof
 local C = ffi.C
 
+local setmetatable = setmetatable
+
 local tbl_insert = table.insert
-local tbl_concat = table.concat
 local str_sub = string.sub
 
 local PER_FRAME_PAGE_SIZE_MAX = 4096
@@ -40,10 +41,13 @@ function _P:read(s)
     -- frame leading
     local fldata, flerr = s:receive(SIZE_OF_FRAME_PAGE_LEADING)
     if not fldata then
-        return nil, "failed to read frame leading -- " .. flerr
+        return nil, flerr, "failed to read frame leading"
     end
 
     ffi.copy(self.frm_l_r, fldata, #fldata)
+    if self.frm_l_r.data_size <= 0 then
+        return nil, "frame leading data size is zero"
+    end
 
     while true do
         --
@@ -54,7 +58,7 @@ function _P:read(s)
             local pl_size = self:getPacketLeadingSize()
             local pldata, plerr = s:receive(pl_size)
             if not pldata then
-                return nil, "failed to read packet leading -- " .. plerr
+                return nil, plerr, "failed to read packet leading"
             end
 
             ffi.copy(self.pkt_l_r, pldata, #pldata)
@@ -64,7 +68,7 @@ function _P:read(s)
             -- packet name
             local pkt_name, pkt_nameerr = self:readPacketName(s)
             if not pkt_name then
-                return pkt_name, "failed to read packet name -- " .. pkt_nameerr
+                return pkt_name, pkt_nameerr, "failed to read packet name"
             end
 
             --
@@ -74,7 +78,7 @@ function _P:read(s)
         -- packet data
         local pddata, pderr = s:receive(remain_data_size)
         if not pddata then
-            return nil, "failed to read packet data" .. pderr
+            return nil, pderr, "failed to read packet data"
         end
 
         tbl_insert(self.pkt_r.data, pddata)
@@ -88,6 +92,9 @@ function _P:read(s)
     return self.pkt_r
 end
 
+-- for buffer reuse
+local pkt_w
+
 --
 function _P:write(s, msgname, msgdata, msgSn)
     local sent = 0
@@ -96,7 +103,6 @@ function _P:write(s, msgname, msgdata, msgSn)
     local remain_size = #msgdata
     local send_size_max
     local send_size
-    local pkt_w
 
     -- first page
     send_size_max = PER_FRAME_PAGE_SIZE_MAX - SIZE_OF_FRAME_PAGE_LEADING - pl_size - name_len
@@ -121,7 +127,8 @@ function _P:write(s, msgname, msgdata, msgSn)
     tbl_insert(pkt_w, msgname)
     tbl_insert(pkt_w, str_sub(msgdata, 1, send_size))
 
-    s:send(tbl_concat(pkt_w))
+    -- send table directly, no need to concat
+    s:send(pkt_w)
     sent = sent + send_size
 
     -- more frame pages?
@@ -142,7 +149,8 @@ function _P:write(s, msgname, msgdata, msgSn)
 
         tbl_insert(pkt_w, str_sub(msgdata, sent + 1, sent + send_size))
 
-        s:send(tbl_concat(pkt_w))
+        -- send table directly, no need to concat
+        s:send(pkt_w)
         sent = sent + send_size
     end
 

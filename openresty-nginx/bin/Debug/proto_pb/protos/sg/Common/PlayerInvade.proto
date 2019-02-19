@@ -1,0 +1,51 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message PlayerInvadeRecord {
+    required  int32     id = 1;
+    required  int32     state = 2;
+   	optional  UserInfo  player = 3;
+    optional  sfixed64  happen_time = 4;
+    optional  sfixed64  revenge_deadline = 5; 
+    optional  int32     result = 6;
+    optional  Reward    revenge_reward = 7;
+    optional  int32     score_change = 8;
+}
+
+message PlayerInvadeState {
+	optional  UserInfo  match_player = 1;
+	optional  sfixed64  defend_deadline = 2;
+	optional  sfixed64  deadline = 3;
+	optional  int32     win = 4;
+	repeated  pb_pair_int_int drop_get = 5;
+    optional  int32     score = 6;
+}
+
+message PlayerInvadeService {
+	enum CMD {
+		QUERY = 1;	// 查询
+		QUERY_STATE = 2;
+	}
+	
+	message PlayerInvadeRequest {
+		required CMD      cmd = 1;
+	}
+	
+	message PlayerInvadeResponse {
+		required int32 result = 1;	// 0 = success, -1 = failed
+		optional PlayerInvadeState state = 2;
+        repeated PlayerInvadeRecord    record_list = 3;
+	}
+	
+	optional PlayerInvadeRequest req = 1;
+	optional PlayerInvadeResponse resp = 2;
+}
+
+message PlayerInvadeNotify {
+	required  PlayerInvadeRecord record = 1;
+	optional  Reward  lose = 2;
+}

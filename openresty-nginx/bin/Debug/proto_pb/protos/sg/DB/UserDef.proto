@@ -1,0 +1,602 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+message UserAttribute {
+	required bytes			userid = 1;
+	required bytes          nick = 2;	
+	required int32			level = 3;
+	required int32			exp = 4;
+	required int32			portrait = 5;
+	required bytes			signature = 6;
+	required int32			rank = 7;
+	required sfixed64		createtime = 8;
+	
+    required sfixed64		optime = 11;
+	required int32			ticketid = 12;
+	optional int32          force = 13;
+	optional bytes          grow_gift = 14;
+	optional sfixed64       last_rename_time = 15;
+	optional int32          portrait_frame = 16;
+}
+
+////////////////////////////////////////////////////////////////	
+message UserShip {
+  required bytes  userid = 1;
+  required int32  ship_model = 2;
+	required bytes  ship = 3;
+	required bytes  ship_tiles = 4;
+	required bytes  facility = 5;
+	required int32  width = 6;
+	required int32  height = 7;
+	required bytes  unlock_room = 8;
+}
+
+message UserRoom {
+	required bytes  userid = 1;
+	required int32	roomid = 2;
+	required int32	room_type = 3;
+	required int32	orderid = 4;
+	required bytes	room_struct = 5;
+	required int32	state = 6;
+	optional int32  region = 7;
+}
+
+message UserSailor {
+	required bytes userid = 1;
+	required int32 id = 2;
+	required int32 typeid = 3;
+	required int32 state = 4;
+	required uint64 place = 5;
+	required int32 facility_id = 6;
+	required int32 level = 7;
+	required int32 star =8;
+	required int32 phase = 9;
+	required int32 hp_lost = 10;
+	required float vim = 11;	
+	required int32 exp = 12;
+	required int32 orderid = 14;
+	required sfixed64  last_rest_time = 15; 
+	required int32 job = 16;
+	required bytes conduct_list = 17;
+	optional int32 practice = 18;
+	optional int32 region = 19;
+	optional float hunger = 20;
+}
+
+message UserSailorEquip {
+	required bytes userid = 1;
+	required int32 id = 2;
+	required int32 part = 3;
+	required int32 equip_id = 4;
+}
+
+message UserItem {
+	required bytes  userid = 1;
+	required int32	item_typeid = 2;
+  required int64	item_num = 3;
+}
+
+message UserFacility {
+	required bytes  userid = 1;
+	required int32	id = 2;
+	required int32	typeid = 3;
+	required int32	style = 4;
+	required bytes	order_list = 5;
+	required int32	roomid = 6;
+	required bytes	worker_list= 7;
+	required int32	pos_x = 8;
+	required int32	pos_y = 9;
+	required int32  level = 10;
+	optional int32  region = 11;
+	optional bytes  special_data = 12;
+	optional int32  remain_food = 13;
+	optional bytes  unlock_order_slot = 14;
+	optional sfixed64 level_up_starttime = 15;
+}
+
+message UserProduceOrder{
+	required bytes     userid = 1;
+	required int32     id = 2;
+	required int32     state = 3;
+	required int32     production_type = 4;
+	required int32     production = 5;
+	required bytes     basics = 6;
+	required int32     output_num = 7;
+	required int32     circle_num = 8;
+	required int32     finish_num = 9;
+	required float     speed = 10;
+	required float     ratio = 11;
+	required sfixed64  timestamp = 12;
+	required int32     pre_order = 13;
+	required int32     next_order = 14;
+	optional float     ratio_stamp = 15;
+	optional bytes     skill_influence = 16;
+}
+
+message UserNavigationState{
+	required bytes     userid = 1;
+	required uint64    origin = 2;
+	required uint64    destination = 3;
+	required sfixed64  start_date = 4;
+	required bytes     path = 5;
+	optional int32     event_id = 6;
+	optional int32     event_state = 12;
+	optional int32     event_duration = 7;
+	optional bytes     event_pos = 8;
+	optional bytes     event_data = 9;
+	optional int32     event_happened_times = 10;
+	optional sfixed64  timestamp = 11;
+	optional int32     fast_reach_ticket = 13;
+	optional sfixed64  ticket_timestamp = 14;
+	optional int32     first_tag = 15;
+}
+
+message UserNavigationRecord{
+	required bytes     userid = 1;
+	required int32     id = 2;
+	required sfixed64  recently_visit_time = 3;
+}
+
+
+message UserExploreState {
+	required bytes       userid = 1;
+	required int32       location = 2; //所在地点id
+	required int32       step = 3;
+	required int32       pos_x = 4; 
+	required int32       pos_y = 5;
+}
+
+
+message UserExploreStage {
+	required bytes       userid = 1;
+	required int32       id = 2; //地点id
+	required bytes       fog = 3; //迷雾
+}
+
+message UserExploreRecord {
+	required bytes       userid = 1;
+	required int32       id = 2; 
+	required int32       type = 3; //记录类型
+	required int32       object = 4; //目标
+	required bytes       content = 5; //内容
+	required sfixed64    timestamp = 6; //发生时间
+}
+
+message UserExploreEvent {
+	required bytes       userid = 1;
+	required int32       id = 2; 
+	required int32       state = 3;  //状态
+	required int32       type = 4; //类型
+	required int32       typeid = 5; //类型id
+	required int32       locale_type = 6; //地点类型
+	required int32       locale = 7; //地点id
+	required int32       pos_x = 8; //
+	required int32       pos_y = 9; //
+	required bytes       content = 10; //
+	required sfixed64    timestamp = 11; //发生时间
+	required sfixed64    deadline = 12; // 最后期限
+}
+
+message  ShoppingRecord {
+	required bytes									userid = 1;
+	required int32                  id = 2;
+	required int32                  goodsid = 3;
+	required sfixed64               begin_time = 4;
+	required sfixed64               end_time = 5;
+	required int32                  goodsnum = 6;
+}
+
+message  UserWanted {
+	required bytes                 userid = 1;
+	required int32                 id = 2;
+	required int32                 typeid = 3;
+	required int32                 state = 4;
+	required int32                 place = 5;
+	required int32                 pos_type = 6;
+	required int32                 pos_x = 7;
+	required int32                 pos_y = 8;
+    required sfixed64              optime = 9;
+}
+
+message  UserTask {
+	required bytes                 userid = 1;
+	required int32                 id = 2;
+	required int32                 state = 3;
+	required int32                 step = 4;
+	required bytes                 finish_value = 5;
+}
+
+message  UserNpc {
+	required bytes                 userid = 1;
+	required int32                 id = 2;
+	required int32                 state = 3;
+	required int32                 place = 5;
+	required int32                 pos_type = 6;
+	required int32                 pos_x = 7;
+	required int32                 pos_y = 8;
+}
+
+message  UserManual {
+	required bytes                 userid = 1;
+	required int32                 typeid = 2;
+	required sfixed64              optime = 3;
+}
+
+message  UserState {
+	required bytes                 userid = 1;
+	required bytes                 guide_val = 2;
+	required sfixed64              tab_time = 3;
+	required int32                 gold_lottery_times_once = 4;
+	required int32                 diamond_lottery_times_once = 5;
+	required int32                 gold_lottery_times_ten = 6;
+	required int32                 diamond_lottery_times_ten = 7;
+	required sfixed64              daily_refresh_time = 8;
+	optional int32                 daily_lottery_times = 9;
+	optional int32                 daily_occupy_monster_ship = 10;
+	optional int32                 daily_occupy_player_ship = 11;
+	optional int32                 daily_occupy_special_ship = 12;
+	optional int32                 daily_buy_vitality_times = 13;
+	optional int32                 daily_single_ranking_times = 14;
+	optional int32                 daily_multiple_ranking_times = 15;
+	optional sfixed64              easter_egg_refresh_time = 16;
+	optional sfixed64              login_time = 17;
+	optional sfixed64              logout_time = 18;
+	optional sfixed64              heartbeat_time = 19;
+	optional int32                 repeat_task_refresh_times = 20;
+}
+
+message  UserRegion {
+	required bytes                 userid = 1;
+	required int32                 id = 2;
+	required int32                 fast_finish_times = 4;
+	optional bytes                 map_data = 5;
+	optional bytes                 unlock_room = 6;
+	optional sfixed64              first_reach_time = 7;
+}
+
+message  UserSystemTask {
+	required bytes                 userid = 1;
+	required int32                 id = 2;
+	required int32                 state = 3;
+	required int32                 finish_value = 4;
+	required sfixed64              deadline = 5;
+	required sfixed64              timestamp = 6;
+}
+
+message  UserShoppingGoods {
+	required bytes                 userid = 1;
+	required int64                 store = 2;
+	required int32                 goods_id = 3;
+	required int32                 goods_typeid = 4;
+	required int32                 state = 5;
+	required int32                 purchase_times = 6;
+	required float                 discount = 7;
+	required float                 price_fluctuation = 8;
+	required sfixed64              timestamp = 9;
+	required int32                 duration = 10;
+}
+
+message  UserShoppingMall {
+	required bytes                 userid = 1;
+	required int64                 id = 2;
+	required int32                 type = 3;
+	required int64                 tag = 4;
+	required int32                 state = 5;
+	required sfixed64              timestamp = 6;
+	required int32                 duration = 7;
+}
+
+message  UserShipModel {
+	required bytes                 userid = 1;
+	required int32                 ship_model = 2;
+	required int32                 state = 3;
+	required sfixed64              optime = 4;
+}
+
+message  UserArchive {
+	required bytes                 userid = 1;
+	required int32                 id = 2;
+	required int32                 state = 3;   
+	required bytes                 name = 4;  
+	required int32                 ship_model = 5;  
+	required bytes                 ship_tiles = 6;  
+	required bytes                 facilitys = 7;  
+	required bytes                 devices = 8;           
+}
+
+message  UserFormula {
+	required  bytes    userid = 1;
+	required  int32    formula_id = 2;
+}
+
+message  UserAchievement {
+	required  bytes    userid = 1;
+	required  int32    id = 2;
+	required  int64    finish_value = 3;
+	optional  int32    state = 4;
+	optional  int32    phase = 5;
+}
+
+message  UserDungeonEvent {
+	required  bytes    userid = 1;
+	required  int32    id = 2;
+	required  int32    finish_value = 3;
+	required  int32    state = 4;
+}
+
+message  UserDungeonState {
+	required  bytes    userid = 1;
+	required  int32    dungeon_id  = 2;
+	required  int32    state = 3;
+	required  int32    clear_times = 4;
+	optional  int32    max_layer = 5;
+	optional  bytes    reward_received = 6;
+	optional  int32    daily_times = 7;
+	optional  bytes    open_chest = 8;
+}
+
+message  UserPveMap {
+	required  bytes    userid = 1;
+	required  uint64   belong_island = 2;
+	required  int32    type = 3;
+	required  bytes    data = 4;
+}
+
+message  UserChest {
+	required  bytes    userid = 1;
+	required  int32    id = 2;
+	required  int32    state = 3;
+}
+
+message  UserEventRecord {
+	required  bytes    userid = 1;
+	required  int32    id = 2;
+	required  int32    state = 3;
+	required  int32    type = 4;
+	required  bytes    contant = 5;
+	required  sfixed64    timestamp = 6;
+}
+
+message UserEventCache {
+	required  bytes   userid = 1;
+	required  int32   type = 2;
+	required  bytes   contant = 3;
+	required  sfixed64    timestamp = 4;
+}
+
+message UserEquip {
+	required  bytes   userid = 1;
+	required  int32   id =  2;
+	required  int32   typeid = 3;
+	required  int32   quality = 4;
+	required  int32   state = 5;
+	required  bytes   attribute = 6;
+	required  bytes   special_attr = 7;
+	required  bytes   attribute_slot = 8;
+	required  int32   belong_to = 9;
+	optional  int32   quality_refine_times = 10;
+	optional  int64   skill = 11;
+}
+
+message UserSailorSkill {
+	required  bytes   userid = 1;
+	required  int32   id =  2;
+	required  int32   slotid =  3;
+	required  int32   type = 4;
+	required  uint64  skillid = 5;
+	required  int32   level = 6;
+}
+
+message UserSailorFarmSkill {
+	required  bytes   userid = 1;
+	required  int32   id =  2;
+	required  uint64   skillid = 3;
+	required  int32   level = 4;
+	required  int32   exp = 5;
+}
+
+message UserFightManual {
+	required  bytes   userid = 1;
+	required  int32   type =  2;
+	required  int32   typeid = 3;
+}
+
+message UserHiddenData {
+	required  bytes   userid = 1;
+	required  float   businessman_pro_add = 2;
+}
+
+message UserSpecialEvent {
+	required  bytes  userid = 1;
+	required  int64  id = 2;
+	required  int32  trigger_times = 3;
+	required  int32  happen_times = 4;
+	required  sfixed64  timestamp = 5;
+}
+
+message  UserSailorInGhostShip {
+	required  bytes  userid = 1;
+	required  int32  id = 2;
+	required  bytes  data = 4;
+}
+
+message  UserGhostStage {
+	required  bytes  userid = 1;
+	required  int32  id = 2;
+	required  int32  type = 3;
+	required  bytes  name = 4;
+	required  int32  level = 5;
+	required  int32  state = 6;
+	required  bytes  battle_data = 7;
+}
+
+message  UserGhostShip {
+	required  bytes  userid = 1;
+	required  int32  state = 2;
+	required  int32  reset_times = 3;
+	required  bytes  buff_get = 4;
+	required  int32  attack_times = 5;
+	required  int32  rank = 6;
+}
+
+message  UserBattleState {
+	required  bytes  userid = 1;
+	required  int32  dungeon_id = 2;
+	required  bytes  user_info = 4;
+	required  bytes  battle_data = 5;
+	optional  bytes  team_data = 6;
+}
+
+message  UserPvpState {
+	required  bytes  userid = 1;
+	required  int32  remain_times = 2;
+	required  int32  combo = 3;
+	required  sfixed64  timestamp = 4;
+	required  sfixed64  round_start = 5;
+}
+
+message  UserEasterEgg {
+	required  bytes  userid = 1;
+	required  int64  entryid = 2;
+	required  int64  easter_egg = 3;
+	required  sfixed64  timestamp = 4;
+	optional  int32  exist_times = 5;
+}
+
+message  UserShipEvent {
+	required  bytes  userid = 1;
+	required  int32  id = 2;
+	required  int64  typeid = 3;
+	required  int32  seat = 4;
+	required  int32  state = 5;
+	required  sfixed64  timestamp = 6;
+	optional  int32  region = 7;
+}
+
+message  UserShipEventTiming {
+	required  bytes  userid = 1;
+	required  int64  event = 2;
+	required  int64  online_seconds = 3;
+	required  int64  offline_seconds = 4;
+	required  int32  happened_times = 5;
+}
+
+message UserDailyGift {
+	required  bytes  userid = 1;
+	required  int32  gift_id = 2;
+	required  int32  state = 3;
+	required  int32  be_recieved = 4;
+	required  sfixed64  timestamp = 5;
+}
+
+message UserPVPRecord {
+	required bytes userid = 1;
+	required int32 id = 2;
+	required int32 player = 3;
+	required bytes player_nick = 4;
+	required int32 player_level = 5;
+	required int32 result = 6;
+	required int32 win_score = 7;
+	required bytes team_data = 8;
+	required bytes enemy_data = 9; 
+	required sfixed64 timestamp = 10;
+}
+
+message UserMaelstromState {
+	required bytes userid = 1;
+	required bytes map_size = 2;
+	required int32 explore_level = 3;
+	required bytes pos = 4;
+	required bytes fog = 5;
+	required int32 oil = 6;
+	required sfixed64 repair_timestamp = 7;
+	required sfixed64 refresh_timestamp = 8; 
+	optional int32 explore_point = 9;
+	optional bytes talent = 10;
+	optional bytes event_record = 11;
+}
+
+message UserMaelstromBuilding {
+	required bytes userid = 1;
+	required int32 id = 2;
+	required int32 type = 3;
+	required int32 level = 4;
+	required sfixed64 timestamp = 5;
+	required sfixed64 level_up_timestamp = 6;
+}
+
+message UserMaelstromEvent {
+	required bytes userid = 1;
+	required int32 id = 2;
+	required int32 typeid = 3;
+	required int32 level = 4;
+	required bytes pos = 5;
+	required int32 state = 6;
+	required bytes data = 7;
+}
+
+message UserDungeonChest {
+	required bytes userid = 1;
+	required int32 id = 2;
+	required float add_probability = 3;
+
+}
+
+message PlayerInvadeRecord {
+	required int32 ticketid = 1;
+	required int32 id = 2;
+	required int32 state = 3;
+    required bytes record_data = 4;
+    required bytes revenge_reward = 5;
+    required sfixed64 happened_time = 6;
+    required sfixed64 deadline = 7;
+}
+
+message PlayerInvadeState {
+	required int32 ticketid = 1;
+	required bytes matched_player = 2;
+	required sfixed64 defend_deadline = 3;
+	required sfixed64 timestamp = 4;
+    required int32 win = 5;
+    required int32 navigation_times = 6;
+    required sfixed64 daily_timestamp = 7;
+    optional bytes    drop_get = 8;
+    optional int32    score = 9;
+}
+
+message  UserRoomModel {
+	required bytes  userid = 1;
+	required int32  id = 2;
+}
+
+////////////////////////////////////////////////////////////////	
+// log
+message  UserLogCostDiamond  {
+	required  bytes  userid = 1;
+	required  int32  way = 2;
+	required  int64  param = 3;
+	required  int32  cost_num = 4;
+	required  sfixed64  timestamp = 5;
+}
+
+message  UserLogCostItem {
+	required  bytes  userid = 1;
+	required  int32  item_typeid = 2;
+	required  int32  item_num = 3;
+	required  int32  way = 4;
+	required  sfixed64  timestamp = 5;
+}
+
+message  UserLogShopping  {
+	required  bytes  userid = 1;
+	required  int32  goods_typeid = 2;
+	required  int32  goods_num = 3;
+	required  int32  belong_store = 4;
+	required  sfixed64  timestamp = 5;
+}
+
+////////////////////////////////////////////////////////////////	
+

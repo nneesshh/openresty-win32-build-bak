@@ -39,7 +39,6 @@ package.path = package.path .. ";./lualibs/luadate-2.1/?.lua"
 
 -- protobuf
 package.path = package.path .. ";./lualibs/protobuf/?.lua"
-package.path = package.path .. ";./lua/proto_pb/?.lua"
 
 --
 require("uuid")

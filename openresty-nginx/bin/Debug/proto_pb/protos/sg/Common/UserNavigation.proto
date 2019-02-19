@@ -1,0 +1,71 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message   NavigationEvent {
+	required   int32   id = 1;
+	required   int32   pos_x = 2;
+	required   int32   pos_y = 3;
+	required   int32   duration = 4;
+	optional   int32   state = 5;   
+}
+
+message NavigationState {
+    required int32        state = 1;
+    required uint64       origin = 2;  //出发点,若目标点为0,出发点为当前所在地
+    required uint64       destination = 3; //目标点 ,0为无目标
+    optional int32        fast_reach_ticket = 4;
+    optional sfixed64     ticket_timestamp = 5;
+}
+
+message NavigationRecord {
+    required int32       id = 1;
+    required sfixed64    recently_visit_time = 2;
+    optional bool        isnew = 3;
+}
+
+
+message UserNavigationService {
+	enum NAVIGATION_CMD {
+		QUERY = 1; // 查询信息
+		START_OFF = 2; //出发
+		RECORD = 3;  //记录
+		IGNORE_EVENT= 4;//忽略事件 
+		FAST_REACH = 5;// 快速到达
+	}
+	
+	//
+	message UserNavigationRequest {
+		required NAVIGATION_CMD			cmd = 1;
+	    optional uint64             destination = 2; //设定目标
+	    optional int32              pos_x = 3;
+	    optional int32              pos_y = 4;
+	}
+	
+	//
+	message UserNavigationResponse {
+		required int32			result = 1;
+
+	    optional NavigationState  state = 2; //现在状态
+	    repeated int32            path = 3; //路线
+	    repeated NavigationRecord  record = 4; //航海记录
+	    optional NavigationEvent    now_event = 6;
+	    optional Reward             lose = 7;
+	    optional UserInfo         player = 8;
+	}
+	
+	optional UserNavigationRequest req = 1;
+	optional UserNavigationResponse resp = 2;
+}
+
+message NavigationEventIgnoredNotify {
+    optional NavigationEvent    event = 1;
+	optional Reward             lose = 2;
+}
+
+message FastReachTicketNotify {
+    optional int32    fast_reach_ticket_num = 1;
+}

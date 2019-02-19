@@ -9,6 +9,9 @@ local NOTICE = ngx.NOTICE
 local INFO = ngx.INFO
 local DEBUG = ngx.DEBUG
 
+local ngx_worker = ngx.worker
+local ngx_timer = ngx.timer
+
 --
 require = require("utils.require").require
 
@@ -38,7 +41,6 @@ package.path = package.path .. ";./lualibs/luadate-2.1/?.lua"
 
 -- protobuf
 package.path = package.path .. ";./lualibs/protobuf/?.lua"
-package.path = package.path .. ";./lua/proto_pb/?.lua"
 
 --
 require("uuid")
@@ -56,13 +58,13 @@ local func_check_per_min = function(premature)
     --
 end
 
-if 0 == ngx.worker.id() then
+if 0 == ngx_worker.id() then
     local ok, err
-    ngx.log(NOTICE, "[init_worker_stream] start heartbeat timer at worker -- ", ngx.worker.id())
+    ngx.log(NOTICE, "[init_worker_stream] start heartbeat timer at worker -- ", ngx_worker.id())
 
     -- 0.0s
     ok, err =
-        ngx.timer.at(
+        ngx_timer.at(
         0,
         function(premature)
             -- do some routine job in Lua just like a cron job
@@ -70,7 +72,7 @@ if 0 == ngx.worker.id() then
                 return
             end
 
-            --require("init_worker_stream_lazy")
+            require("init_worker_stream_lazy")
         end
     )
     if not ok then
@@ -79,7 +81,7 @@ if 0 == ngx.worker.id() then
     end
 
     -- check
-    ok, err = ngx.timer.every(delay, func_check_per_min)
+    ok, err = ngx_timer.every(delay, func_check_per_min)
     if not ok then
         ngx.log(ERR, "failed to create timer: ", err)
         return

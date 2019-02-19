@@ -1,0 +1,127 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "Mail.proto";
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+// 捕猎列表
+
+enum HUNT_GROUND_TYPE {
+		HUNT_GROUND_TYPE_TRAP = 1; // 陷阱猎场
+		HUNT_GROUND_TYPE_FISHING = 2; // 捕鱼猎场
+}
+
+enum HUNT_GROUND_STATE {
+		HUNT_GROUND_STATE_DISABLE = 0; // 禁止
+		HUNT_GROUND_STATE_ENABLE_PART = 1; // 部分允许
+		HUNT_GROUND_STATE_ENABLE_FULL = 2; // 完全允许
+}
+
+// 猎物类型
+enum HUNT_PREY_TYPE {
+	HUNT_PREY_TYPE_UNKNOWN = 0;
+	HUNT_PREY_TYPE_BEAST = 1; // 兽类
+	HUNT_PREY_TYPE_FISH = 2; // 鱼类
+
+}
+
+// 捕猎信息
+message HuntGroundInfo {
+	required uint64							groundid = 1;
+	optional HUNT_GROUND_STATE	state = 2;
+	optional int32							hunt_num = 3; // 剩余捕猎次数
+	optional sfixed64						hunt_recover_starttime = 4; // 捕猎次数恢复开始时间
+	optional int32							hunt_recover_cd_seconds = 5; // 捕猎次数恢复冷却时间(秒)
+	optional float							hunt_recover_add_ratio1 = 6; // 捕猎次数恢复速度加成比率1
+	optional float							hunt_recover_add_ratio2 = 7; // 捕猎次数恢复速度加成比率2
+	optional float							hunt_recover_add_ratio3 = 8; // 捕猎次数恢复速度加成比率3
+	
+	optional int32							prey_hunt_num_max = 11;
+	
+	optional sfixed64						growtime = 12; // 猎物增长时间
+}
+
+// 猎物
+message HuntPrey {
+	enum PREY_STATE {
+		TO_DELETE = -1; // 删除，服务器专用
+		IDLE = 0; // 空闲
+		CAPTURED = 1; // 被捕获
+		ESCAPED = 2; // 逃脱
+		STRUGGLE = 3; // 询问战斗与否
+		FIGHT = 4; // 进入战斗
+		RETREAT = 5; // 战斗撤退，消失不见
+	}
+	
+	required int32						preyid = 1; // 猎物 序列号
+	optional HUNT_PREY_TYPE		prey_type = 2;
+	optional uint64						cfgid = 3; // 猎物 config id
+	optional int32						cfg_groupid = 4; // 猎物 组id
+	optional PREY_STATE				state = 5;  // 猎物 状态
+	optional int32						seconds = 6; // 猎物落入陷阱后逃脱倒计时
+
+	optional sfixed64					optime = 21; // 操作时间
+}
+
+message HuntPreyList {
+	repeated HuntPrey list = 1;
+}
+
+message HuntPreyDrop {
+	optional int32							preyid = 1; // 猎物序列号
+	optional ItemDropList				drop_item_list = 2; // 猎物掉落道具列表
+}
+
+message HuntPreyDropList {
+	repeated HuntPreyDrop list = 1;
+}
+
+// 捕猎Npc列表
+message UserHuntService {
+	enum HUNT_COMMAND {
+		QUERY = 1;	// 查询指定猎场的猎物
+		ENTER = 2;	// 进入指定猎场
+		TRAP = 3;	// 开始抓捕猎物
+		FISHING_NET = 4;	// 开始渔网捕鱼
+		FISHING_ROD = 5;	// 开始鱼竿捕鱼
+		FISHING_HARPOON = 6;	// 开始鱼叉捕鱼
+	}
+	
+	message HuntRequest {
+		required HUNT_COMMAND				cmd = 1;
+		optional uint64							hunt_groundid = 2;
+		optional int32							trapid = 3; // 陷阱id
+		optional int32							preyid = 4; // 猎物序列号
+
+		optional int32							toolid = 5; // 渔具id
+		repeated int32							fishid_list = 6; // 鱼类猎物列表
+	}
+	
+	message HuntResponse {
+		required int32							result = 1;	// 0 = success, -1 = failed
+		optional HuntPreyList				prey_list = 2;
+		optional HuntGroundInfo			ground_info = 3;
+		optional HuntPreyDropList		prey_drop_list = 4;
+
+	}
+	
+	optional HuntRequest req = 1;
+	optional HuntResponse resp = 2;
+	
+}
+
+//
+message HuntGroundStateNotify {
+	required HuntGroundInfo				ground_info = 1;
+}
+
+//
+message HuntPreyStateNotify {
+	required uint64								groundid = 1; // 猎场编号
+	required HuntPreyList					prey_list = 2;
+
+	optional ItemDropList					prey_drop_item_list = 11; // 猎物掉落道具列表
+	
+}

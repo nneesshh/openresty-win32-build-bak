@@ -1,0 +1,320 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+//
+// 
+message ConfigActivityTime {
+	required int32		id = 1; // 唯一id
+	required int32		type = 2; // 类型 1=开服7日签到，
+	required bytes		name = 3; // 名称
+	required bytes		desc = 4; // 描述
+	required int32		disable = 5; // 是否禁用
+	required sfixed64	begin_time = 6; // 有效期起始时间
+	required sfixed64	end_time = 7; // 有效期截止时间
+
+}
+
+message ConfigActivityTimeList {
+	repeated ConfigActivityTime list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+//
+// 首充礼包 配置
+message ConfigGiftbagFirstCharge {
+	required int32 charge_subtype = 1; // 充值子类型
+	required bytes name = 2;
+	required bytes reward = 3;
+
+}
+
+message ConfigGiftbagFirstChargeList {
+	repeated ConfigGiftbagFirstCharge list = 1;
+}
+
+// 充值礼包 配置
+message ConfigGiftbagCharge {
+	required int32 chargeid = 1; // 充值id
+	required bytes name = 2;
+	required float cash = 3; // 充值金额
+	required bytes reward = 4;
+
+}
+
+message ConfigGiftbagChargeList {
+	repeated ConfigGiftbagCharge list = 1;
+}
+
+// 7 日登录礼包 配置
+message ConfigGiftbagSevenDay {
+	required int32 dayid = 1; // 日期序号id
+	required bytes reward = 2;
+
+}
+
+message ConfigGiftbagSevenDayList {
+	repeated ConfigGiftbagSevenDay list = 1;
+}
+
+// 节日礼包 配置
+message ConfigGiftbagFestival {
+	required int32 activityid = 1; // 活动id
+	required int32 dayid = 2; // 日期序号id
+	required bytes reward = 3;
+}
+
+message ConfigGiftbagFestivalList {
+	repeated ConfigGiftbagFestival list = 1;
+}
+
+// 月卡礼包 配置
+message ConfigGiftbagMonthCard {
+	required int32 cardid = 1; // 月卡id
+	required bytes name = 2;
+	required bytes desc = 3;
+	required int32 card_days = 4; // 月卡持续天数, 0 = 30 days
+	required bytes reward = 5;
+
+	required float passenger_refresh_time_ratio = 11; // 顾客刷新时间缩短比率
+	required float role_exp_ratio = 12; // 角色经验增加比率
+	required float sailor_exp_ratio = 13; // 船员经验增加比率
+	required int32 ghost_ship_reset_num = 14; // 幽灵船重置次数
+	required int32 free_resurrection_num = 15; // 免费复活次数
+	required bytes pirate_ship_fight_num = 16; // 海盗船战斗次数增加字符串 -- "type:num |..."
+}
+
+message ConfigGiftbagMonthCardList {
+	repeated ConfigGiftbagMonthCard list = 1;
+}
+
+// 签到礼包 配置
+message ConfigGiftbagRoleSignin {
+	required int32 id = 1; // 单双月id
+	required int32 dayid = 2; // 签到日id
+	required bytes reward = 3;
+	required bytes extra_reward = 4;
+}
+
+message ConfigGiftbagRoleSigninList {
+	repeated ConfigGiftbagRoleSignin list = 1;
+}
+
+// 升级礼包 配置
+message ConfigGiftbagRoleLevelup {
+	required int32 levelid = 1; // 角色等级id
+	required bytes reward = 2;
+
+}
+
+message ConfigGiftbagRoleLevelupList {
+	repeated ConfigGiftbagRoleLevelup list = 1;
+}
+
+// 升级礼包shopping 配置
+message ConfigGiftbagRoleLvShopping {
+	required uint64 giftbagid = 1;
+	required int32 levelid = 2; // 角色等级id
+	required bytes reward = 3;
+	required bytes mail_title = 4;
+	required bytes mail_text = 5;
+}
+
+message ConfigGiftbagRoleLvShoppingList {
+	repeated ConfigGiftbagRoleLvShopping list = 1;
+}
+
+// 礼包兑换码 配置
+message ConfigGiftbagCode {
+	required bytes		code = 1; // 礼包代码
+	required int32		type = 2; // 礼包码类型 1=每用户可使用一次，2=仅可使用一次
+	required bytes		desc = 3; // 
+	required sfixed64	begin_time = 4; // 有效期起始时间
+	required sfixed64	end_time = 5; // 有效期截止时间
+	
+	required uint64		reward_typeid = 11; // 同一奖励typeid仅可领取一次
+
+}
+
+message ConfigGiftbagCodeList {
+	repeated ConfigGiftbagCode list = 1;
+}
+
+// 好友礼物 配置
+message ConfigGiftbagFriend {
+	required int32 level = 1; // 唯一id
+	required int32 give_num_day = 2; // 每日赠送礼物次数, 0=不限次数
+	required int32 accept_num_day = 3; // 每日收取礼物次数, 0=不限次数
+	required uint64 item_typeid = 11; // 道具typeid
+	required int32 item_num = 12; // 道具数量
+
+}
+
+message ConfigGiftbagFriendList {
+	repeated ConfigGiftbagFriend list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+// game charge
+
+enum GAME_CHARGE_TYPE {
+		GAME_CHARGE_TYPE_DIAMOND = 0; // 充钻石
+		GAME_CHARGE_TYPE_MONTH_CARD = 1;	// 充月卡
+}
+
+enum GAME_CHARGE_STATE {
+		GAME_CHARGE_STATE_INVALID = 0; // 无效
+		GAME_CHARGE_STATE_UNOPENED = 1;	// 未拆封
+		GAME_CHARGE_STATE_OPENED = 2; // 已拆封
+}
+
+message GameCharge {
+	required uint64 id = 1; // 充值id，64位自增长
+	required bytes userid = 2; // 单体地址
+	required float charge_cash = 3; // 充值金额(现金)
+	required int32 charge_type = 4; // 充值类型, 0 = 钻石，1 = 月卡
+	required int32 charge_state = 5; // 充值状态，0 = 无效，1 = 未开封， 2 = 已拆封
+	
+	required bytes platid = 11; // 订单号
+	required bytes ordernum = 12; // 订单号
+	required bytes order_receipt = 13; // 收条
+	required bytes order_createtime = 14; // 订单创建时间
+	required bytes order_notifytime = 15; // 订单通知时间
+	required int32 goodsid = 16; // 商品id
+	
+	required sfixed64	createtime = 21;
+	required sfixed64	optime = 22;
+}
+
+message GameChargeList {
+	repeated GameCharge list = 1;
+}
+
+////////////////////////////////////////////////////////////////	
+message UserChargeAndGiftbagFirstCharge {
+	required bytes		userid = 1;
+	required uint64		charge_subtype = 2; // 充值子类型, 0 = 首充奖励, > 0 = goods id
+	required sfixed64	charge_time = 3; // 首充时间
+}
+
+message UserChargeAndGiftbagFirstChargeList {
+	repeated UserChargeAndGiftbagFirstCharge list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message proc_load_game_charge {
+	message Parameter {
+		required uint64				p_last_topid = 1;
+	}
+
+	message ReturnRecord {
+		required GameCharge			item = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+
+}
+
+////////////////////////////////////////////////////////////////
+//
+message proc_save_game_charge {
+	message Parameter {
+		required uint64				p_id = 1;
+		required int32				p_state = 2; // 状态
+		required bytes				p_receipt = 3; // 收条
+		required sfixed64			p_optime = 4;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+}
+
+////////////////////////////////////////////////////////////////
+message proc_create_game_charge {
+	message Parameter {
+		required bytes				p_userid = 1;
+		required float				p_charge_cash = 2;
+		required int32				p_charge_type = 3;
+		required int32				p_charge_state = 4;
+
+		required bytes				p_platid = 11;
+		required bytes				p_ordernum = 12;
+		required bytes				p_order_receipt = 13;
+		required bytes				p_order_createtime = 14;
+		required bytes				p_order_notifytime = 15;
+		required int32				p_goods_id = 16;
+		
+		required sfixed64			p_optime = 21;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+}
+
+////////////////////////////////////////////////////////////////	
+// user month card
+message UserMonthCard {
+	required bytes			userid = 1;
+	required int32			cardid = 2;
+	required int32			buy_month_card_num = 3;
+	required sfixed64		buy_month_card_burntime = 4;
+	required sfixed64		month_card_awardtime = 5;
+}
+
+////////////////////////////////////////////////////////////////	
+// user role level shopping
+message UserRoleLvShopping {
+	required bytes			userid = 1;
+	required uint64			giftbagid = 2;
+	required uint64			flag_reward = 3;  // 升级礼包商店版奖励标志
+	required sfixed64		awardtime = 4;
+}
+
+////////////////////////////////////////////////////////////////	
+message UserStatsChargeAndGiftbag {
+	required bytes			userid = 1;
+	required uint64			charge_pool_topid = 2; // 用于快速查找
+	required int32			charge_point_num = 3; // 充值金额（单位：RMB分)
+	
+	required uint64			flag_role_signin_reward = 21;
+	required uint64			flag_role_signin = 22;
+	required sfixed64		role_signin_burntime = 23;
+
+	required uint64			flag_role_levelup_reward = 31;  // 升级礼包奖励标志
+	required uint64			flag_charge_reward = 32;  // 充值礼包领取标志
+
+	required sfixed64		seven_day_signin_time = 41;  // 7日累积登录最近签到时间
+	required uint64			flag_seven_day_signin = 42;  // 7日累积登录礼包签到标志
+	required uint64			flag_seven_day_signin_reward = 43;  // 7日累积登录礼包领取标志
+
+	required sfixed64		friend_gift_give_num_refreshtime = 51;  // 好友礼物赠送次数刷新时间
+	required int32			friend_gift_give_num = 52;  // 好友礼物赠送次数(每日)
+	required int32			friend_gift_give_num_total = 53;  // 好友礼物赠送次数(总计)
+
+	required sfixed64		friend_gift_accept_num_refreshtime = 61;  // 好友礼物收取次数刷新时间
+	required int32			friend_gift_accept_num = 62;  // 好友礼物领取次数(每日)
+	required int32			friend_gift_accept_num_total = 63;  // 好友礼物领取次数(总计)
+}
+
+////////////////////////////////////////////////////////////////	
+message UserActivityGiftbag {
+	required bytes			userid = 1;
+	required int32			activityid = 2; //活动id
+	
+	required sfixed64		festival_signin_time = 41;  // 节日累积登录最近签到时间
+	required uint64			flag_festival_signin = 42;  // 节日累积登录礼包签到标志
+	required uint64			flag_festival_signin_reward = 43;  // 节日累积登录礼包领取标志
+}
+
+////////////////////////////////////////////////////////////////	
+message GameGiftbagCode {
+	required bytes			code = 1; // 激活码
+	required bytes			userid = 2; // 激活用户
+	optional sfixed64		active_time = 3; // 激活时间
+	
+}

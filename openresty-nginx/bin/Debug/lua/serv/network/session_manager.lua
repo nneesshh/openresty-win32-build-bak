@@ -34,7 +34,7 @@ function _M.create_session(self, sock)
         sock = sock,
         --
         sema_send = false,
-        sema_send_buffer = false,
+        sema_send_packet_queue = false,
         --
         uuid = nil,
         released = false

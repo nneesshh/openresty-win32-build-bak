@@ -1,0 +1,85 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum GAME_STORE_TYPE {
+	GAME_STORE_TYPE_SYSTEM = 1;
+	GAME_STORE_TYPE_GUILD = 2;
+	GAME_STORE_TYPE_NPC = 3;
+	GAME_STORE_TYPE_CUSTOMER = 4;
+	GAME_STORE_TYPE_JJC = 5;
+	GAME_STORE_TYPE_DAILY = 6;
+	GAME_STORE_TYPE_WEEKLY = 7;
+	GAME_STORE_TYPE_MONTHLY = 8;
+	GAME_STORE_TYPE_DAILY_GIFT = 9;
+	GAME_STORE_TYPE_WEEKLY_GIFT = 10;
+}
+
+enum GOODS_CATEGORY {
+	GOODS_CATEGORY_DIAMOND = 1; // 购买钻石
+	GOODS_CATEGORY_GIFT = 2; // 购买礼包
+	GOODS_CATEGORY_FORMULA = 3; // 购买图纸
+	GOODS_CATEGORY_SAILOR = 4; // 购买船员 
+	GOODS_CATEGORY_DAILY_GIFT = 5; // 每日礼包
+	GOODS_CATEGORY_WEEKLY_GIFT = 6; // 每周礼包
+}
+
+enum TRADE_ERROR {
+	TRADE_ERROR_GOODS_NOT_EXIST = 1; // 商品不存在
+	TRADE_ERROR_NOT_ENOUGH_MONEY = 2; // 余额不足
+}
+
+message ShoppingGoods { 
+    required int32                      id = 1;
+    required int64                      belong_store = 2;
+	required int32						typeid = 3;
+	required int32       		        category = 4; // 商品类别
+	required int32	                    need_item = 5; // 商品所需货币   0 为RMB
+	required int32			  			price = 6;	// 商品售价
+	required int32                      remain = 7; // 剩余可购买数量
+	required sfixed64                   timestamp = 8;  //
+	required sfixed64                   duration = 9;
+
+	optional float                      discount = 10;
+	optional bool                       first_charge = 11;
+}
+
+message GameStore {
+	required  int64        id = 1;
+    required  int32        type = 2;
+    required  int32        state = 3;
+    repeated  ShoppingGoods  goods_list = 4;
+    optional  int32         duration = 5;
+    optional  sfixed64      timestamp = 6;  //
+}
+
+// 交易列表
+message ShoppingService {
+	enum SHOPPING_COMMAND {
+		QUERY = 1;	// 查询商品
+		BUY = 2; // 购买
+		REFRESH = 3; //刷新
+		BUY_VITALITY = 4; // 购买体力
+		QUERY_STORE = 5;// 查询商店
+		BARGAIN = 6;// 议价
+	}
+	
+	message ShoppingRequest {
+		required SHOPPING_COMMAND cmd = 1;
+		optional int32 buy_id = 2; // 商品编号
+		optional int64 store_id = 3; //商店id
+	}
+	
+	message ShoppingResponse {
+		required int32 result = 1;	// 0 = success, -1 = failed
+        repeated GameStore   store_list = 2;
+		optional Reward      goods_accept = 11;
+		optional ShoppingGoods  goods = 12;
+	}
+	
+	optional ShoppingRequest req = 1;
+	optional ShoppingResponse resp = 2;
+}

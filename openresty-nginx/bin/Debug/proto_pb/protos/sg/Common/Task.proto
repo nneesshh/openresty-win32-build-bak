@@ -1,0 +1,103 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum TASK_STATE {
+    TASK_STATE_LOCK  = 0;  // 
+    TASK_STATE_CAN_TAKE = 1; //可接 
+	TASK_STATE_DOING = 2;  //进行中
+	TASK_STATE_FINISH = 3;  //已完成
+}
+
+enum SYSTEM_TASK_STATE {
+    SYSTEM_TASK_STATE_VALID = 1; //有效的
+    SYSTEM_TASK_STATE_FINISH = 2; //完成的
+    SYSTEM_TASK_STATE_INVALID = 3; //无效的
+    SYSTEM_TASK_STATE_WAITING = 4; //等待激活的
+}
+
+message  Task_Content {
+    required  int32                 index = 1;
+	required  int32                 type = 2;      //要求类型
+	repeated  pb_pair_string_int    des = 3;   //要求 描述
+	required  int32                 finish_value = 4;    //完成度
+	required  int32                 require_value = 5; //需求度
+}
+
+message  Task {
+	required int32                 id = 1;      //id
+	required TASK_STATE            state = 2;   //状态
+    required int32                 step = 3;  //所处步骤
+    repeated Task_Content          content = 4;   //任务内容
+}
+
+message  SystemTask {
+    required int32                 id = 1;      //id
+    required int32                 type = 2;    //
+    required SYSTEM_TASK_STATE            state = 3;   //状态
+    required int64                 finish_value = 4;  
+    required sfixed64              deadline = 5;  
+    required int64                 require_value = 6;
+    optional sfixed64              timestamp = 7;
+}
+
+
+message   UserTaskService {
+	enum  CMD {
+	    QUERY = 1;
+	    TAKE_THE_TASK = 2;
+	    DO_THE_TASK = 3;
+	    COMPLETE_TASK = 4;
+	}
+    
+    message  UserTaskRequest{
+        required  CMD      cmd = 1;
+        optional  int32    task_id = 2;
+        optional  int32    content_index = 3;   //行为,与内容类型对应
+        optional  int32    times = 5;    //次数
+    }
+     
+    message  UserTaskResponse{
+        required  int32    result = 1;
+        repeated  Task     tasks = 2;
+        optional  Reward   reward = 3;
+    }
+    
+    optional  UserTaskRequest  req = 1;
+    optional  UserTaskResponse  resp = 2;
+}
+
+
+message   UserSystemTaskService {
+    enum  CMD {
+        QUERY = 1;
+        GET_REWARD = 2;
+        RESET_TASK = 3;
+    }
+    
+    message  UserSystemTaskRequest {
+        required  CMD      cmd = 1;
+        optional  int32    task_id = 2;
+        optional  int32    query_type = 3;
+    }
+     
+    message  UserSystemTaskResponse {
+        required  int32    result = 1;
+        repeated  SystemTask     tasks = 2;
+        optional  Reward   reward = 3;
+    }
+    
+    optional  UserSystemTaskRequest  req = 1;
+    optional  UserSystemTaskResponse  resp = 2;
+}
+
+message  TaskNotify {
+    required  Task  task = 1;
+}
+
+message  SystemTaskNotify {
+    required  SystemTask  task = 1;
+}

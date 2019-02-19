@@ -1,0 +1,41 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+message LogOnline {
+	enum ACTION_TYPE {
+		ONLINE = 1;
+		OFFLINE = 2;
+		HEARTBEAT = 3;
+	}
+	
+	required uint64				subid = 1;
+	required sfixed64			action_time = 2;
+	required ACTION_TYPE	action_type = 3;
+	required int32				entry_id = 4;
+	required bytes				userid = 5;
+	required bytes				nick = 6;
+	required bytes				ip = 7;
+
+	optional uint64				serverid = 11;
+	
+	optional int32				concurrent_users = 21;
+
+}
+
+//
+message proc_gate_log_online {
+	message Parameter {
+		required LogOnline		p_log = 1;
+	}
+	
+	message ReturnRecord {
+
+	}
+
+	//
+	optional Parameter						param	= 1;							//
+	repeated ReturnRecord					return_record_list = 2;
+}

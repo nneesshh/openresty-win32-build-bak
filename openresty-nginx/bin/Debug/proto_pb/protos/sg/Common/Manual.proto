@@ -1,0 +1,35 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package sg;
+
+
+message  Manual {
+    required int32                 typeid = 2;
+    required sfixed64              optime = 3;
+}
+
+message  UserManualService {
+    enum  MANUAL_CMD{
+        QUERY  =  1;
+        ADD = 2;
+    }
+     
+    message  UserManualRequest{
+        required  MANUAL_CMD     cmd = 1;
+        optional  int32          add_type = 2; // 1 = 装备  2 = 家具   3 = 顾客
+        optional  int32          add_typeid = 3;
+    }
+
+    message  UserManualResponse{
+        required  int32  result = 1;
+        repeated  Manual    manual_customer = 2;
+        repeated  Manual    manual_facility = 3;
+        repeated  Manual    manual_equip = 4;
+    }
+
+    optional UserManualRequest req = 1;
+    optional UserManualResponse resp = 2;
+}
+
+

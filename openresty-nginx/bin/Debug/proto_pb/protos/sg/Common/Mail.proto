@@ -1,0 +1,103 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+// 道具
+message ItemAny {
+	enum ITEM_TYPE {
+		ITEM_NONE = 0; // (空)
+		ITEM_RESOURCE = 1; // 资源
+	}	
+
+	required uint32	item_type = 1;
+	required uint64	item_typeid = 2;
+	optional int32	val = 3;
+	optional float	probability = 4;
+}
+
+message ItemAnyList {
+	repeated ItemAny list = 1;
+}
+
+// 掉落物品
+message ItemDrop {
+	required uint64					drop_typeid = 1; // 掉落道具typeid
+	optional int32					drop_num = 2; // 掉落道具数量
+}
+
+message ItemDropList {
+	repeated ItemDrop list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+//
+message MailData {
+	enum MAIL_TYPE {
+		MAIL_TYPE_UNKNOWN = 0;
+		MAIL_TYPE_COMPENSATE = 1; //
+		MAIL_TYPE_FIRST_CHARGE = 2;
+		MAIL_TYPE_MONTH_CARD = 3;
+		MAIL_TYPE_RANKING_REWARD = 4;
+		MAIL_TYPE_GUILD = 5;
+		MAIL_TYPE_LV_SHOPPING = 6;
+	}
+
+	enum MAIL_STATE {
+		BURN = -1; // 销毁
+		INVALID = 0; // 无效
+		UNREAD = 1;	// 未读
+		READ = 2; // 已读
+		ACCEPT = 3; // 领取附件
+	}
+	
+	required int64 mailid = 1;
+	required MAIL_TYPE type = 2;
+	required MAIL_STATE state = 3;	
+		
+	required bytes subject = 11;
+	required bytes content = 12;
+	
+	required ItemAnyList attachment_list = 21;
+	
+	required sfixed64 createtime = 31; // 创建时间
+	required sfixed64 burntime = 32; // 截止时间
+}
+
+message MailDataList {
+	repeated MailData list = 1;
+}
+
+// Mail 列表
+message MailboxService {
+	enum MAILBOX_COMMAND {
+		QUERY = 1;	// 查询
+		READ = 2;	// 读取
+		ACCEPT = 3;	// 领取
+		BURN = 4;	// 销毁
+		ACCEPT_ALL = 5;	// 领取全部邮件
+		BURN_ALL = 6;	// 销毁全部已领取邮件
+	}
+	
+	message MailboxRequest {
+		required MAILBOX_COMMAND cmd = 1;
+		optional uint64 mailid = 2;
+	}
+	
+	message MailboxResponse {
+		optional int32 result = 1;
+		optional MailDataList mail_list = 2;
+		
+		repeated Reward out_drop_list = 11;
+	}
+	
+	optional MailboxRequest req = 1;
+	optional MailboxResponse resp = 2;
+}
+
+// 新邮件通知
+message NewMailNotify {
+	optional MailDataList mail_list = 1;
+}

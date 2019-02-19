@@ -1,0 +1,68 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////	
+// config farm skill
+////////////////////////////////////////////////////////////////
+message ConfigFarmSkill {
+	required uint64      	skillid = 1; // 技能 id
+	required bytes       	name = 2; // 技能名称
+	required int32				type = 3; // 技能类型
+	required int32       	is_talent = 8; // 是否属于天赋技能
+	
+	required float				effect_drop_num_ratio1 = 11; // 掉落数量比率1
+	required float				effect_drop_num_ratio2 = 12; // 掉落数量比率2
+	required float				effect_drop_num_ratio3 = 13; // 掉落数量比率3
+	required float         tired_ratio = 14;
+}
+
+message ConfigFarmSkillList {
+	repeated ConfigFarmSkill list = 1;
+}
+
+message proc_load_config_farm_skill {
+	message Parameter {
+		
+	}
+
+	message ReturnRecord {
+		required ConfigFarmSkill	cfg = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+////////////////////////////////////////////////////////////////	
+// config farm skill trigger
+////////////////////////////////////////////////////////////////
+message ConfigFarmSkillTrigger {
+	required int32       	id = 1; // 技能 id
+	required bytes       	desc = 2; // 技能名称
+	required uint64      	skillid = 3; // 技能 id
+	required int32				trigger_type = 4; // 触发类型
+	required bytes       	trigger_target_group = 5; // 触发目标组字符串 -- "target id | ..."
+	required bytes       	effect_drop = 6; // 掉落效果字符串 -- "level : ratio : item id... | ..." (根据技能类型格式有变化)
+	required bytes       	effect_add_ratio = 7; // 提升效率效果字符串 -- "level : type : add ratio :  | ..." (根据技能类型格式有变化)
+}
+
+message ConfigFarmSkillTriggerList {
+	repeated ConfigFarmSkillTrigger list = 1;
+}
+
+message proc_load_config_farm_skill_trigger {
+	message Parameter {
+		
+	}
+
+	message ReturnRecord {
+		required ConfigFarmSkillTrigger	cfg = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}

@@ -1,0 +1,75 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+message ConfigTreasureMapTile {
+	required int32				level = 1; // 等级
+	required bytes				map_size = 2; // 地图高宽比字符串 -- "height : width"
+	required bytes				map_data = 3; // 地图单元格数据字符串
+}
+
+message ConfigTreasureMapTileList {
+	repeated ConfigTreasureMapTile	list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigTreasureMapActivity {
+	required int32				level = 1; // 等级
+	required int32				num1 = 2; // cfg num1
+	required int32				num2 = 3; // cfg num2
+}
+
+message ConfigTreasureMapActivityList {
+	repeated ConfigTreasureMapActivity	list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigTreasureMap {
+	required int32			toolid = 1; // 
+	required int32			tool_type = 2; // 工具类型, 1 = compass, 2 = map
+	required bytes			name = 3; // 名称
+	required bytes			desc = 4; // 描述
+	required uint64			itemid = 5; // 道具id
+  
+	required bytes			location = 11; // 地点字符串 -- " location type : areaid"
+	required bytes			level_range = 12; // 角色等级范围字符串 -- "min : max "
+	required bytes			trigger = 13; // 触发器字符串 -- " type : ratio | ... "
+	required bytes			monster_group = 14; // 怪物组字符串 -- "groupid : ratio | ..."
+	required bytes			monster_drop = 15; // 怪物组掉落字符串 -- " item : award type : num : ratio | ..."
+	required bytes			treasure_drop = 16; // 宝藏掉落字符串 -- " item : award type : num : ratio | ... "
+	required bytes			trap_lost = 17; // 陷阱损失字符串 -- "type : ratio : lost | "
+  
+}
+
+message ConfigTreasureMapList {
+	repeated ConfigTreasureMap list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message UserStatsTreasureMap {
+	required bytes				userid = 1;
+	required sfixed64			refreshtime = 2;
+	required uint32				flag = 3;
+	required uint32				num1 = 4;
+	required uint32				num2 = 5;
+}
+
+////////////////////////////////////////////////////////////////
+message UserTreasureMap {
+	required bytes				userid = 1;
+	required int32				sn = 2; // 唯一id
+	required int32				toolid = 3; // 宝图配置id
+	required int32				state = 4; // 宝图状态, 0 = idle, 1 = busy
+	required int32				areaid = 5; // 区域 id
+	required int32    			coord_x = 6; // 坐标 x
+	required int32    			coord_y = 7; // 坐标 y
+	
+	required int32				monster_group = 11; // 怪物组
+	
+	required int32				trap_type = 21; // 陷阱类型, 0 = 无, 1 = 木材， 2 = 金币
+	required int32				trap_lost_num = 22; // 损失数量
+	
+	optional sfixed64			optime = 31; // 操作时间
+}

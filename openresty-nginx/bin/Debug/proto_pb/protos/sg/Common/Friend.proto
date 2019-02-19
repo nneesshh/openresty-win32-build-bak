@@ -1,0 +1,227 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum RANK_TITLE {
+	RANK_TITLE_MARSHAL = 1; // 元帅
+	RANK_TITLE_GENERAL = 2; // 上将
+	RANK_TITLE_LIEUTENANT_GENERAL = 3; // 中将
+	RANK_TITLE_MAJOR_GENERAL = 4; // 少将
+	RANK_TITLE_BRIGADIER_GENERAL = 5; // 准将
+	RANK_TITLE_SENIOR_COLONEL = 6; // 大校
+	RANK_TITLE_COLONEL = 7; // 上校
+	RANK_TITLE_LIEUTENANT_COLONEL = 8; // 中校
+	RANK_TITLE_MAJOR = 9; // 少校
+	RANK_TITLE_NEWBIE = 10; // 萌新
+
+}
+
+enum FRIEND_GIFT_STATE {
+	FRIEND_GIFT_STATE_NONE = 0; // 无礼物
+	FRIEND_GIFT_STATE_GIVEN = 1; // 有礼物，但未领取
+	FRIEND_GIFT_STATE_TAKEN = 2; // 礼物已经领取
+}
+
+message PersonTeamMember {
+	required int32 posid = 1;
+	required uint64 member_typeid = 2; // 卡牌typeid
+	required int32 member_level = 3; // 卡牌等级
+	required int32 member_star = 4; // 卡牌星级
+}
+
+message PersonTeamMemberList {
+	repeated PersonTeamMember list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+// 访客人物数据
+message PersonData {
+	required uint64						uuid = 1;
+	required bytes						role_nick = 2;
+	required int32						role_level = 3;
+	required int32						role_exp = 4;
+	required int32						role_rank = 5;
+
+	optional int32						portrait = 11; // 头像编号
+	optional int32						portrait_frame = 12; // 头像编号
+	optional bytes						signature = 13; // 心情描述文字
+	optional int32						guildid = 14; // 公会id
+	optional bytes						guild_name = 15; // 公会名称
+	optional bytes						guild_badge = 16; // 公会徽章
+	optional int32						guild_title = 17; // 公会头衔
+	required int32						force = 18; // 角色战力
+	required bool						is_online = 19; // 是否在线	
+
+	optional sfixed64					logintime = 21;
+
+	// for friend only
+	optional bool						can_challenge = 31;
+	optional int32						challenge_score = 32;
+
+	optional FRIEND_GIFT_STATE			gift_state = 41;
+	optional uint64						gift_item_typeid = 42; // 道具typeid
+	optional int32						gift_item_num = 43; // 道具数量
+	optional bool 						can_give_gift = 44; // 是否可以向其赠送礼物
+
+	optional PersonTeamMemberList		team = 51;
+}
+
+message PersonDataList {
+	repeated PersonData list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+//
+enum FRIEND_STATE {
+	FRIEND_STATE_TO_DELETE = -1; // 删除，服务器专用
+	FRIEND_STATE_STRANGER = 0; // 陌生人
+	FRIEND_STATE_CANDIDATE = 1; // 候选好友，被推荐给我，我可以向其发起添加好友申请的人
+	FRIEND_STATE_ADDING = 2; // 正在向我申请添加好友的人
+	FRIEND_STATE_CONFIRMING = 3; // 我已经向其发起了好友申请，等待对方确认
+	FRIEND_STATE_OK = 4; // 好友
+	FRIEND_STATE_BAN = 5; // 屏蔽中
+}
+
+enum QUERY_PERSON_STATE {
+	QUERY_PERSON_STATE_IDLE = 0;
+	QUERY_PERSON_STATE_BUSY = 1;
+	QUERY_PERSON_STATE_OK = 2;
+	QUERY_PERSON_STATE_NOT_FOUND = 3;
+}
+
+message QueryPersonResult {
+	required QUERY_PERSON_STATE state = 1;
+	optional uint64 param_uuid = 2;
+	optional PersonData person = 3;
+}
+
+// 好友列表
+message FriendService {
+	enum FRIEND_COMMAND {
+		QUERY_FRIENDS = 1; // 查询好友
+		ADD_FRIEND = 2; // 添加好友，发起好友申请
+		DELETE_FRIEND = 3; // 删除好友
+		VISIT_FRIEND = 4; // 拜访好友
+		REFRESH_CANDIDATES = 5; // 刷新
+		QUERY_PERSON_BY_UUID = 6; // 通用人物信息查询
+		REJECT_ALL_ADDING = 7; // 拒绝全部好友申请（来自他人）
+		ACCEPT_ALL_ADDING = 8; // 同意全部好友申请（来自他人）
+		CANCEL_ALL_CONFIRMING = 9; // 撤回全部申请（自己发出）
+		
+		BAN_FRIEND = 11; // 加入屏蔽列表
+		UNBAN_FRIEND = 12; // 取消屏蔽，优先恢复到好友列表，好友满则直接删除
+
+		GIVE_GIFT = 21; // 赠送礼物
+		ACCEPT_GIFT = 22; // 领取礼物
+	}
+		
+	message FriendRequest {
+		required FRIEND_COMMAND			cmd = 1;
+		optional uint64					person_uuid = 2; // 赠送和收取礼物时，0 = 全部
+	}
+	
+	message FriendResponse {
+		required int32					result = 1;	// 0 = success, -1 = failed
+		optional PersonDataList			friend_list = 2; // 好友列表
+		optional PersonDataList			candidate_list = 3; // 推荐列表
+		optional PersonDataList			adding_list = 4; // 申请列表（别人加我，等待我确认）
+		optional PersonDataList			confirming_list = 5; // 待确认列表（我加别人，等待别人确认）
+		
+		optional int32					challenge_num = 6; // 挑战次数
+		optional int32					challenge_num_max = 7; // 最大可挑战次数
+		
+		optional PersonDataList			ban_list = 8; // 屏蔽列表
+		
+		optional QueryPersonResult		qurey_person_result = 11; // 查询结果
+
+		optional Reward					gift_accepted = 21; // 收取到的礼物
+		optional int32					gift_accept_num = 22; // 收取好友礼物次数
+		optional int32					gift_accept_num_max = 23; // 收取好友礼物次数最大值
+	}
+	
+	optional FriendRequest		req = 1;
+	optional FriendResponse		resp = 2;
+}
+
+////////////////////////////////////////////////////////////////
+//
+enum GAME_INVITE_STATE {
+	GAME_INVITE_STATE_NONE = 0; // 未接受邀请
+	GAME_INVITE_STATE_ACCEPT = 1; // 已经接受邀请
+	GAME_INVITE_STATE_OK = 2; // 满足邀请条件限制，邀请成功
+}
+
+//
+enum GAME_INVITE_REWARD_STATE {
+	GAME_INVITE_REWARD_STATE_NOT_READY = 1; // 不可领取
+	GAME_INVITE_REWARD_STATE_READY = 2; // 可领取
+	GAME_INVITE_REWARD_STATE_ACCEPT = 3; // 已领取
+	GAME_INVITE_REWARD_STATE_OUT_OF_DATE = 4; // 已过期
+}
+
+//
+message GameInviteReward {
+	required int32						id = 1; // 招募人数进度
+	required GAME_INVITE_REWARD_STATE	reward_state = 2;
+	required int32						reward_reason = 3; // 人数
+	
+	required int32						item_type = 11; // 道具类型 1=资源, 2=装备, 3=船只, 4=皮肤，时装
+	required uint64						item_typeid = 12;
+	required int32 						item_num = 13;
+}
+
+message GameInviteRewardList {
+	repeated GameInviteReward list = 1;
+}
+
+//
+message InputInviteCodeResult {
+	required QUERY_PERSON_STATE			state = 1;
+	optional uint64						param_uuid = 2;
+}
+
+// 领取奖励
+message GameInviteAcceptReward {
+	optional int32						reward_id = 1;
+	repeated Item 						out_accept_list = 2;
+}
+
+// 游戏招募列表
+message GameInviteService {
+	enum GAME_INVITE_COMMAND {
+		QUERY = 1; // 查询邀请数据
+		INPUT_INVITE_CODE = 2; // 输入邀请码
+		ACCEPT_REWARD = 3; // 按邀请人数进度收取奖励
+	}
+		
+	message GameInviteRequest {
+		required GAME_INVITE_COMMAND	cmd = 1;
+		optional int64					invite_code = 2; // 邀请码 (邀请人的uuid)
+		optional int64					reward_id = 3; // 收取奖励物品id（招募人数进度）
+	}
+	
+	message GameInviteResponse {
+		required int32					result = 1;	// 0 = success, -1 = failed
+		optional uint64					who_invite_me = 2; // (我的邀请人的uuid)，0 表示尚无邀请人
+		optional int32					invite_accept_num = 3; // 接受我邀请的人数
+		optional int32					invite_ok_num = 4; // 接受我邀请, 并达到邀请条件限制的人数
+		
+		optional InputInviteCodeResult	input_invite_code_result = 11;
+
+		optional GameInviteReward		invitee_reward = 21; // 被招募奖励, reward_id = 1
+		optional GameInviteRewardList	inviter_reward_list = 22; // 招募人数进度奖励列表，reward_id > 1
+		
+		optional GameInviteAcceptReward	accept_reward = 31; //
+	}
+	
+	optional GameInviteRequest		req = 1;
+	optional GameInviteResponse		resp = 2;
+}
+
+//
+message FriendGiftNotify {
+	required uint64		friend_uuid = 1;
+}

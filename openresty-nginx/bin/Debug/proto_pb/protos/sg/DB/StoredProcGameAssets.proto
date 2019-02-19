@@ -1,0 +1,156 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+import "UserDef.proto";
+
+
+////////////////////////////////////////////////////////////////
+message proc_load_all_users {
+	message Parameter {
+	}
+	
+	message ReturnRecord {
+		required UserAttribute		attr = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+
+////////////////////////////////////////////////////////////////
+
+message  GameState {
+    required   int32    id = 1;
+	required   int32    daily_gift_id = 2;
+	required   int32    weekly_gift_id = 3;
+	optional   sfixed64   daily_gift_refresh_time = 4;
+	optional   sfixed64   weekly_gift_refresh_time =5;
+	optional   sfixed64   daily_pvp_reward_send_time =6;
+	optional   sfixed64   weekly_pvp_reward_send_time =7;
+	optional   sfixed64   monthly_pvp_reward_send_time =8;
+}
+
+////////////////////////////////////////////////////////////////
+
+message  IslandBattleData {
+	required   uint64    id = 1;
+	required   int32    type = 2;
+	required   bytes    defender = 3;
+	required   bytes   defend_team = 4;
+	required   bytes   pve_map = 5;
+}
+
+////////////////////////////////////////////////////////////////
+
+message  GameRanking {
+	required   int32   ranking = 1;
+	required   int32   ticketid = 2;
+}
+
+////////////////////////////////////////////////////////////////
+
+message  UserCommonData {
+	required   bytes    userid = 1;
+	required   uint64   event_record_count = 2;
+}
+
+
+message proc_i_load_user_common_data {
+	message Parameter {
+	}
+	
+	message ReturnRecord {
+		required UserCommonData		data = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+message proc_i_save_user_common_data {
+	message Parameter {
+		required UserCommonData					  p_data = 1;
+	}  
+	
+	//
+	optional Parameter					param	= 1;	
+}
+
+////////////////////////////////////////////////////////////////
+
+message  UserRankingData {
+	required   int32    ticketid = 1;
+	required   int32    ranking_score = 2;
+	required   int32    win = 3;
+	required   int32    lose = 4;
+	required   sfixed64    timestamp = 5;
+	required   bytes    team = 6;
+}
+
+
+message proc_i_load_user_ranking_data {
+	message Parameter {
+	}
+	
+	message ReturnRecord {
+		required UserRankingData		data = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+message proc_i_save_user_ranking_data {
+	message Parameter {
+		required UserRankingData					  p_data = 1;
+	}  
+	
+	//
+	optional Parameter					param	= 1;							//
+}
+
+////////////////////////////////////////////////////////////////
+
+message  ConfigGameServer {
+    required  int32      first_gold_lottery_id_once = 1;
+    required  int32      first_diamond_lottery_id_ten = 2;
+    required  int32      max_daily_system_task_num = 3;
+    required  int32      max_occupy_monster_ship_times = 4;
+    required  int32      max_occupy_player_ship_times = 5;
+    required  int32      max_occupy_special_ship_times = 6;
+    required  int32      max_ghost_ship_reset_times = 7;
+    required  bytes      ghost_ship_reset_cost = 8;
+    required  int32      max_fast_reach_ticket_num = 9;
+    required  int32      fast_reach_ticket_cd = 10;
+    required  bytes      jjc_daily_mail_title = 11;
+    required  bytes      jjc_daily_mail_content = 12;
+    required  bytes      jjc_weekly_mail_title = 13;
+    required  bytes      jjc_weekly_mail_content = 14;
+    required  bytes      jjc_monthly_mail_title = 15;
+    required  bytes      jjc_monthly_mail_content = 16;
+    required  int32      repeat_task_refresh_times = 17;
+}
+
+////////////////////////////////////////////////////////////////
+
+message  GameRobot {
+	required   int32   id = 1;
+	required   int32   ticketid = 2;
+	required   int32   init_level = 3;
+}
+
+////////////////////////////////////////////////////////////////
+message GameAnnouncement {
+	required  int32  id = 1;
+	required  int32  type = 2;
+	required  sfixed64  timestamp = 3;
+	required  int32  circle_seconds = 4;
+	required  bool   read = 5;
+	required  bytes  data = 6;
+}

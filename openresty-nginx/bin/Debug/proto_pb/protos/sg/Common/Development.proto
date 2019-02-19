@@ -1,0 +1,32 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+
+message  UserDevelopmentService {
+	enum  CMD {
+	    QUERY = 1;
+	    DEVELOP = 2;
+	}
+    
+    message  UserDevelopmentRequest{
+        required  CMD      cmd = 1;
+        optional  int32    develop_type = 2;
+        repeated  Item     materials = 3; 
+    }
+     
+    message  UserDevelopmentResponse{
+        required  int32    result = 1;
+
+        repeated  int32    formula_list = 2;
+        optional  int32    unlock_formula = 3;
+    }
+    
+    optional  UserDevelopmentRequest  req = 1;
+    optional  UserDevelopmentResponse  resp = 2;
+}
+

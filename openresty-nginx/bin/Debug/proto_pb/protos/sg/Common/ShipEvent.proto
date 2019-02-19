@@ -1,0 +1,52 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message  ShipEvent {
+	required int32                 id = 1;
+	required int64                 typeid = 2;
+	required int32                 state = 3;
+	required int32                 seat = 4;
+    required sfixed64              timestamp = 5;
+    required int64                 duration = 6;
+    optional int32                 region = 7;
+}
+
+message  ShipEventService {
+    enum  CMD{
+        QUERY  =  1;
+        DEAL = 2;
+    }
+     
+    message  ShipEventRequest {
+        required  CMD  cmd = 1;
+
+        optional  int32   target = 2;
+        optional  int32   choice = 3;
+    }
+
+    message  ShipEventResponse{
+        required  int32  result = 1;
+        repeated  ShipEvent   events = 2;
+
+        optional  Reward    reward = 3;
+        optional  Reward    lose = 4;
+    }
+
+    optional ShipEventRequest req = 1;
+    optional ShipEventResponse resp = 2;
+}
+
+
+message ShipEventNotify {
+	required  ShipEvent      event = 1;
+}
+
+message ShipEventDisappearNotify {
+    required  ShipEvent      event = 1;
+	repeated  Item           lose = 2;
+}

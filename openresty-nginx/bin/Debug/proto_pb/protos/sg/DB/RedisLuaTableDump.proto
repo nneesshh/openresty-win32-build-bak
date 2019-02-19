@@ -1,0 +1,17 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+//
+message RedisListLuaTableDump {
+	required bytes					module = 1; // 模块名
+	required bytes					id = 2; // redis list id
+	required bytes					l_val = 3; // list lua表msgpack值, 最大10M
+	required bytes					c_key = 4; // cas key
+	required bytes					c_val = 5; // cas lua表msgpack值, 最大10M
+	required bytes					mainid = 6; // 主id标识
+	
+	optional sfixed64				optime = 11; // 操作时间
+}

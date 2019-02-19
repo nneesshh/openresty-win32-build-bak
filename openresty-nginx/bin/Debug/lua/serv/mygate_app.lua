@@ -38,7 +38,7 @@ function _M.init()
     _M.ssmgr = smfactory.create("mygate_server")
 
     -- debug only with "enable_code_cache" is 0
-    require("init_worker_stream_lazy")
+    -- require("init_worker_stream_lazy")
     return _M
 end
 

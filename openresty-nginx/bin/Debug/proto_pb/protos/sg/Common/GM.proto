@@ -1,0 +1,34 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package gm;
+
+////////////////////////////////////////////////////////////////
+// GM 添加资源
+message GMAddItem {
+	required uint64		item_typeid = 1;
+	required int32 		item_num = 2;
+}
+
+// GM 命令列表
+message GMService {
+	enum GM_COMMAND {
+		ADD_ITEM = 1;	// 添加资源
+		
+		COMMAND_TXT = 101; // gm 命令文本
+	}
+	
+	message GMRequest {
+		required GM_COMMAND				cmd = 1;
+		repeated GMAddItem 				add_item_list = 11;
+		
+		optional bytes						command_txt = 51;
+	}
+	
+	message GMResponse {
+		required int32						result = 1;	// 0 = success, -1 = failed
+	}
+	
+	optional GMRequest req = 1;
+	optional GMResponse resp = 2;
+}

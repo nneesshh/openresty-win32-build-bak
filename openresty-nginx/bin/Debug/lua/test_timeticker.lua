@@ -11,8 +11,8 @@ local timermanager = require("utils.timer.timermanager")
 local ticker = timermanager.createTimeTicker("test")
 
 local player = {x = 100, y = 100}
-ticker:tween(100, player, {x = 200, y = 200}, 'in-out-cubic', function() print('Player tween finished!') end)
---ticker:tween(100, player, {x = 200, y = 200}, 'linear', function() print('Player tween finished!') end)
+ticker:tween(100, player, {x = 200, y = 200}, 'linear', function() print('Player tween linear finished!') end)
+--ticker:tween(100, player, {x = 200, y = 200}, 'in-out-cubic', function() print('Player tween in-out-cubic finished!') end)
 
 for i = 1, 100 do
     local x, y = player.x, player.y

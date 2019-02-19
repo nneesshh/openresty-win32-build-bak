@@ -1,0 +1,273 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+////////////////////////////////////////////////////////////////
+// user map
+
+// 地图区域解锁条件
+enum MAP_AREA_UNLOCK_COND {
+	MAP_AREA_UNLOCK_COND_NONE = 0; // 无
+	MAP_AREA_UNLOCK_COND_SHIP = 1; // 船
+	MAP_AREA_UNLOCK_COND_QUEST = 2; // 任务
+	MAP_AREA_UNLOCK_COND_ACHIEVEMENT = 3; // 成就
+	MAP_AREA_UNLOCK_COND_LEVEL = 4; // 等级
+	MAP_AREA_UNLOCK_COND_CAPTAIN_LEVEL = 5; // 船长等级 
+	MAP_AREA_UNLOCK_COND_HERO_NUM = 6; // 拥有X个英雄
+}
+
+// 地图区域解锁类型
+enum MAP_AREA_UNLOCK_TYPE {
+	MAP_AREA_UNLOCK_TYPE_GOLD = 1; // 金币
+	MAP_AREA_UNLOCK_TYPE_DIAMOND = 2; // 钻石
+}
+
+// 地图区域解锁状态
+enum MAP_AREA_UNLOCK_STATE {
+	MAP_AREA_STATE_LOCKED = 0; // 未解锁
+	MAP_AREA_STATE_UNLOCKED = 1; // 已经解锁
+}
+
+// 地图区域
+message MapArea {
+	required uint64					areaid = 1;	
+	required MAP_AREA_UNLOCK_STATE	area_state = 2; // 区域状态, 0=未解锁， 1=已经解锁
+}
+
+message MapAreaList {
+	repeated MapArea	list = 1;
+}
+
+// 地图入口类型
+enum MAP_ENTRY_TYPE {
+    MAP_ENTRY_TYPE_NONE = 0;
+	MAP_ENTRY_TYPE_BORN = 1; // 新手村
+	MAP_ENTRY_TYPE_HARBOR = 2; // 港口
+	MAP_ENTRY_TYPE_WILD_ISLAND = 3; // 野外资源岛
+	MAP_ENTRY_TYPE_PIRATE_SHIP = 4; // 海盗船
+	MAP_ENTRY_TYPE_PLAYER_SHIP = 5; // 玩家船
+	MAP_ENTRY_TYPE_TAVERN = 6; // 招募岛(酒馆功能)
+	MAP_ENTRY_TYPE_HUNTING_GROUND = 7; // 猎场
+	MAP_ENTRY_TYPE_FISHING_GROUND = 8; // 渔场
+	MAP_ENTRY_TYPE_ARENA = 9; // 竞技场 
+	MAP_ENTRY_TYPE_GHOST_SHIP = 10; //幽灵船
+	MAP_ENTRY_TYPE_MAELSTROM = 11; // 大漩涡
+}
+
+// 地图入口状态
+enum MAP_ENTRY_STATE {
+	MAP_ENTRY_STATE_INVISIBLE = 0; // 不可见
+	MAP_ENTRY_STATE_NORMAL = 1; // 正常（可见）
+}
+
+// 地图入口所有权状态
+enum MAP_ENTRY_OWNERSHIP_STATE {
+	MAP_ENTRY_OWNERSHIP_STATE_NONE = 0; // 无所有权
+	MAP_ENTRY_OWNERSHIP_STATE_OWN = 1; // 拥有所有权
+	MAP_ENTRY_OWNERSHIP_STATE_LOST = 2; // 丧失所有权
+}
+
+// 资源收取类型
+enum MAP_ENTRY_HARVEST_TYPE {
+	MAP_ENTRY_HARVEST_TYPE_UNKNOWN = 0; // 未知收获
+	MAP_ENTRY_HARVEST_TYPE_WOOD = 1; //
+	MAP_ENTRY_HARVEST_TYPE_STONE = 2; //
+	MAP_ENTRY_HARVEST_TYPE_COPPER = 3; //
+	MAP_ENTRY_HARVEST_TYPE_IRON = 4; //
+}
+
+message PirateShip {
+	required int32 		shipid = 1; // 海盗船id，为空表示无船
+	optional int32 		type = 2; // see "config_pirate_ship"
+	optional sfixed64	refresh_time = 3; // 海盗船刷新时间
+	optional int32		fight_num = 4; // 战斗次数
+	optional int32		fight_num_max = 5; // 战斗次数上限
+}
+
+message PlayerShip {
+	required UserInfo 		player = 1; 
+}
+
+// 地图入口
+message MapEntry {
+	required uint64						entryid = 1;	
+	required MAP_ENTRY_STATE			entry_state = 2; // 入口状态, 0=不可见，1=正常（可见）
+	optional bool						passable = 3; // 是否允许通行
+
+	optional MAP_ENTRY_HARVEST_TYPE		harvest_type = 4; // 资源收获类型
+	optional int32                      type = 5;
+	
+	optional uint64						occupier_uuid = 11; // 岛屿占领者uuid，为空表示无占领者
+	optional bytes						occupier_nick = 12; // 岛屿占领者昵称
+	optional int32						occupier_level = 13; // 岛屿占领者等级
+	optional int32						occupier_exp = 14; // 岛屿占领者exp
+	optional int32						occupier_rank = 15; // 岛屿占领者称号
+
+	optional bool						occupy_protect = 21; // 是否处于占领保护期
+	optional sfixed64					occupy_protect_starttime = 22; // 保护期开始时间
+	optional int32						occupy_protect_seconds = 23; // 保护期时长
+	
+	optional int32						workshop_level = 31;
+	optional WILD_ISLAND_WORKSHOP_STATE	workshop_state = 32;
+
+	optional PirateShip					pirate_ship = 41;
+	optional PlayerShip					player_ship = 42;
+	optional sfixed64	                refresh_time = 43;
+}
+
+message MapEntryList {
+	repeated MapEntry list = 1;
+}
+
+// 野外资源岛类型
+enum WILD_ISLAND_TYPE {
+	WILD_ISLAND_TYPE_DUMMY = 0; // 
+	WILD_ISLAND_TYPE_COMMON = 1; // 私人资源岛
+	WILD_ISLAND_TYPE_PIRATE = 2; // 海盗资源岛
+	WILD_ISLAND_TYPE_GROUP = 3; // 公共资源岛
+}
+
+enum WILD_ISLAND_STATE {
+	WILD_ISLAND_STATE_UNKNOWN = 0; // 未知
+	WILD_ISLAND_STATE_OPEN = 1; // 开放中，允许进攻
+	WILD_ISLAND_STATE_PROTECTED = 2; // 保护中，不允许进攻
+	WILD_ISLAND_STATE_CLOSE = 3; // 功能关闭，不允许进攻
+}
+
+// 野外资源岛采集状态
+enum WILD_ISLAND_GATHER_STATE {
+	WILD_ISLAND_GATHER_STATE_IDLE = 0; //
+	WILD_ISLAND_GATHER_STATE_GATHER_BUSY = 1; // 采集累积进行中
+	WILD_ISLAND_GATHER_STATE_GATHER_OVER = 2; // 采集累积完成，尚未收获
+	WILD_ISLAND_GATHER_STATE_HARVEST = 3; // 收获完成
+}
+
+//
+enum WILD_ISLAND_WORKSHOP_STATE {
+	WILD_ISLAND_WORKSHOP_STATE_NONE = 0; // 无
+	WILD_ISLAND_WORKSHOP_STATE_WORKING = 1; // 工作中
+}
+
+// 资源岛占领者数据
+message OccupierData {
+	required uint64						uuid = 1; // 资源岛占领者uuid，为空表示无占领者
+	optional bytes						nick = 2; // 占领者昵称
+	optional int32						level = 3; // 占领者等级
+	optional int32						rank = 4; // 占领者称号
+	optional sfixed64					occupy_time = 5; // 占领时间
+}
+
+// 野外资源岛
+message WildIsland {
+	// 工作台，资源采集点
+	message Workshop {
+		required int32						level = 1;
+		required WILD_ISLAND_WORKSHOP_STATE	state = 2;
+		required float						gather_per_min = 3; // 每分钟采集量
+		required float						gather_add_ratio = 4; // 采集增加比率
+		required sfixed64					gather_time = 5; // 采集发生时间
+	}
+	
+	// 工作台选项
+	message WorkshopOption {
+		required float					gather_per_min = 1; // 每分钟采集量
+	}
+	
+	required uint64						entryid = 1; // 入口id
+	required int32						island_cfgid = 2; // 岛屿配置id
+	required WILD_ISLAND_STATE			island_state = 3;	
+	required OccupierData				occupier_data = 4; // 资源岛占领者数据
+
+	optional Workshop					workshop = 11;
+	optional bytes						map_data = 12; //
+}
+
+message WildIslandList {
+	repeated WildIsland list = 1;
+}
+
+// 资源采收日志
+message WildIslandHarvestLog {
+	//
+	message HarvestItem {
+		required int32	item_type = 1;
+		required int32	item_num = 2;
+	}
+
+	message HarvestItemList {
+		repeated HarvestItem	list = 1;
+	}
+	
+	message HarvestLog {
+		optional sfixed64			harvest_time = 1; // 收取时间
+		optional HarvestItemList	item_list = 2; // 收获资源
+	}
+	
+	message HarvestLogList {
+		repeated HarvestLog			list = 1;
+	}
+
+	optional HarvestLogList			harvest_log_list = 1;
+}
+
+message HarvestTime {
+	required MAP_ENTRY_HARVEST_TYPE	harvest_type = 1;
+	required sfixed64				harvest_time = 2;
+}
+
+message GarrisonRoom {
+	required int32 					roomid = 1;
+	repeated int32					garrison_list = 2;
+}
+
+// 地图列表
+message UserMapService {
+	enum MAP_COMMAND {
+		QUERY_AREA = 1; // 查询区域列表
+		QUERY_ENTRY = 2;	// 查询入口列表，不包含野外资源岛详细信息
+		QUERY_ENTRY_WILD_ISLAND = 3; // 查询指定入口的野外资源岛详细信息
+		UNLOCK_AREA = 4;	// 解锁指定区域
+		BUILD_WORKSHOP = 5; // 建设工作台
+		GARRISON_WORKSHOP = 6; // 驻守工作台
+		
+		HARVEST = 11; // 收获资源，同时得到一份资源采集日志
+		QUERY_HARVEST_TIME = 12; // 查询收获时间信息
+		QUERY_HARVEST_LOG = 13; // 查询资源采集日志
+	}
+	
+	message MapRequest {
+		required MAP_COMMAND				cmd = 1;
+		optional int32						areaid = 2; // 区域id
+		optional uint64						entryid = 3; // 入口id
+		optional GarrisonRoom				garrison_room = 4; // 驻守房间
+		optional MAP_ENTRY_HARVEST_TYPE		harvest_type = 5; // 收取资源类型			
+	}
+	
+	message MapResponse {
+		required int32						result = 1;	// 0 = success, -1 = failed
+		optional MapAreaList				area_list = 2;
+		optional MapEntryList				entry_list = 3;
+		optional WildIslandList				island_list = 4;
+		
+		optional WildIslandHarvestLog		harvest_log = 11; // 资源收取日志
+		repeated HarvestTime				harvest_time = 12;
+		optional int32						cfg_harvest_interval_seconds = 13; // 收获间隔时间配置
+	}
+	
+	optional MapRequest req = 1;
+	optional MapResponse resp = 2;
+	
+}
+
+//
+message MapEntryStateNotify {
+	optional MapEntryList				entry_list = 1;
+}
+
+//
+message WildIslandStateNotify {
+	required WildIslandList			island_list = 1;
+}

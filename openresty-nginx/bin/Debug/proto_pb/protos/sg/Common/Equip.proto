@@ -1,0 +1,40 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+
+message EquipService {
+	enum EQUIP_CMD {
+		QUERY = 1;	// 查询
+		REFINE = 2; //洗炼
+		DECOMPOSE = 3; //分解
+		LOCK = 4; // 锁 
+		RESET_REFINE = 5; //重置洗练
+		SALE = 6;
+		QUALITY_REFINE = 7;
+	}
+	
+	message EquipRequest {
+		required EQUIP_CMD      cmd = 1;
+		optional int32     equip_id = 2;
+		optional int32     slot_id = 3;
+        optional int32     refine_way = 4;   // 0 = 普通  1 = 钻石
+        optional int32     decompose_way = 5; // 0 = 普通  1 = 金币
+
+        repeated int32     decompose_list = 6;
+	}
+	
+	message EquipResponse {
+		required int32 result = 1;	// 0 = success, -1 = failed
+		
+		optional bool    big_success = 2;
+        repeated Equip   equip_list = 3;
+        optional Reward  get = 4;
+	}
+	
+	optional EquipRequest req = 1;
+	optional EquipResponse resp = 2;
+}

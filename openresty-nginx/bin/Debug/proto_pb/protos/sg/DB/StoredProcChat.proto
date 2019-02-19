@@ -1,0 +1,37 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+message UserChatBlacklist {
+    required  bytes   userid = 1;
+	required  int32   index =  2;
+	required  uint64   ticketid = 3;
+}
+
+////////////////////////////////////////////////////////////////
+message proc_load_user_chat_blacklist {
+	message Parameter {
+		required bytes						p_userid = 1;
+	}
+	
+	message ReturnRecord {
+		required UserChatBlacklist        user = 1;
+	}
+
+	//
+	optional Parameter					param	= 1;							//
+	repeated ReturnRecord				return_record_list = 2;
+}
+
+
+
+////////////////////////////////////////////////////////////////
+message proc_save_user_chat_blacklist {
+	message Parameter {
+		required UserChatBlacklist   p_user = 1;
+  }
+
+	//
+	optional Parameter					param	= 2;							//
+}

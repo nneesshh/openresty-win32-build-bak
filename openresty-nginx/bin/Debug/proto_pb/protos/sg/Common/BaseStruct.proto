@@ -1,0 +1,286 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package sg;
+
+
+enum GAME_GOODS_TYPE {
+    GAME_GOODS_TYPE_ITEM = 1;
+    GAME_GOODS_TYPE_SAILOR = 2;
+    GAME_GOODS_TYPE_SHIP_MODEL = 3; 
+    GAME_GOODS_TYPE_DEVICE = 4; 
+    GAME_GOODS_TYPE_FORMULA = 5;
+    GAME_GOODS_TYPE_MONTH_CARD = 6;
+    GAME_GOODS_TYPE_MAP = 7;
+    GAME_GOODS_TYPE_EQUIP = 8;
+    GAME_GOODS_TYPE_TREASURE_TICKET = 9;
+    GAME_GOODS_TYPE_GROW_GIFT = 10;
+    GAME_GOODS_CUSTOMER = 11;
+}
+
+
+
+enum ROOM_TYPE{
+	ROOM_NONE = 0;
+	ROOM_EMPTY = 1;
+	ROOM_STOREHOUSE = 2;
+	ROOM_KITCHEN = 3; 
+	ROOM_MAGAZINE = 4;
+	ROOM_BREED = 5;
+	ROOM_CULTIVATE = 6;
+	ROOM_RESTAURANT = 7; 
+	ROOM_FACTORY = 8;
+	ROOM_STATUE = 9;
+	ROOM_SMITHY = 10;
+	ROOM_POWER = 11;
+	ROOM_BEDROOM = 12;
+	ROOM_REST = 13;
+	ROOM_SHRINE = 14;
+	ROOM_LABORATORY = 15;
+	ROOM_VINTRY = 16;
+	ROOM_TRAIN = 17;
+	ROOM_CELL = 18;
+	ROOM_BOARD = 19;
+	ROOM_ENTER = 20;
+	ROOM_CAPTAIN = 21;
+	ROOM_TASK = 22;
+	ROOM_PLAY = 23;
+	ROOM_CRAFT = 24;
+	ROOM_STORE = 25;
+    ROOM_SEWING = 26;
+    ROOM_COLLECTION_1 = 28;
+    ROOM_COLLECTION_2 = 30;
+    ROOM_COLLECTION_3 = 33;
+	ROOM_WOOD = 101;
+	ROOM_STONE_ORE = 102;
+	ROOM_GOLD_ORE = 103;
+	ROOM_IRON_ORE = 104;
+}
+
+enum SAILOR_STATE {
+    SAILOR_STATE_NONE = 0;
+    SAILOR_STATE_IDLE = 1;  //空闲
+	SAILOR_STATE_WORKING = 101;   //工作中
+	SAILOR_STATE_DO_EVENT = 102; //事件中
+    SAILOR_STATE_COOKING = 103; //做菜中 
+	SAILOR_STATE_REST = 205;  // 休息中
+	SAILOR_STATE_SLEEP = 206; //睡觉中
+	SAILOR_STATE_SLEEP_WITHOUT_BED = 207;
+	SAILOR_STATE_SENDING = 307; //送东西中
+    SAILOR_STATE_DEFENDING = 1000; //驻扎中
+}
+
+message UserRoom {
+    required int32       id = 1;
+    required int32       room_type = 2;
+    optional int32       comfort = 3;
+    optional int32       machine_capacity = 4;
+    optional int32       machine_value = 5;
+}
+
+message  Locale {
+	required int32   place_id = 1;
+	required int32   pos_type = 2;
+	required int32   pos_x = 3;
+	required int32   pos_y = 4;
+}
+
+message  pb_pair_int_int {
+    required int32 key = 1;
+    required int32 value = 2;
+}
+
+message  pb_pair_int_time {
+    required int32 key = 1;
+    required sfixed64 value = 2;
+}
+
+message  pb_pair_int64_int {
+    required int64 key = 1;
+    required int32 value = 2;
+}
+
+message  pb_pair_string_int {
+    required bytes key = 1;
+    required int32 value = 2;
+}
+
+message  pb_pair_int_float {
+    required int32 key = 1;
+    required float value = 2;
+}
+
+message UserInfo {
+    required  uint64   uuid = 1;
+    required  int32    level = 2;
+    required  bytes    nick = 3;
+    required  int32    portrait = 4;
+    required  bytes    signature = 5;
+    optional  int32    portrait_frame = 6;
+}
+
+message UserState {
+    optional bytes       guide_val = 2;
+    optional int32       occupy_monster_ship_times = 3;
+    optional int32       occupy_player_ship_times = 4;
+    optional int32       occupy_special_ship_times = 5;
+    optional int32       max_occupy_monster_ship_times = 6;
+    optional int32       max_occupy_player_ship_times = 7;
+    optional int32       max_occupy_special_ship_times = 8;
+    optional int32       daily_buy_vitality_times = 9;
+}
+
+message Equip {
+    required int32       id = 1;
+    required int32       typeid = 2;
+    required int32       quality = 3;
+    required int32       state = 4;
+    required int32       belong_to = 5;
+    repeated pb_pair_int_float attribute = 6;
+    
+    message  SpecialAttribute {
+        required int32       id = 1;
+        required int32       target = 2;
+        required float       value = 3;        
+    }
+
+    message  EquipAttributeSlot {
+        required int32      id = 1;
+        required int32      type = 2;
+        required int32      typeid = 3;
+        required float      value = 4;
+        required int32      refine_times = 5;
+        optional bool       big_success = 6;
+    }
+
+    repeated SpecialAttribute   special_attr = 7;
+    repeated EquipAttributeSlot  attr_slots = 8;
+    optional  int32   quality_refine_times = 9;
+    optional  int64   skill = 10;
+}
+
+enum  SAILOR_SKILL_TYPE {
+    SAILOR_SKILL_TYPE_FALL = 1;  //落地i
+    SAILOR_SKILL_TYPE_BUFF = 2;  //增益
+    SAILOR_SKILL_TYPE_SELF = 3;  //英雄 
+}
+
+message SailorSkill {
+	required int32      slotid = 1;
+    required int32      type = 2;
+    required int32      state = 3;
+    required uint64     skillid = 4;
+	required int32      level = 5;
+}
+
+message SailorFarmSkill {
+    required uint64     id = 1;
+    required int32      level = 2;
+    required int32      exp = 3;
+}
+
+message SailorTalent {
+	required uint64    id = 1;
+	required int32     level = 2;
+}
+
+message Sailor {
+	required int32       id = 1;
+	required int32       typeid = 2;
+    required SAILOR_STATE       state = 3;
+	required uint64       place = 4;
+	required int32       facility_id  = 5;
+	required int32       level = 6;
+    required int32       star = 7;
+    required int32       phase = 8;
+    required int32       hp_lost = 9;
+    required float       vim = 10;
+    required int32       exp = 11;
+    optional int32       orderid = 13;
+    optional sfixed64    last_rest_time = 14; 
+    optional int32       job = 15;
+    repeated pb_pair_int_float attribute = 16;
+    repeated pb_pair_int_float aptitude = 17;
+    repeated Equip       equip = 18;
+    repeated SailorSkill       skills = 19;
+    repeated SailorFarmSkill       farm_skills = 20;
+    optional SailorTalent      talent = 21;
+    optional int32       practice = 22;
+    optional int32       region = 23;
+    optional float       hunger = 24;
+}
+
+message NPC {
+	required int32       id = 1;
+    required int32       state = 2;
+   	required Locale      locale = 3;
+}
+
+message Item {
+	required int32      typeid = 1;
+	required int64      num = 2;
+}
+
+message Facility {
+    
+    message SpecialData {
+        required int32  property_type = 1;
+        required int32  count_times = 2;
+        repeated Item   contain = 3;
+        optional sfixed64  timestamp = 4; 
+    }
+    
+    message OrderSlot {
+        required int32    orderid = 1;
+        required int32    state = 2;  // 0 为 lock  1为unlock
+        required int32    index = 3;
+    }
+
+    required int32       id = 1;
+    required int32       typeid = 2;
+    required int32       style = 3;
+    repeated OrderSlot       order_list = 4;
+    optional int32       roomid = 5;
+    repeated int32       worker_list = 6;
+    optional int32       pos_x = 7;
+    optional int32       pos_y = 8;
+    optional int32       level = 9;
+    optional int32       region = 10;
+    repeated SpecialData  special_data = 11;
+    optional int32       remain_food = 12;
+    optional sfixed64    level_up_starttime = 13;
+}
+
+message Reward {
+    repeated Item items = 1;  // 获得道具
+    repeated Sailor sailors = 2;  //获得人物
+    repeated Facility  facilitys = 3; //获得设备
+    repeated int32     models = 4; //获得模板 
+    repeated int32     formulas = 5; //获得配方
+    repeated int32     maps = 6; //获得地图
+    repeated int32     month_cards = 7; //获得月卡
+    repeated Equip     equips = 8; //获得装备
+    optional int32   exp = 9;
+    repeated pb_pair_int_int   sailor_add_exp = 10;
+    repeated int32     treasure_ticket = 11; //获得藏宝图
+    repeated int32     grow_gift = 12;
+}
+
+message RegionState {
+    optional int32  comfort_grade = 1;
+    optional int32  item_capacity = 2;
+    optional int32  equip_capacity = 3;
+    optional int32  facility_capacity = 4;
+    optional int32  food_capacity = 5;
+    optional int32  resource_capacity = 6;
+    optional float  resource_product_add = 7;
+    optional int32  food_resource_capacity = 8;
+    optional int32  wood_resource_capacity = 9;
+    optional int32  iron_resource_capacity = 10;
+    optional int32  machine_capacity = 11;
+}
+
+message SpecialEventNotify {
+    required  int64   id = 1;
+    optional  Reward  reward = 2;
+}

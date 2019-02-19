@@ -1,0 +1,63 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum RANK_LIST_TYPE {
+	PVP_RANKING = 1;
+}
+
+message  PVPRankState {
+    optional int32    win = 1;
+    optional int32    lose = 2;
+    optional int32    ranking = 3;
+    optional int32    ranking_score = 4; 
+    optional float    ranking_ratio = 5;
+}
+
+message  PVPRankingData {
+	required   UserInfo   info = 1;
+	required   int32      ranking_score = 2;
+	required   int32      ranking = 3;
+}
+
+message PVPRecord {
+	required bytes  player_nick = 1;
+	required int32   player_level = 2;
+	message  SailorData {
+	     required  int32  typeid = 1;
+	     required  int32  level = 2;
+	     required  int32  star = 3;
+	}
+
+	repeated  SailorData  team_data = 3;
+	repeated  SailorData  enemy_data =  4;
+	required  sfixed64  timestamp = 5;
+	required  int32     result = 6;
+	required  int32     change_score = 7;
+}
+
+message RankService {
+    enum RANK_CMD {
+        QUERY = 1;
+        QUERY_SELF = 2;
+        QUERY_RECORD = 3;
+    }
+	message RankRequest {  
+        required RANK_CMD             cmd = 1; //命令
+        optional RANK_LIST_TYPE       type = 2;
+	}
+	
+	//
+	message RankResponse {
+		required int32    result = 1; //结果
+        optional PVPRankState   state = 2;
+        repeated PVPRankingData   roles = 3;
+        repeated PVPRecord  record_list = 4;
+	}
+	
+	optional RankRequest req = 1;
+	optional RankResponse resp = 2;
+}

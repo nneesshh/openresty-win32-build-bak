@@ -1,0 +1,192 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+import "PVE.proto";
+
+package sg;
+
+message FrameData {
+  optional int32  frame = 1;
+  optional int32  source = 2;
+  optional bytes  data = 3;
+}
+
+message MultiplayerRoom {
+  required int32  id = 1;
+  required int32  state = 2;
+  required bytes  name = 3;
+
+  message Member {
+    required int32 index = 1;   
+    required int32 status = 3;
+    optional UserInfo  user = 4;
+    optional int32 state = 5;
+    repeated Sailor sailors = 6;
+  };
+  
+  message  Chat {
+    required  int32  index = 1;
+    required  sfixed64  timestamp = 2;
+    required  bytes  data = 3;
+  }
+
+  repeated Member members = 4;
+  optional int32  target = 5;
+  optional int32  type = 6;
+  required bytes work = 7;
+  repeated Chat  chat_list = 8; 
+}
+
+message MultiplayerBattleField {
+  message Member {
+    required int32 index = 1;   
+    required int32 status = 3;
+    required int32 state = 4;
+    optional UserInfo  user = 5;
+    optional UserTeamData  data = 6;
+  };
+
+  required int32  id = 1;
+  required int32  state = 2;
+  required bytes  name = 3;
+  required int32  frame = 4;
+  required int32  rand_seed = 5;
+
+  repeated Member members = 6;
+  repeated FrameData data = 7;
+  required bytes    work = 8;
+
+  optional int32  target = 9;
+  optional int32  type = 10;
+}
+
+message MultiplayerTeamService {
+    enum CMD {
+      QUERY_LIST = 1;
+      QUERY_SELF = 2;
+      CREATE_ROOM = 3;
+      ADD_ROOM = 4;
+      LEAVE_ROOM = 5;
+      DELETE_ROOM = 6;
+      CHANGE_SEAT = 7;
+      CHANGE_OWNER = 8;
+      SET_WORK = 9;
+      RENAME_ROOM = 10;
+      READY = 11;
+      TALK = 12;
+  }
+
+	message MultiplayerTeamRequest {  
+        required CMD             cmd = 1; 
+        optional int32           target_id = 2;
+        optional int32           seat = 3;
+        optional bytes           work = 4;
+        optional int32           type = 5;
+        optional bytes           name = 6;
+        optional int32           new_owner = 7;
+        optional bytes           talk_data = 8;
+	}
+	
+	//
+	message MultiplayerTeamResponse { 
+	    required int32             result = 1; //
+	  	optional MultiplayerRoom   my_room = 2; // 
+	  	repeated MultiplayerRoom   room_list = 3;    
+	}
+
+	optional MultiplayerTeamRequest req = 1;
+	optional MultiplayerTeamResponse resp = 2;
+}
+
+message UserTalkNotify {
+  required  int32  index = 1;
+  required  sfixed64  timestamp = 2;
+  required  bytes  data = 3;
+}
+
+message UserAddNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message UserChangeSeatNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message UserDeleteRoomNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message UserChangeOwnerNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message UserChangeWorkNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message UserLeaveNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message UserRenameNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message BattleReadyNotify {
+  optional MultiplayerRoom   room_data = 1; // 
+}
+
+message MultiplayerBattleService {
+    enum CMD {
+      READY = 1;
+      CHANGE_SAILOR = 2;
+      OPERATE = 3;
+      OVER = 4;
+  }
+  
+  message MultiplayerBattleRequest {  
+        required CMD             cmd = 1; 
+        optional uint64          target_id = 3;
+        repeated int32           sailors = 4;
+        repeated FrameData       operation_list = 5;
+        optional int32           result = 6;
+  }
+  
+  //
+  message MultiplayerBattleResponse { 
+      required int32             result = 1; //
+  }
+
+  optional MultiplayerBattleRequest req = 1;
+  optional MultiplayerBattleResponse resp = 2;
+}
+
+
+message FrameAddNotify {
+  required int32  frame = 1;
+  repeated FrameData data = 2;
+}
+
+message UserReadyNotify {
+  required int32  member_index = 1;
+  required bool  ready = 2;
+}
+
+message UserChangeSailorNotify {
+  required int32  member_index = 1;
+  repeated Sailor   use_sailor = 2;
+}
+
+
+message BattleStartNotify {
+  required  MultiplayerBattleField battle_data = 1;
+  optional DungeonContent      content = 2; //   
+  optional UserDungeonInformation user_info = 3;
+  optional int32    cost_vitality = 4;
+}
+
+message BattleOverNotify {
+  required  int32  result = 1;
+  optional  Reward reward = 2;
+}

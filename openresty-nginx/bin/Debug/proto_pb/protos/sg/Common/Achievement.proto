@@ -1,0 +1,39 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message  Achievement {
+    required  int32     id = 1;
+    required  int64     finish_value = 2;
+    required  int32     phase = 3;
+    required  int32     state = 4;
+}
+
+message  UserAchievementService {
+	enum  CMD {
+	    QUERY = 1;
+        GET_REWARD = 2;
+	}
+    
+    message  UserAchievementRequest{
+        required  CMD      cmd = 1;
+        optional  int32    id = 2;
+    }
+     
+    message  UserAchievementResponse{
+        required  int32    result = 1;
+        repeated  Achievement   achievement_list = 2;  
+        optional  int32    achievement_point = 3;
+        optional  Reward   reward = 4;
+    }
+    
+    optional  UserAchievementRequest  req = 1;
+    optional  UserAchievementResponse  resp = 2;
+}
+
+message  AchievementNotify {
+	required  Achievement  achievement = 1;
+}

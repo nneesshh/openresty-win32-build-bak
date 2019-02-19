@@ -1,0 +1,102 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum PRODUCE_ORDER_STATE {
+	PRODUCE_ORDER_STATE_IDLE = 0;     //空闲
+    PRODUCE_ORDER_STATE_WAITING = 1;  //等待
+    PRODUCE_ORDER_STATE_WORKING = 2;  //进行中
+    PRODUCE_ORDER_STATE_WAITING_HARVEST = 3;  //等待收获
+    PRODUCE_ORDER_STATE_HARVESTING = 4;  //收获中
+}
+
+enum PRODUCTION_TYPE {
+    PRODUCTION_TYPE_RESOURCE = 1;
+    PRODUCTION_TYPE_ITEM = 2; 
+    PRODUCTION_TYPE_CULTURE = 3;
+}
+
+
+message OrderBasic {
+	required int32  basic_type = 1; // 1 = 人物 , 2 = 房间 , 3 = 设施
+	required int32  basic_id = 2; 
+}
+
+message ProduceOrder {
+    required int32       id = 1;
+    optional PRODUCE_ORDER_STATE       state = 2; // 当前状态
+    optional PRODUCTION_TYPE           production_type = 3; // 产品类型
+    optional int32       production = 4; //产品id
+    optional int32       output_num = 5;  //每次产出数量
+    optional int32       circle_num = 6;   //循环次数,-1为无限循环
+    optional int32       finish_num = 7;
+    optional float       speed = 8;  //速度 单位为百分比每秒
+    optional float       ratio = 9;  //当前完成度  0-100
+    optional sfixed64    timestamp = 10;  //当前状态的时间点
+    repeated OrderBasic     basics = 11; //任务要素
+    optional int32       pre_order = 12;  //前置任务
+    optional int32       next_order = 13;  // 后续任务
+}
+
+message UserProduceOrderService {
+	enum PRODUCE_ORDER_CMD {
+		QUERY = 1; // 查询生产
+		ADD = 2;  //添加任务
+		CANCEL = 3; //任务 取消
+		START = 4; //开始生产
+		HARVEST = 5; //收获
+		FAST_FINISH = 6; // 快速完成
+	}
+	
+	//
+	message UserProduceOrderRequest {
+		required PRODUCE_ORDER_CMD			cmd = 1;
+	    
+	    repeated OrderBasic     basics = 2;
+	    optional int32          facility_id = 3;
+	    optional int32          slot_id = 4;
+	    optional PRODUCTION_TYPE      production_type = 5;  //产品类型 
+	    optional int32      production = 6;  //产品id
+	    optional int32       circle_num = 7;  //生产次数
+        optional int32      orderid = 9;
+        repeated int32      harvest_list = 10;
+	}
+	
+	//
+	message UserProduceOrderResponse {
+		required int32			result = 1;
+
+		repeated ProduceOrder         orders = 2;
+        optional Reward               gain = 3;
+        repeated Item                 cost_items = 4;
+
+	}
+	
+	optional UserProduceOrderRequest req = 1;
+	optional UserProduceOrderResponse resp = 2;
+}
+
+
+message OrderCreateNotify {
+    required ProduceOrder order = 1;
+}
+
+message OrderFinishNotify {
+    required int32 finish_id = 1;
+    optional Item item_get = 2;
+}
+
+message OrderBeginNotify {
+    required ProduceOrder order = 1;
+}
+
+message OrderPauserNotify {
+    required ProduceOrder order = 1;
+}
+
+message OrderStateNotify {
+    required ProduceOrder order = 1;
+}

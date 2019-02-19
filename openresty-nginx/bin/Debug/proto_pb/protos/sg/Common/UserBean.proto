@@ -1,0 +1,191 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+package sg;
+
+// 错误号
+message ErrorNo {
+	enum ERROR_NO {
+		RELOGIN = -9000; // 账号重新登录
+	}
+	
+	required int32 error_no = 1;		
+	required bytes desc = 2;
+}
+
+//
+message RegisterAccountService {
+	enum RESULT {
+		OK = 0;
+		UID_OR_PWD_TOO_SHORT = -1; // 账号或者密码长度少于6
+		UID_ALREADY_EXISTS = -2; // 账号已经存在
+		UID_MUST_START_WITH_A_LETTER = -3; // 账号首字符不是字母
+		EMAIL_INVALID = -4; // 无效的email
+	}
+		
+	message RegisterRequest {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+		required bytes			nick = 3;  // 用户昵称，可为空
+		required bytes			email = 4; // 用户邮箱，必须包含@和.字符，不能为空
+	}
+	
+	//
+	message RegisterResponse {
+		required RESULT			result = 1;
+	}
+	
+	optional RegisterRequest req = 1;
+	optional RegisterResponse resp = 2;
+}
+
+message FastRegisterAccountService {
+	message RegisterRequest {
+
+	}
+	
+	//
+	message RegisterResponse {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+		required bytes			nick = 3;  // 用户昵称，可为空
+		required bytes			email = 4; // 用户邮箱，必须包含@和.字符，不能为空
+	}
+	
+	optional RegisterRequest req = 1;
+	optional RegisterResponse resp = 2;
+}
+
+// 登录协议
+message AccountLoginService {
+	enum RESULT {
+		OK = 0;
+		UID_OR_PWD_IS_NOT_VALID = -1; // 账号或者密码错误
+		USER_ASSETS_LOAD_FAILED = -2; // 用户资料加载失败 
+		TOO_MANY_REQUEST = -3; // 账号繁忙
+	}
+	
+	//
+	message LoginRequest {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+	}
+	
+	//
+	message LoginResponse {
+		required RESULT			result = 1;
+		optional uint64			uuid = 2;
+	}
+	
+	optional LoginRequest req = 1;
+	optional LoginResponse resp = 2;
+}
+
+// 重新登录协议
+message AccountReloginService {
+	enum RESULT {
+		OK = 0;
+		FAILED = 1;
+	}
+	
+	//
+	message ReloginRequest {
+		required bytes			uid = 1;
+		required bytes			pwd = 2;
+	}
+	
+	//
+	message ReloginResponse {
+		required RESULT			result = 1;
+		optional uint64			uuid = 2;
+	}
+	
+	optional ReloginRequest req = 1;
+	optional ReloginResponse resp = 2;
+}
+
+// 游戏服务器验证协议
+message PlayerJoinService {
+	enum RESULT {
+		OK = 0;
+		FAILED = 1;
+	}
+	
+	//
+	message JoinRequest {
+		required bytes			uid = 1;
+		required bytes			nick = 2;
+	}
+	
+	//
+	message JoinResponse {
+		required RESULT			result = 1;
+	}
+	
+	optional JoinRequest req = 1;
+	optional JoinResponse resp = 2;
+}
+
+message UserAttribute{
+	required bytes userid = 1;
+	required int32 level = 2;
+	required int32 exp = 3;
+	required bytes nick = 4;
+	required int32 portrait = 5;
+    required bytes signature = 6;
+    optional sfixed64 last_rename_time = 7;
+    optional int32 portrait_frame = 8;
+}
+
+
+// 用户属性
+message UserAttrService {
+    enum USER_CMD {
+       QUERY = 1;
+       RENAME = 2;
+       CHANGE_PORTRAIT = 3;
+       WRITE_SIGNATURE = 4;
+       CHANGE_PORTRAIT_FRAME = 5;
+    }
+	message UserAttrRequest {
+        required  USER_CMD    cmd = 1;
+        optional  bytes       new_name = 2;
+        optional  int32       new_portrait = 3;
+        optional  bytes       new_signature = 4;
+        optional  int32       new_frame = 5;
+	} 
+	
+	message UserAttrResponse {
+		required int32 result = 1;
+		optional UserAttribute user = 2;
+	}
+	
+	optional UserAttrRequest req = 1;
+	optional UserAttrResponse resp = 2;
+}
+
+message UserLevelUpNotify {
+	required int32     level = 1; // 当前等级
+	required int32     exp = 2;  //当前经验值
+	optional Reward    reward = 3;  //升级奖励
+}
+
+message UserStateService {
+    enum CMD {
+       QUERY = 1;
+       CHANGE_GUIDE = 2;
+    }
+	message UserStateRequest {
+        required  CMD    cmd = 1;
+        optional  bytes        new_guide_val = 2;
+	} 
+	
+	message UserStateResponse {
+		required  int32 result = 1;
+		optional  UserState    state = 2;
+	}
+	
+	optional UserStateRequest req = 1;
+	optional UserStateResponse resp = 2;
+}

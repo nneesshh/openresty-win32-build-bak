@@ -1,0 +1,89 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+package db;
+
+////////////////////////////////////////////////////////////////
+message ConfigHuntGround {
+	required uint64     	groundid = 1; // 
+	required int32        ground_type = 2; // 猎场类型, 1 = trap, 2 = fishing
+  required int32        prey_num = 3; // 猎物数量
+  required int32        prey_hunt_num = 4; // 捕猎次数
+  required int32        prey_refresh_time = 5; // 刷新间隔
+  required int32        hunt_recover_time = 6; // 捕猎次数恢复时间间隔
+}
+
+message ConfigHuntGroundList {
+	repeated ConfigHuntGround list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigHuntTrap {
+	required int32      	trapid = 1; // 唯一 id
+  required int32        size_type = 2; // 尺寸类型
+  required uint64       itemid = 3; // 道具id
+  required bytes				target_group = 4; // 目标字符串 -- "prey typeid : success ratio : escape ratio : fight ratio | ..."
+}
+
+message ConfigHuntTrapList {
+	repeated ConfigHuntTrap list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigHuntFishingTool {
+	required int32      	toolid = 1; // 唯一 id
+  required int32        tool_type = 2; // 工具类型
+  required uint64       itemid = 3; // 道具id
+  required bytes				target_group = 4; // 目标字符串 -- "prey typeid : success ratio : escape ratio : fight ratio | ..."
+}
+
+message ConfigHuntFishingToolList {
+	repeated ConfigHuntFishingTool list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message ConfigHuntPrey {
+	required uint64      	groundid = 1; // cfg groundid
+  required uint64       prey_typeid = 2; // prey typeid
+  required int32        prey_type = 3; // 猎物类型, 1=兽类，2=鱼类，
+  required int32        size_type = 4; // 尺寸类型
+  required float        refresh_ratio = 5; // 刷新几率
+  required int32        level = 6; // 猎物等级
+	required bytes        drop_list = 7; // 掉落列表
+}
+
+message ConfigHuntPreyList {
+	repeated ConfigHuntPrey list = 1;
+}
+
+////////////////////////////////////////////////////////////////
+message UserHuntGround {
+	required bytes				userid = 1;
+	required uint64				groundid = 2; //猎场id
+	required int32				state = 3;
+	required int32				hunt_num = 4; // 剩余捕猎次数
+	required sfixed64    	hunt_recover_starttime = 5; // 捕猎次数恢复开始时间
+	required int32    		hunt_recover_cd_seconds = 6; // 捕猎次数恢复冷却时间(秒)
+	required float    		hunt_recover_add_ratio1 = 7; // 捕猎次数恢复速度加成比率1
+	required float    		hunt_recover_add_ratio2 = 8; // 捕猎次数恢复速度加成比率2
+	required float    		hunt_recover_add_ratio3 = 9; // 捕猎次数恢复速度加成比率3
+	
+	required sfixed64    	growtime = 11; // 增长时间
+}
+
+////////////////////////////////////////////////////////////////
+message UserHuntPrey {
+	required bytes				userid = 1;
+	required uint64				groundid = 2; //捕猎区id
+	required int32				sn = 3;
+	required int32				prey_type = 4; // 猎物类型, 1=兽类，2=鱼类
+	required uint64				cfgid = 5; // npc 配置类型id
+	required int32				cfg_groupid = 6; // resident group id
+	required int32				state = 7; // npc 状态
+	required int32				seconds = 8; // 倒计时
+	required int32				seqno = 9; // 顺序值
+	
+	required int32				task_menuid = 11; // 任务菜单id
+	
+	required sfixed64    	optime = 21; // 操作时间
+}

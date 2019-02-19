@@ -161,7 +161,7 @@ function _M.new(opts, wheel_now_time)
   -- Call this function (at least) every `precision` seconds.
   -- @return `true`
   function wheel:step()
-    local dt = now() - start
+    local dt = now() - start - elapsed
     return self:update(dt)
   end
 

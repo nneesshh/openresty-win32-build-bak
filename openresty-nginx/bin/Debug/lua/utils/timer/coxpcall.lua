@@ -26,6 +26,7 @@ local function isCoroutineSafe(func)
 end
 
 -- No need to do anything if pcall and xpcall are already safe.
+local copcall, coxpcall
 if isCoroutineSafe(pcall) and isCoroutineSafe(xpcall) then
     copcall = pcall
     coxpcall = xpcall

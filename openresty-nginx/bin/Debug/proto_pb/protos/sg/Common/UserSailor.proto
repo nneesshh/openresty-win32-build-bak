@@ -1,0 +1,117 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+
+import "BaseStruct.proto";
+
+package sg;
+
+enum SAILOR_CONTROL_CODE {
+    CODE_NONE = 0;
+    SEND_FOOD = 1; //送菜
+    CODE_OVER = 99;
+}
+
+message SailorDelegate {
+	required int32   sailor_id = 1;
+	required int32   job = 2;
+	required int32   index = 3;
+}
+
+message UserSailorService {
+	enum SAILOR_CMD {
+		QUERY = 1; // 查询船员
+		DELEGATE = 2; // 委派 
+		CHANGE_EQUIP = 3; // 换装备
+		REPLACE = 4; //放置
+		CONTROL = 5; //控制
+		BATCH_DELEGATE = 6;//批量委派
+	}
+
+	
+	//
+	message UserSailorRequest {
+		required SAILOR_CMD			cmd = 1;
+	    
+	    optional int32      sailor_id = 2;  //指定船员 
+	    optional int32      work_order = 3; //
+	    optional int32      work_facility = 5;  //工作设备 
+	    optional int32      work_index = 6;  //工作设备对应位置 
+	    optional SAILOR_CONTROL_CODE      control_code = 7; //控制代码
+        
+        repeated SailorDelegate       delegates = 8;
+        
+        optional int32      equip_part = 9;
+        optional int32      equip_id = 10;
+        repeated pb_pair_int_int      replace_list = 11;   // -1为移除
+	}
+	
+	//
+	message UserSailorResponse {
+		required int32			result = 1;
+
+		repeated Sailor         sailors = 2;
+	}
+	
+	optional UserSailorRequest req = 1;
+	optional UserSailorResponse resp = 2;
+}
+
+message UserSailorStrengthenService {
+	enum SAILOR_CMD {
+	    SUMMON = 1; //召唤
+		STRENGTHEN = 2; //升阶
+        FARM_SKILL_LEVEL_UP = 3; //生活技能升级
+        SKILL_LEVEL_UP = 4; //技能升级
+        LEVEL_UP_SKILL_BATCH = 5;//
+        CHIP_EXCHANGE = 6;
+        SKILL_EXCHANGE = 7; //技能转换
+        LEARN_SKILL = 8; //技能学习
+        PRACTICE = 9;
+	}
+
+	
+	//
+	message UserSailorStrengthenRequest {
+		required SAILOR_CMD			cmd = 1;
+	    
+	    optional int32      sailor_id = 2;  //指定船员 
+	    optional int32      sailor_typeid = 3;  //召唤船员类型
+        optional int32      skill_id = 4;
+        repeated pb_pair_int_int skill_list = 5;
+        optional int32      exchange_num = 6;
+	    optional int32      skill_book = 7;
+	}
+	
+	//
+	message UserSailorStrengthenResponse {
+		required int32			result = 1;
+	    optional Sailor         sailor = 2;
+	    optional Item           return_item = 3;
+	    optional SailorSkill    skill = 4;
+	}
+	
+	optional UserSailorStrengthenRequest req = 1;
+	optional UserSailorStrengthenResponse resp = 2;
+}
+
+
+
+
+message SailorStateNotify{
+	required int32        sailorid = 1;
+	optional SAILOR_STATE  _state = 2;
+	optional int32        duration = 3;
+	optional uint64        roomid = 4;
+	optional int32        facilityid = 5;
+	optional int32        orderid = 6;
+	optional int32        job = 7;
+	optional int32        hunger = 8;
+}
+
+message SailorFarmSkillNotify{
+    required int32        sailorid = 1;
+    optional uint64       skillid  = 2;
+    optional int32        level  = 3;
+    optional int32        exp  = 4;
+}

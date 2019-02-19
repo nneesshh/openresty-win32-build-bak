@@ -1,0 +1,33 @@
+syntax = "proto2";
+option cc_enable_arenas = true;
+
+import "BaseStruct.proto";
+
+package sg;
+
+message Chest {
+    required int32  id = 1;
+    required int32  state = 2;
+}
+
+message  UserChestService {
+    enum  CHEST_CMD {
+        QUERY  =  1;
+        OPEN = 2;
+    }
+     
+    message  UserChestRequest{
+        required  CHEST_CMD  cmd = 1;
+        optional  int32    open_id = 2;
+    }
+
+    message  UserChestResponse{
+        required  int32  result = 1;
+        repeated  Chest    chest_list = 2;
+        optional  Reward   reward = 3;
+    }
+
+    optional UserChestRequest req = 1;
+    optional UserChestResponse resp = 2;
+}
+
