@@ -12,7 +12,11 @@ local cwd = (...):gsub("%.[^%.]+$", "") .. "."
 local pdir = (...):gsub("%.[^%.]+%.[^%.]+$", "") .. "."
 local cfg_robot = require(pdir .. "config.zjh_robot")
 local uptcpd = require("serv.network.uptcp")
-local robotCls = require(cwd .. "ZjhTestRobot")
+--local packet_cls = require("serv.network.outer_packet")
+--local packet_cls = require("serv.network.inner_packet")
+local packet_cls = require("serv.network.zjh_packet")
+
+local robot_cls = require(cwd .. "ZjhTestRobot")
 
 --
 function _M.onUpconnAdd(upconn)
@@ -68,7 +72,7 @@ function _M.start()
         local connected_cb = function(self)
             print("connected_cb, connid=", tostring(self.id))
 
-            local robot = robotCls:new(self)
+            local robot = robot_cls:new(self)
             robot:start()
 
         end
@@ -88,6 +92,7 @@ function _M.start()
                     local upconn = _M.createUpconn()
                     local opts = {
                         cfg = v,
+                        packet_cls = packet_cls,
                         connected_cb = connected_cb,
                         disconnected_cb = disconnected_cb,
                         got_packet_cb = got_packet_cb

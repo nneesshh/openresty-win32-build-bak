@@ -26,7 +26,9 @@ end
 --
 function _M.serve()
     --
-    local ok, err = serverd.serve(_M.ssmgr, _onClientConnected, _onClientDisconnected, _onClientGotPacket)
+    --local packetCls = require(cwd .. "inner_packet")
+    local packetCls = require(cwd .. "outer_packet")    
+    local ok, err = serverd.serve(_M.ssmgr, _onClientConnected, _onClientDisconnected, _onClientGotPacket, packetCls)
     if not ok then
         ngx.log(ngx.ERR, err)
     end

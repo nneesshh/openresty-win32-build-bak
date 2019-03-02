@@ -4,7 +4,7 @@ local sizeof = ffi.sizeof
 local offsetof = ffi.offsetof
 local C = ffi.C
 
-local setmetatable = setmetatable
+local setmetatable, getmetatable = setmetatable, getmetatable
 
 local tbl_insert = table.insert
 local str_sub = string.sub
@@ -58,7 +58,7 @@ function _P:read(s)
 
         -- packet leading
         if self.frm_l_r.page_start > 0 then
-            local pl_size = self:getPacketLeadingSize()
+            local pl_size = self:get_packet_leading_size()
             local pldata, plerr = s:receive(pl_size)
             if not pldata then
                 return nil, plerr, "failed to read packet leading"
@@ -66,10 +66,10 @@ function _P:read(s)
 
             ffi.copy(self.pkt_l_r, pldata, #pldata)
 
-            self.pkt_r.sn = self:getSerialNo()
+            self.pkt_r.sn = self:get_serial_no()
 
             -- packet name
-            local pkt_name, pkt_nameerr = self:readPacketName(s)
+            local pkt_name, pkt_nameerr = self:read_packet_name(s)
             if not pkt_name then
                 return pkt_name, pkt_nameerr, "failed to read packet name"
             end
@@ -101,7 +101,7 @@ local pkt_w
 --
 function _P:write(s, msgname, msgdata, msgSn)
     local sent = 0
-    local pl_size = self:getPacketLeadingSize()
+    local pl_size = self:get_packet_leading_size()
     local name_len = #msgname
     local remain_size = #msgdata
     local send_size_max
@@ -162,15 +162,15 @@ end
 
 -- packet type 2: inner packet
 _P.new = function()
-    local function get_packet_leading_size(self)
+    local function _get_packet_leading_size(self)
         return SIZE_OF_TCP_INNER_PACKET_LEADING
     end
 
-    local function get_serial_no(self)
+    local function _get_serial_no(self)
         return self.pkt_l_r.inner_serial_no
     end
 
-    local function read_packet_name(self, s)
+    local function _read_packet_name(self, s)
         if self.pkt_l_r.inner_name_len <= 0 or self.pkt_l_r.inner_name_len > 1024 then
             return nil, "invalid inner_name_len"
         end
@@ -182,6 +182,20 @@ _P.new = function()
 
         self.pkt_r.name = name
         return self.pkt_r.name
+    end
+
+    local _tfl = function(str)
+        -- trim first letter
+        return str_sub(str, 2)
+    end
+
+    --
+    local function _send_packet(self, sock, msg, msgsn)
+        local meta = getmetatable(msg)
+        local msgname = _tfl(meta._descriptor.full_name)
+        local msgdata = msg:SerializeToString()
+
+        return self:write(sock, msgname, msgdata, msgsn)
     end
 
     local self = {
@@ -198,9 +212,10 @@ _P.new = function()
         frm_l_w = frame_leading_t(),
         pkt_l_w = packet_leading_t(),
         --
-        getPacketLeadingSize = get_packet_leading_size,
-        getSerialNo = get_serial_no,
-        readPacketName = read_packet_name
+        get_packet_leading_size = _get_packet_leading_size,
+        get_serial_no = _get_serial_no,
+        read_packet_name = _read_packet_name,
+        send_packet = _send_packet
     }
 
     return setmetatable(

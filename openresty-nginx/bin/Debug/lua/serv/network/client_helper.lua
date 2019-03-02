@@ -24,7 +24,8 @@ function _M.init_sema(session)
             local ok, err = session.sema_send:wait(10.0) -- wait for 10s
             if not ok then
                 if err ~= "timeout" then
-                    return nil, "sema_send_handler: failed to wait on sema: " .. err
+                    print("sema_send_handler: failed to wait on sema: " .. err)
+                    break
                 end
             else
                 local curr_conn = ngx_ctx.curr_conn
@@ -74,7 +75,7 @@ local tfl = function(str)
 end
 
 --
-function _M.send_msg(msg, msgsn)
+function _M.send_packet(msg, msgsn)
     local meta = getmetatable(msg)
     local msgname = tfl(meta._descriptor.full_name)
     local msgdata = msg:SerializeToString()
@@ -82,7 +83,7 @@ function _M.send_msg(msg, msgsn)
     local curr_conn = ngx_ctx.curr_conn
     local s = curr_conn.downstream
     local packet_obj = curr_conn.packet_obj
-    return packet_obj:write(s, msgname, msgdata, msgsn)
+    return packet_obj:send_packet(s, msgname, msgdata, msgsn)
 end
 
 --

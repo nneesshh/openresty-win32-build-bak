@@ -13,31 +13,26 @@ local ngx_ctx = ngx.ctx
 
 -- Localize
 local cwd = (...):gsub("%.[^%.]+$", "") .. "."
-local packet1 = require(cwd .. "outer_packet")
-local packet2 = require(cwd .. "inner_packet")
 
 --
-function _M.serve(ssmgr_obj, connected_cb, disconnected_cb, got_packet_cb, packet_type)
+function _M.serve(ssmgr_obj, connected_cb, disconnected_cb, got_packet_cb, packet_cls)
     local workerid = ngx_worker.id()
-    local s = ngx_req.socket()
-    local packet_obj
-    local pkt
+    local packet_obj, pkt
 
     ngx_ctx.curr_conn = {}
 
     --
+    local s = ngx_req.socket()
     if not s then
         return nil, "no socket: workerid: " .. workerid
     end
     ngx_ctx.curr_conn.downstream = s
 
     --
-    packet_type = packet_type or 1
-    if packet_type == 1 then
-        packet_obj = packet1.new()
-    else
-        packet_obj = packet2.new()
+    if not packet_cls then
+        return nil, "no packet class: workerid: " .. workerid
     end
+    packet_obj = packet_cls.new()
     ngx_ctx.curr_conn.packet_obj = packet_obj
 
     --1s, 1s, 1s

@@ -34,10 +34,11 @@ typedef struct memory_stream_s
 
 memory_stream_t * create_memory_stream(char* buffer, int size);
 void              destroy_memory_stream(memory_stream_t *stream);
+void              reset_memory_stream(memory_stream_t *stream);
 
 void              memory_stream_seek(memory_stream_t *stream, int pos);
 void              memory_stream_skip(memory_stream_t *stream, int len);
-int               memory_stream_get_pos(memory_stream_t *stream);
+int               memory_stream_get_used_size(memory_stream_t *stream);
 int               memory_stream_get_free_size(memory_stream_t *stream);
 
 int8_t            memory_stream_read_byte(memory_stream_t *stream);
@@ -60,7 +61,7 @@ void              memory_stream_write_buffer(memory_stream_t *stream, unsigned c
 
 local frame_leading_t = ffi.typeof("MSG_HEADER")
 local SIZE_OF_FRAME_PAGE_LEADING = sizeof(frame_leading_t, 0)
-local lcutil = ffi.load(ffi.os == "Windows" and "lcutil" or "lcutil")
+local ffilib_lcutil = ffi.load(ffi.os == "Windows" and "./clibs/lcutil.dll" or "lcutil")
 
 ----
 local _P = {}
@@ -70,7 +71,7 @@ function _P:read(s)
     -- frame leading
     local fldata, flerr = s:receive(SIZE_OF_FRAME_PAGE_LEADING)
     if not fldata then
-        return nil, "failed to read frame leading -- " .. flerr
+        return nil, flerr, "failed to read frame leading"
     end
 
     ffi.copy(self.frm_l_r, fldata, #fldata)
@@ -82,7 +83,7 @@ function _P:read(s)
         -- packet data
         local pddata, pderr = s:receive(remain_data_size)
         if not pddata then
-            return nil, "failed to read packet data" .. pderr
+            return nil, pderr, "failed to read packet data"
         end
 
         tbl_insert(self.pkt_r.data, pddata)
@@ -96,7 +97,7 @@ function _P:read(s)
 end
 
 --
-function _P:write(s, sessionId, msgId, msgdata)
+function _P:write(s, sessionid, msgid, msgdata)
     local sent = 0
     local remain_size = #msgdata
     local send_size_max
@@ -116,12 +117,12 @@ function _P:write(s, sessionId, msgId, msgdata)
     else
         -- frame leading init
         self.frm_l_w.size = remain_size
-        self.frm_l_w.sessionId = sessionId
-        self.frm_l_w.msgId = msgId
+        self.frm_l_w.sessionId = sessionid
+        self.frm_l_w.msgId = msgid
 
         -- header
         tbl_insert(pkt_w, ffi.string(self.frm_l_w, SIZE_OF_FRAME_PAGE_LEADING))
-        
+
         -- body
         tbl_insert(pkt_w, str_sub(msgdata, 1, send_size))
 
@@ -132,36 +133,47 @@ function _P:write(s, sessionId, msgId, msgdata)
     return sent
 end
 
--- packet type 1: outer packet
+-- packet type 3: zjh packet
 _P.new = function()
-
-    local function get_sessionid(self)
-        return self.frm_l_r.sessionId
-    end
-
-    local function get_msgid(self)
-        return self.frm_l_r.msgId
+    local function _get_reader_stream(self)
+        return self.frm_l_r.pkt_r_stream
     end
 
     local function lcutil(self)
-        return lcutil
+        return ffilib_lcutil
+    end
+
+    local function _create_stream(self)
+        local buffer = ffi.new("char[?]", PER_FRAME_PAGE_SIZE_MAX)
+        return ffilib_lcutil.create_memory_stream(buffer, PER_FRAME_PAGE_SIZE_MAX)
+    end
+
+    local function create_writer_stream(self)
+        return ffilib_lcutil.create_memory_stream(self.pkt_w_buffer, PER_FRAME_PAGE_SIZE_MAX)
+    end
+
+    --
+    local function _send_packet(self, sock, sessionid, msgid, stream)
+        local buffer_size = lcutil.memory_stream_get_used_size(stream)
+        local msgdata = ffi.string(stream.buffer, buffer_size)
+        return self:write(sock, sessionid, msgid, msgdata)
     end
 
     local self = {
         -- read
         frm_l_r = frame_leading_t(),
-        pkt_r = {
-            sn = 0,
-            name = "",
-            data_size = 0,
-            data = {}
-        },
+        pkt_r_stream = _create_stream(),
         -- write
         frm_l_w = frame_leading_t(),
+        pkt_w_stream = _create_stream(),
         --
-        getSessionId = get_sessionid,
-        getMsgId = get_msgid,
-        lcutil = lcutil
+        get_sessionid = _get_sessionid,
+        get_msgid = _get_msgid,
+        get_reader_stream = _create_stream,
+        lcutil = _lcutil,
+
+        create_writer_stream = create_writer_stream,
+        send_packet = _send_packet
     }
 
     return setmetatable(

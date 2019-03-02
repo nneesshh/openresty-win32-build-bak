@@ -19,8 +19,6 @@ local ngx_semaphore = require("ngx.semaphore")
 
 -- Localize
 local cwd = (...):gsub("%.[^%.]+$", "") .. "."
-local packet1 = require(cwd .. "outer_packet")
-local packet2 = require(cwd .. "inner_packet")
 local client_helper = require(cwd .. "client_helper")
 
 -- constant
@@ -53,20 +51,11 @@ function _M.send_raw(self, data)
     return s:send(data)
 end
 
-local tfl = function(str)
-    -- trim first letter
-    return str_sub(str, 2)
-end
-
 --
-function _M.send_msg(self, msg, msgsn)
-    local meta = getmetatable(msg)
-    local msgname = tfl(meta._descriptor.full_name)
-    local msgdata = msg:SerializeToString()
-
+function _M.send_packet(self, ...)
     local packet_obj = self.packet_obj
-    local s = self.upstream
-    return packet_obj:write(s, msgname, msgdata, msgsn)
+    local sock = self.upstream
+    return packet_obj:send_packet(sock, ...)
 end
 
 --
@@ -158,19 +147,10 @@ end
 function _M.connect(self, opts)
     --
     local workerid = ngx_worker.id()
-    local packet_type, packet_obj, pkt
+    local packet_obj
 
     -- opts
     self.opts = opts
-
-    -- packet obj
-    packet_type = opts.packet_type or 2
-    if packet_type == 1 then
-        packet_obj = packet1.new()
-    else
-        packet_obj = packet2.new()
-    end
-    self.packet_obj = packet_obj
 
     --
     local sock, errstr = _connect(self, workerid)
@@ -179,32 +159,39 @@ function _M.connect(self, opts)
         self.upstream = sock
         self.state = STATE_CONNECTED
 
-        -- connected cb
-        opts.connected_cb(self)
-        --return true
-    else
-        -- error
-        print(errstr)
+        -- packet obj
+        packet_obj = opts.packet_cls.new()
+        self.packet_obj = packet_obj
+
+        --
+        if opts.connected_cb then
+            opts.connected_cb(self)
+        end
+        return true
     end
 
     -- check reconnect
     if self.state ~= STATE_CLOSED and self.enable_reconnect and self.reconnect_delay_seconds > 0 then
+        print(errstr)
         return self:reconnect(opts)
+    else
+        return nil, errstr
     end
 end
 
 --
 function _M.read_packet(self)
     if self.opts and self.packet_obj and self.upstream then
+        -- read packet loop
+        local pkt, err, err_
         while true do
-            -- read packet
-            local pkt, err, err_ = self.packet_obj:read(self.upstream)
+            pkt, err, err_ = self.packet_obj:read(self.upstream)
             if pkt then
                 if self.opts.got_packet_cb then
                     -- packet dispatcher
                     self.opts.got_packet_cb(self, pkt)
                 end
-                return pkt
+                return pkt, true
             elseif err ~= "timeout" then
                 --
                 if self.opts.disconnected_cb then
@@ -214,11 +201,11 @@ function _M.read_packet(self)
                 -- clear sock
                 self.upstream:close()
                 self.upstream = false
-                return nil, "failed to read packet: connid=" .. tostring(self.id) .. ", " .. err .. " -- " .. err_
+                return nil, "read_packet: connid=" .. tostring(self.id) .. ", " .. err .. " -- " .. err_
             end
         end
     end
-    return nil, "failed to read packet: not connected yet!!!"
+    return nil, "read_packet: not connected yet!!!"
 end
 
 --
@@ -233,7 +220,8 @@ function _M.init_sema(self)
             local ok, err = self.sema_send:wait(10.0) -- wait for 10s
             if not ok then
                 if err ~= "timeout" then
-                    return nil, "sema_send_handler: failed to wait on sema: " .. err
+                    print("sema_send_handler: failed to wait on sema -- " .. err)
+                    break
                 end
             else
                 local packet_obj = self.packet_obj
@@ -254,8 +242,25 @@ end
 --
 function _M.run(self, opts, workerid)
     local function _run_handler()
+        --
         self:init_sema()
-        return self:connect(opts)
+
+        -- run loop
+        while true do
+            -- connect
+            local ok = self:connect(opts)
+            if ok then
+                -- read loop
+                while true do
+                    local pkt, err = self:read_packet()
+                    if not pkt then
+                        print("uptcp run read packet error: " .. err)
+                        break
+                    end
+                end
+            end
+            -- just connect again
+        end
     end
     return ngx_thread.spawn(_run_handler)
 end
