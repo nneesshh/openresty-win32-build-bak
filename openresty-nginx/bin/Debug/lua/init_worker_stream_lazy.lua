@@ -12,7 +12,13 @@ local DEBUG = ngx.DEBUG
 --
 require = require("utils.require").require
 require("bootstrap_app")
-ngx.log(NOTICE, "start upconn.Forward ...")
-local mygate_forward = require("serv.mygate.upconn.Forward")
-mygate_forward.start()
-mygate_forward.check()
+--[[
+ngx.log(NOTICE, "start Forward ...")
+local d = require("serv.mygate.upconn.Forward")
+]]
+
+ngx.log(NOTICE, "start ZjhTest...")
+local d = require("serv.mygate.upconn.ZjhTest")
+
+d.start()
+d.check()

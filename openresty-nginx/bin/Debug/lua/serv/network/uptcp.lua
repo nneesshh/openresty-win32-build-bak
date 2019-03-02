@@ -49,8 +49,7 @@ end
 
 --
 function _M.send_raw(self, data)
-    local curr_conn = self.curr_conn
-    local s = curr_conn.upstream
+    local s = self.upstream
     return s:send(data)
 end
 
@@ -65,9 +64,8 @@ function _M.send_msg(self, msg, msgsn)
     local msgname = tfl(meta._descriptor.full_name)
     local msgdata = msg:SerializeToString()
 
-    local curr_conn = self.curr_conn
-    local s = curr_conn.upstream
-    local packet_obj = curr_conn.packet_obj
+    local packet_obj = self.packet_obj
+    local s = self.upstream
     return packet_obj:write(s, msgname, msgdata, msgsn)
 end
 
@@ -102,7 +100,7 @@ function _M.reconnect(self, opts)
 end
 
 --
-local function _connect(self, opts, workerid)
+local function _connect(self, workerid)
     -- new sock
     local sock, err1 = ngx_tcp()
     if not sock then
@@ -111,23 +109,23 @@ local function _connect(self, opts, workerid)
                 ", connid:" ..
                     tostring(self.id) ..
                         ", configid: " ..
-                            tostring(opts.cfg.id) ..
+                            tostring(self.opts.cfg.id) ..
                                 ", cname: " ..
-                                    opts.cfg.name ..
-                                        ", host: " .. opts.cfg.host .. ", port: " .. tostring(opts.cfg.port)
+                                self.opts.cfg.name ..
+                                        ", host: " .. self.opts.cfg.host .. ", port: " .. tostring(self.opts.cfg.port)
     end
 
-    --1s, 1s, 1s
+    --10s, 1s, 1s
     sock:settimeouts(10000, 1000, 1000) -- timeout for connect/send/receive
 
     local ok, err2
-    local host = opts.cfg.host
+    local host = self.opts.cfg.host
     if host then
-        local port = opts.cfg.port or 8860
+        local port = self.opts.cfg.port or 8860
 
         ok, err2 = sock:connect(host, port)
     else
-        local path = opts.cfg.path
+        local path = self.opts.cfg.path
         if not path then
             return nil, 'neither "host" nor "path" options are specified'
         end
@@ -148,10 +146,10 @@ local function _connect(self, opts, workerid)
                         ", connid: " ..
                             tostring(self.id) ..
                                 ", configid: " ..
-                                    tostring(opts.cfg.id) ..
+                                    tostring(self.opts.cfg.id) ..
                                         ", cname: " ..
-                                            opts.cfg.name ..
-                                                ", host: " .. opts.cfg.host .. ", port: " .. tostring(opts.cfg.port)
+                                        self.opts.cfg.name ..
+                                                ", host: " .. self.opts.cfg.host .. ", port: " .. tostring(self.opts.cfg.port)
         return nil, errstr
     end
 end
@@ -160,57 +158,30 @@ end
 function _M.connect(self, opts)
     --
     local workerid = ngx_worker.id()
-    local packet_obj
-    local pkt
+    local packet_type, packet_obj, pkt
+
+    -- opts
+    self.opts = opts
+
+    -- packet obj
+    packet_type = opts.packet_type or 2
+    if packet_type == 1 then
+        packet_obj = packet1.new()
+    else
+        packet_obj = packet2.new()
+    end
+    self.packet_obj = packet_obj
 
     --
-    self.curr_conn = {}
-
-    --
-    local sock, errstr = _connect(self, opts, workerid)
+    local sock, errstr = _connect(self, workerid)
     if sock then
         --
-        self.sock = sock
-        self.curr_conn.upstream = sock
-
-        --
-        local packet_type = opts.packet_type or 2
-        if packet_type == 1 then
-            packet_obj = packet1.new()
-        else
-            packet_obj = packet2.new()
-        end
-        self.curr_conn.packet_obj = packet_obj
-
-        --
+        self.upstream = sock
         self.state = STATE_CONNECTED
 
         -- connected cb
         opts.connected_cb(self)
-
-        --
-        while true do
-            -- read packet
-            local pkt, err, err_ = packet_obj:read(sock)
-            if pkt then
-                if opts.got_packet_cb then
-                    -- packet dispatcher
-                    opts.got_packet_cb(self, pkt)
-                end
-            elseif err ~= "timeout" then
-                print("failed to read packet: connid=" .. tostring(self.id) .. ", " .. err .. " -- " .. err_)
-                break
-            end
-        end
-
-        --
-        opts.disconnected_cb(self)
-
-        -- clear sock
-        if self.sock then
-            self.sock:close()
-            self.sock = false
-        end
+        --return true
     else
         -- error
         print(errstr)
@@ -220,6 +191,34 @@ function _M.connect(self, opts)
     if self.state ~= STATE_CLOSED and self.enable_reconnect and self.reconnect_delay_seconds > 0 then
         return self:reconnect(opts)
     end
+end
+
+--
+function _M.read_packet(self)
+    if self.opts and self.packet_obj and self.upstream then
+        while true do
+            -- read packet
+            local pkt, err, err_ = self.packet_obj:read(self.upstream)
+            if pkt then
+                if self.opts.got_packet_cb then
+                    -- packet dispatcher
+                    self.opts.got_packet_cb(self, pkt)
+                end
+                return pkt
+            elseif err ~= "timeout" then
+                --
+                if self.opts.disconnected_cb then
+                    self.opts.disconnected_cb(self)
+                end
+
+                -- clear sock
+                self.upstream:close()
+                self.upstream = false
+                return nil, "failed to read packet: connid=" .. tostring(self.id) .. ", " .. err .. " -- " .. err_
+            end
+        end
+    end
+    return nil, "failed to read packet: not connected yet!!!"
 end
 
 --
@@ -236,12 +235,9 @@ function _M.init_sema(self)
                 if err ~= "timeout" then
                     return nil, "sema_send_handler: failed to wait on sema: " .. err
                 end
-
-                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
             else
-                local curr_conn = self.curr_conn
-                local s = curr_conn.upstream
-                local packet_obj = curr_conn.packet_obj
+                local packet_obj = self.packet_obj
+                local s = self.upstream
 
                 for _, v in ipairs(self.sema_send_packet_queue) do
                     packet_obj:write(s, v[1], v[2], 0)
@@ -249,7 +245,6 @@ function _M.init_sema(self)
                 self.sema_send_packet_queue = {}
             end
         end
-        print("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
     end
 
     --

@@ -10,7 +10,7 @@ local _M = {
 -- Localize
 local cwd = (...):gsub("%.[^%.]+$", "") .. "."
 local pdir = (...):gsub("%.[^%.]+%.[^%.]+$", "") .. "."
-local cfg_upconn = require(pdir .. "config.cfg_forward")
+local cfg_upconn = require(pdir .. "config.forward")
 local uptcpd = require("serv.network.uptcp")
 
 --
